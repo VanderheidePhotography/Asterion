@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Header } from './app/chrome/Header';
 import { ambient } from './features/audio/ambient';
@@ -37,6 +37,12 @@ function SceneLoading() {
 }
 
 export function App() {
+  /**
+   * Has the visitor asked to enter the hall despite the WebGL2 probe saying
+   * no? Kept here rather than in the route so it survives the re-render that
+   * pressing the button causes.
+   */
+  const [forceScene, setForceScene] = useState(false);
   const highContrast = useSettings((s) => s.highContrast);
   const soundOn = useSettings((s) => s.soundOn);
   const { searchOpen, setSearchOpen } = useUi();
@@ -84,12 +90,15 @@ export function App() {
           <Route
             path="/"
             element={
-              hasWebGL2() ? (
+              hasWebGL2() || forceScene ? (
                 <SceneBoundary>
                   <GrandLibrary />
                 </SceneBoundary>
               ) : (
-                <SceneUnavailable reason="it does not support WebGL2" />
+                <SceneUnavailable
+                  reason="it does not support WebGL2"
+                  onRetry={() => setForceScene(true)}
+                />
               )
             }
           />

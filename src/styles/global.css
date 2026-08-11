@@ -1681,7 +1681,11 @@ button {
   font-family: var(--font-display);
   font-style: italic;
 }
-.scene-unavailable .btn {
+.scene-unavailable-doors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
   margin-top: 0.4rem;
 }
 
