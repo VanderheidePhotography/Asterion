@@ -46,35 +46,71 @@ export class SceneBoundary extends Component<{ children: ReactNode }, { failed: 
  *
  * Checked by actually asking for a context rather than by sniffing the user
  * agent: locked-down corporate machines, virtual desktops and old integrated
- * drivers all block or fail WebGL2 in ways no UA string reports. The probe
- * canvas is thrown away immediately, and the context with it.
+ * drivers all block or fail WebGL2 in ways no UA string reports.
+ *
+ * TWO THINGS HERE ARE LOAD-BEARING, and the first version of this had neither,
+ * which took the site off an iPhone 11 entirely.
+ *
+ * IT RUNS ONCE. The result is cached at module scope because the caller sits
+ * in a route `element`, which React re-evaluates on every render of the app —
+ * every settings toggle, every search open. A fresh probe per render is a
+ * fresh CONTEXT per render.
+ *
+ * IT GIVES THE CONTEXT BACK. A WebGL context is not ordinary garbage: browsers
+ * cap how many may be live at once, and iOS Safari's cap is small and strictly
+ * enforced. Dropping the JS reference does not free the slot promptly — the
+ * context lingers until the collector gets to it. Leak enough and
+ * `getContext('webgl2')` starts returning null on a device that supports it
+ * perfectly well, so the probe answers "no WebGL2" and shows the visitor a
+ * dead end on hardware that could have run the building. `WEBGL_lose_context`
+ * is the explicit hand-back, and it is the whole reason this is not a
+ * one-liner.
  */
+let webgl2: boolean | null = null;
+
 export function hasWebGL2(): boolean {
+  if (webgl2 !== null) return webgl2;
   try {
     const canvas = document.createElement('canvas');
-    return Boolean(canvas.getContext('webgl2'));
+    const gl = canvas.getContext('webgl2');
+    webgl2 = Boolean(gl);
+    gl?.getExtension('WEBGL_lose_context')?.loseContext();
   } catch {
-    return false;
+    webgl2 = false;
   }
+  return webgl2;
 }
 
-export function SceneUnavailable({ reason }: { reason: string }) {
+export function SceneUnavailable({ reason, onRetry }: { reason: string; onRetry?: () => void }) {
   return (
     <div className="scene-unavailable" role="alert">
       <div className="scene-unavailable-card">
         <span className="scene-unavailable-kicker">The doors are shut</span>
         <h1>The Grand Library needs 3D graphics</h1>
         <p>
-          This browser could not open the hall — {reason}. That is a limit of the machine or its
-          graphics driver, not of your collection.
+          This browser could not open the hall — {reason}. On an iPhone or iPad that usually means
+          iOS 15 or newer is needed; elsewhere it is the graphics driver. Either way it is a limit
+          of the machine, not of your collection.
         </p>
         <p className="scene-unavailable-note">
           Every word of the museum is also kept as plain text: the same people, books, symbols and
           events, with their sources and citations, and nothing to render.
         </p>
-        <Link className="btn btn-gold" to="/research">
-          Enter the Research Hall instead
-        </Link>
+        <div className="scene-unavailable-doors">
+          <Link className="btn btn-gold" to="/research">
+            Enter the Research Hall instead
+          </Link>
+          {/* A CHECK THAT SAYS NO CAN BE WRONG, so it is never the last word.
+              The probe reads whatever the browser reports at that moment, and a
+              browser under pressure — too many live contexts, a GPU process
+              that has just restarted — can refuse one and grant the next. This
+              refuses to turn a maybe into a dead end. */}
+          {onRetry && (
+            <button className="btn" onClick={onRetry}>
+              Try the hall anyway
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { texPx } from './textureBudget';
 
 /**
  * THE GLORIA — the Tetragrammaton in a burst of glory, and the Eye of
@@ -27,8 +28,8 @@ import * as THREE from 'three';
  * caller, like the fanlight and every flame in the building.
  */
 export function gloriaTexture(): THREE.CanvasTexture {
-  const W = 2048;
-  const H = 2048;
+  const W = texPx(2048);
+  const H = texPx(2048);
   const canvas = document.createElement('canvas');
   canvas.width = W;
   canvas.height = H;
