@@ -1,0 +1,574 @@
+{
+ "resolved": {
+  "bk-flamel-hieroglyphical": {
+   "bkId": "bk-flamel-hieroglyphical",
+   "archiveId": "b30334767",
+   "title": "Nicholas Flammel, his exposition of the hieroglyphicall figures which he caused to bee painted upon an arch in St. Innocents church-yard in Paris. Together with the secret booke of Artephius, and the epistle of Iohn Pontanus; concerning both the theoricke and the practicke of the Philosophers Stone ...",
+   "creator": "Flamel, Nicolas, -1418",
+   "year": 1624,
+   "publisher": "London : By T. S[nodham for Thomas Walkley]",
+   "cover": "/art/cover-bk-flamel-hieroglyphical.png",
+   "ahash": "0000000000000000111111100000000011111111111110001111111111111000111111111111100011111111111110001111111111111000111111111111100011111111111110001111111111111000111111111111000011111111111110001111111111110000111111111111000010000000000000000000000000000000"
+  },
+  "bk-french-distillation": {
+   "bkId": "bk-french-distillation",
+   "archiveId": "the-art-of-distillation-by-john-french",
+   "title": "The Art of Distillation by John French",
+   "creator": "John French",
+   "year": 2023,
+   "publisher": "",
+   "cover": "/art/cover-bk-french-distillation.png",
+   "ahash": "1111111111111111111111111111111111111011111111111111100000011111111111100111111111110000000011111111000000001111111111111111111111111000000111111111111111111111111111111111111111111000001111111111100000111111111111111111111111111111111111111111111111111111"
+  },
+  "bk-glauber-works": {
+   "bkId": "bk-glauber-works",
+   "archiveId": "b30322522",
+   "title": "The works of the highly experienced and famous chymist, John Rudolph Glauber: containing, great variety of choice secrets in medicine and alchymy in the working of metallick mines, and the separation of metals. Also, various cheap and easie ways of making salt-petre, and improving of barren-land, and the fruits of the earth",
+   "creator": "Glauber, Johann Rudolf, 1604-1670",
+   "year": 1689,
+   "publisher": "London : Printed by T. Milbourn, for the author, etc.",
+   "cover": "/art/cover-bk-glauber-works.png",
+   "ahash": "0000000000000001000011111111111100001111111111100000111111111100000011111111110000000111111111000000111111111100000011111111110000001111111111000000011111111110000011111111111000001111111111100000111111111110000011111111111000001111111111110000000000000000"
+  },
+  "bk-ashmole-way-to-bliss": {
+   "bkId": "bk-ashmole-way-to-bliss",
+   "archiveId": "AshmoleETheWayToBlissInThreeBooks1658",
+   "title": "Ashmole E The Way To Bliss In Three Books 1658",
+   "creator": "Elias Ashmole (ed.)",
+   "year": 2017,
+   "publisher": "",
+   "cover": "/art/cover-bk-ashmole-way-to-bliss.png",
+   "ahash": "0000111111111110000011111111111000001111111110110000110111110111000111001111111100011001111011100001111111111111000001111111111100001111111111110001111111111111000111111111111100010011111111110001011111101011000100111101111100010111110111110001111000111111"
+  },
+  "bk-figulus-golden-casket": {
+   "bkId": "bk-figulus-golden-casket",
+   "archiveId": "11569866bsb",
+   "title": "A golden and blessed casket of nature's marvels: now first done into English from the German original published at Strasburg in the year 1608",
+   "creator": "Figulus, Benedictus",
+   "year": 1893,
+   "publisher": "",
+   "cover": "/art/cover-bk-figulus-golden-casket.png",
+   "ahash": "1000101101111011100000110101111110001011111111111000111111111111100011111111111110001111111111111000110011111111100011100111111110001011011111111000111101111111100000011111011110000000001100111000000001110000100010000001100010000000000000001001111111111111"
+  },
+  "bk-valentine-last-will": {
+   "bkId": "bk-valentine-last-will",
+   "archiveId": "bim_early-english-books-1641-1700_basilius-valentinus-mon_basil-valentine_1658",
+   "title": "Basilius Valentinus, Monk, of the Order of St. Bennet: his last will and testament.  1658",
+   "creator": "Basil, Valentine",
+   "year": 1658,
+   "publisher": "",
+   "cover": "/art/cover-bk-valentine-last-will.png",
+   "ahash": "0000000000000000001111111111100001111111111111001011111111111100111111111111110011111111111111001111111111111100111111111111110011111111101101001111111110111100111111111111110011111111101111000111111111111100001111111111010000000000000000000000000000000000"
+  },
+  "bk-digby-chymical-secrets": {
+   "bkId": "bk-digby-chymical-secrets",
+   "archiveId": "bim_early-english-books-1641-1700_a-choice-collection-of-r_digby-sir-kenelm_1682_0",
+   "title": "A choice collection of rare chymical secrets...  1682",
+   "creator": "Digby, Sir Kenelm",
+   "year": 1682,
+   "publisher": "",
+   "cover": "/art/cover-bk-digby-chymical-secrets.png",
+   "ahash": "0000000000000000111111111111111011111001111101101111111111111110111111111111111011111111111111001100000000011110111010000001111011111100001001101101011001111110111111111111111011000000000001101100011010010110110111111111111010000000000001100100000000000000"
+  },
+  "bk-valentine-of-natural-supernatural": {
+   "bkId": "bk-valentine-of-natural-supernatural",
+   "archiveId": "lastvvilltestame00basi",
+   "title": "The last vvill and testament of Basil Valentine, monke of the order of St. Bennet : which, being alone, he hid under a table of marble, behind the high-altar of the cathedral church, in the imperial city of Erford : leaving it there to be found by him, whom Gods providence should make worthy of it : to which is added two treatises, the first declaring his manual operations, the second shewing things natural and supernatural",
+   "creator": "Basilius Valentinus",
+   "year": 1671,
+   "publisher": "London : Printed by S.G. and B.G. for Edward Brewster ...",
+   "cover": "/art/cover-bk-valentine-of-natural-supernatural.png",
+   "ahash": "1111111111111111111111111101111111000100010011111110000000001111111001000000010111110100000010011111000001110011100000000111000111100000000000011000000000000101100000000000000110000000001000111000000000110000100000000000000011000000000011111110001111111111"
+  },
+  "bk-aurifontina-chymica": {
+   "bkId": "bk-aurifontina-chymica",
+   "archiveId": "bim_early-english-books-1641-1700_aurifontina-chymica-or-_houpreght-john-frederic_1680",
+   "title": "Aurifontina chymica: or, a collection ...  1680",
+   "creator": "Houpreght, John Frederick.",
+   "year": 1680,
+   "publisher": "",
+   "cover": "/art/cover-bk-aurifontina-chymica.png",
+   "ahash": "1000000000000001110000000000001110000000000000011000000000000011100000000000001110000000000000111000000000000011100000000000001110000000000000111000000000000011100000000000001111000000000000111100000000000011100000000000001111111111000000011111111111111111"
+  },
+  "bk-ripley-compound-of-alchymy": {
+   "bkId": "bk-ripley-compound-of-alchymy",
+   "archiveId": "george-ripleys-compound-of-alchymy-1591",
+   "title": "Khan George Ripley's Compound Of Alchymy ( 1591)",
+   "creator": "George Ripley",
+   "year": 2024,
+   "publisher": "",
+   "cover": "/art/cover-bk-ripley-compound-of-alchymy.png",
+   "ahash": "0000001111111111000001111111111100011111111111100010111111111100000000111000000000000011110100000001111011111000000000011111110000000000000000000000000000000000000000000100000000000000011100000000000011111001000000011111111100000011111111110001111111111111"
+  },
+  "bk-waite-lives-alchemystical": {
+   "bkId": "bk-waite-lives-alchemystical",
+   "archiveId": "livesofalchemyst00barr",
+   "title": "The lives of alchemystical philosophers : with a critical catalogue of books in occult chemistry, and a selection of the most celebrated treatises on the theory and practice of the hermetic art",
+   "creator": "Barrett, Francis",
+   "year": 1815,
+   "publisher": "London : Printed by Macdonald and Son ... for Lackington, Allen, & Co. ...",
+   "cover": "/art/cover-bk-waite-lives-alchemystical.png",
+   "ahash": "1011111111111111100011000010011110000000000011111000000000000111100001000000011110000000000001111000001000000111100001100000111110000011000001111000001100000011100000010000001110000011000011111000001110111111100000111111111110000011111111111000001111111111"
+  },
+  "bk-waite-collectanea-chemica": {
+   "bkId": "bk-waite-collectanea-chemica",
+   "archiveId": "A.EWaiteCollectaneaChemicaBeingCertainSelectTreatisesOnAlchemyAndHermeticLiterature",
+   "title": "A. E Waite Collectanea Chemica Being Certain Select Treatises On Alchemy And Hermetic Literature",
+   "creator": "Arthur Edward Waite (ed.)",
+   "year": 2017,
+   "publisher": "",
+   "cover": "/art/cover-bk-waite-collectanea-chemica.png",
+   "ahash": "1111111111111111111110000001111111111110011111111111100000011111111110000001111111111000000111111111100000011111111110000001111111111000000111111111111111111111111100000000111111000000000000111110110000010111111111100111111111111100001111111111111111111111"
+  },
+  "bk-waite-azoth-star-east": {
+   "bkId": "bk-waite-azoth-star-east",
+   "archiveId": "anewlightmystic00waitgoog",
+   "title": "A New Light of Mysticism: Azoth; Or, The Star in the East ...",
+   "creator": "Arthur Edward Waite",
+   "year": 1893,
+   "publisher": "Theosophical P̀ublishing Society ; The Path",
+   "cover": "/art/cover-bk-waite-azoth-star-east.png",
+   "ahash": "0010111111111111000001111111111111111111111111110000000000000000000011111111111100000000000000011000000000011111100000000000000010000000000000001000000000000000000000011111111100000111111111111111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "bk-starkey-pyrotechny": {
+   "bkId": "bk-starkey-pyrotechny",
+   "archiveId": "bim_early-english-books-1641-1700_pyrotechny-asserted-_starkey-george_1658",
+   "title": "Pyrotechny asserted ...  1658",
+   "creator": "Starkey, George.",
+   "year": 1658,
+   "publisher": "",
+   "cover": "/art/cover-bk-starkey-pyrotechny.png",
+   "ahash": "0000000000000000001111111110110011111111111111001111111111111100111111111111110011111100111111001111110000111100111111111111110011101100001111001111111111111100101111110000110010111111111011001111111111111100101111111110110000000000011110000000000000000000"
+  },
+  "bk-salmon-medicina-practica": {
+   "bkId": "bk-salmon-medicina-practica",
+   "archiveId": "medicinapractica00salm",
+   "title": "Medicina practica, or, Practical physick : containing the way of curing the more eminent and usual diseases happening to humane bodies ... : whereunto is annexed, 1. The preparation of the praecipiolum of Paracelsus; 2. The key of Helmont and Lully; 3. The opening of Sol and Luna",
+   "creator": "Salmon, William, 1644-1713",
+   "year": 1692,
+   "publisher": "London : Printed by W. Bonny : for T. Howkins ... : and J. Harris",
+   "cover": "/art/cover-bk-salmon-medicina-practica.png",
+   "ahash": "0000000010011111100000001001111110000000001101111000000000011011100000000001111110000000000111110000000000011111100000000011110110000000011011110000000000011111100000000111111110000000001111111000000000111111100000000111111100000000011111110001000001111111"
+  },
+  "bk-urbigerus-aphorisms": {
+   "bkId": "bk-urbigerus-aphorisms",
+   "archiveId": "aphorismiurbiger00urbi",
+   "title": "Aphorismi Urbigerani, or, Certain rules clearly demonstrating the three infallible ways of preparing the grand elixir, or circulatum majus of the philosophers : discovering the secret of secrets, and detecting the errors of vulgar chymists in their operations : contain'd in one hundred and one aphorisms : to which are added, The three ways of preparing the vegetable elixir, or circulatum minus",
+   "creator": "Urbigerus, Baro",
+   "year": 1690,
+   "publisher": "London : Printed for Henry Faithorne ...",
+   "cover": "/art/cover-bk-urbigerus-aphorisms.png",
+   "ahash": "0000000000111101000000000111111100000000011111110000000011111111000000010111111100000010111111110000001011111111000000011111111100000001011111110000000101111111000000001111111100000001111111110000000101111111000000010111111100000000111111110000000000001111"
+  },
+  "bk-paracelsus-archidoxes-magic": {
+   "bkId": "bk-paracelsus-archidoxes-magic",
+   "archiveId": "ParacelsusArchidoxesOfMagic",
+   "title": "Paracelsus Archidoxes Of Magic",
+   "creator": "Paracelsus",
+   "year": 2015,
+   "publisher": "",
+   "cover": "/art/cover-bk-paracelsus-archidoxes-magic.png",
+   "ahash": "0000101111100000011111111111111001111111111111100111111111111110011111111111111001111111111111100111001111111110010000000110000001000000011000000100000100000000010100100110000001000000011011000100000001111110011000100111111001111111111111100000000000000000"
+  },
+  "bk-five-treatises-stone": {
+   "bkId": "bk-five-treatises-stone",
+   "archiveId": "fivetreatisesofp00pinn",
+   "title": "Five treatises of the philosophers stone : two of Alphonso, king of Portugall, as it was written with his own hand, and taken out of his closset, translated out of the Portuguez into English : one of John Sawtre, a monke, translated into English : another written by Florianus Raudorff, a German philosopher, and translated out of the same language into English : also, A treatise of the names of the philosophers stone, by William Gratacolle, translated into English : to which is added, The smaragdine table",
+   "creator": "Pinnell, Henry",
+   "year": 1651,
+   "publisher": "London : Printed by Thomas Harper, and are to be sold by John Collins ...",
+   "cover": "/art/cover-bk-five-treatises-stone.png",
+   "ahash": "0000000000000000000000000000000001000000000100000100111111011111010000000110101110000000101100111111110100111111111111111111111111000111111110011100011111111111110010111110111111110111110111111111001000001111011100100001111101101100001110010000010001000001"
+  },
+  "bk-artephius-secret-book": {
+   "bkId": "bk-artephius-secret-book",
+   "archiveId": "alchemical-manuscript-series-v-16-volume-sixteen-secret-book-liber-secretus-by-artephius",
+   "title": "Alchemical Manuscript Series V 16 - Volume Sixteen: Secret Book (Liber Secretus), by Artephius",
+   "creator": "Artephius",
+   "year": 2023,
+   "publisher": "",
+   "cover": "/art/cover-bk-artephius-secret-book.png",
+   "ahash": "1111111111111111111111110111111110100000000000011000000000000001111111111111111110000000000000011000000000010001111111111111111111111100000111111111100000011111111111000011111111111111110111111111111111111111111111111111111111000000000001111110101001101111"
+  },
+  "bk-golden-tract-hermetic": {
+   "bkId": "bk-golden-tract-hermetic",
+   "archiveId": "the-golden-tract-concerning-the-stone-of-the-philosophers.-by-an-anonymous-german-philosopher",
+   "title": "THE GOLDEN TRACT CONCERNING THE STONE OF THE PHILOSOPHERS. BY AN ANONYMOUS GERMAN PHILOSOPHER",
+   "creator": "anonymous",
+   "year": 2023,
+   "publisher": "",
+   "cover": "/art/cover-bk-golden-tract-hermetic.png",
+   "ahash": "1111000000001111111100000000111111110000000011111111110000001111111110000001111111111111111111111111100000011111111110000001111111111000000111111111111001111111111111100111111111111110011111111111100000011111111100000000111111110100001011111110000000001111"
+  },
+  "bk-boyle-origine-formes": {
+   "bkId": "bk-boyle-origine-formes",
+   "archiveId": "bub_gb_cJM1CHr4bdwC",
+   "title": "The Origine of Formes and Qualities, according to the Corpuscular Philosophy, Illustrated by Considerations and Experiments, ... by the Honourable Robert Boyle, Fellow of the Royal Society. ..",
+   "creator": "Robert Boyle",
+   "year": 1666,
+   "publisher": "H. Hall printer to the University, for. Ric. Davis",
+   "cover": "/art/cover-bk-boyle-origine-formes.png",
+   "ahash": "1111000000000111111100000000000111110000000000001111000000000000111100000000000011110000000000001111000000000000111100000000000011110000000000001111000000000000111100000000000011110000000000001111000000000000111100000000000011110000000000111111000000001111"
+  },
+  "bk-cooper-catalogue-chymicall": {
+   "bkId": "bk-cooper-catalogue-chymicall",
+   "archiveId": "bim_early-english-books-1641-1700_a-catalogue-of-chymicall_cooper-william-booksel_1675",
+   "title": "A catalogue of chymicall books. ...  1675",
+   "creator": "Cooper, William, bookseller.",
+   "year": 1675,
+   "publisher": "",
+   "cover": "/art/cover-bk-cooper-catalogue-chymicall.png",
+   "ahash": "0000000000000000000000000000000001111111111111001111111111111110111111111111111011111111111111101111111111110110110100000100011011111111111111101111111111111110110001110100011011111111111111101111111111111110111111111111110011111111111110000000000000000000"
+  },
+  "bk-philalethes-secrets-revealed": {
+   "bkId": "bk-philalethes-secrets-revealed",
+   "archiveId": "SecretsRevealedPhilalethes",
+   "title": "Secrets Revealed Philalethes",
+   "creator": "Philalethes, Eirenaeus",
+   "year": 1669,
+   "publisher": "",
+   "cover": "/art/cover-bk-philalethes-secrets-revealed.png",
+   "ahash": "1011111100000001001111111100000100111111111101000011111111111100001111111000010000111111111111000011111111111100001111111111110000111111111111000011111111111100001111111111110000111111100111000011111111111100000111111111110000000000011111000000000000000000"
+  },
+  "bk-pontanus-epistle-fire": {
+   "bkId": "bk-pontanus-epistle-fire",
+   "archiveId": "easieintroductio00thor",
+   "title": "An easie introduction to the philosophers magical gold : to which is added, Zor[o]asters cave : as also, John Pontanus Epistle upon the mineral fire, otherwise called, The philosophers stone",
+   "creator": "Thor., George",
+   "year": 1667,
+   "publisher": "London : Printed for Matthew Smelt ...",
+   "cover": "/art/cover-bk-pontanus-epistle-fire.png",
+   "ahash": "0000000000000000011100000111101000000000000000100111110000111110111110001101111011111110011111101000000000000011111110001001111110010000000011111111100001101001110111110001100111111111111111100000000001111110100000000010111011111111111111100000111111111110"
+  },
+  "bk-dee-fasciculus-chemicus": {
+   "bkId": "bk-dee-fasciculus-chemicus",
+   "archiveId": "fasciculuschemic00deea",
+   "title": "Fasciculus chemicus, or, Chymical collections : expressing the ingress, progress, and egress of the secret Hermetick science, out of the choisest and most famous authors ... : whereunto is added, the Arcanum, or, Grand secret of hermetick philosophy",
+   "creator": "Dee, Arthur, 1579-1651",
+   "year": 1650,
+   "publisher": "London : Printed by J. Flesher for Richard Mynne ...",
+   "cover": "/art/cover-bk-dee-fasciculus-chemicus.png",
+   "ahash": "1100000000001111111111101111111100000001101000011111010111111111000001000000000111110110000111111111111111111111000010000100000111110000000011110100100110100011111111111001111100111100000111110100111111100111000000010000000100000000000000010000100111010110"
+  },
+  "bk-waite-turba-philosophorum": {
+   "bkId": "bk-waite-turba-philosophorum",
+   "archiveId": "turbaphilosophor00gratiala",
+   "title": "The Turba philosophorum, or assembly of the sagas; called also the book of truth in the art and the third Pythagorical synod. An ancient alchemical treatise translated from the Latin, the chief readings of the shorter codex, parallels from the Greek alchemists, and explanations of obscure terms",
+   "creator": "Gratarolo, Guglielmo, 1516?-1568?",
+   "year": 1896,
+   "publisher": "London : George Redway",
+   "cover": "/art/cover-bk-waite-turba-philosophorum.png",
+   "ahash": "1000000011111111001101111000111100000111111111110000011111111111000000000011111100000000011111111000000000011111000000000001111100000000000111110000000000011111000000000001111110000000000111111100000000001111110000000001111100000000011111111000000000000111"
+  }
+ },
+ "unresolved": [
+  {
+   "bkId": "bk-mylius-philosophia-reformata",
+   "cluster": "alchemy",
+   "era": "early-modern",
+   "yearGuess": 1622,
+   "dates": "1622",
+   "title": "Philosophia Reformata",
+   "author": "Johann Daniel Mylius",
+   "query": "Philosophia Reformata Mylius",
+   "epithet": "A vast systematised compendium of the whole art",
+   "summary": "Mylius's enormous digest of the alchemical authorities, laid out in order and illustrated with sixty emblems of the stages of the work — one of the most complete summae the tradition produced.",
+   "tags": [
+    "compendium",
+    "emblem",
+    "stages"
+   ],
+   "wiki": "Johann_Daniel_Mylius",
+   "linkKind": "associated-with",
+   "linkTarget": "alchemy",
+   "imprint": "Frankfurt: Lucas Jennis, 1622",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-stolcius-viridarium",
+   "cluster": "alchemy",
+   "era": "early-modern",
+   "yearGuess": 1624,
+   "dates": "1624",
+   "title": "Viridarium Chymicum",
+   "author": "Daniel Stolcius",
+   "query": "Viridarium Chymicum Stolcius",
+   "epithet": "A pleasure-garden of one hundred and seven emblems",
+   "summary": "Stolcius's anthology reprints the finest emblems of Maier, Mylius and the Frankfurt printers as a single illustrated garden of the art, each plate under a Latin verse — the tradition's most compact picture-book.",
+   "tags": [
+    "emblem",
+    "anthology",
+    "garden"
+   ],
+   "wiki": "Daniel_Stolcius",
+   "linkKind": "associated-with",
+   "linkTarget": "alchemy",
+   "imprint": "Frankfurt: Lucas Jennis, 1624",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-trevisan-philosophers-stone",
+   "cluster": "alchemy",
+   "era": "medieval",
+   "yearGuess": 1683,
+   "dates": "comp. 15th c.",
+   "title": "A Treatise of the Philosopher's Stone",
+   "author": "Bernard of Trevisan",
+   "query": "Bernard Trevisan philosopher's stone treatise",
+   "epithet": "The nobleman who spent a fortune seeking the stone",
+   "summary": "The much-reprinted treatise ascribed to Bernard of Trevisan, whose famous parable of the fountain and the king's bath became one of alchemy's stock allegories of the work.",
+   "tags": [
+    "allegory",
+    "medieval",
+    "stone"
+   ],
+   "wiki": "Bernard_of_Treviso",
+   "linkKind": "associated-with",
+   "linkTarget": "alchemy",
+   "imprint": "in Aurifontina Chymica, London, 1680",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-philalethes-ripley-reviv",
+   "cluster": "alchemy",
+   "era": "early-modern",
+   "yearGuess": 1678,
+   "dates": "1678",
+   "title": "Ripley Reviv'd",
+   "author": "Eirenaeus Philalethes",
+   "query": "Ripley Reviv'd Philalethes",
+   "epithet": "A hidden adept's line-by-line reading of Ripley",
+   "summary": "Philalethes's commentaries on George Ripley's poems — the most influential English alchemy of the age, written by the pseudonymous adept whom Newton and Boyle both took with deadly seriousness.",
+   "tags": [
+    "commentary",
+    "ripley",
+    "adept"
+   ],
+   "wiki": "Eirenaeus_Philalethes",
+   "linkKind": "associated-with",
+   "linkTarget": "george-ripley",
+   "imprint": "London: William Cooper, 1678",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-paracelsus-aurora",
+   "cluster": "alchemy",
+   "era": "early-modern",
+   "yearGuess": 1659,
+   "dates": "1659",
+   "title": "Aurora, or the Rising of the Sun (Paracelsus His Aurora)",
+   "author": "attributed to Paracelsus",
+   "query": "Paracelsus Aurora rising sun treasure treasures 1659",
+   "epithet": "The dawn of the treasure of treasures",
+   "summary": "The English 'Aurora' ascribed to Paracelsus, with the Treasure of Treasures — a visionary statement of the tincture and the universal medicine that shaped the Paracelsian revival in England.",
+   "tags": [
+    "paracelsian",
+    "tincture",
+    "english"
+   ],
+   "wiki": "Paracelsus",
+   "linkKind": "attributed-to",
+   "linkTarget": "paracelsus",
+   "imprint": "London: Giles Calvert, 1659",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-sendivogius-new-light",
+   "cluster": "alchemy",
+   "era": "early-modern",
+   "yearGuess": 1650,
+   "dates": "1650",
+   "title": "A New Light of Alchymie",
+   "author": "Michael Sendivogius",
+   "query": "New Light of Alchymie Sendivogius French 1650",
+   "epithet": "The Cosmopolite's aerial nitre, Englished",
+   "summary": "The English New Light of Alchymie, carrying Sendivogius's doctrine of the hidden 'aerial nitre' that feeds all life — a book Newton read closely, bound here with a treatise of sulphur and the Dialogue of Mercury.",
+   "tags": [
+    "nitre",
+    "cosmopolite",
+    "english"
+   ],
+   "wiki": "Michael_Sendivogius",
+   "linkKind": "wrote",
+   "linkTarget": "michael-sendivogius",
+   "imprint": "London: Richard Cotes for Thomas Williams, 1650",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-collesson-idea-perfecta",
+   "cluster": "alchemy",
+   "era": "early-modern",
+   "yearGuess": 1631,
+   "dates": "1631",
+   "title": "Idea Perfecta Philosophiae Hermeticae",
+   "author": "Jean Collesson",
+   "query": "Idea Perfecta Philosophiae Hermeticae Collesson",
+   "epithet": "A perfect idea of the Hermetic philosophy",
+   "summary": "Collesson's compact statement of Hermetic first principles and the single matter of the stone — a short, much-copied French adept's treatise of the mature tradition.",
+   "tags": [
+    "hermetic",
+    "french",
+    "principles"
+   ],
+   "wiki": "Alchemy",
+   "linkKind": "associated-with",
+   "linkTarget": "alchemy",
+   "imprint": "Paris, 1631",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-paracelsus-nature-of-things",
+   "cluster": "alchemy",
+   "era": "early-modern",
+   "yearGuess": 1650,
+   "dates": "1650",
+   "title": "Of the Nature of Things, Nine Books",
+   "author": "Paracelsus",
+   "query": "Paracelsus Of the Nature of Things Nine Books",
+   "epithet": "Generation, growth and the homunculus",
+   "summary": "The nine books on the nature of things ascribed to Paracelsus — on generation, growth, decay and the making of the homunculus — a cornerstone of the Paracelsian philosophy of nature, in English.",
+   "tags": [
+    "paracelsian",
+    "generation",
+    "homunculus"
+   ],
+   "wiki": "Paracelsus",
+   "linkKind": "wrote",
+   "linkTarget": "paracelsus",
+   "imprint": "London: for the Company of Stationers, 1650",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-hollandus-opera-mineralia",
+   "cluster": "alchemy",
+   "era": "early-modern",
+   "yearGuess": 1600,
+   "dates": "1600",
+   "title": "Opera Mineralia",
+   "author": "Isaac Hollandus",
+   "query": "Opera Mineralia Hollandus",
+   "epithet": "The Dutch adepts' work of Saturn and the stone",
+   "summary": "The mineral and metallic works attributed to the Hollandus adepts — detailed operations on lead, antimony and the vegetable stone that were pored over by Paracelsian chymists across Europe.",
+   "tags": [
+    "mineral",
+    "dutch",
+    "operations"
+   ],
+   "wiki": "Isaac_Hollandus",
+   "linkKind": "associated-with",
+   "linkTarget": "alchemy",
+   "imprint": "Middelburg: Richard Schilders, 1600",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-philalethes-marrow-alchemy",
+   "era": "early-modern",
+   "yearGuess": 1654,
+   "dates": "1654–55",
+   "title": "The Marrow of Alchemy",
+   "author": "Eirenaeus Philalethes",
+   "query": "Marrow of Alchemy Philoponos Philalethes",
+   "epithet": "The hidden adept's alchemy in English verse",
+   "summary": "The long alchemical poem under the Philalethes name, setting out the theory and practice of the stone in verse — English adept-lore at the height of the Interregnum enthusiasm.",
+   "tags": [
+    "verse",
+    "adept",
+    "english"
+   ],
+   "wiki": "Eirenaeus_Philalethes",
+   "linkKind": "associated-with",
+   "linkTarget": "alchemy",
+   "imprint": "London: Edward Brewster, 1654",
+   "cluster": "alchemy",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-hermetick-triumph",
+   "era": "early-modern",
+   "yearGuess": 1723,
+   "dates": "1723",
+   "title": "The Hermetick Triumph",
+   "author": "Alexander Toussaint Limojon de Saint-Didier",
+   "query": "Hermetick Triumph Victorious Philosophical Stone",
+   "epithet": "The victorious stone, in an English rendering",
+   "summary": "The English 'Hermetick Triumph', the victorious philosophical stone, with the 'Ancient War of the Knights' — a favourite late allegory of the art in the language of chivalry.",
+   "tags": [
+    "allegory",
+    "stone",
+    "english"
+   ],
+   "wiki": "Alchemy",
+   "linkKind": "associated-with",
+   "linkTarget": "alchemy",
+   "imprint": "London: for P. Hanet, 1723",
+   "cluster": "alchemy",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-vaughan-aula-lucis",
+   "era": "early-modern",
+   "yearGuess": 1652,
+   "dates": "1652",
+   "title": "Aula Lucis, or the House of Light",
+   "author": "Thomas Vaughan",
+   "query": "Aula Lucis House of Light 1652",
+   "epithet": "Vaughan on the light and the first matter",
+   "summary": "Vaughan's short Hermetic discourse on the 'house of light' and the universal spirit hidden in nature — the Welsh alchemist's mysticism of the world-soul.",
+   "tags": [
+    "hermetic",
+    "light",
+    "vaughan"
+   ],
+   "wiki": "Thomas_Vaughan_(philosopher)",
+   "linkKind": "wrote",
+   "linkTarget": "thomas-vaughan",
+   "imprint": "London: for William Leake, 1652",
+   "cluster": "alchemy",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-vaughan-euphrates",
+   "cluster": "alchemy",
+   "era": "early-modern",
+   "yearGuess": 1655,
+   "dates": "1655",
+   "title": "Euphrates, or the Waters of the East",
+   "author": "Thomas Vaughan",
+   "query": "Euphrates Waters of the East Vaughan",
+   "epithet": "Vaughan on the secret water of the wise",
+   "summary": "Vaughan's late treatise on the 'water of the East', the mysterious first matter and universal spirit of the alchemists — the Welsh Hermetist's most cryptic English tract.",
+   "tags": [
+    "hermetic",
+    "prima-materia",
+    "vaughan"
+   ],
+   "wiki": "Thomas_Vaughan_(philosopher)",
+   "linkKind": "wrote",
+   "linkTarget": "thomas-vaughan",
+   "imprint": "London: for Humphrey Moseley, 1655",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-bloomfield-blossoms",
+   "cluster": "alchemy",
+   "era": "renaissance",
+   "yearGuess": 1652,
+   "dates": "c. 1557 (printed 1652)",
+   "title": "Bloomfield's Blossoms",
+   "author": "William Bloomfield",
+   "query": "Bloomfield's Blossoms Camp of Philosophy Ashmole",
+   "epithet": "A Tudor physician's alchemical dream-poem",
+   "summary": "Bloomfield's verse 'Blossoms', or Camp of Philosophy — a Tudor dream-allegory of the alchemical work, preserved in Ashmole's Theatrum Chemicum Britannicum.",
+   "tags": [
+    "verse",
+    "allegory",
+    "english"
+   ],
+   "wiki": "Alchemy",
+   "linkKind": "associated-with",
+   "linkTarget": "alchemy",
+   "imprint": "in Theatrum Chemicum Britannicum, 1652",
+   "reason": "no usable scan found"
+  }
+ ]
+}

@@ -1,0 +1,164 @@
+{
+  "_comment": [
+    "Where each material's scans come from. Everything listed is CC0 (public domain):",
+    "Poly Haven (polyhaven.com) and ambientCG (ambientcg.com) both release under CC0,",
+    "so these ship with the project with no attribution obligation — though both",
+    "deserve the credit anyway, and get it in docs/MATERIALS.md.",
+    "",
+    "Run `npm run textures:fetch` to download, then `npm run textures:scan`.",
+    "Nothing here is required: every material still has a painted stand-in, so a",
+    "checkout that skips the fetch renders a fully dressed building.",
+    "",
+    "Resolution is per-material on purpose. 2k goes only to surfaces a visitor gets",
+    "close to or sees at a grazing angle — floors, the walls at eye level, the",
+    "carpet. Everything else is 1k, because a coffer 14 m overhead cannot resolve",
+    "more and the bytes are better spent elsewhere."
+  ],
+  "polyhaven": {
+    "wood_floor_polished": {
+      "asset": "wood_floor_worn",
+      "res": "2k"
+    },
+    "wood_table_top": {
+      "asset": "wood_table_worn",
+      "res": "1k"
+    },
+    "wood_rotunda_wainscot": {
+      "asset": "dark_wood",
+      "res": "2k"
+    },
+    "wood_hall_wainscot": {
+      "asset": "medieval_wood",
+      "res": "2k"
+    },
+    "wood_rotunda_timber": {
+      "asset": "oak_veneer_01",
+      "res": "1k"
+    },
+    "wood_hall_timber": {
+      "asset": "dark_planks",
+      "res": "1k"
+    },
+    "wood_shelving_library": {
+      "asset": "wood_cabinet_worn_long",
+      "res": "2k"
+    },
+    "wood_gallery_timber": {
+      "asset": "plank_flooring_03",
+      "res": "1k"
+    },
+    "wood_ceiling_boards": {
+      "asset": "worn_planks",
+      "res": "1k"
+    },
+    "wood_walnut_ancient": {
+      "asset": "fine_grained_wood",
+      "res": "1k"
+    },
+    "wood_arcade_timber": {
+      "asset": "jolcham_oak_bark_01",
+      "res": "1k"
+    },
+    "stone_limestone_ancient": {
+      "asset": "medieval_blocks_05",
+      "res": "2k"
+    },
+    "stone_flagstone_floor": {
+      "asset": "monastery_stone_floor",
+      "res": "2k"
+    },
+    "stone_arcade_ashlar": {
+      "asset": "mossy_stone_wall",
+      "res": "2k"
+    },
+    "stone_arcade_base": {
+      "asset": "old_stone_wall",
+      "res": "1k"
+    },
+    "stone_arcade_upper": {
+      "asset": "rustic_stone_wall",
+      "res": "1k"
+    },
+    "stone_plaster_vault": {
+      "asset": "worn_cracked_plaster",
+      "res": "2k"
+    },
+    "stone_niche_mosaic": {
+      "asset": "old_mosaic_floor",
+      "res": "2k"
+    },
+    "stone_dressed_plain": {
+      "asset": "plastered_stone_wall",
+      "res": "1k"
+    },
+    "stone_hearth": {
+      "asset": "medieval_blocks_02",
+      "res": "1k"
+    },
+    "stone_pillar_carved": {
+      "asset": "medieval_wall_02",
+      "res": "1k"
+    },
+    "stone_sandstone_weathered": {
+      "asset": "mossy_sandstone",
+      "res": "1k"
+    },
+    "stone_granite_dark": {
+      "asset": "dark_rock",
+      "res": "1k"
+    },
+    "stone_marble_white": {
+      "asset": "marble_01",
+      "res": "2k"
+    },
+    "fabric_rug_persian": {
+      "asset": "dirty_carpet",
+      "res": "2k"
+    },
+    "fabric_niche_damask": {
+      "asset": "velour_velvet",
+      "res": "2k"
+    },
+    "leather_upholstery": {
+      "asset": "brown_leather",
+      "res": "1k"
+    },
+    "book_leather_aged": {
+      "asset": "fabric_leather_01",
+      "res": "1k"
+    },
+    "book_leather_cracked": {
+      "asset": "leather_red_02",
+      "res": "1k"
+    },
+    "book_cloth_binding": {
+      "asset": "book_pattern",
+      "res": "1k"
+    },
+    "book_cloth_oxblood": {
+      "asset": "book_pattern",
+      "res": "1k",
+      "prefer": [
+        "col2"
+      ]
+    }
+  },
+  "ambientcg": {
+    "metal_brass_burnished": {
+      "asset": "Metal017",
+      "res": "1K"
+    },
+    "metal_bronze_aged": {
+      "asset": "Metal008",
+      "res": "1K"
+    },
+    "metal_iron_forged": {
+      "asset": "Metal013",
+      "res": "1K"
+    },
+    "metal_copper_oxidized": {
+      "asset": "Metal018",
+      "res": "1K"
+    }
+  }
+}

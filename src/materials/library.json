@@ -1,0 +1,2227 @@
+{
+  "root": "/textures",
+  "_comment": [
+    "The catalogue. Pure data — no code reads anything here it cannot also read",
+    "from a file you edit by hand.",
+    "",
+    "ROUGHNESS IS THE ART DIRECTION. Centuries-old architecture is almost",
+    "entirely diffuse: stone that was ever polished has been walked and weathered",
+    "matte, old oak absorbs light rather than returning it, wool and leather have",
+    "no specular lobe worth the name. Values here sit deliberately high — 0.9+ on",
+    "everything structural — and the only surfaces allowed a visible highlight are",
+    "burnished brass edges, crystal, lenses and fresh wax. If a surface in this",
+    "building is catching the light, that should be a decision someone made.",
+    "",
+    "Scan sources live in sources.json; `npm run textures:fetch` pulls them."
+  ],
+  "categories": {
+    "wood": "Wood",
+    "stone": "Stone",
+    "metal": "Metal",
+    "book": "Books",
+    "fabric": "Fabric",
+    "glass": "Glass",
+    "decal": "Decals",
+    "misc": "Vegetation"
+  },
+  "materials": {
+    "wood_walnut_ancient": {
+      "label": "Ancient dark walnut",
+      "family": "wood",
+      "note": "The keeper's own furniture. Near-black in the recesses, warm where a thousand years of hands have polished it.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#3b2a1c",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 1,
+        "aoMapIntensity": 1
+      },
+      "uv": {
+        "tilesPerMetre": 0.55
+      },
+      "fallback": {
+        "painter": "woodBeam",
+        "args": [
+          "#3b2a1c",
+          21
+        ]
+      }
+    },
+    "wood_oak_carved": {
+      "label": "Hand-carved oak",
+      "family": "wood",
+      "note": "Chisel facets, not machine edges. Dust sits in every cut.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#5c4530",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 1.25,
+        "aoMapIntensity": 1.15
+      },
+      "uv": {
+        "tilesPerMetre": 0.7
+      },
+      "fallback": {
+        "painter": "wallPanels",
+        "args": [
+          "#5c4530",
+          33
+        ]
+      }
+    },
+    "wood_mahogany_weathered": {
+      "label": "Weathered mahogany",
+      "family": "wood",
+      "note": "Varnish gone uneven and crazed. Water marks near the floor.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#4a2a20",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 1
+      },
+      "uv": {
+        "tilesPerMetre": 0.6
+      },
+      "fallback": {
+        "painter": "woodBeam",
+        "args": [
+          "#4a2a20",
+          23
+        ]
+      }
+    },
+    "wood_shelving_library": {
+      "label": "Old library shelving",
+      "family": "wood",
+      "note": "Darker oil stain along every shelf edge where books have been pulled out for centuries.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#3f2e1f",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 1,
+        "aoMapIntensity": 1.2
+      },
+      "uv": {
+        "tilesPerMetre": 0.8
+      },
+      "fallback": {
+        "painter": "woodBeam",
+        "args": [
+          "#3f2e1f",
+          21
+        ]
+      }
+    },
+    "wood_floor_polished": {
+      "label": "Polished hardwood flooring",
+      "family": "wood",
+      "note": "Running-bond planks. Walked bare along the desire lines, dull and dusty under the shelves.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#6f5136",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 0.85
+      },
+      "uv": {
+        "tilesPerMetre": 0.35
+      },
+      "fallback": {
+        "painter": "woodPlanks",
+        "args": [
+          "#6f5136",
+          7
+        ]
+      }
+    },
+    "wood_panel_carved": {
+      "label": "Decorative carved panels",
+      "family": "wood",
+      "note": "Wainscot with sunk fields. Relief belongs in the normal map, never in geometry.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#63492f",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 1.4,
+        "aoMapIntensity": 1.25
+      },
+      "uv": {
+        "tilesPerMetre": 0.5
+      },
+      "fallback": {
+        "painter": "wallPanels",
+        "args": [
+          "#63492f",
+          33
+        ]
+      }
+    },
+    "wood_rotunda_wainscot": {
+      "label": "Rotunda wainscot",
+      "family": "wood",
+      "note": "The drum's panelling. Warmer and lighter than the halls' — the rotunda is the room that has been kept up, and the timber shows it.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#63492f",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 1.2,
+        "aoMapIntensity": 1.2
+      },
+      "uv": {
+        "tilesPerMetre": 0.5
+      },
+      "fallback": {
+        "painter": "wallPanels",
+        "args": [
+          "#63492f",
+          33
+        ]
+      }
+    },
+    "wood_rotunda_timber": {
+      "label": "Rotunda timber",
+      "family": "wood",
+      "note": "Beams and framing under the dome.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#5c4530",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 1.1
+      },
+      "uv": {
+        "tilesPerMetre": 0.7
+      },
+      "fallback": {
+        "painter": "woodBeam",
+        "args": [
+          "#5c4530",
+          21
+        ]
+      }
+    },
+    "wood_hall_wainscot": {
+      "label": "Hall wainscot",
+      "family": "wood",
+      "note": "Deliberately a SEPARATE definition from the rotunda's, not a shared one. The halls are meant to read as their own timber — a visitor notices the change walking out of the drum, and that change is the only thing distinguishing eight long corridors from the room they lead off. Tones currently match; the point is that they can diverge without touching a line of geometry code.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#63492f",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 1.2,
+        "aoMapIntensity": 1.2
+      },
+      "uv": {
+        "tilesPerMetre": 0.5
+      },
+      "fallback": {
+        "painter": "wallPanels",
+        "args": [
+          "#63492f",
+          33
+        ]
+      }
+    },
+    "wood_hall_timber": {
+      "label": "Hall timber",
+      "family": "wood",
+      "note": "The darker oak of the wings' beams and ceilings — the wood that makes the halls read as a different room from the rotunda.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#4a3421",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 1.15
+      },
+      "uv": {
+        "tilesPerMetre": 0.7
+      },
+      "fallback": {
+        "painter": "woodBeam",
+        "args": [
+          "#4a3421",
+          21
+        ]
+      }
+    },
+    "wood_gallery_timber": {
+      "label": "Gallery timber",
+      "family": "wood",
+      "note": "The upper gallery's framing — between the rotunda's tone and the halls'.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#5a4530",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 1.1
+      },
+      "uv": {
+        "tilesPerMetre": 0.7
+      },
+      "fallback": {
+        "painter": "woodBeam",
+        "args": [
+          "#5a4530",
+          21
+        ]
+      }
+    },
+    "stone_dome_coffer": {
+      "label": "Dome coffering",
+      "family": "stone",
+      "note": "The great dome's inner shell. Deep stepped coffers with lapis fields and gilt celestial engraving, weathered from the oculus down. `color` is WHITE on purpose: the painter already bakes the stone's own tone into the map, so tinting it a second time here multiplies the albedo by itself and the whole shell goes to near-black. Any painter that takes a base colour has this hazard.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1.3,
+        "aoMapIntensity": 1.3,
+        "side": "back"
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "domeCoffers",
+        "args": [
+          "#5d5a48",
+          "#b98a3d",
+          63
+        ]
+      }
+    },
+    "stone_vault_coffer": {
+      "label": "Vault coffering",
+      "family": "stone",
+      "note": "The wings' barrel soffits — a gilt star at the centre of every coffer.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#2f3b3a",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1.25,
+        "aoMapIntensity": 1.25
+      },
+      "uv": {
+        "tilesPerMetre": 0.4
+      },
+      "fallback": {
+        "painter": "vaultCoffer",
+        "args": [
+          "#2f3b3a",
+          "#c39a4e",
+          67
+        ]
+      }
+    },
+    "wood_ceiling_boards": {
+      "label": "Dark ceiling boarding",
+      "family": "wood",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#4a3624",
+        "roughness": 0.88,
+        "metalness": 0
+      },
+      "uv": {
+        "tilesPerMetre": 0.4
+      },
+      "fallback": {
+        "painter": "woodPlanks",
+        "args": [
+          "#4a3624",
+          41
+        ]
+      }
+    },
+    "wood_table_top": {
+      "label": "Reading table top",
+      "family": "wood",
+      "note": "Lighter and more polished than the shelving — a working surface, rubbed bright at the elbows, ink-stained at the edges.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#8a6a45",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 0.9
+      },
+      "uv": {
+        "tilesPerMetre": 0.5
+      },
+      "fallback": {
+        "painter": "woodPlanks",
+        "args": [
+          "#8a6a45",
+          63
+        ]
+      }
+    },
+    "wood_bark_old": {
+      "label": "Old oak limb",
+      "family": "wood",
+      "note": "For the timber order in the halls, and for the roots that have got in.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#4a3a28",
+        "roughness": 0.92,
+        "metalness": 0,
+        "normalScale": 1.5
+      },
+      "uv": {
+        "tilesPerMetre": 0.8
+      },
+      "fallback": {
+        "painter": "bark",
+        "args": [
+          "#4a3a28",
+          9,
+          37
+        ]
+      }
+    },
+    "stone_limestone_ancient": {
+      "label": "Ancient limestone",
+      "family": "stone",
+      "note": "The building's own body. Micro-cracks, chipped arrises, a millennium of dust in the mouldings.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#8e8677",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1.15,
+        "aoMapIntensity": 1.2
+      },
+      "uv": {
+        "tilesPerMetre": 0.28
+      },
+      "fallback": {
+        "painter": "stoneBlocks",
+        "args": [
+          "#8e8677",
+          9
+        ]
+      }
+    },
+    "stone_granite_dark": {
+      "label": "Dark granite",
+      "family": "stone",
+      "note": "Plinths, thresholds, the bases that take the wear.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#3a3a3c",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 0.9
+      },
+      "uv": {
+        "tilesPerMetre": 0.35
+      },
+      "fallback": {
+        "painter": "stoneBlocks",
+        "args": [
+          "#3a3a3c",
+          11
+        ]
+      }
+    },
+    "stone_sandstone_weathered": {
+      "label": "Weathered sandstone",
+      "family": "stone",
+      "note": "Eroded soft. Water staining runs downward wherever the roof has ever failed.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#9a8367",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1.3,
+        "aoMapIntensity": 1.3
+      },
+      "uv": {
+        "tilesPerMetre": 0.3
+      },
+      "fallback": {
+        "painter": "stoneBlocks",
+        "args": [
+          "#9a8367",
+          13
+        ]
+      }
+    },
+    "stone_marble_white": {
+      "label": "White marble",
+      "family": "stone",
+      "note": "The statues. Veined, slightly translucent at the edges, grey in every crevice.",
+      "physical": true,
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#cfc9bd",
+        "roughness": 0.62,
+        "metalness": 0,
+        "normalScale": 0.6,
+        "clearcoat": 0.08,
+        "clearcoatRoughness": 0.8
+      },
+      "uv": {
+        "tilesPerMetre": 0.25
+      },
+      "fallback": {
+        "painter": "flutes",
+        "args": [
+          "#cfc9bd",
+          1,
+          29
+        ]
+      }
+    },
+    "stone_slate_grey": {
+      "label": "Grey slate",
+      "family": "stone",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#4c5054",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1.1
+      },
+      "uv": {
+        "tilesPerMetre": 0.45
+      },
+      "fallback": {
+        "painter": "stoneBlocks",
+        "args": [
+          "#4c5054",
+          17
+        ]
+      }
+    },
+    "stone_flagstone_floor": {
+      "label": "Flagstone flooring",
+      "family": "stone",
+      "note": "Uneven slabs, polished hollow along the walking lines, lichen only where damp collects.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#7d7568",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1.2,
+        "aoMapIntensity": 1.25
+      },
+      "uv": {
+        "tilesPerMetre": 0.22
+      },
+      "fallback": {
+        "painter": "stoneBlocks",
+        "args": [
+          "#7d7568",
+          19
+        ]
+      }
+    },
+    "stone_pillar_carved": {
+      "label": "Carved pillar stone",
+      "family": "stone",
+      "note": "Fluted shafts and their capitals. Corners knocked off at shoulder height.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#9a9488",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1.35,
+        "aoMapIntensity": 1.2
+      },
+      "uv": {
+        "tilesPerMetre": 0.4
+      },
+      "fallback": {
+        "painter": "flutes",
+        "args": [
+          "#9a9488",
+          20,
+          29
+        ]
+      }
+    },
+    "stone_hearth": {
+      "label": "Hearth stone",
+      "family": "stone",
+      "note": "Rough coursed blocks around the fire. Soot-blackened above the opening — the only surface in the building with real smoke damage.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#6e6258",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1.4,
+        "aoMapIntensity": 1.3
+      },
+      "uv": {
+        "tilesPerMetre": 0.6
+      },
+      "fallback": {
+        "painter": "stoneBlocks",
+        "args": [
+          "#6e6258",
+          9
+        ]
+      }
+    },
+    "stone_dressed_plain": {
+      "label": "Dressed stone, plain face",
+      "family": "stone",
+      "note": "Benches, case plinths, sills — worked stone with no coursing or fluting on it. Its stand-in is a flat field on purpose: a block or flute pattern painted onto a bench seat reads as wallpaper.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#9a9488",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1
+      },
+      "uv": {
+        "tilesPerMetre": 0.5
+      },
+      "fallback": {
+        "painter": "solid",
+        "args": [
+          "#9a9488"
+        ]
+      }
+    },
+    "stone_arcade_ashlar": {
+      "label": "Arcade ashlar",
+      "family": "stone",
+      "note": "The halls' recessed fields. Damp, cold, greener than the rotunda's stone — the arcade is the part of the building the weather has got into.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#4b5147",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1.3,
+        "aoMapIntensity": 1.3
+      },
+      "uv": {
+        "tilesPerMetre": 0.3
+      },
+      "fallback": {
+        "painter": "stoneBlocks",
+        "args": [
+          "#4b5147",
+          9
+        ]
+      }
+    },
+    "stone_arcade_flutes": {
+      "label": "Arcade fluted shaft",
+      "family": "stone",
+      "note": "Cut from the same damp base stone as the bays. Its own definition rather than a tint of the pillar stone, because the flute canvas bakes its base in — tinting on top turned the shafts nearly black against near-white capitals.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "height": "height.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1.35,
+        "aoMapIntensity": 1.2
+      },
+      "uv": {
+        "repeat": [
+          1,
+          4.5
+        ]
+      },
+      "fallback": {
+        "painter": "flutes",
+        "args": [
+          "#4b5147",
+          20,
+          29
+        ]
+      }
+    },
+    "stone_arcade_upper": {
+      "label": "Arcade upper stage",
+      "family": "stone",
+      "note": "Drier and warmer than the base — the stage above the damp line.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#6b6a52",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1.1
+      },
+      "uv": {
+        "tilesPerMetre": 0.4
+      },
+      "fallback": {
+        "painter": "solid",
+        "args": [
+          "#6b6a52"
+        ]
+      }
+    },
+    "stone_arcade_base": {
+      "label": "Arcade base stone",
+      "family": "stone",
+      "note": "Plain worked faces of the halls' stone order — members in front of the ashlar fields, so no coursing painted on them.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#4b5147",
+        "roughness": 0.96,
+        "metalness": 0,
+        "normalScale": 1.1
+      },
+      "uv": {
+        "tilesPerMetre": 0.4
+      },
+      "fallback": {
+        "painter": "solid",
+        "args": [
+          "#4b5147"
+        ]
+      }
+    },
+    "wood_arcade_timber": {
+      "label": "Arcade oak members",
+      "family": "wood",
+      "note": "The bark-clad oak rolls of the halls' order. The canvas bakes its own base, so this is used untinted.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "normalScale": 1.5
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1.6
+        ]
+      },
+      "fallback": {
+        "painter": "bark",
+        "args": [
+          "#4a3a28",
+          9,
+          37
+        ]
+      }
+    },
+    "stone_plaster_vault": {
+      "label": "Vault plaster",
+      "family": "stone",
+      "note": "Candle soot gathers on the ribs and in the coffer heads.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#b8a888",
+        "roughness": 0.95,
+        "metalness": 0,
+        "normalScale": 1,
+        "aoMapIntensity": 1.3
+      },
+      "uv": {
+        "tilesPerMetre": 0.3
+      },
+      "fallback": {
+        "painter": "conchCoffers",
+        "args": [
+          47
+        ]
+      }
+    },
+    "stone_niche_mosaic": {
+      "label": "Niche conch mosaic",
+      "family": "stone",
+      "note": "The gold-tessera semi-dome over each statue. Gold over crimson is the historic apse pairing — same warmth, different value — and it is what makes the vault and the damask below read as one surface rather than two materials meeting at a line. Brick was tried here and fought the hanging. Set straight on the map and fanned into a radial vault by the quarter-sphere's own UVs, the way a mosaicist sets an apse.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#8f7038",
+        "roughness": 0.62,
+        "metalness": 0.18,
+        "normalScale": 1.1,
+        "aoMapIntensity": 1.2
+      },
+      "uv": {
+        "tilesPerMetre": 0.55
+      },
+      "fallback": {
+        "painter": "conchMosaic",
+        "args": [
+          31
+        ]
+      }
+    },
+    "metal_bronze_aged": {
+      "label": "Aged bronze",
+      "family": "metal",
+      "note": "Cast and hammered. Oxidised to a dark olive in the recesses, rubbed back to warm metal on every raised edge. Hammer facets, not a smooth surface.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "metalness": "metalness.jpg"
+      },
+      "params": {
+        "color": "#6f5636",
+        "roughness": 0.72,
+        "metalness": 0.84,
+        "normalScale": 1.1,
+        "aoMapIntensity": 1.1
+      },
+      "uv": {
+        "tilesPerMetre": 0.9
+      },
+      "fallback": {
+        "painter": "forgedMetal",
+        "args": [
+          "#6f5636",
+          "bronze",
+          17
+        ]
+      }
+    },
+    "metal_brass_burnished": {
+      "label": "Burnished brass",
+      "family": "metal",
+      "note": "Lantern bodies, orrery arms, drawer pulls. Aged lacquer over the metal, gone amber and crazed; bright only along the arrises fingers actually reach. Never a mirror — a clean specular on brass is the fastest way to make a hand-forged building look machined.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "metalness": "metalness.jpg"
+      },
+      "params": {
+        "color": "#a8863c",
+        "roughness": 0.52,
+        "metalness": 0.86,
+        "normalScale": 0.85,
+        "roughnessScale": 1.0
+      },
+      "uv": {
+        "tilesPerMetre": 1.2
+      },
+      "fallback": {
+        "painter": "forgedMetal",
+        "args": [
+          "#a8863c",
+          "brass",
+          41
+        ]
+      }
+    },
+    "metal_copper_oxidized": {
+      "label": "Oxidized copper",
+      "family": "metal",
+      "note": "Verdigris creeping out of the joints and running down.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "metalness": "metalness.jpg"
+      },
+      "params": {
+        "color": "#5c7a68",
+        "roughness": 0.78,
+        "metalness": 0.6,
+        "normalScale": 1.3
+      },
+      "uv": {
+        "tilesPerMetre": 0.8
+      },
+      "fallback": {
+        "painter": "solid",
+        "args": [
+          "#5c7a68"
+        ]
+      }
+    },
+    "metal_iron_forged": {
+      "label": "Forged iron",
+      "family": "metal",
+      "note": "Drawn under a hammer and black-oxidised. Scale, pitting, and the faint flat facets a smith leaves. Almost no specular — this is the metal that disappears.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "metalness": "metalness.jpg"
+      },
+      "params": {
+        "color": "#2e2b28",
+        "roughness": 0.86,
+        "metalness": 0.7,
+        "normalScale": 1.4
+      },
+      "uv": {
+        "tilesPerMetre": 1
+      },
+      "fallback": {
+        "painter": "forgedMetal",
+        "args": [
+          "#2e2b28",
+          "iron",
+          63
+        ]
+      }
+    },
+    "metal_steel_blackened": {
+      "label": "Blackened steel",
+      "family": "metal",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "metalness": "metalness.jpg"
+      },
+      "params": {
+        "color": "#242427",
+        "roughness": 0.6,
+        "metalness": 0.85,
+        "normalScale": 1
+      },
+      "uv": {
+        "tilesPerMetre": 1
+      },
+      "fallback": {
+        "painter": "solid",
+        "args": [
+          "#242427"
+        ]
+      }
+    },
+    "metal_gold_leaf": {
+      "label": "Gold leaf",
+      "family": "metal",
+      "note": "Gilding on the dome's constellations and the coffer rosettes. Worn through to bole in places.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "metalness": "metalness.jpg"
+      },
+      "params": {
+        "color": "#d8b154",
+        "roughness": 0.3,
+        "metalness": 1,
+        "normalScale": 0.6,
+        "roughnessScale": 0.8
+      },
+      "uv": {
+        "tilesPerMetre": 1.4
+      },
+      "fallback": {
+        "painter": "solid",
+        "args": [
+          "#d8b154"
+        ]
+      }
+    },
+    "book_leather_aged": {
+      "label": "Aged leather binding",
+      "family": "book",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#c9beac",
+        "roughness": 0.9,
+        "metalness": 0,
+        "normalScale": 1.2
+      },
+      "uv": {
+        "tilesPerMetre": 3
+      },
+      "fallback": {
+        "painter": "leather",
+        "args": [
+          13
+        ]
+      },
+      "category": "Leather"
+    },
+    "book_leather_cracked": {
+      "label": "Cracked leather binding",
+      "family": "book",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#b6a996",
+        "roughness": 0.9,
+        "metalness": 0,
+        "normalScale": 1.6,
+        "aoMapIntensity": 1.3
+      },
+      "uv": {
+        "tilesPerMetre": 3
+      },
+      "fallback": {
+        "painter": "leather",
+        "args": [
+          29
+        ]
+      },
+      "category": "Leather"
+    },
+    "book_cloth_binding": {
+      "label": "Cloth binding",
+      "family": "book",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg"
+      },
+      "params": {
+        "color": "#a89c86",
+        "roughness": 0.9,
+        "metalness": 0,
+        "normalScale": 1
+      },
+      "uv": {
+        "tilesPerMetre": 3.5
+      },
+      "fallback": {
+        "painter": "leather",
+        "args": [
+          31
+        ]
+      }
+    },
+    "book_cloth_oxblood": {
+      "label": "Cloth binding, oxblood",
+      "family": "book",
+      "note": "The same bookbinding linen as book_cloth_binding in its other published colourway — two cloth grounds so a shelf is not one bolt of fabric.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.jpg",
+        "arm": "arm.jpg"
+      },
+      "params": {
+        "color": "#a89c86",
+        "roughness": 0.9,
+        "metalness": 0,
+        "normalScale": 1
+      },
+      "uv": {
+        "tilesPerMetre": 3.5
+      },
+      "fallback": {
+        "painter": "leather",
+        "args": [
+          37
+        ]
+      }
+    },
+    "book_spine_gilt": {
+      "label": "Gilt-embossed spine atlas",
+      "family": "book",
+      "note": "An atlas, not a tile — every shelf reads a different cell so no two spines repeat.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "metalness": "metalness.jpg"
+      },
+      "params": {
+        "color": "#c9b9a2",
+        "roughness": 0.9,
+        "metalness": 0,
+        "normalScale": 1.3
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "bookSpines"
+      }
+    },
+    "book_vellum": {
+      "label": "Vellum",
+      "family": "book",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg"
+      },
+      "params": {
+        "color": "#e2d7bd",
+        "roughness": 0.9,
+        "metalness": 0
+      },
+      "uv": {
+        "tilesPerMetre": 2
+      },
+      "fallback": {
+        "painter": "solid",
+        "args": [
+          "#e2d7bd"
+        ]
+      },
+      "category": "Paper"
+    },
+    "book_parchment": {
+      "label": "Parchment leaf",
+      "family": "book",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg"
+      },
+      "params": {
+        "color": "#d8c9a6",
+        "roughness": 0.9,
+        "metalness": 0,
+        "normalScale": 0.8
+      },
+      "uv": {
+        "tilesPerMetre": 2
+      },
+      "fallback": {
+        "painter": "solid",
+        "args": [
+          "#d8c9a6"
+        ]
+      },
+      "category": "Paper"
+    },
+    "fabric_rug_persian": {
+      "label": "Persian rug",
+      "family": "fabric",
+      "note": "Faded to a third of its dyed strength. Frayed at the ends, worn to the warp where feet cross it.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#6e2530",
+        "roughness": 0.97,
+        "metalness": 0,
+        "normalScale": 1.2
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "rugRound",
+        "args": [
+          "#6e2530",
+          "#d9a648",
+          77
+        ]
+      },
+      "category": "Rugs"
+    },
+    "fabric_cosmographia_mandala": {
+      "label": "Cosmographia — the rotunda mandala",
+      "family": "fabric",
+      "note": "The observatory floor: one 31 m sheet, never tiled. Woven orbit rings, a twelvefold zodiac band, a stone pavement course and the ambulatory the ten ways leave from. Walked to the warp along every gate line.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.96,
+        "metalness": 0,
+        "normalScale": 1.15,
+        "alphaTest": 0.45
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "cosmographiaMandala",
+        "args": [
+          91
+        ]
+      },
+      "category": "Rugs"
+    },
+    "fabric_ceremonial_way": {
+      "label": "Cosmographia — the ceremonial way",
+      "family": "fabric",
+      "note": "The radial carpet out of the mandala and down every hall. u runs across the way, v along it, so only v repeats; the selvedges are frayed into the alpha so the boards show past them.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.97,
+        "metalness": 0,
+        "normalScale": 1.1,
+        "alphaTest": 0.45
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "ceremonialWay",
+        "args": [
+          31
+        ]
+      },
+      "category": "Rugs"
+    },
+    "stone_observatory_roundel": {
+      "label": "Cosmographia — the observatory roundel",
+      "family": "stone",
+      "note": "The compass-rose disc set into the boards where a way pauses at a gallery. Cut edge, not a selvedge — this one is masonry.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "normalScale": 1,
+        "alphaTest": 0.45
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "observatoryRoundel",
+        "args": [
+          17
+        ]
+      },
+      "category": "Stone"
+    },
+    "fabric_velvet_banner": {
+      "label": "Velvet banner",
+      "family": "fabric",
+      "note": "Sheen is the whole point — velvet reads as velvet only when the grazing angle lights up.",
+      "physical": true,
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#4a1622",
+        "roughness": 0.98,
+        "metalness": 0,
+        "sheen": 1,
+        "sheenColor": "#8a3a4a",
+        "sheenRoughness": 0.55
+      },
+      "uv": {
+        "tilesPerMetre": 0.6
+      },
+      "fallback": {
+        "painter": "nicheDamask",
+        "args": [
+          "#4a1622",
+          91
+        ]
+      }
+    },
+    "leather_upholstery": {
+      "label": "Chair leather",
+      "family": "fabric",
+      "note": "The keeper's fireside chairs. The stand-in is painted neutral so the tint carries the colour — swap in a scan and drop the tint.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#8a3648",
+        "roughness": 0.97,
+        "metalness": 0,
+        "normalScale": 1.3
+      },
+      "uv": {
+        "tilesPerMetre": 1.5
+      },
+      "fallback": {
+        "painter": "leather",
+        "args": [
+          13
+        ]
+      },
+      "category": "Leather"
+    },
+    "fabric_linen_curtain": {
+      "label": "Linen curtain",
+      "family": "fabric",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#9c9280",
+        "roughness": 0.97,
+        "metalness": 0,
+        "transparent": true,
+        "opacity": 0.92,
+        "side": "double"
+      },
+      "uv": {
+        "tilesPerMetre": 0.8
+      },
+      "fallback": {
+        "painter": "solid",
+        "args": [
+          "#9c9280"
+        ]
+      }
+    },
+    "fabric_silk_ceremonial": {
+      "label": "Silk ceremonial cloth",
+      "family": "fabric",
+      "physical": true,
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg"
+      },
+      "params": {
+        "color": "#1f3a30",
+        "roughness": 0.97,
+        "metalness": 0,
+        "sheen": 0.85,
+        "sheenColor": "#3a6a54",
+        "sheenRoughness": 0.35
+      },
+      "uv": {
+        "tilesPerMetre": 1
+      },
+      "fallback": {
+        "painter": "starryRobe",
+        "args": [
+          "#1f3a30",
+          44
+        ]
+      }
+    },
+    "fabric_niche_damask": {
+      "label": "Statue niche damask",
+      "family": "fabric",
+      "note": "The crimson field behind every niched figure — the deep red the great museum rotondas hang their marbles against, and what sets a pale statue off the dark timber drum. Its own definition rather than a tint of the wool hanging, because it has to survive the lighting rig: at 85% shadow a plain #6d222a alcove goes to brown mud and the red disappears. Lifted about a stop, plus a very dark emissive that raises the floor of the colour without flattening it — the baked vertex shading still multiplies the diffuse, so the hollow keeps its depth.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#93303b",
+        "roughness": 0.97,
+        "metalness": 0,
+        "normalScale": 1.3,
+        "emissive": "#2e0b11",
+        "emissiveIntensity": 1
+      },
+      "uv": {
+        "tilesPerMetre": 0.5
+      },
+      "fallback": {
+        "painter": "nicheDamask",
+        "args": [
+          "#6d222a",
+          91
+        ]
+      }
+    },
+    "fabric_wool_hanging": {
+      "label": "Wool wall hanging",
+      "family": "fabric",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#6d222a",
+        "roughness": 0.97,
+        "metalness": 0,
+        "normalScale": 1.3
+      },
+      "uv": {
+        "tilesPerMetre": 0.5
+      },
+      "fallback": {
+        "painter": "nicheDamask",
+        "args": [
+          "#6d222a",
+          91
+        ]
+      }
+    },
+    "glass_crown_old": {
+      "label": "Old crown glass",
+      "family": "glass",
+      "note": "Wavy, bubbled, never optically flat. Distortion is what makes a window read as a thousand years old.",
+      "physical": true,
+      "maps": {
+        "normal": "normal.png",
+        "roughness": "roughness.jpg"
+      },
+      "params": {
+        "color": "#c8d4d8",
+        "roughness": 0.18,
+        "metalness": 0,
+        "normalScale": 0.35,
+        "transmission": 0.92,
+        "thickness": 0.02,
+        "ior": 1.52,
+        "transparent": true,
+        "side": "double"
+      },
+      "uv": {
+        "tilesPerMetre": 0.5
+      },
+      "fallback": {
+        "painter": "none"
+      }
+    },
+    "glass_stained_observatory": {
+      "label": "Stained observatory window",
+      "family": "glass",
+      "physical": true,
+      "maps": {
+        "albedo": "albedo.png",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "emissive": "emissive.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.3,
+        "metalness": 0,
+        "emissive": "#ffffff",
+        "emissiveIntensity": 0.55,
+        "transparent": true,
+        "opacity": 0.96,
+        "side": "double"
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "stainedGlassArch",
+        "args": [
+          3
+        ]
+      }
+    },
+    "glass_crystal_sphere": {
+      "label": "Crystal sphere",
+      "family": "glass",
+      "physical": true,
+      "maps": {
+        "normal": "normal.png",
+        "roughness": "roughness.jpg"
+      },
+      "params": {
+        "color": "#e8f0f4",
+        "roughness": 0.02,
+        "metalness": 0,
+        "transmission": 1,
+        "thickness": 0.35,
+        "ior": 1.7,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.05,
+        "transparent": true
+      },
+      "uv": {
+        "tilesPerMetre": 2
+      },
+      "fallback": {
+        "painter": "none"
+      }
+    },
+    "glass_flask_alchemical": {
+      "label": "Alchemical flask",
+      "family": "glass",
+      "physical": true,
+      "maps": {
+        "normal": "normal.png",
+        "roughness": "roughness.jpg"
+      },
+      "params": {
+        "color": "#cfe0d4",
+        "roughness": 0.12,
+        "metalness": 0,
+        "normalScale": 0.5,
+        "transmission": 0.95,
+        "thickness": 0.06,
+        "ior": 1.48,
+        "transparent": true,
+        "side": "double"
+      },
+      "uv": {
+        "tilesPerMetre": 3
+      },
+      "fallback": {
+        "painter": "none"
+      }
+    },
+    "glass_lens": {
+      "label": "Instrument lens",
+      "family": "glass",
+      "physical": true,
+      "params": {
+        "color": "#dce8ec",
+        "roughness": 0.04,
+        "metalness": 0,
+        "transmission": 0.97,
+        "thickness": 0.03,
+        "ior": 1.62,
+        "iridescence": 0.35,
+        "transparent": true
+      },
+      "fallback": {
+        "painter": "none"
+      }
+    },
+    "decal_star_chart": {
+      "label": "Celestial chart",
+      "family": "decal",
+      "note": "Projected, never modelled. Alpha-cut so it sits on whatever surface it is pinned to.",
+      "maps": {
+        "albedo": "albedo.png",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "transparent": true,
+        "alphaTest": 0.02,
+        "depthWrite": false
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "none"
+      },
+      "category": "Astronomy"
+    },
+    "decal_zodiac_wheel": {
+      "label": "Zodiac wheel",
+      "family": "decal",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "transparent": true,
+        "alphaTest": 0.02,
+        "depthWrite": false
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "none"
+      },
+      "category": "Astronomy"
+    },
+    "decal_rosicrucian": {
+      "label": "Rosicrucian engraving",
+      "family": "decal",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "transparent": true,
+        "alphaTest": 0.02,
+        "depthWrite": false
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "none"
+      }
+    },
+    "decal_hermetic_diagram": {
+      "label": "Hermetic diagram",
+      "family": "decal",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "transparent": true,
+        "alphaTest": 0.02,
+        "depthWrite": false
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "none"
+      }
+    },
+    "decal_alchemical_plate": {
+      "label": "Alchemical illustration",
+      "family": "decal",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "transparent": true,
+        "alphaTest": 0.02,
+        "depthWrite": false
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "none"
+      },
+      "category": "Alchemy"
+    },
+    "decal_manuscript": {
+      "label": "Ancient manuscript page",
+      "family": "decal",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "transparent": true,
+        "alphaTest": 0.02,
+        "depthWrite": false
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "none"
+      },
+      "category": "Paper"
+    },
+    "decal_sacred_geometry": {
+      "label": "Sacred geometry",
+      "family": "decal",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png",
+        "emissive": "emissive.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "emissive": "#e8c977",
+        "emissiveIntensity": 0.25,
+        "transparent": true,
+        "alphaTest": 0.02,
+        "depthWrite": false
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "none"
+      }
+    },
+    "decal_orbit_diagram": {
+      "label": "Engraved planetary orbits",
+      "family": "decal",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "transparent": true,
+        "alphaTest": 0.02,
+        "depthWrite": false
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "none"
+      },
+      "category": "Astronomy"
+    },
+    "misc_ivy": {
+      "label": "Ivy runner",
+      "family": "misc",
+      "maps": {
+        "albedo": "albedo.png",
+        "normal": "normal.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#3f6340",
+        "roughness": 0.92,
+        "metalness": 0,
+        "transparent": true,
+        "alphaTest": 0.35,
+        "side": "double"
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "ivyRunner",
+        "args": [
+          "#3f6340",
+          19
+        ]
+      },
+      "category": "Vegetation"
+    },
+    "misc_leaves": {
+      "label": "Leaf cluster",
+      "family": "misc",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#4d7c50",
+        "roughness": 0.92,
+        "metalness": 0,
+        "transparent": true,
+        "alphaTest": 0.35,
+        "side": "double"
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "leafCluster",
+        "args": [
+          "#4d7c50",
+          15
+        ]
+      },
+      "category": "Vegetation"
+    },
+    "misc_fern": {
+      "label": "Fern",
+      "family": "misc",
+      "note": "A shuttlecock of pinnate fronds, drawn springing from the bottom centre so a cross-quad carrying it stands in a pot rather than floating. alphaTest, never transparent.",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "alphaTest": 0.42,
+        "side": "double"
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "fernSheet",
+        "args": [
+          "#4a6b42",
+          15
+        ]
+      },
+      "category": "Vegetation"
+    },
+    "misc_palm": {
+      "label": "Parlour palm",
+      "family": "misc",
+      "note": "Long strap leaves bowing over under their own weight — the tall pots. Fewer, bigger shapes than the fern, because these are read against a wall from below.",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "alphaTest": 0.42,
+        "side": "double"
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "palmSheet",
+        "args": [
+          "#55764a",
+          27
+        ]
+      },
+      "category": "Vegetation"
+    },
+    "misc_shrub": {
+      "label": "Flowering shrub",
+      "family": "misc",
+      "note": "A dense dome of small leaves with five-petalled blossoms scattered through it.",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "alphaTest": 0.42,
+        "side": "double"
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "shrubSheet",
+        "args": [
+          "#42603f",
+          "#c9788a",
+          33
+        ]
+      },
+      "category": "Vegetation"
+    },
+    "misc_trail": {
+      "label": "Trailing creeper",
+      "family": "misc",
+      "note": "Drawn head-DOWN: runners spring from the top of the sheet and fall, accelerating as they go. Serves both the pot skirts and the long creepers off the rotunda gallery.",
+      "maps": {
+        "albedo": "albedo.png",
+        "alpha": "alpha.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.9,
+        "metalness": 0,
+        "alphaTest": 0.42,
+        "side": "double"
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "trailSheet",
+        "args": [
+          "#3e5c3b",
+          39
+        ]
+      },
+      "category": "Vegetation"
+    },
+    "misc_soil": {
+      "label": "Potting earth",
+      "family": "misc",
+      "note": "Dark crumb, grit, fallen leaf and a little moss — the surface of a pot that has been watered for a very long time.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "roughness": "roughness.jpg",
+        "normal": "normal.png"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 1,
+        "metalness": 0
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "soilSheet",
+        "args": [
+          51
+        ]
+      },
+      "category": "Vegetation"
+    },
+    "stone_terracotta": {
+      "label": "Terracotta",
+      "family": "stone",
+      "note": "The pots. Wheel-thrown, salt-bloomed, chipped at the rim and a good deal duller than a garden-centre pot — these have stood indoors for centuries.",
+      "maps": {
+        "albedo": "albedo.jpg",
+        "normal": "normal.png",
+        "roughness": "roughness.jpg",
+        "ao": "ao.jpg"
+      },
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.88,
+        "metalness": 0,
+        "normalScale": 1.0
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "terracotta",
+        "args": [
+          "#8e5334",
+          63
+        ]
+      },
+      "category": "Stone"
+    },
+    "metal_bronze_frieze": {
+      "label": "Bronze astronomical frieze",
+      "family": "metal",
+      "note": "The cast band under the gallery cornice: zodiac wreaths and instruments in low relief, verdigris in the hollows, the proud parts rubbed back to metal. The relief is PAINTED — this surface must never take an albedo scan, only normal/roughness. Metalness is kept low and a touch of emissive added: there is no environment map in this scene, so a physically-metal band fourteen metres up in an 85%-shadow room renders as a black stripe.",
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.7,
+        "metalness": 0.24,
+        "normalScale": 0.9,
+        "emissive": "#2a2012",
+        "emissiveIntensity": 0.6
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "bronzeFrieze",
+        "args": [
+          811
+        ]
+      }
+    },
+    "stone_celestial_roundel": {
+      "label": "Celestial roundels (atlas)",
+      "family": "stone",
+      "note": "Eight carved medallions in one atlas so the ten round the drum cost one draw call. UVs are addressed per cell — never give this a repeat other than 1.",
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.92,
+        "metalness": 0.08,
+        "normalScale": 1
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "celestialRoundels",
+        "args": [
+          523
+        ]
+      }
+    },
+    "stone_constellation_plaque": {
+      "label": "Constellation plaques (atlas)",
+      "family": "stone",
+      "note": "The ten small cut plaques set over the statues, one per pier, in a single atlas. Cut in stone rather than brass on purpose: a bright plate here would outshine the figure standing under it.",
+      "params": {
+        "color": "#ffffff",
+        "roughness": 0.94,
+        "metalness": 0,
+        "normalScale": 1
+      },
+      "uv": {
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "fallback": {
+        "painter": "constellationPlaques",
+        "args": [
+          337
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,317 @@
+[
+ {
+  "bkId": "bk-bodin-demonomanie",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1580,
+  "dates": "1580",
+  "title": "De la démonomanie des sorciers",
+  "author": "Jean Bodin",
+  "query": "Demonomanie des sorciers Bodin",
+  "epithet": "The jurist's case for burning the witch",
+  "summary": "Bodin's demonology, written by one of the age's foremost political theorists as a direct answer to the sceptics — a learned and pitiless argument that witchcraft is real and its punishment a duty, and a chief authority cited in the persecutions.",
+  "tags": [
+   "demonology",
+   "witchcraft",
+   "law"
+  ],
+  "wiki": "Jean_Bodin",
+  "linkKind": "associated-with",
+  "linkTarget": "renaissance-magic",
+  "imprint": "Paris: Jacques du Puys, 1580"
+ },
+ {
+  "bkId": "bk-de-lancre-tableau",
+  "cluster": "renaissance",
+  "era": "early-modern",
+  "yearGuess": 1613,
+  "dates": "1613",
+  "title": "Tableau de l'inconstance des mauvais anges et démons",
+  "author": "Pierre de Lancre",
+  "query": "Tableau de l'inconstance des mauvais anges Lancre",
+  "epithet": "The Basque witch-hunt set down by its inquisitor",
+  "summary": "De Lancre's account of the mass witch trials he conducted in the Pays de Labourd — a lurid, systematic description of the sabbath, famous for the fold-out engraving of the witches' assembly.",
+  "tags": [
+   "demonology",
+   "witchcraft",
+   "basque"
+  ],
+  "wiki": "Pierre_de_Lancre",
+  "linkKind": "associated-with",
+  "linkTarget": "renaissance-magic",
+  "imprint": "Paris: Nicolas Buon, 1613"
+ },
+ {
+  "bkId": "bk-patrizi-nova-philosophia",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1591,
+  "dates": "1591",
+  "title": "Nova de universis philosophia",
+  "author": "Francesco Patrizi",
+  "query": "Nova de universis philosophia Patrizi",
+  "epithet": "A Neoplatonic cosmos of light against Aristotle",
+  "summary": "Patrizi's system, which sought to replace Aristotle in the schools with a philosophy of light descending from God through the world — and which appended the Hermetic and Zoroastrian texts as older and truer than the Greeks.",
+  "tags": [
+   "neoplatonism",
+   "light",
+   "hermetic"
+  ],
+  "wiki": "Francesco_Patrizi_(philosopher)",
+  "linkKind": "associated-with",
+  "linkTarget": "renaissance-magic",
+  "imprint": "Ferrara: Benedetto Mammarelli, 1591"
+ },
+ {
+  "bkId": "bk-porta-natural-magick",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1658,
+  "dates": "1658",
+  "title": "Natural Magick",
+  "author": "Giambattista della Porta",
+  "query": "Natural Magick della Porta English 1658",
+  "epithet": "The English Magia Naturalis, twenty books of wonders",
+  "summary": "The English 'Natural Magick', della Porta's twenty books of the secrets of nature — optics, magnetism, cookery, counterfeiting gold — the Renaissance encyclopaedia of natural marvels for the English reader.",
+  "tags": [
+   "natural-magic",
+   "wonders",
+   "secrets"
+  ],
+  "wiki": "Giambattista_della_Porta",
+  "linkKind": "wrote",
+  "linkTarget": "giambattista-della-porta",
+  "imprint": "London: for Thomas Young and Samuel Speed, 1658"
+ },
+ {
+  "bkId": "bk-james-daemonologie",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1597,
+  "dates": "1597",
+  "title": "Daemonologie",
+  "author": "King James VI",
+  "query": "Daemonologie King James",
+  "epithet": "A king's dialogue proving witchcraft real",
+  "summary": "James VI of Scotland's dialogue on witchcraft, necromancy and the powers of spirits — written to refute the sceptics, and the royal authority behind the trials and the 1604 Witchcraft Act.",
+  "tags": [
+   "witchcraft",
+   "demonology",
+   "royal"
+  ],
+  "wiki": "Daemonologie",
+  "linkKind": "associated-with",
+  "linkTarget": "renaissance-magic",
+  "imprint": "Edinburgh: Robert Waldegrave, 1597"
+ },
+ {
+  "bkId": "bk-burton-anatomy-melancholy",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1621,
+  "dates": "1621",
+  "title": "The Anatomy of Melancholy",
+  "author": "Robert Burton",
+  "query": "Anatomy of Melancholy Burton",
+  "epithet": "Melancholy, its demons, spirits and cures",
+  "summary": "Burton's vast anatomy of melancholy, whose long digression on spirits, devils, magicians and astrology is one of the richest surveys of Renaissance occult belief ever assembled.",
+  "tags": [
+   "melancholy",
+   "spirits",
+   "astrology"
+  ],
+  "wiki": "The_Anatomy_of_Melancholy",
+  "linkKind": "associated-with",
+  "linkTarget": "renaissance-magic",
+  "imprint": "Oxford: John Lichfield, 1621"
+ },
+ {
+  "bkId": "bk-agrippa-vanity-arts",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1676,
+  "dates": "1676",
+  "title": "The Vanity of Arts and Sciences",
+  "author": "Henry Cornelius Agrippa",
+  "query": "Vanity of Arts and Sciences Agrippa",
+  "epithet": "Agrippa's recantation of all human learning",
+  "summary": "The English 'Vanity of Arts and Sciences', Agrippa's sceptical demolition of every branch of knowledge including his own magic — the recantation that shadowed the Occult Philosophy.",
+  "tags": [
+   "scepticism",
+   "learning",
+   "agrippa"
+  ],
+  "wiki": "Heinrich_Cornelius_Agrippa",
+  "linkKind": "wrote",
+  "linkTarget": "cornelius-agrippa",
+  "imprint": "London: for Samuel Speed, 1676"
+ },
+ {
+  "bkId": "bk-lavater-of-ghostes",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1572,
+  "dates": "1572",
+  "title": "Of Ghostes and Spirites Walking by Nyght",
+  "author": "Ludwig Lavater",
+  "query": "Of Ghostes and Spirites Walking by Nyght Lavater",
+  "epithet": "The Protestant handbook of hauntings",
+  "summary": "Lavater's treatise on nocturnal apparitions and their causes — a Protestant attempt to explain hauntings without Catholic purgatory, and a source Shakespeare drew on for his ghosts.",
+  "tags": [
+   "ghosts",
+   "apparitions",
+   "protestant"
+  ],
+  "wiki": "Ludwig_Lavater",
+  "linkKind": "associated-with",
+  "linkTarget": "renaissance-magic",
+  "imprint": "London: Henry Benneyman, 1572"
+ },
+ {
+  "bkId": "bk-le-loyer-treatise-specters",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1605,
+  "dates": "1605",
+  "title": "A Treatise of Specters or Straunge Sights",
+  "author": "Pierre Le Loyer",
+  "query": "A Treatise of Specters Le Loyer",
+  "epithet": "A learned inquiry into visions and phantoms",
+  "summary": "Le Loyer's learned survey of specters, visions and apparitions across history and philosophy — a compendium of Renaissance thought on the boundary of the seen and unseen, in English.",
+  "tags": [
+   "specters",
+   "visions",
+   "survey"
+  ],
+  "wiki": "Pierre_Le_Loyer",
+  "linkKind": "associated-with",
+  "linkTarget": "renaissance-magic",
+  "imprint": "London: Val. Simmes, 1605"
+ },
+ {
+  "bkId": "bk-nashe-terrors-night",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1594,
+  "dates": "1594",
+  "title": "The Terrors of the Night",
+  "author": "Thomas Nashe",
+  "query": "The Terrors of the Night Nashe",
+  "epithet": "A wit's discourse on dreams and apparitions",
+  "summary": "Nashe's brilliant discourse on dreams, nightmares and the spirits that trouble sleep — a sceptical, dazzling Elizabethan essay on the psychology of the night's terrors.",
+  "tags": [
+   "dreams",
+   "apparitions",
+   "elizabethan"
+  ],
+  "wiki": "Thomas_Nashe",
+  "linkKind": "associated-with",
+  "linkTarget": "renaissance-magic",
+  "imprint": "London: John Danter, 1594"
+ },
+ {
+  "bkId": "bk-browne-pseudodoxia",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1646,
+  "dates": "1646",
+  "title": "Pseudodoxia Epidemica",
+  "author": "Thomas Browne",
+  "query": "Pseudodoxia Epidemica Browne vulgar errors",
+  "epithet": "The great catalogue of vulgar errors",
+  "summary": "Browne's examination of the 'vulgar errors' of his age — amulets, the basilisk, sympathetic magic, astrology — weighing each against reason and experiment; a monument of early scientific scepticism.",
+  "tags": [
+   "vulgar-errors",
+   "scepticism",
+   "natural-history"
+  ],
+  "wiki": "Pseudodoxia_Epidemica",
+  "linkKind": "associated-with",
+  "linkTarget": "natural-magic",
+  "imprint": "London: Edward Dod, 1646"
+ },
+ {
+  "bkId": "bk-gifford-dialogue-witches",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1593,
+  "dates": "1593",
+  "title": "A Dialogue concerning Witches and Witchcraftes",
+  "author": "George Gifford",
+  "query": "A Dialogue concerning Witches Gifford",
+  "epithet": "A country minister on the folly of witch-belief",
+  "summary": "Gifford's dialogue on the popular belief in witches — sceptical of the accusations while granting the Devil's power — one of the shrewdest Elizabethan discussions of the witch panic.",
+  "tags": [
+   "witchcraft",
+   "scepticism",
+   "dialogue"
+  ],
+  "wiki": "George_Gifford_(preacher)",
+  "linkKind": "associated-with",
+  "linkTarget": "renaissance-magic",
+  "imprint": "London: for Toby Cooke, 1593"
+ },
+ {
+  "bkId": "bk-perkins-damned-art",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1608,
+  "dates": "1608",
+  "title": "A Discourse of the Damned Art of Witchcraft",
+  "author": "William Perkins",
+  "query": "Discourse of the Damned Art of Witchcraft Perkins",
+  "epithet": "The Puritan casebook against the witch",
+  "summary": "Perkins's systematic Puritan treatise on witchcraft — its covenant with Satan, its detection and its punishment — the theological handbook behind much English witch-prosecution.",
+  "tags": [
+   "witchcraft",
+   "puritan",
+   "theology"
+  ],
+  "wiki": "William_Perkins_(theologian)",
+  "linkKind": "associated-with",
+  "linkTarget": "renaissance-magic",
+  "imprint": "Cambridge: Cantrell Legge, 1608"
+ },
+ {
+  "bkId": "bk-recorde-castle-knowledge",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1556,
+  "dates": "1556",
+  "title": "The Castle of Knowledge",
+  "author": "Robert Recorde",
+  "query": "The Castle of Knowledge Recorde astronomy",
+  "epithet": "The first English textbook of the heavens",
+  "summary": "Recorde's dialogue teaching the sphere and the motions of the heavens — the first astronomy in English, and an early notice of Copernicus, from the man who invented the equals sign.",
+  "tags": [
+   "astronomy",
+   "cosmology",
+   "english"
+  ],
+  "wiki": "Robert_Recorde",
+  "linkKind": "associated-with",
+  "linkTarget": "renaissance-magic",
+  "imprint": "London: Reginald Wolfe, 1556"
+ },
+ {
+  "bkId": "bk-hill-natural-conclusions",
+  "cluster": "renaissance",
+  "era": "renaissance",
+  "yearGuess": 1581,
+  "dates": "1581",
+  "title": "A Brief and Pleasant Treatise of Natural and Artificial Conclusions",
+  "author": "Thomas Hill",
+  "query": "Natural and Artificial Conclusions Thomas Hill",
+  "epithet": "A popular book of natural marvels and tricks",
+  "summary": "Hill's popular collection of natural 'conclusions' — experiments, tricks and marvels of household natural magic — the Elizabethan best-seller that put the secrets of nature in every hand.",
+  "tags": [
+   "natural-magic",
+   "secrets",
+   "popular"
+  ],
+  "wiki": "Thomas_Hill_(author)",
+  "linkKind": "associated-with",
+  "linkTarget": "natural-magic",
+  "imprint": "London: for Abraham Kitson, 1581"
+ }
+]

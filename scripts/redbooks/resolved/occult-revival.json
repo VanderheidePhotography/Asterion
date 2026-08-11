@@ -1,0 +1,662 @@
+{
+ "resolved": {
+  "bk-levi-transcendental-magic": {
+   "bkId": "bk-levi-transcendental-magic",
+   "archiveId": "transcendentalma00leviuoft",
+   "title": "Transcendental magic, its doctrine and ritual",
+   "creator": "Lévi, Eliphas, 1810-1875",
+   "year": 1896,
+   "publisher": "London : G. Redway",
+   "cover": "/art/cover-bk-levi-transcendental-magic.png",
+   "ahash": "1000000000011111001100000000011100111000000000110011100000000011001100000000000100000000000000000000000000000001000000000000000100000000000000010000000000000111100000000000111100000000001111110000000000111111000000000111111100000000111111111000000111111111"
+  },
+  "bk-levi-mysteries-of-magic": {
+   "bkId": "bk-levi-mysteries-of-magic",
+   "archiveId": "mysteriesofmagic00levi",
+   "title": "The mysteries of magic:a digest of the writings of Eliphas Levi [pseud.]",
+   "creator": "Levi, Eliphas, 1810-1875",
+   "year": 1897,
+   "publisher": "London, K. Paul, Trench, Trubner",
+   "cover": "/art/cover-bk-levi-mysteries-of-magic.png",
+   "ahash": "0000000000111100000000001111111000000001010000110000111111111111000111111111111100011111111111110001111111111111000101111111111100011111111111110011111111111111000001111111011100000000000001110011111111111111000000000111111000000000111111000000000000000000"
+  },
+  "bk-leadbeater-astral-plane": {
+   "bkId": "bk-leadbeater-astral-plane",
+   "archiveId": "theastralplane00leaduoft",
+   "title": "The astral plane : its scenery, inhabitants, and phenomena",
+   "creator": "Leadbeater, C. W. (Charles Webster), 1847-1934",
+   "year": 1900,
+   "publisher": "London : Theosophical Pub. Soc",
+   "cover": "/art/cover-bk-leadbeater-astral-plane.png",
+   "ahash": "0000000000000001011000000000000111100000000001111110000000011111111000000011111111100000001111111110000000111111000000000000011100000000001111110000000000111111000000000011111100111000000011110011100000000010001110000000000001111000000000000001000000000000"
+  },
+  "bk-leadbeater-man-visible-invisible": {
+   "bkId": "bk-leadbeater-man-visible-invisible",
+   "archiveId": "manvisibleinvis00lead",
+   "title": "Man visible and invisible ..",
+   "creator": "Leadbeater, C. W. (Charles Webster), 1854-1934",
+   "year": 1903,
+   "publisher": "[n.p.]",
+   "cover": "/art/cover-bk-leadbeater-man-visible-invisible.png",
+   "ahash": "0000000111111111000000011111111100000001111111110000000001111111000000000011111100000000000111110000000000000011000000000000000100000000000000010000000000000001000000000000001100000000000011110000000000000111000000000000111100000011011111110000011111111111"
+  },
+  "bk-steiner-knowledge-higher-worlds": {
+   "bkId": "bk-steiner-knowledge-higher-worlds",
+   "archiveId": "how-does-one-attain-knowledge-of-higher-worlds-cw-10",
+   "title": "How Does One Attain Knowledge of Higher Worlds (CW 10)",
+   "creator": "Steiner, Rudolf",
+   "year": 1914,
+   "publisher": "",
+   "cover": "/art/cover-bk-steiner-knowledge-higher-worlds.png",
+   "ahash": "0000000000000000000000000000000000000000000000000011111111111000001111111111100000000111110000000000011111100000000001111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "bk-steiner-theosophy": {
+   "bkId": "bk-steiner-theosophy",
+   "archiveId": "theosophy-cw-9",
+   "title": "Theosophy (CW 9)",
+   "creator": "Steiner, Rudolf",
+   "year": 1904,
+   "publisher": "",
+   "cover": "/art/cover-bk-steiner-theosophy.png",
+   "ahash": "0000000000000000000000000000000000000000000000000000011111000000000011111110000000111111111110000111111111111100001011111110110000000111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "bk-waite-ceremonial-magic": {
+   "bkId": "bk-waite-ceremonial-magic",
+   "archiveId": "a.-e.-waite-the-book-of-ceremonial-magic",
+   "title": "A. E. Waite - The Book Of Ceremonial Magic",
+   "creator": "A. E. Waite, Arthur Edward Waite",
+   "year": 2022,
+   "publisher": "",
+   "cover": "/art/cover-bk-waite-ceremonial-magic.png",
+   "ahash": "1111111111111111111111111111111111000000000000111111100000011111110000000000011111101110011001111111000000001111111100000000111100111111111111011111111011111111111110000011111110000000001111111000000001111111111100000011111111111111111111111111111111111111"
+  },
+  "bk-hartmann-pronaos": {
+   "bkId": "bk-hartmann-pronaos",
+   "archiveId": "b24884157",
+   "title": "In the pronaos of the temple of wisdom : containing the history of the true and the false Rosicrucians : with an introduction into the mysteries of the hermetic philosophy",
+   "creator": "Hartmann, Franz, 1838-1912. n 50026762",
+   "year": 1890,
+   "publisher": "London : Theosophical Pub. Society",
+   "cover": "/art/cover-bk-hartmann-pronaos.png",
+   "ahash": "0000000000000000000000001111111000000000111111100000000000111110000000000111111000000000111111000000001111110100000000111110000000000001111000000000000111111100000011111111000000001111111100000000000011000000000000000000011011111000000000001111100000000000"
+  },
+  "bk-jennings-rosicrucians": {
+   "bkId": "bk-jennings-rosicrucians",
+   "archiveId": "rosicruciansthe00jenngoog",
+   "title": "The Rosicrucians, their rites and mysteries ",
+   "creator": "Jennings, Hargrave, 1817?-1890",
+   "year": 1870,
+   "publisher": "New York : Arno Press",
+   "cover": "/art/cover-bk-jennings-rosicrucians.png",
+   "ahash": "1111111111111111111111000111111111111100111111111111111111111111111111011111111111111111111111111000111111111111100000000000001110000000000000111000000000000011100000000000001110000000000001111000000000000011100000000000001111010111111111111111111111111111"
+  },
+  "bk-britten-modern-american-spiritualism": {
+   "bkId": "bk-britten-modern-american-spiritualism",
+   "archiveId": "modernamericansp00brit",
+   "title": "Modern American spiritualism: twenty years' record of the communion between earth and the world of spirits",
+   "creator": "Britten, Emma Hardinge, d. 1899",
+   "year": 1870,
+   "publisher": "New York, The author",
+   "cover": "/art/cover-bk-britten-modern-american-spiritualism.png",
+   "ahash": "0000000000011111000000000011111100000000000011110000000000000111000000000000001100000000000000110000000000000001000000000000000100000000000000010000000000000001000000000000001100000000000000110111111000000111111111100000011101111110000011110000000000111111"
+  },
+  "bk-davis-principles-of-nature": {
+   "bkId": "bk-davis-principles-of-nature",
+   "archiveId": "in.ernet.dli.2015.92862",
+   "title": "The Principles Of Nature Her Divine Revelations,vol.1",
+   "creator": "Davis,andrew Jackson",
+   "year": 1847,
+   "publisher": "",
+   "cover": "/art/cover-bk-davis-principles-of-nature.png",
+   "ahash": "1111111111111111111111100111111111100000000011111100000000000011110010000000001111111010100011111111111000111111111110000001111111111100001111111100000000000011110000000000001111000000000000111111111111111111111101000001111111010000000010111111111111111111"
+  },
+  "bk-home-incidents-my-life": {
+   "bkId": "bk-home-incidents-my-life",
+   "archiveId": "incidentsinmyli02homegoog",
+   "title": "Incidents in My Life",
+   "creator": "Daniel Dunglas Home",
+   "year": 1863,
+   "publisher": "Carleton; [etc.,etc.]",
+   "cover": "/art/cover-bk-home-incidents-my-life.png",
+   "ahash": "1111111111111111110000000000001110000000000000111111111111111111111111111111111111111000001111111111100000111111100000000000001111111111111111111111111011111111111111000111111111111111100111111111100000011111110000000000011111100000000011111111111111111111"
+  },
+  "bk-crookes-researches-spiritualism": {
+   "bkId": "bk-crookes-researches-spiritualism",
+   "archiveId": "researchesinphe00croo",
+   "title": "Researches in the phenomena of spiritualism",
+   "creator": "Crookes, William, 1832-1919",
+   "year": 1874,
+   "publisher": "[n.p.]",
+   "cover": "/art/cover-bk-crookes-researches-spiritualism.png",
+   "ahash": "1110111111111111111011111111111111000000111111110000000000111111000000000000111100000000000011110000000000000011000000000000001100000000000000110000000000000111000000000000001100000000000000110000000000000011000000000000001100000000000000110000000000001111"
+  },
+  "bk-myers-human-personality": {
+   "bkId": "bk-myers-human-personality",
+   "archiveId": "in.ernet.dli.2015.154155",
+   "title": "Human Personality And Its Survival Of Bodily Death Vol Ii",
+   "creator": "Frederic W. H. Myers",
+   "year": 1903,
+   "publisher": "",
+   "cover": "/art/cover-bk-myers-human-personality.png",
+   "ahash": "1100001000011011100000100000000111110000000001111111100000011111111111111111111111110000000011111111100111001111111100000000111111110000000011111111000000011111111111000011111111111110011111111111111111111111111000000000011111110000000011111111111111111111"
+  },
+  "bk-gurney-phantasms-living": {
+   "bkId": "bk-gurney-phantasms-living",
+   "archiveId": "phantasmsoflivin02gurnuoft",
+   "title": "Phantasms of the living",
+   "creator": "Gurney, Edmund, 1847-1888",
+   "year": 1886,
+   "publisher": "London, Soc. for Psychical Research",
+   "cover": "/art/cover-bk-gurney-phantasms-living.png",
+   "ahash": "0110011111111111111100011111111111110000111111111111000000111111011000000011111000000000000011110000000000000110000000000000011000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000100000000000000010000000000000011"
+  },
+  "bk-podmore-modern-spiritualism": {
+   "bkId": "bk-podmore-modern-spiritualism",
+   "archiveId": "modernspiritual03podmgoog",
+   "title": "Modern spiritualism; a history and a criticism",
+   "creator": "Podmore, Frank, 1856-1910",
+   "year": 1902,
+   "publisher": "London, Methuen & co.",
+   "cover": "/art/cover-bk-podmore-modern-spiritualism.png",
+   "ahash": "1111111111111111111110000001111111100000000000111110000000000111111111111111111111111111111111111111100000011111111111111001111111111111111111111111111111111111111111000011111111111111111110111111111111111111110110000001111111111110001111111111111111111111"
+  },
+  "bk-crowe-night-side-nature": {
+   "bkId": "bk-crowe-night-side-nature",
+   "archiveId": "nightsideofnatur01crowiala",
+   "title": "The night side of nature, or, Ghosts and ghost seers",
+   "creator": "Crowe, Catherine, 1800?-1876",
+   "year": 1848,
+   "publisher": "London : T.C. Newby",
+   "cover": "/art/cover-bk-crowe-night-side-nature.png",
+   "ahash": "1111111111101000111011000110001011100110101110011110000110000100111000000011100011100110111111010000000111111011000000001111111111100000000011001110000001111100000000000011001000000000000010110000000000000111000000000000001000000000000001000000100111101100"
+  },
+  "bk-flammarion-psychic-forces": {
+   "bkId": "bk-flammarion-psychic-forces",
+   "archiveId": "mysterious-psychic-forces-1907-camille-flammarion",
+   "title": "Mysterious Psychic Forces (1907) - Camille Flammarion",
+   "creator": "Camille Flammarion",
+   "year": 1907,
+   "publisher": "",
+   "cover": "/art/cover-bk-flammarion-psychic-forces.png",
+   "ahash": "1111111111111111111000000000111111000001000000111110000000000111111110000001111111110010000111111111000000011111111111111011111111111110010000011111100000011111111110000011111111111110011111111111111111111111111111100111111111100000000011111111111111111111"
+  },
+  "bk-sinnett-esoteric-buddhism": {
+   "bkId": "bk-sinnett-esoteric-buddhism",
+   "archiveId": "b24886348",
+   "title": "Esoteric Buddhism",
+   "creator": "Sinnett, A. P. (Alfred Percy), 1840-1921. n 50026420",
+   "year": 1885,
+   "publisher": "London : Trübner",
+   "cover": "/art/cover-bk-sinnett-esoteric-buddhism.png",
+   "ahash": "0000000000001010000000011110011100001111111111110000111000111011000000000000000000000001110000000000000111000000000000111110000000000001111000000000000111100000000000011110000000000001111011110000000011101101000000000000000100000011111111110000000011111111"
+  },
+  "bk-sinnett-occult-world": {
+   "bkId": "bk-sinnett-occult-world",
+   "archiveId": "occultworld00sinn",
+   "title": "The occult world",
+   "creator": "Sinnett, A. P. (Alfred Percy), 1840-1921",
+   "year": 1883,
+   "publisher": "London, Trübner & Co.",
+   "cover": "/art/cover-bk-sinnett-occult-world.png",
+   "ahash": "0000011111111111000111111111111100000111111111110000011111111111000101111111111100110111111111110010001111111111001111110111111100000000111111110000011111111111000000000001111100000000000011110000000000011111000000000001111100000000001011110000000000011111"
+  },
+  "bk-judge-ocean-theosophy": {
+   "bkId": "bk-judge-ocean-theosophy",
+   "archiveId": "oceantheosophy01judggoog",
+   "title": "The ocean of theosophy ",
+   "creator": "Judge, William Quan, 1851-1896",
+   "year": 1893,
+   "publisher": "Pasadena, Calif. : Theosophical University Press",
+   "cover": "/art/cover-bk-judge-ocean-theosophy.png",
+   "ahash": "1111111111111111111111110111111111111111011111111100000000000001111111111111111111111111011111111111000000000111111111000000111111111111111111111111111000111111111111000001111111111111011111111111111010111111111010000000111111000000000000011111111111111111"
+  },
+  "bk-collins-light-on-path": {
+   "bkId": "bk-collins-light-on-path",
+   "archiveId": "lightonpathatre01collgoog",
+   "title": "Light on the Path: A Treatise Written for the Personal Use of Those who are ...",
+   "creator": "Mabel Collins",
+   "year": 1895,
+   "publisher": "Kegan Paul, Trench, Trübner & Co.",
+   "cover": "/art/cover-bk-collins-light-on-path.png",
+   "ahash": "1111111111111111111111111111111111000000000011111111110001111111110000000000111111110000000111111111111111111111111100000000111111111111111111111110000000011111111111111111111101111100011111110100000000001111111111000111111111111111111111111111111111111111"
+  },
+  "bk-kingsford-clothed-with-sun": {
+   "bkId": "bk-kingsford-clothed-with-sun",
+   "archiveId": "clothedwithsunbe00king",
+   "title": "\"Clothed with the sun\"; being the book of the illuminations of Anna (Bonus) Kingsford",
+   "creator": "Kingsford, Anna Bonus, 1846-1888",
+   "year": 1889,
+   "publisher": "New York, F.J. Lovell & Company",
+   "cover": "/art/cover-bk-kingsford-clothed-with-sun.png",
+   "ahash": "0000100001111111000000000111111100000000111111110000000011111111000000100011111100000000101111110000000010111111000001000001111100000000001111110000000010111111000000000111111100000000011111110000000011111111000000001111111100001111111111110000111111111111"
+  },
+  "bk-budge-egyptian-magic": {
+   "bkId": "bk-budge-egyptian-magic",
+   "archiveId": "gri_33125013355314",
+   "title": "Egyptian magic",
+   "creator": "Budge, E. A. Wallis (Ernest Alfred Wallis), Sir, 1857-1934",
+   "year": 1901,
+   "publisher": "London : K. Paul, Trench, Trübner",
+   "cover": "/art/cover-bk-budge-egyptian-magic.png",
+   "ahash": "0000000000000000010011111111111001001111111111100100111111111110010011111111111001001111111111100100111111111110010011111111111001001111111111100100111111111110010011111111111001001111111111100100111111111110010000000111111001000000000000000000000000000000"
+  },
+  "bk-leland-aradia": {
+   "bkId": "bk-leland-aradia",
+   "archiveId": "aradiaorgospelof00lela",
+   "title": "Aradia; or, The gospel of the witches",
+   "creator": "Leland, Charles Godfrey, 1824-1903",
+   "year": 1899,
+   "publisher": "London : D. Nutt",
+   "cover": "/art/cover-bk-leland-aradia.png",
+   "ahash": "0011111011111111011111110111111101000011011111110111111111111111010000111111111101111111011111110100011101111111001111110111111100111111000111110000001000011111000000000001111100000000000111110000000000001111000000000000011100000000000000010000000000000000"
+  },
+  "bk-hartmann-life-paracelsus": {
+   "bkId": "bk-hartmann-life-paracelsus",
+   "archiveId": "lifeofphilippust00hart",
+   "title": "The life of Philippus Theophrastus Bombast of Hohenheim, known by the name of Paracelsus, and the substance of his teachings concerning cosmology, anthropology, pneumatology ... Extracted and translated from his rare and extensive works and from some unpublished manuscripts",
+   "creator": "Hartmann, Franz, d. 1912",
+   "year": 1887,
+   "publisher": "London, G. Redway",
+   "cover": "/art/cover-bk-hartmann-life-paracelsus.png",
+   "ahash": "1111111000011000111111100011110011111110011110000001111011111100000000000111110000000000001110000000000000111000000000000000100000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "bk-blavatsky-theosophical-glossary": {
+   "bkId": "bk-blavatsky-theosophical-glossary",
+   "archiveId": "theosophicalglos0000blav",
+   "title": "The theosophical glossary",
+   "creator": "Blavatsky, H. P. (Helena Petrovna), 1831-1891",
+   "year": 1892,
+   "publisher": "London : Theosophical Pub. Society",
+   "cover": "/art/cover-bk-blavatsky-theosophical-glossary.png",
+   "ahash": "1111110000111111111111000011111100000000000000110011110000000000000000000000110000000000011111000000000100000000000001100000100000000000111100000000000100000000000000000000000000000000000111100000000000011111000000000001111100000000001111110000000011111111"
+  },
+  "bk-hardinge-art-magic": {
+   "bkId": "bk-hardinge-art-magic",
+   "archiveId": "artmagicormundan00brit",
+   "title": "Art magic; or, Mundane, sub-mundane and super-mundane spiritism. A treatise in three parts and twenty-three sections: descriptive of art magic, spiritism, the different orders of spirits in the universe known to be related to, or in communication with man; together with directions for invoking, controlling, and discharging spirits, and the uses and abuses, dangers and possibilities of magical art",
+   "creator": "Britten, William, fl. 1876",
+   "year": 1876,
+   "publisher": "New York, The author",
+   "cover": "/art/cover-bk-hardinge-art-magic.png",
+   "ahash": "0000111111111111000001111111111100000011111111110000011111111111000000111111111100000001111111110000000001111111000000000111111100000000001111110000000000111111000000000000111100000000000011110000000000011111000000000001111100000000000111110000000000001111"
+  },
+  "bk-lombroso-after-death": {
+   "bkId": "bk-lombroso-after-death",
+   "archiveId": "afterdeathwhatsp00lomb",
+   "title": "After death--what? : Spiritistic phenomena and their interpretation",
+   "creator": "Lombroso, Cesare, 1835-1909",
+   "year": 1909,
+   "publisher": "London : T. Fisher Unwin",
+   "cover": "/art/cover-bk-lombroso-after-death.png",
+   "ahash": "0000000000000000000000000000000000011111111111000001111111111100000111111111110000011111111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "bk-jinarajadasa-first-principles": {
+   "bkId": "bk-jinarajadasa-first-principles",
+   "archiveId": "dli.ernet.237113",
+   "title": "First Principles Of Theosophy (1928)",
+   "creator": "Jinarajadasa C.",
+   "year": 1928,
+   "publisher": "Theosophical Publishing House, India",
+   "cover": "/art/cover-bk-jinarajadasa-first-principles.png",
+   "ahash": "1111111111111111110000000000111111000000000011111001100011001111100000000000111110000000010011111000000000001111110000000001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "bk-olcott-people-other-world": {
+   "bkId": "bk-olcott-people-other-world",
+   "archiveId": "peoplefromotherw00olco",
+   "title": "People from the other world",
+   "creator": "Olcott, Henry Steel, 1832-1907",
+   "year": 1875,
+   "publisher": "Hartford, Conn., American Publishing Co.",
+   "cover": "/art/cover-bk-olcott-people-other-world.png",
+   "ahash": "1000011111111111100001111111111110000000111111111000000011111111100000001111111100000000001111111000000000111111100000000001111110000000000011110000000000001111000000000000111100000000000001111000000000001111000000000000111110000000001111111000000011111111"
+  },
+  "bk-owen-footfalls": {
+   "bkId": "bk-owen-footfalls",
+   "archiveId": "foot00fallsonboundowenrich",
+   "title": "Footfalls on the boundary of another world",
+   "creator": "Owen, Robert Dale, 1801-1877",
+   "year": 1860,
+   "publisher": "Philadelphia : J.B. Lippincott & Co.",
+   "cover": "/art/cover-bk-owen-footfalls.png",
+   "ahash": "0000000000000111000000000111111100000000011111110000000001111111000000000111111100000000000011110100000001101111000000011111111100000000001111110110000000001111011000000001111101100000000111110110000110011111011000001111111101110000011111110111000101111111"
+  },
+  "bk-doyle-history-spiritualism": {
+   "bkId": "bk-doyle-history-spiritualism",
+   "archiveId": "in.ernet.dli.2015.221709",
+   "title": "The History Of Spiritualism Vol 1",
+   "creator": "Arthur Conan Doyle",
+   "year": 1926,
+   "publisher": "",
+   "cover": "/art/cover-bk-doyle-history-spiritualism.png",
+   "ahash": "1111111111111111111111111111111111000000000001111100000000000011111111111111111111100000000001111110000000001111111111111111111111111100011111111111110001111111111111111111111111111110011111111111110001111111111100000000111111100000000001111111111111111111"
+  },
+  "bk-lodge-raymond": {
+   "bkId": "bk-lodge-raymond",
+   "archiveId": "raymondorlifedea0000oliv_u4k1",
+   "title": "RAYMOND OR LIFE AND DEATH",
+   "creator": "OLIVER J. LODGE",
+   "year": 1915,
+   "publisher": "",
+   "cover": "/art/cover-bk-lodge-raymond.png",
+   "ahash": "0100011111111111000000000000000100000000000000010000011101111111000000000000000100001010011111010000000000000001000000000011111100001111111111110000001111111111000001111111111100001111111111110000111111111111001111111111111100111111111111110000111111111111"
+  },
+  "bk-barrett-threshold-unseen": {
+   "bkId": "bk-barrett-threshold-unseen",
+   "archiveId": "onthresholdofuns00barruoft",
+   "title": "On the threshold of the unseen : an examination of the phenomena of spiritualism and of the evidence for survival after death",
+   "creator": "Barrett, William, Sir, 1844-1925",
+   "year": 1917,
+   "publisher": "London : Kegan Paul, Trench, Trubner ; New York : E. P. Dutton",
+   "cover": "/art/cover-bk-barrett-threshold-unseen.png",
+   "ahash": "0000111111111111000001000000000000010000000010000000001100001111000011111110000000011111111111100011111111111111001111111111111100000010011111110000000000111111001111111111111100111111111111110001111011110000000010111010000000111111111010000001111111110000"
+  },
+  "bk-besant-death-and-after": {
+   "bkId": "bk-besant-death-and-after",
+   "archiveId": "besantlifeandlifeafterdeath1919",
+   "title": "Life and Life After Death",
+   "creator": "Annie Besant, 1847-1933.",
+   "year": 2019,
+   "publisher": "",
+   "cover": "/art/cover-bk-besant-death-and-after.png",
+   "ahash": "0000000000000000100000000000000011111111111010001111111111111100111111111111100010000000000000001101101010000000111111111111110011111111001110001000000000000000111111111111000011111111111111001111111111111100111111100000000011111111000000001110010111111000"
+  },
+  "bk-sinnett-growth-of-soul": {
+   "bkId": "bk-sinnett-growth-of-soul",
+   "archiveId": "in.ernet.dli.2015.215946",
+   "title": "The Growth Of The Soul.",
+   "creator": "Sinnett, A.p",
+   "year": 1896,
+   "publisher": "",
+   "cover": "/art/cover-bk-sinnett-growth-of-soul.png",
+   "ahash": "1111111111111111111111100111111110000000000000011110000000000111111101110110111111111111111111111111111000011111111000000000011111111111111111111111111111111111111111111111111111111111111111111110000000000111111000000000011111110000010001111111111111111111"
+  }
+ },
+ "unresolved": [
+  {
+   "bkId": "bk-levi-science-des-esprits",
+   "cluster": "occult-revival",
+   "era": "nineteenth",
+   "yearGuess": 1865,
+   "dates": "1865",
+   "title": "La Science des esprits",
+   "author": "Éliphas Lévi",
+   "query": "La Science des esprits Levi",
+   "epithet": "Lévi on spirits, the Bible and the Kabbalah",
+   "summary": "Lévi's late treatise reconciling his magical doctrine with the Bible and the Kabbalah, and turning a sceptical eye on the spiritism then sweeping France — a mature statement of his esoteric Catholicism.",
+   "tags": [
+    "spirits",
+    "kabbalah",
+    "levi"
+   ],
+   "wiki": "Éliphas_Lévi",
+   "linkKind": "wrote",
+   "linkTarget": "eliphas-levi",
+   "imprint": "Paris: Germer Baillière, 1865",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-besant-ancient-wisdom",
+   "cluster": "occult-revival",
+   "era": "nineteenth",
+   "yearGuess": 1897,
+   "dates": "1897",
+   "title": "The Ancient Wisdom",
+   "author": "Annie Besant",
+   "query": "The Ancient Wisdom Besant",
+   "epithet": "Theosophy's teaching set out in order",
+   "summary": "Besant's orderly exposition of the Theosophical doctrine — the planes, the bodies, karma and reincarnation — the clear textbook that carried Blavatsky's system to a mass readership.",
+   "tags": [
+    "theosophy",
+    "doctrine",
+    "planes"
+   ],
+   "wiki": "Annie_Besant",
+   "linkKind": "wrote",
+   "linkTarget": "annie-besant",
+   "imprint": "London: Theosophical Publishing Society, 1897",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-besant-esoteric-christianity",
+   "cluster": "occult-revival",
+   "era": "twentieth",
+   "yearGuess": 1901,
+   "dates": "1901",
+   "title": "Esoteric Christianity",
+   "author": "Annie Besant",
+   "query": "Esoteric Christianity Besant",
+   "epithet": "The lesser and greater mysteries of the Church",
+   "summary": "Besant's reading of Christianity as an initiatory mystery-religion with an inner, esoteric teaching behind the exoteric creed — the Theosophical claim on the Western tradition.",
+   "tags": [
+    "theosophy",
+    "christianity",
+    "mysteries"
+   ],
+   "wiki": "Annie_Besant",
+   "linkKind": "wrote",
+   "linkTarget": "annie-besant",
+   "imprint": "London: Theosophical Publishing Society, 1901",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-westcott-numbers",
+   "cluster": "occult-revival",
+   "era": "nineteenth",
+   "yearGuess": 1890,
+   "dates": "1890",
+   "title": "Numbers: Their Occult Power and Mystic Virtues",
+   "author": "W. Wynn Westcott",
+   "query": "Numbers Their Occult Power and Mystic Virtues Westcott",
+   "epithet": "The Golden Dawn founder on sacred number",
+   "summary": "Westcott's compendium of the mystical meanings of the numbers from Pythagoras through the Kabbalah — a small classic of number-symbolism by one of the founders of the Golden Dawn.",
+   "tags": [
+    "numerology",
+    "pythagorean",
+    "golden-dawn"
+   ],
+   "wiki": "William_Wynn_Westcott",
+   "linkKind": "wrote",
+   "linkTarget": "william-wynn-westcott",
+   "imprint": "London: Theosophical Publishing Society, 1890",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-mathers-tarot",
+   "cluster": "occult-revival",
+   "era": "nineteenth",
+   "yearGuess": 1888,
+   "dates": "1888",
+   "title": "The Tarot: Its Occult Signification and Methods of Play",
+   "author": "S. L. MacGregor Mathers",
+   "query": "The Tarot Occult Signification Mathers",
+   "epithet": "Mathers's little handbook of the cards",
+   "summary": "Mathers's short guide to the symbolism and divinatory use of the Tarot — the compact statement of the card-lore he would build into the Golden Dawn's elaborate system.",
+   "tags": [
+    "tarot",
+    "divination",
+    "golden-dawn"
+   ],
+   "wiki": "Samuel_Liddell_MacGregor_Mathers",
+   "linkKind": "wrote",
+   "linkTarget": "macgregor-mathers",
+   "imprint": "London: George Redway, 1888",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-kardec-mediums-book",
+   "cluster": "occult-revival",
+   "era": "nineteenth",
+   "yearGuess": 1874,
+   "dates": "1861 (trans. 1874)",
+   "title": "The Mediums' Book",
+   "author": "Allan Kardec",
+   "query": "The Mediums Book Kardec Experimental Spiritism",
+   "epithet": "The practical manual of Spiritism",
+   "summary": "Kardec's practical sequel to The Spirits' Book — the theory and discipline of mediumship, evocation and communication that codified Spiritism into a doctrine, especially in the Latin world.",
+   "tags": [
+    "spiritism",
+    "mediumship",
+    "kardec"
+   ],
+   "wiki": "The_Mediums'_Book",
+   "linkKind": "wrote",
+   "linkTarget": "allan-kardec",
+   "imprint": "London: Trübner, 1876",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-peladan-comment-on-devient-mage",
+   "cluster": "occult-revival",
+   "era": "nineteenth",
+   "yearGuess": 1892,
+   "dates": "1892",
+   "title": "Comment on devient mage",
+   "author": "Joséphin Péladan",
+   "query": "Comment on devient mage Peladan",
+   "epithet": "The aesthete-magus on becoming an adept",
+   "summary": "Péladan's ethical-aesthetic manual on 'how one becomes a mage' — the manifesto of the flamboyant founder of the Salon de la Rose+Croix and the Catholic-occult decadence of 1890s Paris.",
+   "tags": [
+    "magic",
+    "aestheticism",
+    "rose-croix"
+   ],
+   "wiki": "Joséphin_Péladan",
+   "linkKind": "wrote",
+   "linkTarget": "josephin-peladan",
+   "imprint": "Paris: Chamuel, 1892",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-guaita-au-seuil-du-mystere",
+   "cluster": "occult-revival",
+   "era": "nineteenth",
+   "yearGuess": 1886,
+   "dates": "1886",
+   "title": "Au seuil du mystère",
+   "author": "Stanislas de Guaita",
+   "query": "Au seuil du mystere Guaita",
+   "epithet": "On the threshold of the occult sciences",
+   "summary": "De Guaita's introduction to the occult sciences and their literature — the opening volume of the Cabalistic Order of the Rose-Cross he founded, and the doorway to his Serpent of Genesis.",
+   "tags": [
+    "occultism",
+    "rose-croix",
+    "kabbalah"
+   ],
+   "wiki": "Stanislas_de_Guaita",
+   "linkKind": "associated-with",
+   "linkTarget": "occult-revival-movement",
+   "imprint": "Paris: Georges Carré, 1886",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-crowley-konx-om-pax",
+   "cluster": "occult-revival",
+   "era": "twentieth",
+   "yearGuess": 1907,
+   "dates": "1907",
+   "title": "Konx Om Pax",
+   "author": "Aleister Crowley",
+   "query": "Konx Om Pax Crowley",
+   "epithet": "Essays in the light, from the young magus",
+   "summary": "Crowley's playful, elaborately produced volume of mystical essays and verse — 'essays in light' from the period just before he proclaimed the Law of Thelema, and a specimen of his early adepthood.",
+   "tags": [
+    "thelema",
+    "essays",
+    "crowley"
+   ],
+   "wiki": "Aleister_Crowley",
+   "linkKind": "wrote",
+   "linkTarget": "aleister-crowley",
+   "imprint": "London: Walter Scott, 1907",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-mathers-fortune-telling-cards",
+   "cluster": "occult-revival",
+   "era": "nineteenth",
+   "yearGuess": 1897,
+   "dates": "1897",
+   "title": "Fortune-Telling Cards: The Tarot",
+   "author": "S. L. MacGregor Mathers",
+   "query": "Fortune Telling Cards Tarot Mathers",
+   "epithet": "The card-lore of the Golden Dawn's chief",
+   "summary": "Mathers's illustrated treatment of the Tarot for divination — the popular face of the elaborate esoteric card-system he devised for the Hermetic Order of the Golden Dawn.",
+   "tags": [
+    "tarot",
+    "divination",
+    "golden-dawn"
+   ],
+   "wiki": "Samuel_Liddell_MacGregor_Mathers",
+   "linkKind": "wrote",
+   "linkTarget": "macgregor-mathers",
+   "imprint": "London: George Redway, 1897",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-sedir-histoire-rose-croix",
+   "cluster": "occult-revival",
+   "era": "twentieth",
+   "yearGuess": 1910,
+   "dates": "1910",
+   "title": "Histoire et doctrine des Rose-Croix",
+   "author": "Paul Sédir",
+   "query": "Histoire des Rose-Croix Sedir",
+   "epithet": "The French revival's history of the Rose Cross",
+   "summary": "Sédir's history and doctrine of the Rosicrucians — a product of the Papus circle that shaped how the French occult revival understood its own Rosicrucian ancestry.",
+   "tags": [
+    "rosicrucian",
+    "history",
+    "french"
+   ],
+   "wiki": "Paul_Sédir",
+   "linkKind": "associated-with",
+   "linkTarget": "occult-revival-movement",
+   "imprint": "Paris: Bibliothèque des Amitiés Spirituelles, 1910",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-papus-abc-illustre",
+   "cluster": "occult-revival",
+   "era": "twentieth",
+   "yearGuess": 1922,
+   "dates": "1922",
+   "title": "ABC illustré d'occultisme",
+   "author": "Papus",
+   "query": "ABC illustre d'occultisme Papus",
+   "epithet": "A first primer of the occult sciences",
+   "summary": "Papus's illustrated beginner's primer of occultism — Kabbalah, astrology, Tarot and magic in outline — the entry-level companion to his great methodical treatise.",
+   "tags": [
+    "occultism",
+    "primer",
+    "illustrated"
+   ],
+   "wiki": "Papus",
+   "linkKind": "wrote",
+   "linkTarget": "papus",
+   "imprint": "Paris: Librairie Hermétique, 1922",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-underhill-mysticism",
+   "cluster": "occult-revival",
+   "era": "twentieth",
+   "yearGuess": 1911,
+   "dates": "1911",
+   "title": "Mysticism",
+   "author": "Evelyn Underhill",
+   "query": "Mysticism Evelyn Underhill",
+   "epithet": "The classic modern study of the mystic way",
+   "summary": "Underhill's great study of the nature and stages of the mystical life — awakening, purgation, illumination, the dark night and union — the standard English account for a century.",
+   "tags": [
+    "mysticism",
+    "contemplation",
+    "stages"
+   ],
+   "wiki": "Evelyn_Underhill",
+   "linkKind": "associated-with",
+   "linkTarget": "occult-revival-movement",
+   "imprint": "London: Methuen, 1911",
+   "reason": "no usable scan found"
+  }
+ ]
+}

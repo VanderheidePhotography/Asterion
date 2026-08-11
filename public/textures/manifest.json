@@ -1,0 +1,214 @@
+{
+  "book_cloth_binding": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "book_cloth_oxblood": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "normal": "normal.jpg"
+  },
+  "book_leather_aged": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "book_leather_cracked": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "fabric_niche_damask": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "fabric_rug_persian": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "leather_upholstery": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "metal_brass_burnished": {
+    "albedo": "albedo.jpg",
+    "height": "height.jpg",
+    "metalness": "metalness.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "metal_bronze_aged": {
+    "albedo": "albedo.jpg",
+    "height": "height.jpg",
+    "metalness": "metalness.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "metal_copper_oxidized": {
+    "albedo": "albedo.jpg",
+    "height": "height.jpg",
+    "metalness": "metalness.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "metal_iron_forged": {
+    "albedo": "albedo.jpg",
+    "height": "height.jpg",
+    "metalness": "metalness.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "stone_arcade_ashlar": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_arcade_base": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_arcade_upper": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_dressed_plain": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_flagstone_floor": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_granite_dark": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_hearth": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_limestone_ancient": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_marble_white": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_niche_mosaic": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_pillar_carved": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_plaster_vault": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "stone_sandstone_weathered": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "wood_arcade_timber": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "wood_ceiling_boards": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "wood_floor_polished": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "wood_gallery_timber": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "wood_hall_timber": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "wood_hall_wainscot": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "wood_rotunda_timber": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "wood_rotunda_wainscot": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "wood_shelving_library": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "wood_table_top": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "height": "height.jpg",
+    "normal": "normal.jpg"
+  },
+  "wood_walnut_ancient": {
+    "albedo": "albedo.jpg",
+    "arm": "arm.jpg",
+    "normal": "normal.jpg"
+  }
+}

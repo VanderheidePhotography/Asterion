@@ -1,0 +1,20 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "asterion",
+      "runtimeExecutable": "/Users/brandon/.nvm/versions/node/v23.7.0/bin/npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "5191", "--strictPort"],
+      "port": 5191,
+      "autoPort": true,
+      "env": {
+        "PATH": "/Users/brandon/.nvm/versions/node/v23.7.0/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      }
+    },
+    {
+      "name": "asterion-attach",
+      "port": 5191,
+      "url": "http://localhost:5191"
+    }
+  ]
+}

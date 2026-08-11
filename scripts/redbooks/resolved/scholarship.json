@@ -1,0 +1,740 @@
+{
+ "resolved": {
+  "bk-lea-inquisition-middle-ages": {
+   "bkId": "bk-lea-inquisition-middle-ages",
+   "archiveId": "ahistoryinquisi10leagoog",
+   "title": "A history of the Inquisition of the Middle Ages : in three volumes",
+   "creator": "Lea, Henry Charles, 1825-1909",
+   "year": 1887,
+   "publisher": "[Whitefish, Mont.] : Kessinger Pub.",
+   "cover": "/art/cover-bk-lea-inquisition-middle-ages.png",
+   "ahash": "1111111111111111111111110111111111111110000111111111000000000111111111000001111111111100000111111111111111111111111110000000111111111111111111111111111000111111111111111111111111110000001111111111000000000111111000000000011111100000000000011111111110000111"
+  },
+  "bk-lea-materials-witchcraft": {
+   "bkId": "bk-lea-materials-witchcraft",
+   "archiveId": "materialstowardh00leah",
+   "title": "Materials toward a history of witchcraft, collected by Henry Charles Lea ... arranged and edited by Arthur C. Howland ... with an introduction by George Lincoln Burr ...",
+   "creator": "Lea, Henry Charles, 1825-1909, comp.",
+   "year": 1939,
+   "publisher": "University of Pennsylvania Press,",
+   "cover": "/art/cover-bk-lea-materials-witchcraft.png",
+   "ahash": "1111111000001111111111100000111111111100000111110000000000011111000000000001111100000000000111110000000000000011000000000000001100000000000000110000000000000111000000000000011100000000000000110000000000000111000000000000111100000000000011111000000000011111"
+  },
+  "bk-notestein-witchcraft-england": {
+   "bkId": "bk-notestein-witchcraft-england",
+   "archiveId": "b24851681",
+   "title": "A history of witchcraft in England from 1558 to 1718",
+   "creator": "Notestein, Wallace, 1878-1969. n 50022836",
+   "year": 1911,
+   "publisher": "Washington : The American historical association",
+   "cover": "/art/cover-bk-notestein-witchcraft-england.png",
+   "ahash": "1111111111111111111111111111111111111111111111111111111111111111111111111111111110111111111111110001111111111111000000011101111100000000001111110000000000101110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "bk-kittredge-witchcraft": {
+   "bkId": "bk-kittredge-witchcraft",
+   "archiveId": "witchcraftinoldn00kitt_0",
+   "title": "Witchcraft in old and New England, by George Lyman Kittredge",
+   "creator": "Kittredge, George Lyman, 1860-1941.",
+   "year": 1929,
+   "publisher": "Harvard university press,",
+   "cover": "/art/cover-bk-kittredge-witchcraft.png",
+   "ahash": "0111111000011111011111110001111101111110000011110000000000001111000000000001111100000000000001110000000000000111000000000000011100000000000001110000000000001111000000000000111100000000000111110000000000111111000000000011111100000000001111110000000000111111"
+  },
+  "bk-burr-witch-persecutions": {
+   "bkId": "bk-burr-witch-persecutions",
+   "archiveId": "burr-the-witch-persecutions",
+   "title": "The Witch Persecutions - by George L. Burr",
+   "creator": "George Lincoln Burr",
+   "year": 1897,
+   "publisher": "",
+   "cover": "/art/cover-bk-burr-witch-persecutions.png",
+   "ahash": "1011111111100001101111111110000010111111111110011011111111111001101111111111100110111111111110111011111111111001101111111111100110111111111110000011111111111000001111111111100000011111111110000011111111111000001110000001000000111000000000001011100000010001"
+  },
+  "bk-mackay-popular-delusions": {
+   "bkId": "bk-mackay-popular-delusions",
+   "archiveId": "bwb_W9-DDB-391",
+   "title": "extraordinary popular delusions and the madness of crowds",
+   "creator": "Charles Mackay",
+   "year": 1852,
+   "publisher": "",
+   "cover": "/art/cover-bk-mackay-popular-delusions.png",
+   "ahash": "1100000000000111100000010000000110100101001111111000000101100001110001111111111111000010111000111100010001111111110001000011101111000110111100111100001111100011110000011110001111000000011110111100010111111111110011001001111111000101111111111100001111111111"
+  },
+  "bk-white-warfare-science-theology": {
+   "bkId": "bk-white-warfare-science-theology",
+   "archiveId": "historyofwarfare0001whit_n9c7",
+   "title": "A history of the warfare of science with theology in christendom",
+   "creator": "White, Andrew Dickson, 1832-1918",
+   "year": 1896,
+   "publisher": "New York, D. Appleton & Co.",
+   "cover": "/art/cover-bk-white-warfare-science-theology.png",
+   "ahash": "1111110000001111000110000101111100000111111111110000011111111110000001111111111000000000110001000000000011001100000000000000000000000000000000000000000000000000000000000000000000000000001001100000000001111111000000011111111100000011111111110000011111111111"
+  },
+  "bk-thorndike-magic-vol1": {
+   "bkId": "bk-thorndike-magic-vol1",
+   "archiveId": "historyofmagicex0001lynn_j4x1",
+   "title": "A History of Magic and Experimental Science: During the First Thirteen Centuries of Our Era--Volume I",
+   "creator": "Lynn Thorndike",
+   "year": 1923,
+   "publisher": "Macmillan",
+   "cover": "/art/cover-bk-thorndike-magic-vol1.png",
+   "ahash": "0000011111111111000001111111111100001111111111110000011111111111000001111111111100000111111111110000011111111111000000111111111100000000111111110000000001111111000000000011111100000000000111110000000000001111000000000000011100000000000001110000000000000001"
+  },
+  "bk-frazer-folklore-old-testament": {
+   "bkId": "bk-frazer-folklore-old-testament",
+   "archiveId": "india.history.resource.93483",
+   "title": "Folk-Lore in the Old Testament, Studies in Comparative Religion Legend and Law, in Three Volumes, Vol. III",
+   "creator": "Bible-Old Testament",
+   "year": 1918,
+   "publisher": "Macmillan and Co., Limited (London)",
+   "cover": "/art/cover-bk-frazer-folklore-old-testament.png",
+   "ahash": "0111110111111111000000000000001100000000000000010000000000000011000000000000001100000000000000000000000000000001000000000000010100000000000000000000000000000000000000000000000000000000111111100000000011111110000000000111111000000000000000010000000000000000"
+  },
+  "bk-tylor-early-history-mankind": {
+   "bkId": "bk-tylor-early-history-mankind",
+   "archiveId": "bub_gb_kZZ9NX5RPewC",
+   "title": "Researches into the early history of mankind and the development of civilization",
+   "creator": "Tylor, Edward B. (Edward Burnett), Sir, 1832-1917",
+   "year": 1865,
+   "publisher": "London : J. Murray",
+   "cover": "/art/cover-bk-tylor-early-history-mankind.png",
+   "ahash": "1111111111111111111110000111111111111000011111111000000010000111100000000000011111100000000111111100000000001111000111111111111110000000000111111111000000111111111111111111111111111111111111111111110011111111110000000000111111111111111111111111111111111111"
+  },
+  "bk-lang-making-of-religion": {
+   "bkId": "bk-lang-making-of-religion",
+   "archiveId": "originsreligion00assogoog",
+   "title": "The origins of religion, and other essays",
+   "creator": "Lang, Andrew, 1844-1912",
+   "year": 1908,
+   "publisher": "London, Watts",
+   "cover": "/art/cover-bk-lang-making-of-religion.png",
+   "ahash": "0111111111100111010000000000011101100000000011111111000000111111111100000001111001111111111111110111111111111111111110000011111111111000001111111111111111111111011000000000111111111100000011111111111111111111111111000111111111100000000011111111111111111111"
+  },
+  "bk-lang-magic-and-religion": {
+   "bkId": "bk-lang-magic-and-religion",
+   "archiveId": "magicreligion00langrich",
+   "title": "Magic and religion",
+   "creator": "Lang, Andrew, 1844-1912",
+   "year": 1901,
+   "publisher": "London, New York, and Bombay, Longmans, Green and Co.",
+   "cover": "/art/cover-bk-lang-magic-and-religion.png",
+   "ahash": "0000000000011111000000000000111100000000000111110000000001111111000000011101111100000011111111110000001111111111000000011110011100000011111100010001110111110101000001000000001100000000000010010000000000001111100000000001111110000000000001111000000000000111"
+  },
+  "bk-marett-threshold-religion": {
+   "bkId": "bk-marett-threshold-religion",
+   "archiveId": "thresholdofrelig00mare",
+   "title": "The threshold of religion",
+   "creator": "Marett, R. R. (Robert Ranulph), 1866-1943",
+   "year": 1900,
+   "publisher": "London : Methuen",
+   "cover": "/art/cover-bk-marett-threshold-religion.png",
+   "ahash": "1000000000111111000000000011111110000000001111111000000001111111100000001011111110000000011111111000000100111111100000001111111100000001111111110000000111111111000000001111111110000000111111111000000111111111100000001111111110000000111111111000000000111111"
+  },
+  "bk-robertson-smith-semites": {
+   "bkId": "bk-robertson-smith-semites",
+   "archiveId": "lecturesonreligi00smit",
+   "title": "Lectures on the religion of the Semites. First series. The fundamental institutions",
+   "creator": "Smith, W. Robertson (William Robertson), 1846-1894",
+   "year": 1889,
+   "publisher": "Edinburgh : A. and C. Black",
+   "cover": "/art/cover-bk-robertson-smith-semites.png",
+   "ahash": "1000000000000111000000000001111100000000111111110000000111111111000001111111111100001111110111100000100111011100000101101111001000011110111100000001110110000000001111111000011000011101100000100001001110000110100100111111111110000000011111111000000000011111"
+  },
+  "bk-durkheim-elementary-forms": {
+   "bkId": "bk-durkheim-elementary-forms",
+   "archiveId": "elementaryformso0000emil",
+   "title": "The Elementary Forms Of The Religious Life",
+   "creator": "Emile Durkheim, Joseph Ward Swain",
+   "year": 1915,
+   "publisher": "",
+   "cover": "/art/cover-bk-durkheim-elementary-forms.png",
+   "ahash": "0000001111111111001000000001111101000000000011110110000001111111011100000011111101111111111111110110000000011111011111111111111101111111111111110111111100000011011111111100000101111111111111110000110011111111000000000001111100010111111111110000000001111111"
+  },
+  "bk-weston-ritual-to-romance": {
+   "bkId": "bk-weston-ritual-to-romance",
+   "archiveId": "weston1920fromritualtoroman",
+   "title": "Jessie L. Weston, From Ritual To Romance",
+   "creator": "Weston Jessie",
+   "year": 1920,
+   "publisher": "",
+   "cover": "/art/cover-bk-weston-ritual-to-romance.png",
+   "ahash": "0111111001111100011111100000011000111110110001100011111011000110001111101111111001111110110000100110001011111110011000101000001001100010100000100111111010011110011111101111111001111110111111100111111011000110011111101111111001111110111111100000000000000000"
+  },
+  "bk-crawley-mystic-rose": {
+   "bkId": "bk-crawley-mystic-rose",
+   "archiveId": "mysticrosestudyo00crawrich",
+   "title": "The mystic rose [microform] ; a study of primitive marriage ..",
+   "creator": "Crawley, A. E. (Alfred Ernest), 1869-1924",
+   "year": 1902,
+   "publisher": "London : Macmillan & Co., Ltd.; New York, The Macmillan Co.",
+   "cover": "/art/cover-bk-crawley-mystic-rose.png",
+   "ahash": "0000000000100000000000000010000100111111111111100000000000000111001111001111111100111111111111110011000001011111001111111111111000111111111111100011110000111110001111111111111000011100011111100011111001111110000001000111111000000000000111100010110001111110"
+  },
+  "bk-reinach-orpheus": {
+   "bkId": "bk-reinach-orpheus",
+   "archiveId": "orpheusgeneralhi00rein",
+   "title": "Orpheus : a general history of religions",
+   "creator": "Reinach, Salomon, 1858-1932",
+   "year": 1909,
+   "publisher": "London : W. Heinemann",
+   "cover": "/art/cover-bk-reinach-orpheus.png",
+   "ahash": "1000111111111111100011111111111110000011111111110000000111111111000000000111111100000000000111000000000000000000100000000000000000000000000000000000000000000000000000000010011000000001111111110000000111111111000000111111111100011111111111110001111111111111"
+  },
+  "bk-conway-demonology-devil-lore": {
+   "bkId": "bk-conway-demonology-devil-lore",
+   "archiveId": "india.history.resource.78608",
+   "title": "Demonology and Devil-Lore, in Two Volumes, Vol. II",
+   "creator": "Conway, Moncure Daniel",
+   "year": 1879,
+   "publisher": "Chatto and Windus (London)",
+   "cover": "/art/cover-bk-conway-demonology-devil-lore.png",
+   "ahash": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111110000000001111111000111111111111100011111111111110001111111111110000000000000000000"
+  },
+  "bk-carus-history-of-the-devil": {
+   "bkId": "bk-carus-history-of-the-devil",
+   "archiveId": "historyofdevilid00caru",
+   "title": "The history of the devil and the idea of evil; from the earliest times to the present day",
+   "creator": "Carus, Paul, 1852-1919",
+   "year": 1899,
+   "publisher": "Chicago : Open Court Pub. Co.; London, K. Paul, Trench, Trubner",
+   "cover": "/art/cover-bk-carus-history-of-the-devil.png",
+   "ahash": "0000111111111111000011111111111100000000001111110000000011111111000000000000111100000000000001110000000000000000000000000000000100000000000000010000000000000011000000000000111110000000000011111000000000111111000000000111111100000000111111110000000111111111"
+  },
+  "bk-summers-geography-witchcraft": {
+   "bkId": "bk-summers-geography-witchcraft",
+   "archiveId": "geographyofwitch0000unse_q7b9",
+   "title": "The Geography of Witchcraft",
+   "creator": "montague summers",
+   "year": 1927,
+   "publisher": "william brendon& son, ltd.",
+   "cover": "/art/cover-bk-summers-geography-witchcraft.png",
+   "ahash": "0000011110000111000111111000000000011111110000000000000000000000000000000000000000000001100000000000001111000000000000011100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111110000000011111111"
+  },
+  "bk-summers-vampire": {
+   "bkId": "bk-summers-vampire",
+   "archiveId": "TheVampireSummers",
+   "title": "The Vampire: His Kith and Kin",
+   "creator": "Montague Summers",
+   "year": 1928,
+   "publisher": "",
+   "cover": "/art/cover-bk-summers-vampire.png",
+   "ahash": "1111111111101111110111111100000011111111100000000111111111000000010111111100000001111111100000000111110000000000000000001000000000000111111000000001001111110000000111111000100000011101100000000000100110000000000000000000000011110000000001001100000011000000"
+  },
+  "bk-baring-gould-werewolves": {
+   "bkId": "bk-baring-gould-werewolves",
+   "archiveId": "thebookofwerewolvesbarin",
+   "title": "The book of were-wolves: being an account of a terrible superstition",
+   "creator": "Baring-Gould, Sabine, 1834-1924",
+   "year": 1865,
+   "publisher": "London : Smith, Elder and Co.",
+   "cover": "/art/cover-bk-baring-gould-werewolves.png",
+   "ahash": "1111111111111111111111111111111111111111011111111100000000000011110000000000001111111110011111111110000000000111111111111111111111110000000011111110000000000111111111000011111110111111111111111011010001101111111000000000111111111111111111111111111111011111"
+  },
+  "bk-baring-gould-curious-myths": {
+   "bkId": "bk-baring-gould-curious-myths",
+   "archiveId": "india.history.resource.84775",
+   "title": "Curious Myths of the Middle Ages, Vol. I",
+   "creator": "Baring-Gould, S.",
+   "year": 1866,
+   "publisher": "Rivingtons (London)",
+   "cover": "/art/cover-bk-baring-gould-curious-myths.png",
+   "ahash": "0000000000000011000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111110000000000111111110000000011111111000000011111111111111111111111111111111111111111111111100000000000000000000000000000001"
+  },
+  "bk-evans-wentz-fairy-faith": {
+   "bkId": "bk-evans-wentz-fairy-faith",
+   "archiveId": "india.history.resource.88019",
+   "title": "The Fairy-Faith in Celtic Countries",
+   "creator": "Wentz, W. Y. Evans",
+   "year": 1911,
+   "publisher": "Henry Frowde (London)",
+   "cover": "/art/cover-bk-evans-wentz-fairy-faith.png",
+   "ahash": "0000000000000000000000000000000000000000000000000011000000000000001111100000000000011111000000000000111110000000000011111100000000000000000000000011111000000000001111110000000000111111010000000111111111111100011111111111110000000000000000000000000000000010"
+  },
+  "bk-rhys-celtic-folklore": {
+   "bkId": "bk-rhys-celtic-folklore",
+   "archiveId": "celticfolklorew00rhysgoog",
+   "title": "Celtic Folklore: Welsh and Manx",
+   "creator": "JOHN. RHYS",
+   "year": 1901,
+   "publisher": "H. Frowde",
+   "cover": "/art/cover-bk-rhys-celtic-folklore.png",
+   "ahash": "1111111111111111000000000000001100000000000000111100000000000111111111111111111111111111111111111110000000011111111000000001111111111111111111111111110011111111111111001111111111111111111101111111110000010111111000000001111111111100111111111111111111111111"
+  },
+  "bk-rolleston-myths-celtic": {
+   "bkId": "bk-rolleston-myths-celtic",
+   "archiveId": "mythslegendsofc00roll",
+   "title": "Myths & legends of the Celtic race",
+   "creator": "Rolleston, T. W. (Thomas William), 1857-1920",
+   "year": 1911,
+   "publisher": "New York : T.Y. Crowell",
+   "cover": "/art/cover-bk-rolleston-myths-celtic.png",
+   "ahash": "0000000000011111000011111111110110111111111111010001111111111101100011111111000110000000000001011000000000000001100000000001000110000001101001011000001111100111100000111101011110000011110110011000010101110111100000000111111110010001110111011000000011111111"
+  },
+  "bk-budge-gods-egyptians": {
+   "bkId": "bk-budge-gods-egyptians",
+   "archiveId": "godsofegyptianso00budg",
+   "title": "The gods of the Egyptians, or, Studies in Egyptian mythology",
+   "creator": "Budge, E. A. Wallis (Ernest Alfred Wallis), Sir, 1857-1934",
+   "year": 1904,
+   "publisher": "London : Methuen & Co.",
+   "cover": "/art/cover-bk-budge-gods-egyptians.png",
+   "ahash": "0000000001111111000000001111111100101000111111110000010001111111000001111111111100000001011111110000000000111111000000000000001100000000000000110000000000001111000000011111111100000111111111110000001111111111000011001111111100000110011111110000000000111111"
+  },
+  "bk-budge-book-of-the-dead": {
+   "bkId": "bk-budge-book-of-the-dead",
+   "archiveId": "papyrusanireprod01budg",
+   "title": "The papyrus of Ani; a reproduction in facsimile",
+   "creator": "Budge, E. A. Wallis (Ernest Alfred Wallis), Sir, 1857-1934",
+   "year": 1913,
+   "publisher": "New York : Putnam",
+   "cover": "/art/cover-bk-budge-book-of-the-dead.png",
+   "ahash": "0000000100101111000010101111110100000010111111100000000000000110000000000000010000011111111111100000111111111110000111111111111000011111111111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111010000000000000011"
+  },
+  "bk-erman-egyptian-religion": {
+   "bkId": "bk-erman-egyptian-religion",
+   "archiveId": "handbookofegypti00erma",
+   "title": "A handbook of Egyptian religion",
+   "creator": "Erman, Adolf, 1854-1937",
+   "year": 1907,
+   "publisher": "London : A Constable & Co., Ltd.",
+   "cover": "/art/cover-bk-erman-egyptian-religion.png",
+   "ahash": "0000000000000000000100000000111000000000000000110000000000000001011111111111111101111100000111110111111110111111011110111001111101100100001011110111000000001111011111100011111101111111001111110110011111111111011111110111111111000000001000111111111111111111"
+  },
+  "bk-donnelly-atlantis": {
+   "bkId": "bk-donnelly-atlantis",
+   "archiveId": "atlantis-the-antediluvian-world-ignatius-donnelly",
+   "title": "Atlantis:The Antediluvian World Ignatius Donnelly",
+   "creator": "Ignatius Donnelly",
+   "year": 1882,
+   "publisher": "",
+   "cover": "/art/cover-bk-donnelly-atlantis.png",
+   "ahash": "0110000000000000001100000000000000111111101111110011111101111111001110011100111000111100100000000011111000000000001111000000000000001111110000110000001111111111000000000110000000111100011100000011111011111110001111111111111111111010111111100001111000111000"
+  },
+  "bk-higgins-anacalypsis": {
+   "bkId": "bk-higgins-anacalypsis",
+   "archiveId": "bub_gb_A8RBAAAAcAAJ",
+   "title": "Anacalypsis an attempt to draw aside the veil of the Saitic Isis : or an inquiry into the origin of languages, nations and religions / 2",
+   "creator": "Higgins, Godfrey",
+   "year": 1836,
+   "publisher": "London : Longman",
+   "cover": "/art/cover-bk-higgins-anacalypsis.png",
+   "ahash": "1111111111111111111100000001111111100000000011111110000000001111111110000011111111110000000111111100000000000111110000000000011111110000000111111111100000111111111110000011111111111110111111111111111011111111110000000000011111111111111111111111111111111111"
+  },
+  "bk-knight-worship-priapus": {
+   "bkId": "bk-knight-worship-priapus",
+   "archiveId": "bim_eighteenth-century_an-account-of-the-remain_knight-richard-payne_1786",
+   "title": "An account of the remains of the worship of Priapus, lately existing at Isernia, in the kingdom of Naples: in two letters; one from Sir William Hamilton, ... to Sir Joseph Banks, ... and the other from a person residing at Isernia: to which is added,",
+   "creator": "Knight, Richard Payne",
+   "year": 1786,
+   "publisher": "",
+   "cover": "/art/cover-bk-knight-worship-priapus.png",
+   "ahash": "0000011111111110111111111111111111111111111111111111000000000111111000000000011111000000000000111101001000000011111100101000001111111010011000111110111101001011110111111110111111110011111111110111111111111111010000001100011101111111111111110111111111111100"
+  },
+  "bk-bryant-ancient-mythology": {
+   "bkId": "bk-bryant-ancient-mythology",
+   "archiveId": "10872907bsb",
+   "title": "A new System, or, an Analysis of ancient Mythology. 1",
+   "creator": "Bryant, Jacob",
+   "year": 1774,
+   "publisher": "",
+   "cover": "/art/cover-bk-bryant-ancient-mythology.png",
+   "ahash": "0000001000000001000000000000000111000000111111111000000001111111100001111111111110000001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "bk-massey-book-of-beginnings": {
+   "bkId": "bk-massey-book-of-beginnings",
+   "archiveId": "ult.bookofbeginnings0000gera",
+   "title": "Book of The Beginnings Vol II",
+   "creator": "Gerald Massey",
+   "year": 1881,
+   "publisher": "Williams and Norgate London",
+   "cover": "/art/cover-bk-massey-book-of-beginnings.png",
+   "ahash": "0000000111111111000011111111111100001111111111110000011111111111000000011111111000000011111111000000001111111100000000000000000000000000000000000000000011100000000000111100000000000010000000000011110111110100011111011111110000111011111111100000000011111111"
+  },
+  "bk-inman-ancient-faiths": {
+   "bkId": "bk-inman-ancient-faiths",
+   "archiveId": "ancientfaithsemb00inma",
+   "title": "Ancient faiths embodied in ancient names; or, An attempt to trace the religious belief, sacred rites, and holy emblems of certain nations",
+   "creator": "Inman, Thomas, 1820-1876",
+   "year": 1868,
+   "publisher": "London and Liverpool, Printed for the author",
+   "cover": "/art/cover-bk-inman-ancient-faiths.png",
+   "ahash": "0000000000001111000000000000111000000001100000000000000111000100000000111100110000001011110011000001101111101100000001111111110000000111111111000000011111111100000000111101111000010011111111110001111111111111000011111111111100000000001111110000000000111111"
+  },
+  "bk-carrington-physical-phenomena": {
+   "bkId": "bk-carrington-physical-phenomena",
+   "archiveId": "physicalphenome03carrgoog",
+   "title": "The physical phenomena of spiritualism, fraudulent and genuine : being a brief account of the most important historical phenomena, a criticism of their evidential value, and a complete exposition of the methods employed in fraudulently reproducing the same ",
+   "creator": "Carrington, Hereward, 1880-1959",
+   "year": 1907,
+   "publisher": "Boston : Herbert B. Turner & Co.",
+   "cover": "/art/cover-bk-carrington-physical-phenomena.png",
+   "ahash": "1111111111111111111111100111111111000000000001111110000000001111110000000000011111100000000001111111100000111111111000000000111111110000000111111111111011111111111111000111111111111110011111111111000001111111111100000001111111111111111111111111111111111111"
+  },
+  "bk-schrenck-notzing-materialisation": {
+   "bkId": "bk-schrenck-notzing-materialisation",
+   "archiveId": "phenomenamateri00dalgoog",
+   "title": "Phenomena of materialisation : a contribution to the investigation of mediumistic teleplastics ",
+   "creator": "Schrenck-Notzing, A. von (Albert), 1862-1929",
+   "year": 1920,
+   "publisher": "London : Kegan Paul, Trench, Trubner &amp; Co. ; New York, E.P. Dutton &amp; Co.",
+   "cover": "/art/cover-bk-schrenck-notzing-materialisation.png",
+   "ahash": "1111111111111111111000000000011111100000000001111100000000000011111111111111111111100000000001111111110000111111111000000000011111111000000111111111111111111111111111000011111111111111111111111111111000111111110000000000001111111111111111111111111111111111"
+  },
+  "bk-lang-cock-lane": {
+   "bkId": "bk-lang-cock-lane",
+   "archiveId": "cocklanecommonse00inlang",
+   "title": "Cock lane and common-sense",
+   "creator": "Lang, Andrew, 1844-1912",
+   "year": 1894,
+   "publisher": "London,New York, Longmans, Green",
+   "cover": "/art/cover-bk-lang-cock-lane.png",
+   "ahash": "0000000000000011000011111001111100011111100000110000011111111111000000111111111100000001111101110000000011101111000000001100111100000000010001110000000000000011000000000000011100000000000001110000000011000011000000001111111100000000001111111000000000000011"
+  },
+  "bk-hartland-legend-perseus": {
+   "bkId": "bk-hartland-legend-perseus",
+   "archiveId": "legendofperseuss03hart",
+   "title": "The legend of Perseus; a study of tradition in story, custom and belief ..",
+   "creator": "Hartland, Edwin Sidney, 1848-1927",
+   "year": 1894,
+   "publisher": "London, D. Nutt",
+   "cover": "/art/cover-bk-hartland-legend-perseus.png",
+   "ahash": "0000001111111111000000111111111100000111111111110000111111111111000011111111111100011111111111110000111111111111000011111111111100001111111111110000011111111111000011111111111100001111111111110000001111111111000000111111111100000001111111110000000011111111"
+  },
+  "bk-leland-etruscan-remains": {
+   "bkId": "bk-leland-etruscan-remains",
+   "archiveId": "etruscanromanrem00lelauoft",
+   "title": "Etruscan Roman remains in popular tradition",
+   "creator": "Leland, Charles Godfrey, 1824-1903",
+   "year": 1892,
+   "publisher": "London Unwin",
+   "cover": "/art/cover-bk-leland-etruscan-remains.png",
+   "ahash": "0000000000000000000000000000001000000000000000110001111101111111001100110001111100111111111111110011111111111111001111111111111100110010100111110011111111111111001111010011111100111111111111110011111011111111000110000111111100011111111111100000111111111100"
+  },
+  "bk-lecky-european-morals": {
+   "bkId": "bk-lecky-european-morals",
+   "archiveId": "historyeuropean14leckgoog",
+   "title": "History of European morals from Augustus to Charlemagne",
+   "creator": "Lecky, William Edward Hartpole, 1838-1903",
+   "year": 1809,
+   "publisher": "New York : Appleton",
+   "cover": "/art/cover-bk-lecky-european-morals.png",
+   "ahash": "1111111111111111111111000011111111111100011111111100000000000111111000000000011111110000000111111111111111111111111000000000011111100000000001111111110000111111111111100111111111111111111101111111110001110111111000000000111111111110111111111111111111111011"
+  },
+  "bk-frazer-belief-immortality": {
+   "bkId": "bk-frazer-belief-immortality",
+   "archiveId": "bwb_KV-203-519",
+   "title": "The Belief in Immortality; And the Worship of the Dead",
+   "creator": "J. G. Frazer",
+   "year": 1913,
+   "publisher": "",
+   "cover": "/art/cover-bk-frazer-belief-immortality.png",
+   "ahash": "0000000000000000000000000000001000000000000000110100000000001111000011111111111100000000000001110000000100111111000011001111111100000000000011110111111111111111011001001111111101111111111111110111111111111111011111111111111101000000000111110011111011111111"
+  },
+  "bk-clodd-magic-in-names": {
+   "bkId": "bk-clodd-magic-in-names",
+   "archiveId": "magicinnamesinot00clod",
+   "title": "Magic in names and in other things",
+   "creator": "Clodd, Edward, 1840-1930",
+   "year": 1921,
+   "publisher": "New York : E.P. Dutton",
+   "cover": "/art/cover-bk-clodd-magic-in-names.png",
+   "ahash": "0000000001111111000000001111111100000000111111110000000011111111000000001111111100000000111111110000000011011111000000001111111100000000111111110000000111111111000000111111111100000001111111110000001111111111000000111111111100000011111111110000001111111111"
+  },
+  "bk-haddon-magic-fetishism": {
+   "bkId": "bk-haddon-magic-fetishism",
+   "archiveId": "magicfetishis00hadd",
+   "title": "Magic and fetishism",
+   "creator": "Haddon, Alfred C. (Alfred Cort), 1855-1940",
+   "year": 1906,
+   "publisher": "London : A. Constable & Co. ltd.",
+   "cover": "/art/cover-bk-haddon-magic-fetishism.png",
+   "ahash": "0001111111111111001110000011111100000000000000110101111111111111011111111111111101000100000001110100000000000111011111111111111101111111111111110111111111111111011111111111111101111111111111110111111111111111010000000000011101000000000011110011111111111111"
+  },
+  "bk-hartland-ritual-and-belief": {
+   "bkId": "bk-hartland-ritual-and-belief",
+   "archiveId": "cu31924079599597",
+   "title": "Ritual and belief ; studies in the history of religion",
+   "creator": "Hartland, Edwin Sidney, 1848-1927",
+   "year": 1914,
+   "publisher": "London, Williams and Norgate",
+   "cover": "/art/cover-bk-hartland-ritual-and-belief.png",
+   "ahash": "1111111111111111100000000000000110000000000000111111010000011111111111111111111111111111111111111110000000000111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000000001111111000000000011111111111111111111111111111111111"
+  },
+  "bk-le-plongeon-queen-moo": {
+   "bkId": "bk-le-plongeon-queen-moo",
+   "archiveId": "queenmooegyptian0000augu",
+   "title": "Queen Moo and The Egyptian Sphinx",
+   "creator": "Augustus Le Plongeon",
+   "year": 1900,
+   "publisher": "",
+   "cover": "/art/cover-bk-le-plongeon-queen-moo.png",
+   "ahash": "0001111111111111001000000111111100100001111111110000000110111111000000000001111100000001111111110000000001111111000000000000111100000000011111110000001111111111000000100111111100001001011111110000000000111111000000000111111100000111111111110000001111111111"
+  },
+  "bk-spence-problem-atlantis": {
+   "bkId": "bk-spence-problem-atlantis",
+   "archiveId": "problemofatlanti0000lewi",
+   "title": "the problem of atlantis",
+   "creator": "lewis spence",
+   "year": 1925,
+   "publisher": "",
+   "cover": "/art/cover-bk-spence-problem-atlantis.png",
+   "ahash": "0000000000000000000000000000010000000000000111000000000000001100000000000000110000000000001110000000000011111110000000000111111000000001111111100000000111111110000100001111111000110011111111100001111111111111000111111111111100001111111111110000011111111111"
+  },
+  "bk-waite-book-black-magic": {
+   "bkId": "bk-waite-book-black-magic",
+   "archiveId": "book-of-ceremonial-magic-by-a.-e.-waite",
+   "title": "Book Of Ceremonial Magic by A. E. Waite",
+   "creator": "Arthur Edward Waite",
+   "year": 2023,
+   "publisher": "",
+   "cover": "/art/cover-bk-waite-book-black-magic.png",
+   "ahash": "1111111111111111111111111011111111100000000001111110000110000111111011010011011111110111000111111110000000000111110000000000001111000000000000111100000000000011110000000000001111000000000000111100000000000011110000000000001111111111111111111111111111111111"
+  },
+  "bk-gomme-ethnology-folklore": {
+   "bkId": "bk-gomme-ethnology-folklore",
+   "archiveId": "in.ernet.dli.2015.34007",
+   "title": "Ethnology In Folklore",
+   "creator": "Gomme, Geoge Laurence",
+   "year": 1892,
+   "publisher": "",
+   "cover": "/art/cover-bk-gomme-ethnology-folklore.png",
+   "ahash": "1111111111111111110000011100011111000000000000111111111111111111111111111111111111100000000011111111111111111111111111111111111111111100001111111111110000111111111111100011111111111111111111111111110000111111111000000000011111111111111111111111111111111111"
+  },
+  "bk-hartland-science-fairy-tales": {
+   "bkId": "bk-hartland-science-fairy-tales",
+   "archiveId": "scienceoffairyta00hartiala",
+   "title": "The science of fairy tales : an inquiry into fairy mythology",
+   "creator": "Hartland, Edwin Sidney, 1848-1927",
+   "year": 1891,
+   "publisher": "London : Walter Scott",
+   "cover": "/art/cover-bk-hartland-science-fairy-tales.png",
+   "ahash": "0011111111111111011111111111111101111111111111110111111111111111000111111111111100000111111111110000001101111111000000000001111100000000000000110000000000000001000000000000000000010000010000000000011111111000000000000000000011000000000000001000000000000000"
+  },
+  "bk-muller-science-of-religion": {
+   "bkId": "bk-muller-science-of-religion",
+   "archiveId": "introductiontosc0000fmax_z8a3",
+   "title": "Introduction to the Science of Religion",
+   "creator": "F. Max Muller, M. A.",
+   "year": 1873,
+   "publisher": "",
+   "cover": "/art/cover-bk-muller-science-of-religion.png",
+   "ahash": "0000000010000101011000000011111111110000111111110000010100000111000001010000111111110000001111111111111011111111011100000110111111111111111111111111110111111111011100000110001101111111111000110111111110000000001111111000000000000000010111110000000011111111"
+  },
+  "bk-evans-wentz-tibetan-book-dead": {
+   "bkId": "bk-evans-wentz-tibetan-book-dead",
+   "archiveId": "the-tibetan-book-of-the-dead_202401",
+   "title": "The Bardo Thodol: \"The Tibetan Book of the Dead\"",
+   "creator": "Walter Yeeling Evans-Wentz",
+   "year": 1927,
+   "publisher": "",
+   "cover": "/art/cover-bk-evans-wentz-tibetan-book-dead.png",
+   "ahash": "0001111111111111000010111111111100000011111111110000000111111111000000111111111100000011111111110000011111111111000111111111111100000011111000000000001111010111000000011111111100000000111111110000000010111111000000000011111100000000011111110000000000111111"
+  },
+  "bk-waite-brotherhood-rosy-cross-hist": {
+   "bkId": "bk-waite-brotherhood-rosy-cross-hist",
+   "archiveId": "realhistoryofros00wait",
+   "title": "The real history of the Rosicrucians founded on their own manifestoes, and on facts and documents collected from the writings of initiated brethren",
+   "creator": "Waite, Arthur Edward, 1857-1942",
+   "year": 1887,
+   "publisher": "London, G. Redway",
+   "cover": "/art/cover-bk-waite-brotherhood-rosy-cross-hist.png",
+   "ahash": "0000000000000011000100000001101100011000000111110100000000011011010000000000001101000000000000110000001111000011000001111110001101000111111000010100001111000011000000000000001111000000000000111101100000011111110110000001111111001000001111111110011111111111"
+  },
+  "bk-jastrow-religion-babylonia": {
+   "bkId": "bk-jastrow-religion-babylonia",
+   "archiveId": "in.ernet.dli.2015.89171",
+   "title": "Aspects Of Religious Belief And Practice In Babylonia And Assyria",
+   "creator": "Morris Jastrow Jr.",
+   "year": 1911,
+   "publisher": "",
+   "cover": "/art/cover-bk-jastrow-religion-babylonia.png",
+   "ahash": "1111111111111111110000000000001111110000000011111100000000000011110000000000001111100000000001111111111111111111111100000100111111000000000000111111111111111111111110000001111111111000000111111111111111111111111110000001111111111000000111111111111111111111"
+  },
+  "bk-farnell-cults-greek-states": {
+   "bkId": "bk-farnell-cults-greek-states",
+   "archiveId": "in.ernet.dli.2015.56573",
+   "title": "Cults Of The Greek States Vol.2",
+   "creator": "Lewis Richard Farnell",
+   "year": 1896,
+   "publisher": "",
+   "cover": "/art/cover-bk-farnell-cults-greek-states.png",
+   "ahash": "0000000000000011100000000000001100100000000100110011110011110011000000000011001110000000000001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "bk-gummere-witchcraft-superstition": {
+   "bkId": "bk-gummere-witchcraft-superstition",
+   "archiveId": "germanicoriginss00gummuoft",
+   "title": "Germanic origins. A study in primitive culture",
+   "creator": "Gummere, Francis Barton, 1855-1919",
+   "year": 1892,
+   "publisher": "New York, C. Scribner's sons",
+   "cover": "/art/cover-bk-gummere-witchcraft-superstition.png",
+   "ahash": "0111000000111110011100000001111001110000000111100111000000011110011100000011111100000001111111110000000111111111000000011111111100000000111111110000000000111111000000000011111100000000001001110000000000000111000000000001111100000000000011110000000000000011"
+  },
+  "bk-macculloch-religion-ancient-celts": {
+   "bkId": "bk-macculloch-religion-ancient-celts",
+   "archiveId": "religionofancien00macc",
+   "title": "The religion of the ancient Celts",
+   "creator": "MacCulloch, J. A. (John Arnott), 1868-1950",
+   "year": 1911,
+   "publisher": "Edinburgh : T. & T. Clark",
+   "cover": "/art/cover-bk-macculloch-religion-ancient-celts.png",
+   "ahash": "0011111111111100000000001000011001000000000001110000000001010011000000011000011101111111111111110111000000011111000000000000011101111111111111110111111111111111011111111111111101111111111111100011111111111110000011100100001000000000000000000010111111111000"
+  },
+  "bk-seligmann-melanesians": {
+   "bkId": "bk-seligmann-melanesians",
+   "archiveId": "melanesiansofbri00seli",
+   "title": "The Melanesians of British New Guinea",
+   "creator": "Seligman, C. G. (Charles Gabriel), 1873-1940",
+   "year": 1910,
+   "publisher": "Cambridge : University Press",
+   "cover": "/art/cover-bk-seligmann-melanesians.png",
+   "ahash": "1110011111111111111000111111111111100001111111111110000111111111000000000111111100000000001111110000000000000111000000000000001100000000000000110000000000001011000000000000011100000000000011110000000000011111000000000001111100000000001111110000000000011111"
+  },
+  "bk-summers-malleus": {
+   "bkId": "bk-summers-malleus",
+   "archiveId": "MALLEUSMALEFICARUMCHeinrichKramerJacobSprenger",
+   "title": "MALLEUS MALEFICARUM © Heinrich Kramer & Jacob Sprenger",
+   "creator": "Heinrich Kramer & Jacob Sprenger",
+   "year": 1487,
+   "publisher": "",
+   "cover": "/art/cover-bk-summers-malleus.png",
+   "ahash": "1001111111010001100000000000000111000000000000111100000000001111110000000000000110010000000000011000000000000001111100000011111111100000000011111111000000011011111110000001111111111000000111111111100000011111111110000001111111000000001100111111111111111111"
+  },
+  "bk-lea-inquisition-spain": {
+   "bkId": "bk-lea-inquisition-spain",
+   "archiveId": "ahistoryinquisi17leagoog",
+   "title": "A history of the Inquisition of the Middle Ages",
+   "creator": "Lea, Henry Charles, 1825-1909",
+   "year": 1887,
+   "publisher": "New York : Cosimo Classics",
+   "cover": "/art/cover-bk-lea-inquisition-spain.png",
+   "ahash": "1111111111111111111111000011111111100000000011111110000000001111111110000011111111111000101111111111110001111111111100000000111111111111111111111111110000111111111111111111111111111111111111111111100000011111111110000001111111111111111100011111111111111011"
+  },
+  "bk-wright-narratives-sorcery": {
+   "bkId": "bk-wright-narratives-sorcery",
+   "archiveId": "narrativessorce03wriggoog",
+   "title": "Narratives of sorcery and magic; from the most authentic sources",
+   "creator": "Wright, Thomas, 1810-1877",
+   "year": 1851,
+   "publisher": "London, R. Bentley",
+   "cover": "/art/cover-bk-wright-narratives-sorcery.png",
+   "ahash": "1111111111111111111111111111111111111111111111111111111111111111111111111111111111000010000011111111110011111111111111001111111111000000000011111000000000000111100000000000011110000000000001111000000000000111100000000000011111111111111111111111111111111111"
+  },
+  "bk-howitt-history-supernatural": {
+   "bkId": "bk-howitt-history-supernatural",
+   "archiveId": "supernaturalhist01howirich",
+   "title": "The history of the supernatural in all ages and nations and in all churches Christian and pagan, demonstrating a universal faith",
+   "creator": "Howitt, William, 1792-1879",
+   "year": 1863,
+   "publisher": "Philadelphia, Lippincott",
+   "cover": "/art/cover-bk-howitt-history-supernatural.png",
+   "ahash": "1111111011111111111100000001111111110000000111111111111111111111000000000000000111110000000011111110000000000111111000011000111111110000000111111111000000000111100000000000001111111100011110111110001001111111111100000011111111111000000111111111111111111111"
+  },
+  "bk-lang-custom-and-myth": {
+   "bkId": "bk-lang-custom-and-myth",
+   "archiveId": "in.ernet.dli.2015.38158",
+   "title": "Custom And Myth",
+   "creator": "Lang, Andrew",
+   "year": 1885,
+   "publisher": "",
+   "cover": "/art/cover-bk-lang-custom-and-myth.png",
+   "ahash": "1111111111111111111111111111111111111111111111111100000000000111110000000000011111000111110001111100000000000111110000000000011111000110010001111110011011000111111000000000011111100000000001111110000000001111111111111111111111111111111111111111111111111111"
+  },
+  "bk-frazer-totemism-exogamy": {
+   "bkId": "bk-frazer-totemism-exogamy",
+   "archiveId": "bwb_W9-CWC-734_3",
+   "title": "Totemism and Exogamy",
+   "creator": "J.G. Frazer",
+   "year": 1910,
+   "publisher": "",
+   "cover": "/art/cover-bk-frazer-totemism-exogamy.png",
+   "ahash": "0000000000011111000000000000000100000000000000000000000000000000000000000000000000000000010000000000000000000000000000000001011100000000000111100000000100011111000000111111111100000111111111110000011111111111000011111111111100111111111111111111111111111111"
+  },
+  "bk-jevons-introduction-religion": {
+   "bkId": "bk-jevons-introduction-religion",
+   "archiveId": "bwb_P9-DYU-488",
+   "title": "an introduction to the history of religion",
+   "creator": "frank byron jevons, m.a., litt.d.",
+   "year": 1896,
+   "publisher": "methuen & co.",
+   "cover": "/art/cover-bk-jevons-introduction-religion.png",
+   "ahash": "0000000000000000000000010111000000101111111111000100111111111100011111111111110001111111111111000110000001111100000010000111110000000000000111000111111111111100011111111111110001111111111111000011111111111110000111111111111000000101111111100000000001111110"
+  },
+  "bk-seymour-irish-witchcraft": {
+   "bkId": "bk-seymour-irish-witchcraft",
+   "archiveId": "irishwitchcraftd00seym_0",
+   "title": "Irish witchcraft and demonology",
+   "creator": "Seymour, St. John D. (St. John Drelincourt)",
+   "year": 1913,
+   "publisher": "Baltimore : Norman, Remington",
+   "cover": "/art/cover-bk-seymour-irish-witchcraft.png",
+   "ahash": "0000000010000110001110000111111000000000000001110000000000001111011111111111111101111111111111110111000000111111011111111111111101111111111111110111111111111111011111111111111100111111111111110010000001111111001111101111111100011111111100100000000000010100"
+  },
+  "bk-ashton-devil-britain": {
+   "bkId": "bk-ashton-devil-britain",
+   "archiveId": "11822146bsb",
+   "title": "The Devil in Britain and America: With forty seven illustrations",
+   "creator": "Ashton, John",
+   "year": 1896,
+   "publisher": "",
+   "cover": "/art/cover-bk-ashton-devil-britain.png",
+   "ahash": "1000000000101110100000000000000010000000000000001000000000000000100001111111000010000111111100001000011111110000100001111111000010000111111100001000011111110000100001111111000010000000001000001000000000000000100000000000000010000000000000001011100000000011"
+  },
+  "bk-clodd-tom-tit-tot": {
+   "bkId": "bk-clodd-tom-tit-tot",
+   "archiveId": "tomtittotessayon00clodrich",
+   "title": "Tom Tit Tot; an essay on savage philosophy in folk-tale",
+   "creator": "Clodd, Edward, 1840-1930",
+   "year": 1898,
+   "publisher": "London : Duckworth and co.",
+   "cover": "/art/cover-bk-clodd-tom-tit-tot.png",
+   "ahash": "1111111111111111111111111111111111111011111111111111101110011111111111111111111111110111111011111111000000001111111111111111111101111000000111100111100000011110011110000001110001111100001111000111000000001000011100000000100000000110010000000000000000000000"
+  }
+ },
+ "unresolved": [
+  {
+   "bkId": "bk-bousset-hauptprobleme-gnosis",
+   "cluster": "scholarship",
+   "era": "twentieth",
+   "yearGuess": 1907,
+   "dates": "1907",
+   "title": "Hauptprobleme der Gnosis",
+   "author": "Wilhelm Bousset",
+   "query": "Hauptprobleme der Gnosis Bousset",
+   "epithet": "The chief problems of Gnostic origins",
+   "summary": "Bousset's study of the central problems of Gnosticism, tracing its motifs to Iranian and Babylonian religion — a landmark of the history-of-religions school and of the study of ancient Gnosis.",
+   "tags": [
+    "gnosticism",
+    "history-of-religions",
+    "german"
+   ],
+   "wiki": "Wilhelm_Bousset",
+   "linkKind": "associated-with",
+   "linkTarget": "western-esotericism-field",
+   "imprint": "Göttingen: Vandenhoeck & Ruprecht, 1907",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-schure-grands-inities",
+   "cluster": "scholarship",
+   "era": "nineteenth",
+   "yearGuess": 1889,
+   "dates": "1889",
+   "title": "Les Grands Initiés",
+   "author": "Édouard Schuré",
+   "query": "Les Grands Inities Schure",
+   "epithet": "The chain of the great initiates of history",
+   "summary": "Schuré's hugely popular romance of the 'great initiates' — Rama, Krishna, Hermes, Moses, Orpheus, Pythagoras, Plato, Jesus — the book that fixed the perennialist image of a single hidden wisdom.",
+   "tags": [
+    "perennialism",
+    "initiates",
+    "esotericism"
+   ],
+   "wiki": "Édouard_Schuré",
+   "linkKind": "associated-with",
+   "linkTarget": "western-esotericism-field",
+   "imprint": "Paris: Perrin, 1889",
+   "reason": "no usable scan found"
+  }
+ ]
+}

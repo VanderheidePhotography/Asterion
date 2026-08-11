@@ -1,0 +1,404 @@
+{
+ "resolved": {
+  "bk-taylor-proclus-theology": {
+   "bkId": "bk-taylor-proclus-theology",
+   "archiveId": "taylor-theology-of-plato-en-t.-1-1816",
+   "title": "The six books of Proclus on the theology of Plato. Vol. 1",
+   "creator": "Proclus (412-485)",
+   "year": 1816,
+   "publisher": "",
+   "cover": "/art/cover-bk-taylor-proclus-theology.png",
+   "ahash": "0111111111111110011111010111111111110000000011111111110000011111011111000001111101111110010011110111110000000111011101000000011101111000000001110111110000011110011110000001111001111000000011100111111001111110001110000001011000111110011100000000000000000000"
+  },
+  "bk-taylor-select-plotinus": {
+   "bkId": "bk-taylor-select-plotinus",
+   "archiveId": "b29318178",
+   "title": "Select works of Plotinus ... and extracts from the treatise of Synesius on providence",
+   "creator": "Plotinus. n 80014372",
+   "year": 1817,
+   "publisher": "London : The author & Black",
+   "cover": "/art/cover-bk-taylor-select-plotinus.png",
+   "ahash": "1111111111111101111110000011111111100000000111111100000000000111111010000000111111100000000011111111000000011111110000000000011111110000000111111100000000000111110000000000011110000000000000111100000001111111110000000100011110000000000001111111111111111111"
+  },
+  "bk-taylor-select-porphyry": {
+   "bkId": "bk-taylor-select-porphyry",
+   "archiveId": "b1408836",
+   "title": "A catalogue of a select part of the capital, valuable, and genuine collection of pictures, the property of the Rt. Hon. Sir W. Hamilton, K.B. : purchased by him with great taste and at a liberal expence, from several distinguished cabinets in this country, and during thirty-seven years' residence as Minister Plenipotentiary at the courts of Naples : consisting of the works of the great and admired masters in the Italian, Spanish, French, Flemish, and Dutch schools, viz. Leon. da Vinci, Parmigiano, Polidoro, Garofalo, Titian, Giorgione, P. Veronese, Tintoretto, Schiavoni, Carracci, Schidani, Guido, Cagnacci, L. Giordano, Velasquez, S. Rosa, Vernet, Rubens, V. Dyck, Jordaens, Teniers, Berghem, V. de Velde, Wouvermans : particularly a small portrait, an exquisite cabinet picture, by Leon. da Vinci, formerly in the collection of the Earl of Arundel, and Lady E. Germaine : a Madonna and Child, by Parmegiano : and St. Sebastian, a noble composition, by V. Dyck : also, a small, but most capital assemblage of antique bustos, bas-reliefs, and other valuable marbles, particularly a bust of Nero, in porphyry : an exquisite bas-relief of Bacchus, and the goddess Meta : and an Ægyptian lion in basalt",
+   "creator": "Christie, Mr. (James), 1730-1803",
+   "year": 1801,
+   "publisher": "",
+   "cover": "/art/cover-bk-taylor-select-porphyry.png",
+   "ahash": "0000011111100000011000000001111111000000000101111100000000001111110000000000011111110010110111111111001011011111110000000000111111100000000011111110000000011111110000000001111111100000001111111100000000000111100000010001111110001111111111110000111111111100"
+  },
+  "bk-taylor-orpheus-hymns": {
+   "bkId": "bk-taylor-orpheus-hymns",
+   "archiveId": "b28775430",
+   "title": "The mystical initiations; or, Hymns of Orpheus",
+   "creator": "Taylor, Thomas, 1758-1835, translator. n 79054710",
+   "year": 1787,
+   "publisher": "London : printed for the author",
+   "cover": "/art/cover-bk-taylor-orpheus-hymns.png",
+   "ahash": "1111111111111111111011110111111111000000000000111110011101011111111100000101111111000000000001111110000000000011110000000000001111000000000000111110000000000111110000000000001111000000010001111100000000000011110000000000001110111111111111111111000001111111"
+  },
+  "bk-taylor-eleusinian-bacchic": {
+   "bkId": "bk-taylor-eleusinian-bacchic",
+   "archiveId": "bim_eighteenth-century_a-dissertation-on-the-el_taylor-thomas_1790",
+   "title": "A dissertation on the Eleusinian and Bacchic mysteries.  1790",
+   "creator": "Taylor, Thomas",
+   "year": 1790,
+   "publisher": "",
+   "cover": "/art/cover-bk-taylor-eleusinian-bacchic.png",
+   "ahash": "0000000000000000000011111111110000111111111111000111111111111100011111111111110001111111111111000111111111111100111111111111110011111111111111000011111111111100001111111111110000111111111111000011111111111100001111111111110000000001111100000000000000000000"
+  },
+  "bk-mead-apollonius": {
+   "bkId": "bk-mead-apollonius",
+   "archiveId": "in.ernet.dli.2015.204942",
+   "title": "Apollonius Of Tyana The Philosopher-reformer Of The First Century A.d",
+   "creator": "Mead, G.r.s",
+   "year": 1901,
+   "publisher": "",
+   "cover": "/art/cover-bk-mead-apollonius.png",
+   "ahash": "1111110000011111011111100011111111100000000000011110000000000001111100000000001101100000000000010110000000000001011000000000001101111100100110010111111101111000011111111111100001111111111111110111111111111111011111111111111101111000000001110011111111111111"
+  },
+  "bk-mead-simon-magus": {
+   "bkId": "bk-mead-simon-magus",
+   "archiveId": "g.r.s.-meads-essay-on-simon-magus",
+   "title": "g.r.s.-mead's-essay-on-simon-magus",
+   "creator": "G. R. S. Mead",
+   "year": 2023,
+   "publisher": "",
+   "cover": "/art/cover-bk-mead-simon-magus.png",
+   "ahash": "1111111111111111111111111111111111111111111111111111111111111111111000000000001111000000000000111100000010000011110000011000001111000001100000111100000001000011110000000000001111000000100000111100000001000011110010000000001111001000000000111111111111111111"
+  },
+  "bk-mead-echoes-gnosis": {
+   "bkId": "bk-mead-echoes-gnosis",
+   "archiveId": "thehymnsoftheher02meaduoft",
+   "title": "Echoes from the Gnosis",
+   "creator": "Mead, G. R. S. (George Robert Stow), 1863-1933",
+   "year": 1906,
+   "publisher": "London : Theosophical Pub. Co",
+   "cover": "/art/cover-bk-mead-echoes-gnosis.png",
+   "ahash": "0000000000000000001110000000000000111000100000000011100000000000001110011100000000111000110000000011100111010000000001000001000000001010000000000001111000011000000011101001100011111010100010001111100000000000111110000000000011111000000000001111100000000000"
+  },
+  "bk-mead-subtle-body": {
+   "bkId": "bk-mead-subtle-body",
+   "archiveId": "doctrinesubtle00meaduoft",
+   "title": "The doctrine of the subtle body in Western tradition, an outline of what the philosophers thought and Christians taught on the subject",
+   "creator": "Mead, G. R. S. (George Robert Stow), 1863-1933",
+   "year": 1919,
+   "publisher": "London, J.M. Watkins",
+   "cover": "/art/cover-bk-mead-subtle-body.png",
+   "ahash": "1100111111111111111100000001111110000000000000111110000000001111100000000000011111100011111011111111111111111111111110000011111110000000000000111111111111111111111111111111111111111111111000111111111111100011111111101111111111110000001111110111111011111111"
+  },
+  "bk-cumont-mysteries-mithra": {
+   "bkId": "bk-cumont-mysteries-mithra",
+   "archiveId": "mysteriesofmithr0000cumo",
+   "title": "The mysteries of Mithra",
+   "creator": "Cumont, Franz Valery Marie, 1868-1947",
+   "year": 1903,
+   "publisher": "Chicago, The Open Court publishing company",
+   "cover": "/art/cover-bk-cumont-mysteries-mithra.png",
+   "ahash": "1111111100000000111111110000000000000000000000000001000000000000000000000000000000010011110000000001011111100000000001111111000000010111111100000001001111100000001100000000000000010000000000000011000000000000011100000000000011110000000000001111000000000000"
+  },
+  "bk-cumont-oriental-religions": {
+   "bkId": "bk-cumont-oriental-religions",
+   "archiveId": "in.ernet.dli.2015.106721",
+   "title": "Oriental Religions In Roman Paganism",
+   "creator": "Cumont, Franz",
+   "year": 1911,
+   "publisher": "",
+   "cover": "/art/cover-bk-cumont-oriental-religions.png",
+   "ahash": "1111111111001111111111111001111111000000000001111110000000001111111111101111111111111100011111111111100000111111111110000011111111111111111111111111110001111111000011000011111100001100111111111110000000011111111100000011111111111111111111111111111111111111"
+  },
+  "bk-philostratus-apollonius": {
+   "bkId": "bk-philostratus-apollonius",
+   "archiveId": "in.gov.ignca.13550",
+   "title": "Philostratus the life of apollonius of tyana vol.2",
+   "creator": "Conybeare, F.C.",
+   "year": 1912,
+   "publisher": "",
+   "cover": "/art/cover-bk-philostratus-apollonius.png",
+   "ahash": "0110000000000000111100000001110010000100000001111111110000111101111111111111110101111110111111010001000011111100000000000000100000011111011111101111111111111110111111111111111011111111111111100011111111111110001111111111111000011111010001100000111000001000"
+  },
+  "bk-apuleius-golden-ass": {
+   "bkId": "bk-apuleius-golden-ass",
+   "archiveId": "bim_eighteenth-century_the-new-metamorphosis-o_gildon-charles_1709_1",
+   "title": "The new metamorphosis: or, the pleasant transformation: being The golden ass of Lucius Apuleius of Medaura. Alter'd and improv'd to the modern times and manners ; ... Written in Italian by Carlo Monte Socio, ... Adorn'd with cuts: in two vollumes. ..",
+   "creator": "Gildon, Charles",
+   "year": 1709,
+   "publisher": "",
+   "cover": "/art/cover-bk-apuleius-golden-ass.png",
+   "ahash": "0000000000000000101111111111111010111111111111101011111111111110001111111111111000111111111101101011111111011110101110000000011010111010001101001011111100000100101111111111111000111111111101100011111111000000001111111110000000111111111111100000000000000000"
+  },
+  "bk-cudworth-intellectual-system": {
+   "bkId": "bk-cudworth-intellectual-system",
+   "archiveId": "trueintellect02cudwuoft",
+   "title": "The true intellectual system of the universe : the first part; wherein all the reason and philosophy of atheism is confuted, and its impossibility demonstrated ; with a discourse concerning the true notion of the Lord's Supper ; and two sermons on I John II. 3, 4 and I Cor. XV. 57",
+   "creator": "Cudworth, Ralph, 1617-1688",
+   "year": 1743,
+   "publisher": "London : Printed for J. Walthoe, etc.",
+   "cover": "/art/cover-bk-cudworth-intellectual-system.png",
+   "ahash": "0000000111111111000000111111111100000011111111110000010001111111001111101111111100000000000001111100000000000111011111001111111100000000000001111000000000000111011111111111111101011000001111110100110000111111110011010011111111111111111111110011010111111111"
+  },
+  "bk-stanley-history-philosophy": {
+   "bkId": "bk-stanley-history-philosophy",
+   "archiveId": "bim_early-english-books-1641-1700_the-history-of-philosoph_stanley-thomas_1655_1",
+   "title": "The history of philosophy.  1655: Vol 1",
+   "creator": "Stanley, Thomas",
+   "year": 1655,
+   "publisher": "",
+   "cover": "/art/cover-bk-stanley-history-philosophy.png",
+   "ahash": "0000000000000000001111110111110001000000000000000111111111111100011111111111010001111111111111001111111111111100111111111111110011111111111111000111111111111100011111110111110001111100001111000111111111111100011111111111110001111111111111000000000000000000"
+  },
+  "bk-casaubon-exercitationes": {
+   "bkId": "bk-casaubon-exercitationes",
+   "archiveId": "bim_early-english-books-1475-1640_isaaci-casauboni-de-rebu_casaubon-isaac_1614",
+   "title": "Isaaci Casauboni de rebus sacris et ecclesiasticis exercitationes XVI.  1614",
+   "creator": "Casaubon, Isaac",
+   "year": 1614,
+   "publisher": "",
+   "cover": "/art/cover-bk-casaubon-exercitationes.png",
+   "ahash": "1000000000000000100000000000000010000000000001001000001111100000101011111110011010001111111001101110111111100110110011111110011011001111111001101100111111100110110011111110000010000010000000001000011010000000100000000000000010000000000000001000000000000000"
+  },
+  "bk-cory-ancient-fragments": {
+   "bkId": "bk-cory-ancient-fragments",
+   "archiveId": "cory-i.-p.-1828-corys-ancient-fragments-v-1",
+   "title": "Cory, I. P. ( 1828) Cory's Ancient Fragments, V 1",
+   "creator": "Isaac Preston Cory",
+   "year": 1828,
+   "publisher": "",
+   "cover": "/art/cover-bk-cory-ancient-fragments.png",
+   "ahash": "1111110000000001011000000000000100000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000100000000000000010000000000000001000000000000111100000000000011110110000000001111011110000010111"
+  },
+  "bk-kingsford-virgin-of-world": {
+   "bkId": "bk-kingsford-virgin-of-world",
+   "archiveId": "virgin-of-the-world-of-hermes-mercurius-trismagistus",
+   "title": "The Virgin of the World of Hermes Mercurius Trismagistus By Anna Kingsford and Edward Maitland.",
+   "creator": "trans. Anna Kingsford and Edward Maitland",
+   "year": 2023,
+   "publisher": "",
+   "cover": "/art/cover-bk-kingsford-virgin-of-world.png",
+   "ahash": "1111111111111111111111111111111111101111111111111111111111111111111111111111111111111111111101111110000000000111110000000000001111000000000000111100000000000011110000000000001111000000000000111100000000000011110000000000001111111111111111111111111111111111"
+  },
+  "bk-guthrie-plotinos": {
+   "bkId": "bk-guthrie-plotinos",
+   "archiveId": "plotinoscomplete0002kenn",
+   "title": "Plotinos Complete Works",
+   "creator": "Kenneth Sylvan Guthrie",
+   "year": 1918,
+   "publisher": "",
+   "cover": "/art/cover-bk-guthrie-plotinos.png",
+   "ahash": "0000000000001111000000111111000000000011111110010000000011111111000000001111110100000000000000010000000000001011000000000000001100000000000000110000000000110111000000000010011100000000011001110000100011111111011111111111111101111111111111110111111111111111"
+  },
+  "bk-guthrie-numenius": {
+   "bkId": "bk-guthrie-numenius",
+   "archiveId": "in.ernet.dli.2015.31755",
+   "title": "Numenius Of Apamea",
+   "creator": "Guthrie, Kenneth. Sylvan.",
+   "year": 1917,
+   "publisher": "",
+   "cover": "/art/cover-bk-guthrie-numenius.png",
+   "ahash": "1111000000001111111100000000111111111000000111111100000000000011110000000000001111100000000001111111111111111111111110100001111111100000000001111111000000001111110000000000001111111111111111111111111101111111111100000000111111000000000000111111111111111011"
+  },
+  "bk-yonge-philo": {
+   "bkId": "bk-yonge-philo",
+   "archiveId": "worksphilojudaeu01philuoft",
+   "title": "The works Philo Judaeus, the contemporary of Josephus",
+   "creator": "Philo, of Alexandria",
+   "year": 1854,
+   "publisher": "London, Bohn",
+   "cover": "/art/cover-bk-yonge-philo.png",
+   "ahash": "0000000000001111111000000000011111110000000001111111000000001111111100000000011101110000000001110000000000000111000000000000001100000000000000110000000000000011000000000000111100000000000011111000000000000111100000001000011110000000000000110000100011111111"
+  },
+  "bk-proclus-timaeus": {
+   "bkId": "bk-proclus-timaeus",
+   "archiveId": "proclusontimaeus02procuoft",
+   "title": "The commentaries of Proclus on the Timaeus of Plato in five books; containing a treasury of Pythagoric and Platonic physiology. Translated from the Greek by Thomas Taylor",
+   "creator": "Proclus, ca. 410-485",
+   "year": 1820,
+   "publisher": "London The author",
+   "cover": "/art/cover-bk-proclus-timaeus.png",
+   "ahash": "1110000011111111111000011111111111100000011111111110000000111111110000000000111100000000000111110000000000001111000000000000011100000000000001110000000000001111000000000000111100000000000011110000000000000011000000000000011100000000000000110000000000000011"
+  },
+  "bk-fitzgerald-synesius": {
+   "bkId": "bk-fitzgerald-synesius",
+   "archiveId": "the-essays-and-hymns-of-synesius-of-cyrene-vol-2",
+   "title": "The Essays And Hymns Of Synesius Of Cyrene Vol 2",
+   "creator": "Synesius of Cyrene, Augustine Fitzgerald",
+   "year": 1930,
+   "publisher": "",
+   "cover": "/art/cover-bk-fitzgerald-synesius.png",
+   "ahash": "1100000000000011111010000010011110000000000000111100000000000011111000000000011111110000000011111111100000011111111100000000111111110000000011111111111111111111111111111111111111111110011111111111000000001111111000000000011111111111111111111111111111111111"
+  },
+  "bk-westcott-collectanea-hermetica": {
+   "bkId": "bk-westcott-collectanea-hermetica",
+   "archiveId": "westcott-w-w-collectanea-hermetica-volume-09",
+   "title": "Collectanea Hermetica Vol I-X",
+   "creator": "W. W. Westcott",
+   "year": 1893,
+   "publisher": "",
+   "cover": "/art/cover-bk-westcott-collectanea-hermetica.png",
+   "ahash": "1111111111111111111111111111111111111111111111111000000000000011111111000111111111000000000000111111000000001111110111000111111111111000000111111100000000000011111100000000111111111110011111111111000000011111111101111111111111111111111111111111111111111111"
+  },
+  "bk-inge-plotinus": {
+   "bkId": "bk-inge-plotinus",
+   "archiveId": "philosophyofplot0002will",
+   "title": "The Philosophy of Plotinus : The Gifford Lectures at St. Andrews, 1917-1918",
+   "creator": "William  Ralph Inge, C.V.O., D.D.",
+   "year": 1918,
+   "publisher": "Longsman,Green and Co.",
+   "cover": "/art/cover-bk-inge-plotinus.png",
+   "ahash": "0000000000000111000000000000011100000000000011110011111111111111000011011111111100000000000011110100001111111111011111111111111100111000011111110011111111111111001111111111111100111111111111110000000000001111000000000001111100111111111101110000000111111111"
+  },
+  "bk-whittaker-neoplatonists": {
+   "bkId": "bk-whittaker-neoplatonists",
+   "archiveId": "neoplatonistsst00whit",
+   "title": "The Neo-Platonists : a study in the history of Hellenism",
+   "creator": "Whittaker, Thomas, 1856-1935",
+   "year": 1901,
+   "publisher": "Cambridge : Univ. Press",
+   "cover": "/art/cover-bk-whittaker-neoplatonists.png",
+   "ahash": "0000000001111111000000000000001100001100111111110000000000010111000011111111111100011111111111110000000000011111000001111111111100001111111111110000111111111111000011111111111100001111111001110000011111111111000000000001111100000100011111110000001111111111"
+  },
+  "bk-bigg-christian-platonists": {
+   "bkId": "bk-bigg-christian-platonists",
+   "archiveId": "christianplaton01bigggoog",
+   "title": "The Christian Platonists of Alexandria: Eight Lectures Preached Before the University of Oxford ...",
+   "creator": "Charles Bigg",
+   "year": 1886,
+   "publisher": "Clarendon Press",
+   "cover": "/art/cover-bk-bigg-christian-platonists.png",
+   "ahash": "1110000000000001110000000000011111000000000000111111110000111111111110000001111111100000000001111110000000000111111100000000111111111000010111111110000000000111011111111111111111111110011111110111100000011111011111000011111111111111111111111111111111111111"
+  },
+  "bk-legge-forerunners": {
+   "bkId": "bk-legge-forerunners",
+   "archiveId": "forerunnersrival01legguoft",
+   "title": "Forerunners and rivals of Christianity : being studies in religious history from 330 B.C. to 330 A.D",
+   "creator": "Legge, F",
+   "year": 1915,
+   "publisher": "Cambridge : University Press",
+   "cover": "/art/cover-bk-legge-forerunners.png",
+   "ahash": "1111011100111111111101100000011111110000000001111111000000000011111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000100000000000000011000000000000011100000000001011110000000011111111000001011111111"
+  },
+  "bk-harrison-prolegomena": {
+   "bkId": "bk-harrison-prolegomena",
+   "archiveId": "prolegomenatost03harrgoog",
+   "title": "Prolegomena to the study of the Greek religion",
+   "creator": "Harrison, Jane Ellen, 1850-1928",
+   "year": 1903,
+   "publisher": "Cambridge, University press",
+   "cover": "/art/cover-bk-harrison-prolegomena.png",
+   "ahash": "1100000000000111100000000000001110000000000000011111111111111111111111111111111111111110011111111110000000001111111111111111111111111111111111111111111111111111111111011111111111110000111111111111100011111111111111000001111111111000000111111111111111111111"
+  },
+  "bk-mead-orpheus": {
+   "bkId": "bk-mead-orpheus",
+   "archiveId": "MeadGRSOrpheus",
+   "title": "Mead GRS Orpheus",
+   "creator": "G. R. S. Mead",
+   "year": 2014,
+   "publisher": "",
+   "cover": "/art/cover-bk-mead-orpheus.png",
+   "ahash": "1111111111111111111111111111111111110111111111111110000000000111111000000000011111100000000001111110000000001111111000000000111111100000000011111110000000001111111000000001111111101000000001111111000000000111111100000000011111111111111111111111111111111111"
+  },
+  "bk-taylor-iamblichus-mysteries": {
+   "bkId": "bk-taylor-iamblichus-mysteries",
+   "archiveId": "b29338888_0002",
+   "title": "Iamblichus on the mysteries of the Egyptians, Chaldeans, and Assyrians",
+   "creator": "Iamblichus, approximately 250-approximately 330",
+   "year": 1821,
+   "publisher": "Chiswick : Printed by C. Whittingham for the translator",
+   "cover": "/art/cover-bk-taylor-iamblichus-mysteries.png",
+   "ahash": "0001011111110000000111111111100000011111111111100001111111111111000001111111111100000111111111110000011111111111000011111111111100011111111111110001111111111111000111111111111100011111111111110001111111111111000100111111111000011100111110000001111111100000"
+  }
+ },
+ "unresolved": [
+  {
+   "bkId": "bk-taylor-sallust-gods-world",
+   "cluster": "hermetica",
+   "era": "antiquity",
+   "yearGuess": 1793,
+   "dates": "1793",
+   "title": "Sallust On the Gods and the World",
+   "author": "Sallustius, trans. Thomas Taylor",
+   "query": "Sallust On the Gods and the World Taylor",
+   "epithet": "The catechism of the last pagans",
+   "summary": "The short Neoplatonic creed written in the circle of the Emperor Julian, translated by Taylor with the Pythagoric fragments — a compact statement of the theology the pagan revival died defending.",
+   "tags": [
+    "neoplatonism",
+    "julian",
+    "creed"
+   ],
+   "wiki": "Sallustius",
+   "linkKind": "associated-with",
+   "linkTarget": "julian-the-theurgist",
+   "imprint": "London: for the author, 1793",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-apuleius-god-of-socrates",
+   "cluster": "hermetica",
+   "era": "antiquity",
+   "yearGuess": 1822,
+   "dates": "c. 150 (trans. 1822)",
+   "title": "The God of Socrates",
+   "author": "Apuleius, trans. Thomas Taylor",
+   "query": "Apuleius God of Socrates daemon Taylor",
+   "epithet": "The classic ancient treatise on daemons",
+   "summary": "Apuleius's lecture on the daemons who stand between gods and men, and on the personal daemon of Socrates — the fullest pagan doctrine of intermediary spirits, foundational for later angelology and magic.",
+   "tags": [
+    "daemons",
+    "socrates",
+    "intermediaries"
+   ],
+   "wiki": "Apuleius",
+   "linkKind": "wrote",
+   "linkTarget": "apuleius",
+   "imprint": "London: for the translator, 1822",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-scott-hermetica-vol1",
+   "cluster": "hermetica",
+   "era": "twentieth",
+   "yearGuess": 1924,
+   "dates": "1924",
+   "title": "Hermetica, vol. I: Introduction, Texts, Translation",
+   "author": "Walter Scott (ed.)",
+   "query": "Hermetica Scott volume one introduction texts translation",
+   "epithet": "The Greek text and the great emendations, vol. I",
+   "summary": "The first volume of Scott's Hermetica — the Greek and Latin texts of the philosophical corpus with facing translation — famous for the boldness with which the editor rewrote the passages he judged corrupt.",
+   "tags": [
+    "critical-edition",
+    "corpus-hermeticum",
+    "greek"
+   ],
+   "wiki": "Hermetica",
+   "linkKind": "associated-with",
+   "linkTarget": "hermes-trismegistus",
+   "imprint": "Oxford: Clarendon Press, 1924",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-plutarch-isis-osiris",
+   "cluster": "hermetica",
+   "era": "antiquity",
+   "yearGuess": 1878,
+   "dates": "c. 100 (trans. 1878)",
+   "title": "Of Isis and Osiris",
+   "author": "Plutarch, trans. in the Morals",
+   "query": "Plutarch Isis and Osiris Morals",
+   "epithet": "The priestly account of the Egyptian mystery",
+   "summary": "Plutarch's essay on the myth and cult of Isis and Osiris, addressed to a priestess of Delphi — the single richest ancient source on Egyptian religion read through Greek philosophy, and a touchstone of Hermetic Egyptianism.",
+   "tags": [
+    "isis",
+    "egypt",
+    "myth"
+   ],
+   "wiki": "On_Isis_and_Osiris",
+   "linkKind": "associated-with",
+   "linkTarget": "hermeticism",
+   "imprint": "in Plutarch's Morals, London: Sampson Low, 1878",
+   "reason": "no usable scan found"
+  }
+ ]
+}

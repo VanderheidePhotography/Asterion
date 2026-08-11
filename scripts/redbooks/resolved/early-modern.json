@@ -1,0 +1,588 @@
+{
+ "resolved": {
+  "bk-boehme-three-principles": {
+   "bkId": "bk-boehme-three-principles",
+   "archiveId": "bim_early-english-books-1641-1700_a-description-of-the-thr_bohme-jacob_1648",
+   "title": "A description of the three principles of the divine essence. ...  1648",
+   "creator": "Bohme, Jacob.",
+   "year": 1648,
+   "publisher": "",
+   "cover": "/art/cover-bk-boehme-three-principles.png",
+   "ahash": "0000000000000000111111111111110011110111111111001111111111111100111111111111110011001011100111101111111111111100111111111111110011111111111111001111111111111100111111110001110011111111111100001111111111111000111111111110110011111111100000000000000000000000"
+  },
+  "bk-boehme-threefold-life": {
+   "bkId": "bk-boehme-threefold-life",
+   "archiveId": "highdeepsearchin0000bhme",
+   "title": "The high and deep searching out of the threefold life of man through <or according to> the three principles",
+   "creator": "Böhme, Jakob, 1575-1624",
+   "year": 1909,
+   "publisher": "London : John M. Watkins",
+   "cover": "/art/cover-bk-boehme-threefold-life.png",
+   "ahash": "0111111111111111111111110111111100000000000001110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111000"
+  },
+  "bk-boehme-way-to-christ": {
+   "bkId": "bk-boehme-way-to-christ",
+   "archiveId": "bim_eighteenth-century_the-way-to-christ-discov_bhme-jakob_1752",
+   "title": "The way to Christ discovered. By Jacob Behmen. In these treatises. 1. Of true repentence. ... 4. Of the super-rationall life. Also, the discourse of illumination. ...  1752",
+   "creator": "Böhme, Jakob",
+   "year": 1752,
+   "publisher": "",
+   "cover": "/art/cover-bk-boehme-way-to-christ.png",
+   "ahash": "0000000000000000111111111111111111111111111111111111111111111111111111111111111111111111111111110000000000001111100000000000111110000000000011111000000000001111111111111111111111111111111111111111111111111111111111111111111100000000011111000000000000000000"
+  },
+  "bk-boehme-forty-questions": {
+   "bkId": "bk-boehme-forty-questions",
+   "archiveId": "gtu_32400001864192",
+   "title": "The forty questions of the soul and the clavis",
+   "creator": "Boehme, Jacob",
+   "year": 1911,
+   "publisher": "London: John M. Watkins",
+   "cover": "/art/cover-bk-boehme-forty-questions.png",
+   "ahash": "0000000000000011000000000000101100000000000010110000011111111111000001111111111100000111111101110000011111111111000001111111111100000000011111110000000011111111010000001110111101000001111011110100000001001100010000000001100100000000000110110000000000010011"
+  },
+  "bk-pordage-theologia-mystica": {
+   "bkId": "bk-pordage-theologia-mystica",
+   "archiveId": "bim_early-english-books-1641-1700_theologia-mystica-or-t_pordage-john_1683",
+   "title": "Theologia mystica, or, the mystic divinitie...  1683",
+   "creator": "Pordage, John",
+   "year": 1683,
+   "publisher": "",
+   "cover": "/art/cover-bk-pordage-theologia-mystica.png",
+   "ahash": "1000000000000000100000001100000011100001111111001111001011111100111111111111110011111111111011001111111111111100111111111111100011101111111110001111111111111000111111111111000011111111111100001111111100110000100000000000000010111111110000001000000000000000"
+  },
+  "bk-lead-fountain-gardens": {
+   "bkId": "bk-lead-fountain-gardens",
+   "archiveId": "bim_early-english-books-1641-1700_a-fountain-of-gardens-_lead-jane_1696",
+   "title": "A fountain of gardens ...  1696",
+   "creator": "Lead, Jane.",
+   "year": 1696,
+   "publisher": "",
+   "cover": "/art/cover-bk-lead-fountain-gardens.png",
+   "ahash": "0000000000000000011111111111111001111111111110001111111111111100111111111111111101111111111111110111000010011100111110011100110001100000001100001010000000111000111101000000000010100000000000001010000000000000101100000000000010110000000000000000000000000000"
+  },
+  "bk-lead-revelation-revelations": {
+   "bkId": "bk-lead-revelation-revelations",
+   "archiveId": "bim_early-english-books-1641-1700_the-revelation-of-revela_lead-jane_1683",
+   "title": "The revelation of revelations, ...  1683",
+   "creator": "Lead, Jane.",
+   "year": 1683,
+   "publisher": "",
+   "cover": "/art/cover-bk-lead-revelation-revelations.png",
+   "ahash": "0000000000000000011111111111111001101111111111100110111111011110011111011111111001111111101111100111111111111110011111111111111001100000000011101101000000001110110000000010111011000011011111101100000001111100110000011000110000000001001110000000000000000000"
+  },
+  "bk-vaughan-lumen-de-lumine": {
+   "bkId": "bk-vaughan-lumen-de-lumine",
+   "archiveId": "lumendelumineorn00vaug",
+   "title": "Lumen de lumine, or, A new magicall light",
+   "creator": "Vaughan, Thomas, 1622-1666",
+   "year": 1651,
+   "publisher": "London : Printed for H. Blunden ...",
+   "cover": "/art/cover-bk-vaughan-lumen-de-lumine.png",
+   "ahash": "0000000000000000000000000000000000000000000000000000000000000000000000111100000000001111111100000000111111110000000011111111010000001111111100000000000111000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "bk-vaughan-magia-adamica": {
+   "bkId": "bk-vaughan-magia-adamica",
+   "archiveId": "magiaadamicaoran00vaug",
+   "title": "Magia Adamica, or, The antiquitie of magic : and the descent thereof from Adam downwards, proved : whereunto is added, A perfect and full discoverie of the true coelum terrae, or, The magician's heavenly chaos, and first matter of all things",
+   "creator": "Vaughan, Thomas, 1621-1666",
+   "year": 1650,
+   "publisher": "London : Printed by T.W. for H. Blunden ...",
+   "cover": "/art/cover-bk-vaughan-magia-adamica.png",
+   "ahash": "0000011101111110001001111101111000100111111111110010011111111111001011111111111100101111111111110000011111111111000000111111111100100011111111110000001011111111000000111111111100001011111111110000011111111111000011111111111100101111111111110010000011111111"
+  },
+  "bk-heydon-holy-guide": {
+   "bkId": "bk-heydon-holy-guide",
+   "archiveId": "holyguideleading00heyd",
+   "title": "The holy guide : leading the way to the wonder of the world : a compleat phisitian, teaching the knowledge of all things, past, present, and to come, viz., of pleasure, long life, health, youth, blessedness, wisdome and virtue, and to cure, change, and remedy all diseases in young and old : with Rosie Crucian medicines which are verified by a practical examination of principles in the great world and fitted for the easie understanding, plain practise, use, and benefit of mean capacities",
+   "creator": "Heydon, John, b. 1629",
+   "year": 1662,
+   "publisher": "London : Printed by T.M. and are to be sold by Thomas Whittlesey ...",
+   "cover": "/art/cover-bk-heydon-holy-guide.png",
+   "ahash": "1111111111111111100000000011111110000000000001111001000000000011100000000000000110110000000000011010000000000001110000000000000111100000000011011000000000001111100000000000001110000000000000001000000000000001100000000000000110000000000000111111100000111111"
+  },
+  "bk-maier-themis-aurea": {
+   "bkId": "bk-maier-themis-aurea",
+   "archiveId": "themisavrealawso00maie",
+   "title": "Themis avrea : the laws of the fraternity of the Rosie Crosse",
+   "creator": "Maier, Michael, 1568?-1622",
+   "year": 1656,
+   "publisher": "London : Printed for N. Brooke ...",
+   "cover": "/art/cover-bk-maier-themis-aurea.png",
+   "ahash": "0000000000000001000000011000000000111110011111000011100001011100000110000001100000011000000110000001100000011000000110000001100000011000000110000001100000011000000110000001100100001000000110010001100001011101000111111111110100000000110000010000000000000001"
+  },
+  "bk-swedenborg-divine-love-wisdom": {
+   "bkId": "bk-swedenborg-divine-love-wisdom",
+   "archiveId": "angelicwisdomco00maxwgoog",
+   "title": "Angelic Wisdom Concerning the Divine Love and the Divine Wisdom",
+   "creator": "Emanuel Swedenborg ,  James John Garth Wilkinson,  Alexander Maxwell",
+   "year": 1843,
+   "publisher": "Otis Clapp",
+   "cover": "/art/cover-bk-swedenborg-divine-love-wisdom.png",
+   "ahash": "1111111100000001111110000001111111111110011110011111000000001111111111110111111111000000000001111111111111111111111110000011111111100000000011111111110110111111111100000001111111111111111111111111110001111111111100000000111111111111111111110111111111111111"
+  },
+  "bk-swedenborg-true-christian-religion": {
+   "bkId": "bk-swedenborg-true-christian-religion",
+   "archiveId": "truechristianrel0001eman_o8i3",
+   "title": "The true christian religion: containing the universal theology of the new church",
+   "creator": "Emanuel Swedenborg",
+   "year": 1881,
+   "publisher": "",
+   "cover": "/art/cover-bk-swedenborg-true-christian-religion.png",
+   "ahash": "1011111111111101100000001100000110000000000000001000000000000001100000000000000010000000000000001000000000000000100000000000000010000000000000001000000000000000100000000000000010000000000000011000000000011111100000000011111110100000011111111111001111111111"
+  },
+  "bk-swedenborg-apocalypse-revealed": {
+   "bkId": "bk-swedenborg-apocalypse-revealed",
+   "archiveId": "ApocalypseExplainedV01",
+   "title": "The Apocalypse explained, according to the spiritual sense in which the arcana there predicted but heretofore concealed are revealed",
+   "creator": "Swedenborg, Emanuel, 1688-1772",
+   "year": 1854,
+   "publisher": "London: Swedenborg Society",
+   "cover": "/art/cover-bk-swedenborg-apocalypse-revealed.png",
+   "ahash": "1111111111111111011111111111111101111111111111110111111111111111011111100000001101111110000000110111111000000001011111100000000001110000000000000111000000000000011000000000000001100000000000000110000000000000011000000000000001100000000000000111000000000001"
+  },
+  "bk-swedenborg-conjugial-love": {
+   "bkId": "bk-swedenborg-conjugial-love",
+   "archiveId": "delightsofwisdom00sweduoft",
+   "title": "The delights of wisdom pertaining to conjugial love, to which is added The pleasures of insanity pertaining to scortatory love",
+   "creator": "Swedenborg, Emanuel, 1688-1772",
+   "year": 1885,
+   "publisher": "New York, Amer. Swedenborg Pub. Soc.",
+   "cover": "/art/cover-bk-swedenborg-conjugial-love.png",
+   "ahash": "0000000000000110011100000000001011110000000000001111000000000000111100000000000001110000000000000000000000000000000000000100000000000010011000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "bk-weigel-golden-grasp": {
+   "bkId": "bk-weigel-golden-grasp",
+   "archiveId": "bim_early-english-books-1641-1700_der-guldene-griff-das-_weigel-valentinus_1616",
+   "title": "Der Guldene Griff Das ...  1616",
+   "creator": "Weigel, Valentinus",
+   "year": 1616,
+   "publisher": "",
+   "cover": "/art/cover-bk-weigel-golden-grasp.png",
+   "ahash": "0000000000000000001111111111110000111111111111000011111111111100001111111111110000111111111111000011111111111100001111111111110000111111000111000011111101111100001111111111110000111111111111100011111111111110001111111111110000111111111111000000000000000000"
+  },
+  "bk-swedenborg-worship-love-god": {
+   "bkId": "bk-swedenborg-worship-love-god",
+   "archiveId": "onworshipandlov00swedgoog",
+   "title": "On the Worship and Love of God: Treating of the Birth of the Earth, of ...",
+   "creator": "Emanuel Swedenborg",
+   "year": 1832,
+   "publisher": "J. Allen, 1832.",
+   "cover": "/art/cover-bk-swedenborg-worship-love-god.png",
+   "ahash": "1111111111111110111111100011111111100000000000111111111001111111111011000001001111101000000000111111110000011111100000000000001100001000000011110000000000001111000000000001111111010011000000111111111000000111111100000000011111111111011111111111111111111110"
+  },
+  "bk-boehme-signatura-english": {
+   "bkId": "bk-boehme-signatura-english",
+   "archiveId": "b30337744",
+   "title": "Signatura rerum: or the signature of all things: shewing the sign, and signification of the severall forms and shapes in the creation: and what the beginning, ruin, and cure of everything is; it proceeds out of Eternity into Time, and again out of Time into Eternity, and comprizeth all mysteries",
+   "creator": "Böhme, Jakob, 1575-1624",
+   "year": 1651,
+   "publisher": "London : Printed by John Macock, for Gyles Calvert",
+   "cover": "/art/cover-bk-boehme-signatura-english.png",
+   "ahash": "0000000000000000000000000000000001111111111111100111111111111110011111111111111001111111111111100111111111111110011111111111111001111111111111100111111111111110011111111111111001111111111111100111111111111110011111111111111000011111111111100000000000000000"
+  },
+  "bk-law-way-divine-knowledge": {
+   "bkId": "bk-law-way-divine-knowledge",
+   "archiveId": "bim_early-english-books-1641-1700_learning-and-knowledge-r_payne-william_1682",
+   "title": "Learning and knowledge recommended ...  1682",
+   "creator": "Payne, William.",
+   "year": 1682,
+   "publisher": "",
+   "cover": "/art/cover-bk-law-way-divine-knowledge.png",
+   "ahash": "0000000000000000100000000000000010111111101000001111111110111000111111111111110011111111111111001111111111111100111111111111110011111111110111001111101111111100111111111111110011111111111111001111111111111100101111111111100010000000000000000000000000000000"
+  },
+  "bk-fludd-mosaicall-philosophy": {
+   "bkId": "bk-fludd-mosaicall-philosophy",
+   "archiveId": "mosaicallphiloso00flud",
+   "title": "Mosaicall philosophy : grounded upon the essentiall truth or eternal sapience",
+   "creator": "Fludd, Robert, 1574-1637",
+   "year": 1659,
+   "publisher": "London : Printed for Humphrey Moseley ...",
+   "cover": "/art/cover-bk-fludd-mosaicall-philosophy.png",
+   "ahash": "0000000000111111000000000001111100000000111111110000000001111111000000000111111100000000000111110000000000000001000000000000000100000000000001110000000000011111000000000001111100000000001111110000000001111111000000111111111101000111111111110000000011111111"
+  },
+  "bk-comenius-labyrinth-english": {
+   "bkId": "bk-comenius-labyrinth-english",
+   "archiveId": "bub_gb_mktZAAAAMAAJ",
+   "title": "The Labyrinth of the World and the Paradise of the Heart",
+   "creator": "Johann Amos Comenius",
+   "year": 1901,
+   "publisher": "J.M. Dent",
+   "cover": "/art/cover-bk-comenius-labyrinth-english.png",
+   "ahash": "1111111111111111100000000000000110000000000000011000100101111001100000000000000110010000001110011000000000000001100000000000000110111111000011011000000000000001100000111100000110000000000000011000000000000001100000000000000111111111111111111111111111111111"
+  },
+  "bk-vaughan-anthroposophia-theomagica": {
+   "bkId": "bk-vaughan-anthroposophia-theomagica",
+   "archiveId": "bim_early-english-books-1641-1700_anthroposophia-theomagic_vaughan-thomas_1656",
+   "title": "Anthroposophia theomagica: or a discourse...  1656",
+   "creator": "Vaughan, Thomas",
+   "year": 1656,
+   "publisher": "",
+   "cover": "/art/cover-bk-vaughan-anthroposophia-theomagica.png",
+   "ahash": "0000000000000000011111111111111001111111111111101100101011011110100001110110111001100000000111101111111111111110111111111111111010110101111111101011000100111110101111111111111010111101111111101000000000001010101110100111101010111111111111100000000000000000"
+  },
+  "bk-pordage-mundorum-explicatio": {
+   "bkId": "bk-pordage-mundorum-explicatio",
+   "archiveId": "bim_early-english-books-1641-1700_mundorum-explicatio-or-_pordage-samuel_1661",
+   "title": "Mundorum explicatio or, the explanation ...  1661",
+   "creator": "Pordage, Samuel.",
+   "year": 1661,
+   "publisher": "",
+   "cover": "/art/cover-bk-pordage-mundorum-explicatio.png",
+   "ahash": "0000000000011110111111111111110011110011110111001111111111111100111111111111110011100100100011001110100000010000111111001111110011111111111111001111111011111100110000000000110001000001111111000100111111111100011111111111110001111111111111000000000000000000"
+  },
+  "bk-swedenborg-intercourse-soul-body": {
+   "bkId": "bk-swedenborg-intercourse-soul-body",
+   "archiveId": "onintercoursebe00swedgoog",
+   "title": "On the intercourse between the soul and the body",
+   "creator": "Swedenborg, Emanuel, 1688-1772",
+   "year": 1848,
+   "publisher": "Boston, O. Clapp",
+   "cover": "/art/cover-bk-swedenborg-intercourse-soul-body.png",
+   "ahash": "1111111111001101111111100100100111110000000011111100001000000111110000000000011111100000000011111110001001000111111110000011111111111000000111111111000000001111111110000011111111111000000101111111111001111111111100000000111111111111111111111111111111111111"
+  },
+  "bk-taylor-jacob-behmen": {
+   "bkId": "bk-taylor-jacob-behmen",
+   "archiveId": "jacobbehmenstheobhme",
+   "title": "Jacob Behmen's theosophick philosophy unfolded; in divers considerations and demonstrations ... Also, the principal treatises of the said author abridged. And answers given to the remainder of the 177 theosophick questions ... left unanswered by him at the time of his death ..",
+   "creator": "Böhme, Jakob, 1575-1624",
+   "year": 1691,
+   "publisher": "London, Printed for Tho. Salusbury",
+   "cover": "/art/cover-bk-taylor-jacob-behmen.png",
+   "ahash": "1100000000011111111000111111111110110011111111011010000000000101101000000000010110100000000001011010000000000101101000000000010110100000000001011010000000000101101000000000010110110000000001011011000000000101101100001011110111100111111111111110000000011111"
+  },
+  "bk-lee-jane-lead-tree-faith": {
+   "bkId": "bk-lee-jane-lead-tree-faith",
+   "archiveId": "TreeOfFaithOriginalBook",
+   "title": "Tree Of Faith",
+   "creator": "Jane Lead, Christian Mystic (1624-1704)",
+   "year": 2018,
+   "publisher": "",
+   "cover": "/art/cover-bk-lee-jane-lead-tree-faith.png",
+   "ahash": "1111111111111111111000000000011111101000000000111110111111110011111011111111001111101111100100111110111111110011111011000000001111101001110000111110111111100011111000000000001111101110000000111110000000000011110000000000001111100000000001111111111111111111"
+  },
+  "bk-glanvill-vanity-dogmatizing": {
+   "bkId": "bk-glanvill-vanity-dogmatizing",
+   "archiveId": "bim_early-english-books-1641-1700_the-vanity-of-dogmatizin_glanvill-joseph_1661",
+   "title": "The vanity of dogmatizing:...  1661",
+   "creator": "Glanvill, Joseph",
+   "year": 1661,
+   "publisher": "",
+   "cover": "/art/cover-bk-glanvill-vanity-dogmatizing.png",
+   "ahash": "0000000000000001111111111111110110000000000000011111011111100001111111111111100111111111101101111111111101111101111111111111110111111111111101011111111111111101111111111111110011111110111110001010100000000000111110000000100000101010000000010000000000000000"
+  },
+  "bk-more-antidote-atheism": {
+   "bkId": "bk-more-antidote-atheism",
+   "archiveId": "moreantidoteagainstatheisme",
+   "title": "An antidote against atheisme, or An appeal to the natural faculties of the minde of man, whether there be not a God. By Henry More Fellow of Christ Colledge in Cambridge",
+   "creator": "More, Henry, 1614-1687",
+   "year": 1653,
+   "publisher": "London : printed by Roger Daniel, at Lovell's Inne in Pater-noster-Row",
+   "cover": "/art/cover-bk-more-antidote-atheism.png",
+   "ahash": "1000001111100000100000111111100000000011111111001000001111111111100000111111111110000011111111111000001111111111100000111111111110000011111111111000001111111111100000111111111110000011111111111000001111111111000000111111110000000011111110000000001111110001"
+  },
+  "bk-casaubon-enthusiasme": {
+   "bkId": "bk-casaubon-enthusiasme",
+   "archiveId": "bim_early-english-books-1641-1700_a-treatise-concerning-en_casaubon-meric_1655",
+   "title": "A treatise concerning enthusiasme, ...  1655",
+   "creator": "Casaubon, Meric.",
+   "year": 1655,
+   "publisher": "",
+   "cover": "/art/cover-bk-casaubon-enthusiasme.png",
+   "ahash": "0000000000000000011111111111111001111111111111100111111111111110011111111111111000011111111111100001111111111110000111111111111000011111111111100001111111111110000111111111111000011111111111100001111111111110000111111111110000000011111111100000000000000000"
+  },
+  "bk-baxter-worlds-of-spirits": {
+   "bkId": "bk-baxter-worlds-of-spirits",
+   "archiveId": "bim_early-english-books-1641-1700_the-certainty-of-the-wor_baxter-richard_1691",
+   "title": "The certainty of the worlds of spirits.  1691",
+   "creator": "Baxter, Richard.",
+   "year": 1691,
+   "publisher": "",
+   "cover": "/art/cover-bk-baxter-worlds-of-spirits.png",
+   "ahash": "0000000000000000111111111111111011111111111111101111111111111110110000001000011011110011111111101100000000000110110000000000011011000000000001101100000000000110111000000000111011000000000001101100000000000110111100100000011011111111111111100000000000000000"
+  },
+  "bk-sinclair-satans-invisible-world": {
+   "bkId": "bk-sinclair-satans-invisible-world",
+   "archiveId": "fisherchapbook559",
+   "title": "Satan’s invisible world discovered … to which is added, The marvelous history of Major Weir and his sister",
+   "creator": "Crawhall, Joseph, 1821-1896 (association)",
+   "year": 1769,
+   "publisher": "[Glasgow and other locations : various publishers]",
+   "cover": "/art/cover-bk-sinclair-satans-invisible-world.png",
+   "ahash": "0001100011111111011110000011111100000000100000110111001111111111000000000000001100000001111111111111000000111111100011111111111101111000011111111111000000111111111100000011111101110000001111110111100000111111011111111111111100011000111111110001111111111111"
+  },
+  "bk-beaumont-treatise-spirits": {
+   "bkId": "bk-beaumont-treatise-spirits",
+   "archiveId": "histophysio00beau",
+   "title": "An historical, physiological and theological treatise of spirits, apparitions, witchcrafts, and other magical practices ... : with a refutation of Dr. Bekker's World bewitch'd ...",
+   "creator": "Beaumont, John, d. 1731",
+   "year": 1705,
+   "publisher": "London : Printed for D. Browne, J. Taylor, R. Smith, F. Coggan and T. Browne",
+   "cover": "/art/cover-bk-beaumont-treatise-spirits.png",
+   "ahash": "0000000011001000000000011100001000000001111111110001111111111111000000111111111100101111111111110000010111111011000000111111101100000111111110110000011111111011000000111111001100000001111100110000000110000011000000010000001100000000000000110011111111111111"
+  },
+  "bk-webster-displaying-witchcraft": {
+   "bkId": "bk-webster-displaying-witchcraft",
+   "archiveId": "2426036R.nlm.nih.gov",
+   "title": "The displaying of supposed witchcraft : wherein is affirmed that there are many sorts of deceivers and impostors, and divers persons under a passive delusion of melancholy and fancy : but that there is a corporeal league made betwixt the devil and the witch, or that he sucks on the witches body, has carnal copulation, or that witches are turned into cats, dogs, raise tempests, or the like, is utterly denied and disproved : wherein also is handled, the existence of angels and spirits, the truth of apparitions, the nature of astral and sydereal spirits, the force of charms, and philters, with other abstruse matters",
+   "creator": "Webster, John, 1611-1682, author",
+   "year": 1677,
+   "publisher": "",
+   "cover": "/art/cover-bk-webster-displaying-witchcraft.png",
+   "ahash": "0001111111111111000101111111111100010111111111110001001111111111000000001111111100000100011111110000000100110111000000100000000000000000000000000000000000010000000000010011000000000001111111110001011111111111000101111111111100010111111111110001111111111111"
+  },
+  "bk-lead-wars-of-david": {
+   "bkId": "bk-lead-wars-of-david",
+   "archiveId": "warsdavidandpea00leadgoog",
+   "title": "The Wars of David and the Peaceable Reign of Solomon: Symbolizing the Times of Warfare and ...",
+   "creator": "Jane Lead",
+   "year": 1816,
+   "publisher": "T. Wood",
+   "cover": "/art/cover-bk-lead-wars-of-david.png",
+   "ahash": "1111111111111111111001110001011111100000000000111100000000000011111110000000111111110000000011111111100000001111111100000000011111110000000011111110000000000111111000000000001111100000000000111111000000001111111110000000111111100000000001111111111101111111"
+  }
+ },
+ "unresolved": [
+  {
+   "bkId": "bk-fludd-summum-bonum",
+   "cluster": "early-modern",
+   "era": "early-modern",
+   "yearGuess": 1629,
+   "dates": "1629",
+   "title": "Summum Bonum",
+   "author": "Robert Fludd",
+   "query": "Summum bonum magiae cabalae alchymiae fratrum Roseae Crucis",
+   "epithet": "Fludd's defence of the Rose Cross and its magic",
+   "summary": "Fludd's reply to Mersenne under a pseudonym, defending magic, cabala and alchemy and the Brotherhood of the Rose Cross — the source of the famous rose-and-cross engraving 'Dat Rosa Mel Apibus'.",
+   "tags": [
+    "rosicrucian",
+    "apologia",
+    "cabala"
+   ],
+   "wiki": "Robert_Fludd",
+   "linkKind": "wrote",
+   "linkTarget": "robert-fludd",
+   "imprint": "Frankfurt: William Fitzer, 1629",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-fludd-medicina-catholica",
+   "cluster": "early-modern",
+   "era": "early-modern",
+   "yearGuess": 1629,
+   "dates": "1629",
+   "title": "Medicina Catholica",
+   "author": "Robert Fludd",
+   "query": "Medicina catholica Fludd Frankfurt",
+   "epithet": "A weather-glass of the winds and the body",
+   "summary": "Fludd's macrocosm-microcosm medicine, in which the health of the body answers to the winds, stars and archangels of the greater world — his fullest picture of man mirrored in the cosmos.",
+   "tags": [
+    "medicine",
+    "microcosm",
+    "weather"
+   ],
+   "wiki": "Robert_Fludd",
+   "linkKind": "wrote",
+   "linkTarget": "robert-fludd",
+   "imprint": "Frankfurt: William Fitzer, 1629",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-saint-martin-homme-de-desir",
+   "cluster": "early-modern",
+   "era": "enlightenment",
+   "yearGuess": 1790,
+   "dates": "1790",
+   "title": "L'Homme de désir",
+   "author": "Louis-Claude de Saint-Martin",
+   "query": "Homme de desir Saint-Martin",
+   "epithet": "The unknown philosopher's song of the fallen soul",
+   "summary": "Saint-Martin's lyrical meditations on the desire that draws the fallen human being back toward its divine source — the devotional heart of the Martinist path he taught after breaking with ceremonial magic.",
+   "tags": [
+    "martinist",
+    "reintegration",
+    "devotion"
+   ],
+   "wiki": "Louis_Claude_de_Saint-Martin",
+   "linkKind": "wrote",
+   "linkTarget": "louis-claude-de-saint-martin",
+   "imprint": "Lyon, 1790",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-more-immortality-soul",
+   "cluster": "early-modern",
+   "era": "early-modern",
+   "yearGuess": 1659,
+   "dates": "1659",
+   "title": "The Immortality of the Soul",
+   "author": "Henry More",
+   "query": "Immortality of the Soul Henry More",
+   "epithet": "The Cambridge Platonist's proof of the spirit-world",
+   "summary": "More's demonstration of the soul's immortality and of a graded world of spirits and 'spissitude' — the Cambridge Platonist metaphysics that gave later psychical research its philosophical warrant.",
+   "tags": [
+    "cambridge-platonism",
+    "soul",
+    "spirits"
+   ],
+   "wiki": "Henry_More",
+   "linkKind": "associated-with",
+   "linkTarget": "christian-theosophy",
+   "imprint": "London: J. Flesher, 1659",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-arnold-geheimnis-sophia",
+   "cluster": "early-modern",
+   "era": "early-modern",
+   "yearGuess": 1700,
+   "dates": "1700",
+   "title": "Das Geheimnis der göttlichen Sophia",
+   "author": "Gottfried Arnold",
+   "query": "Geheimniss der goettlichen Sophia Arnold",
+   "epithet": "The mystery of the divine Wisdom",
+   "summary": "Arnold's treatise on the divine Sophia, the heavenly Wisdom of Böhme and the Philadelphians — the scholarly Pietist's gathering of the whole Sophia tradition into one book.",
+   "tags": [
+    "sophia",
+    "pietism",
+    "wisdom"
+   ],
+   "wiki": "Gottfried_Arnold",
+   "linkKind": "associated-with",
+   "linkTarget": "divine-sophia",
+   "imprint": "Leipzig: Thomas Fritsch, 1700",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-poiret-economie-divine",
+   "cluster": "early-modern",
+   "era": "early-modern",
+   "yearGuess": 1687,
+   "dates": "1687",
+   "title": "L'Économie divine",
+   "author": "Pierre Poiret",
+   "query": "Oeconomie divine Poiret",
+   "epithet": "A whole system of mystical divinity",
+   "summary": "Poiret's seven-volume system of divine economy — the philosophical Cartesian-turned-mystic who edited Antoinette Bourignon and gathered the quietist and theosophic currents of his century.",
+   "tags": [
+    "mysticism",
+    "quietism",
+    "system"
+   ],
+   "wiki": "Pierre_Poiret",
+   "linkKind": "associated-with",
+   "linkTarget": "christian-theosophy",
+   "imprint": "Amsterdam: Henry Wetstein, 1687",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-law-spirit-of-prayer",
+   "cluster": "early-modern",
+   "era": "enlightenment",
+   "yearGuess": 1749,
+   "dates": "1749–50",
+   "title": "The Spirit of Prayer",
+   "author": "William Law",
+   "query": "Spirit of Prayer William Law",
+   "epithet": "Böhme Englished by a master of prose",
+   "summary": "Law's dialogues on the birth of God in the soul, the fruit of his late immersion in Böhme — the most eloquent English statement of the theosophical mysticism he spent his last years expounding.",
+   "tags": [
+    "behmenist",
+    "prayer",
+    "law"
+   ],
+   "wiki": "William_Law",
+   "linkKind": "wrote",
+   "linkTarget": "william-law",
+   "imprint": "London: M. Richardson, 1749–50",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-comenius-via-lucis",
+   "cluster": "early-modern",
+   "era": "early-modern",
+   "yearGuess": 1668,
+   "dates": "1668",
+   "title": "Via Lucis",
+   "author": "Jan Amos Comenius",
+   "query": "Via lucis Comenius",
+   "epithet": "The way of light: a pansophic college of nations",
+   "summary": "Comenius's plan for the universal spread of light through a pansophic college, a universal language and a reformed learning — the eirenic, Rosicrucian-tinged utopia of the great educator.",
+   "tags": [
+    "pansophia",
+    "utopia",
+    "comenius"
+   ],
+   "wiki": "John_Amos_Comenius",
+   "linkKind": "wrote",
+   "linkTarget": "comenius",
+   "imprint": "Amsterdam: Christopher Cunrad, 1668",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-bourignon-lumiere-monde",
+   "cluster": "early-modern",
+   "era": "early-modern",
+   "yearGuess": 1679,
+   "dates": "1679",
+   "title": "La Lumière du Monde",
+   "author": "Antoinette Bourignon",
+   "query": "Lumiere du monde Bourignon",
+   "epithet": "The visionary who gathered her own disciples",
+   "summary": "Bourignon's account of her inner light and revelations — the Flemish mystic whose claim to a direct divine illumination drew a following across Protestant Europe and scandalised its churches.",
+   "tags": [
+    "visions",
+    "mysticism",
+    "illumination"
+   ],
+   "wiki": "Antoinette_Bourignon",
+   "linkKind": "associated-with",
+   "linkTarget": "christian-theosophy",
+   "imprint": "Amsterdam: Jean Riewerts, 1679",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-swedenborg-earths-universe",
+   "cluster": "early-modern",
+   "era": "enlightenment",
+   "yearGuess": 1758,
+   "dates": "1758",
+   "title": "Earths in the Universe",
+   "author": "Emanuel Swedenborg",
+   "query": "Earths in the Universe Swedenborg",
+   "epithet": "The spirits of the other planets",
+   "summary": "Swedenborg's report of his conversations with the spirits of the moon and the planets — the strangest of his shorter works, and a favourite of the later occult and science-fiction imagination.",
+   "tags": [
+    "swedenborgian",
+    "planets",
+    "spirits"
+   ],
+   "wiki": "Emanuel_Swedenborg",
+   "linkKind": "wrote",
+   "linkTarget": "emanuel-swedenborg",
+   "imprint": "London, 1758",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-boehme-aurora-english",
+   "cluster": "early-modern",
+   "era": "early-modern",
+   "yearGuess": 1656,
+   "dates": "1612 (trans. 1656)",
+   "title": "Aurora, or the Day-Spring",
+   "author": "Jacob Böhme",
+   "query": "Aurora Day-Spring Behmen Sparrow",
+   "epithet": "The first, unfinished dawn of Böhme's vision",
+   "summary": "Böhme's first book, the ecstatic and unfinished Aurora, in John Sparrow's English — the work whose seizure by the church first made the shoemaker of Görlitz notorious.",
+   "tags": [
+    "theosophy",
+    "aurora",
+    "boehme"
+   ],
+   "wiki": "Jacob_Böhme",
+   "linkKind": "wrote",
+   "linkTarget": "jacob-boehme",
+   "imprint": "London: John Streater, 1656",
+   "reason": "no usable scan found"
+  }
+ ]
+}

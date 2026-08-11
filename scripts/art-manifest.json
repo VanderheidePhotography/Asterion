@@ -1,0 +1,688 @@
+[
+  {
+    "file": "pool-hermetica-3.jpg",
+    "cluster": "hermetica",
+    "caption": "Hermes Trismegistus — the Siena Cathedral pavement (1488)",
+    "source": "File:Giovanni paciarelli, schema del pavimento del duomo di siena, 1884.jpg",
+    "query": "Hermes Trismegistus Siena Duomo floor"
+  },
+  {
+    "file": "pool-hermetica-4.jpg",
+    "cluster": "hermetica",
+    "caption": "The Emerald Tablet, in a 17th-century engraving",
+    "source": "File:Emerald Tablet, Rosicrucian Alchemy Exhibit.jpg",
+    "query": "Tabula Smaragdina"
+  },
+  {
+    "file": "pool-hermetica-5.jpg",
+    "cluster": "hermetica",
+    "caption": "Thoth, ibis-headed scribe of the gods",
+    "source": "File:Mummy of an ibis bird, decorated with a figure of the idis-headed god Thoth, Saqqara, Ptolemaic — Roman, Ashmolean Museum, Oxford.jpg",
+    "query": "Thoth ibis headed god"
+  },
+  {
+    "file": "pool-hermetica-6.jpg",
+    "cluster": "hermetica",
+    "caption": "The weighing of the heart — Papyrus of Ani",
+    "source": "File:Papyrus of Ani BM Sheet 12.jpg",
+    "query": "Papyrus of Ani Book of the Dead"
+  },
+  {
+    "file": "pool-hermetica-7.jpg",
+    "cluster": "hermetica",
+    "caption": "Athanasius Kircher",
+    "source": "File:Athanasius Kircher.jpg",
+    "query": "Athanasius Kircher portrait"
+  },
+  {
+    "file": "pool-hermetica-8.jpg",
+    "cluster": "hermetica",
+    "caption": "The Tower of Babel — Kircher, Turris Babel (1679)",
+    "source": "File:Athanasius Kircher - Turris Babel - 1679 (page 5 crop).jpg",
+    "query": "Kircher Turris Babel"
+  },
+  {
+    "file": "pool-hermetica-9.jpg",
+    "cluster": "hermetica",
+    "caption": "Marsilio Ficino, first translator of the Corpus Hermeticum",
+    "source": "File:Portrait of Marsilio Ficino at the Duomo Firence.jpg",
+    "query": "Marsilio Ficino portrait"
+  },
+  {
+    "file": "pool-hermetica-10.jpg",
+    "cluster": "hermetica",
+    "caption": "Isis, in an Egyptian relief",
+    "source": "File:Philae Temple Egypt Goddess Isis As Angel Mural Artwork 2004-10-11.jpg",
+    "query": "Isis Egyptian goddess relief"
+  },
+  {
+    "file": "pool-hermetica-11.jpg",
+    "cluster": "hermetica",
+    "caption": "Plotinus, founder of Neoplatonism",
+    "source": "File:Paolo Monti - Servizio fotografico (Roma, 1969) - BEIC 6353762.jpg",
+    "query": "Plotinus"
+  },
+  {
+    "file": "pool-hermetica-12.jpg",
+    "cluster": "hermetica",
+    "caption": "Serapis — the syncretic god of Ptolemaic Alexandria",
+    "source": "File:Silver bust of Serapis MET DT6658.jpg",
+    "query": "Serapis bust"
+  },
+  {
+    "file": "pool-hermetica-13.jpg",
+    "cluster": "hermetica",
+    "caption": "Harpocrates, the god of silence",
+    "source": "File:Harpocrates, Philosopher MET DP825421.jpg",
+    "query": "Harpocrates"
+  },
+  {
+    "file": "pool-hermetica-14.jpg",
+    "cluster": "hermetica",
+    "caption": "The obelisk Kircher read as a hieroglyphic sermon",
+    "source": "File:Obelisk en fontein door Gian Lorenzo Bernini op het Piazza Navona te Rome, RP-P-1880-A-4106.jpg",
+    "query": "Egyptian obelisk Piazza Navona"
+  },
+  {
+    "file": "pool-hermetica-15.jpg",
+    "cluster": "hermetica",
+    "caption": "A manuscript of the Corpus Hermeticum",
+    "source": "File:Poimandres Hymnus.jpg",
+    "query": "Corpus Hermeticum manuscript"
+  },
+  {
+    "file": "pool-hermetica-16.jpg",
+    "cluster": "hermetica",
+    "caption": "The ouroboros of Cleopatra the Alchemist",
+    "source": "File:Chrysopoea of Cleopatra 1.png",
+    "query": "Ouroboros Chrysopoeia Cleopatra"
+  },
+  {
+    "file": "pool-hermetica-17.jpg",
+    "cluster": "hermetica",
+    "caption": "Iamblichus, who defended theurgy",
+    "source": "File:Iamblichus.jpg",
+    "query": "Iamblichus"
+  },
+  {
+    "file": "pool-hermetica-18.jpg",
+    "cluster": "hermetica",
+    "caption": "The Library of Alexandria, imagined by a later engraver",
+    "source": "File:Saint Catherine of Alexandria. Engraving. Wellcome V0033436.jpg",
+    "query": "Library of Alexandria engraving"
+  },
+  {
+    "file": "pool-alchemy-4.jpg",
+    "cluster": "alchemy",
+    "caption": "From the Rosarium Philosophorum (1550)",
+    "source": "File:Roi et Reine Alchimie.jpg",
+    "query": "Rosarium Philosophorum"
+  },
+  {
+    "file": "pool-alchemy-5.jpg",
+    "cluster": "alchemy",
+    "caption": "A page of the wordless Mutus Liber (1677)",
+    "source": "File:Mutus Liber Portada One More Library.jpg",
+    "query": "Mutus Liber"
+  },
+  {
+    "file": "pool-alchemy-6.jpg",
+    "cluster": "alchemy",
+    "caption": "The Ripley Scroll",
+    "source": "File:Ripley alchemical scroll. Leonard Smethley, 1624, after George Ripley. Princeton University Library.jpg",
+    "query": "Ripley Scroll"
+  },
+  {
+    "file": "pool-alchemy-7.jpg",
+    "cluster": "alchemy",
+    "caption": "Aurora Consurgens, 15th-century manuscript",
+    "source": "File:Aurora consurgens zurich 007 f-3r-7 building.jpg",
+    "query": "Aurora Consurgens manuscript"
+  },
+  {
+    "file": "pool-alchemy-8.jpg",
+    "cluster": "alchemy",
+    "caption": "One of the Twelve Keys of Basil Valentine",
+    "source": "File:The Second Key of Basil Valentine. Wellcome M0012395.jpg",
+    "query": "Basil Valentine Twelve Keys"
+  },
+  {
+    "file": "pool-alchemy-9.jpg",
+    "cluster": "alchemy",
+    "caption": "Paracelsus",
+    "source": "File:Portrait of Paracelsus (4672979).jpg",
+    "query": "Paracelsus portrait"
+  },
+  {
+    "file": "pool-alchemy-10.jpg",
+    "cluster": "alchemy",
+    "caption": "The alchemist at his furnace — Teniers",
+    "source": "File:David Teniers follower - An alchemist in his workshop H0027-L05801224.jpg",
+    "query": "David Teniers alchemist painting"
+  },
+  {
+    "file": "pool-alchemy-11.jpg",
+    "cluster": "alchemy",
+    "caption": "Nicolas Flamel",
+    "source": "File:Nicolas Flamel Histoire critique.jpg",
+    "query": "Nicolas Flamel"
+  },
+  {
+    "file": "pool-alchemy-12.jpg",
+    "cluster": "alchemy",
+    "caption": "Jan Baptist van Helmont",
+    "source": "File:Jan Baptist van Helmont.jpg",
+    "query": "Jan Baptist van Helmont"
+  },
+  {
+    "file": "pool-alchemy-13.jpg",
+    "cluster": "alchemy",
+    "caption": "Distillation apparatus, from an early printed herbal",
+    "source": "File:Geberis Philosophi Perspicacissimi Summa Perfectionis Magisterii in sua Natura ex Bibliothecae Vaticanae Exemplari Undecunque - DPLA - f2c9fe156507ddee46507bec3786f928 (page 111).jpg",
+    "query": "alembic distillation woodcut"
+  },
+  {
+    "file": "pool-alchemy-14.jpg",
+    "cluster": "alchemy",
+    "caption": "A plate from the Musaeum Hermeticum (1678)",
+    "source": "File:Musaeum hermeticum - title page.jpg",
+    "query": "Musaeum Hermeticum"
+  },
+  {
+    "file": "pool-alchemy-15.jpg",
+    "cluster": "alchemy",
+    "caption": "Fludd’s cosmos — Utriusque Cosmi Historia (1617)",
+    "source": "File:Robert Fludd, 'Utriusque cosmi … historia'. Oppenheim 1617.jpg",
+    "query": "Robert Fludd Utriusque Cosmi"
+  },
+  {
+    "file": "pool-alchemy-16.jpg",
+    "cluster": "alchemy",
+    "caption": "Ashmole’s Theatrum Chemicum Britannicum (1652)",
+    "source": "File:Theatrum Chemicum Britannicum.jpg",
+    "query": "Theatrum Chemicum Britannicum"
+  },
+  {
+    "file": "pool-alchemy-17.jpg",
+    "cluster": "alchemy",
+    "caption": "Elias Ashmole",
+    "source": "File:Elias Ashmole by John Riley.jpg",
+    "query": "Elias Ashmole portrait"
+  },
+  {
+    "file": "pool-alchemy-18.jpg",
+    "cluster": "alchemy",
+    "caption": "Michał Sędziwój (Sendivogius) at work",
+    "source": "File:Unknown - Portrait of an alchemist - MP 159 - National Museum in Warsaw.jpg",
+    "query": "Michael Sendivogius painting"
+  },
+  {
+    "file": "pool-alchemy-19.jpg",
+    "cluster": "alchemy",
+    "caption": "From the Summa Perfectionis of pseudo-Geber",
+    "source": "File:Geberis Philosophi Perspicacissimi Summa Perfectionis Magisterii in sua Natura ex Bibliothecae Vaticanae Exemplari Undecunque - DPLA - f2c9fe156507ddee46507bec3786f928 (page 158).jpg",
+    "query": "Pseudo Geber Summa Perfectionis"
+  },
+  {
+    "file": "pool-kabbalah-3.jpg",
+    "cluster": "kabbalah",
+    "caption": "Portae Lucis — Gikatilla’s Gates of Light (1516)",
+    "source": "File:Gikatilla, 'Portae lucis'.jpg",
+    "query": "Portae Lucis Gikatilla"
+  },
+  {
+    "file": "pool-kabbalah-4.jpg",
+    "cluster": "kabbalah",
+    "caption": "The Zohar, Mantua edition (1558)",
+    "source": "File:Zohar.png",
+    "query": "Zohar first edition"
+  },
+  {
+    "file": "pool-kabbalah-5.jpg",
+    "cluster": "kabbalah",
+    "caption": "Isaac Luria, the Ari of Safed",
+    "source": "File:Mikvah Isaac Luria.JPG",
+    "query": "Isaac Luria"
+  },
+  {
+    "file": "pool-kabbalah-6.jpg",
+    "cluster": "kabbalah",
+    "caption": "Micrography in a Hebrew manuscript",
+    "source": "File:Scribe and illuminator- Aaron Wolf Herlingen - The Five Scrolls in multilingual micrography Ruth, Song of Songs, Ecclesiastes, Esther, and Lamentat... - Google Art Project.jpg",
+    "query": "Hebrew illuminated manuscript micrography"
+  },
+  {
+    "file": "pool-kabbalah-7.jpg",
+    "cluster": "kabbalah",
+    "caption": "Safed, where Lurianic kabbalah took shape",
+    "source": "File:Safed Old City banner2.jpg",
+    "query": "Safed old city"
+  },
+  {
+    "file": "pool-kabbalah-8.jpg",
+    "cluster": "kabbalah",
+    "caption": "A Torah scroll",
+    "source": "File:Torah scroll writing.jpg",
+    "query": "Torah scroll"
+  },
+  {
+    "file": "pool-kabbalah-9.jpg",
+    "cluster": "kabbalah",
+    "caption": "A kabbalistic protective amulet",
+    "source": "File:Medieval amulet to protect mother and child. Wellcome M0008070.jpg",
+    "query": "kabbalistic amulet Hebrew"
+  },
+  {
+    "file": "pool-kabbalah-10.jpg",
+    "cluster": "kabbalah",
+    "caption": "Cordovero’s Pardes Rimonim",
+    "source": "File:Pardes Rimonim - Annotated - Definitive Edition.png",
+    "query": "Moses Cordovero Pardes Rimonim"
+  },
+  {
+    "file": "pool-kabbalah-11.jpg",
+    "cluster": "kabbalah",
+    "caption": "The twenty-two letters",
+    "source": "File:Mira calligraphiae monumenta (Model Book of Calligraphy) G. Bocskay 1562 J. Hoefnagel illumination 1596 Ms.20 (86.MV.527) fol. 035 The Hebrew Alphabet (Getty Museum).jpg",
+    "query": "Hebrew alphabet manuscript"
+  },
+  {
+    "file": "pool-renaissance-4.jpg",
+    "cluster": "renaissance",
+    "caption": "Heinrich Cornelius Agrippa",
+    "source": "File:Heinrich Cornelius Agrippa00.jpg",
+    "query": "Heinrich Cornelius Agrippa portrait"
+  },
+  {
+    "file": "pool-renaissance-5.jpg",
+    "cluster": "renaissance",
+    "caption": "Dee’s Monas Hieroglyphica (1564)",
+    "source": "File:Monas Hieroglyphica.jpg",
+    "query": "Monas Hieroglyphica Dee"
+  },
+  {
+    "file": "pool-renaissance-6.jpg",
+    "cluster": "renaissance",
+    "caption": "Edward Kelley, Dee’s scryer",
+    "source": "File:Edward Kelley. Stipple engraving by R. Cooper. Wellcome V0003198.jpg",
+    "query": "Edward Kelley"
+  },
+  {
+    "file": "pool-renaissance-7.jpg",
+    "cluster": "renaissance",
+    "caption": "Johannes Trithemius, abbot and cryptographer",
+    "source": "File:Johannes Trithemius 15.09.2024 004.jpg",
+    "query": "Johannes Trithemius"
+  },
+  {
+    "file": "pool-renaissance-8.jpg",
+    "cluster": "renaissance",
+    "caption": "Girolamo Cardano",
+    "source": "File:Girolamo Cardano. Stipple engraving by R. Cooper. Wellcome V0001004.jpg",
+    "query": "Girolamo Cardano"
+  },
+  {
+    "file": "pool-renaissance-10.jpg",
+    "cluster": "renaissance",
+    "caption": "Arcimboldo’s Rudolf II as Vertumnus",
+    "source": "File:Vertumnus årstidernas gud målad av Giuseppe Arcimboldo 1591 - Skoklosters slott - 91503.jpg",
+    "query": "Arcimboldo Vertumnus"
+  },
+  {
+    "file": "pool-renaissance-11.jpg",
+    "cluster": "renaissance",
+    "caption": "The zodiac man of the almanacs",
+    "source": "File:Anatomical Man.jpg",
+    "query": "Renaissance astrological man zodiac"
+  },
+  {
+    "file": "pool-renaissance-12.jpg",
+    "cluster": "renaissance",
+    "caption": "Cosimo de’ Medici, who commissioned the translation",
+    "source": "File:Bronzino Cosimo de' Medici.jpg",
+    "query": "Cosimo de Medici portrait"
+  },
+  {
+    "file": "pool-renaissance-13.jpg",
+    "cluster": "renaissance",
+    "caption": "Florence, where the Hermetic revival began",
+    "source": "File:Lorenzo di Magnifico visits king Ferdinand of Aragon in Naples (Palazzo Vecchio, Florence).jpg",
+    "query": "Florence Palazzo Medici"
+  },
+  {
+    "file": "pool-renaissance-14.jpg",
+    "cluster": "renaissance",
+    "caption": "Dürer’s Melencolia I (1514)",
+    "source": "File:Albrecht Dürer - Melencolia I - Google Art Project (427760).jpg",
+    "query": "Albrecht Durer Melencolia"
+  },
+  {
+    "file": "pool-renaissance-15.jpg",
+    "cluster": "renaissance",
+    "caption": "From the Hypnerotomachia Poliphili (1499)",
+    "source": "File:Hypnerotomachia Poliphili MET DP102572.jpg",
+    "query": "Hypnerotomachia Poliphili woodcut"
+  },
+  {
+    "file": "pool-early-modern-4.jpg",
+    "cluster": "early-modern",
+    "caption": "The Fama Fraternitatis (1614)",
+    "source": "File:Fama fraternitatis.jpg",
+    "query": "Fama Fraternitatis Rosicrucian"
+  },
+  {
+    "file": "pool-early-modern-5.jpg",
+    "cluster": "early-modern",
+    "caption": "Robert Fludd",
+    "source": "File:Portrait of Robert Fludd. Wellcome L0005244.jpg",
+    "query": "Robert Fludd portrait"
+  },
+  {
+    "file": "pool-early-modern-6.jpg",
+    "cluster": "early-modern",
+    "caption": "Thomas Vaughan, who wrote as Eugenius Philalethes",
+    "source": "File:Lumen de lumine by Thomas Vaughan.jpg",
+    "query": "Thomas Vaughan Eugenius Philalethes"
+  },
+  {
+    "file": "pool-early-modern-7.jpg",
+    "cluster": "early-modern",
+    "caption": "Blake’s Ancient of Days (1794)",
+    "source": "File:Letters of William Blake, page 34 (The Ancient of Days).jpeg",
+    "query": "William Blake Ancient of Days"
+  },
+  {
+    "file": "pool-early-modern-8.jpg",
+    "cluster": "early-modern",
+    "caption": "Blake’s Jacob’s Ladder",
+    "source": "File:Blake jacobsladder.jpg",
+    "query": "William Blake Jacob's Ladder"
+  },
+  {
+    "file": "pool-early-modern-9.jpg",
+    "cluster": "early-modern",
+    "caption": "Court de Gébelin, who first called the tarot Egyptian",
+    "source": "File:AntoineCourtdeGebelin.jpg",
+    "query": "Antoine Court de Gebelin"
+  },
+  {
+    "file": "pool-early-modern-10.jpg",
+    "cluster": "early-modern",
+    "caption": "Franz Anton Mesmer",
+    "source": "File:Josef Anton Mesmer Portrait Blaicher Franz Jakob.jpg",
+    "query": "Franz Anton Mesmer portrait"
+  },
+  {
+    "file": "pool-early-modern-11.jpg",
+    "cluster": "early-modern",
+    "caption": "The mesmeric baquet",
+    "source": "File:\"Le Baquet de Mesmer\" Wellcome M0006352.jpg",
+    "query": "mesmerism baquet engraving"
+  },
+  {
+    "file": "pool-early-modern-12.jpg",
+    "cluster": "early-modern",
+    "caption": "Swedenborg’s New Jerusalem",
+    "source": "File:Swedenborg Chapel, Cambridge, MA.jpg",
+    "query": "Swedenborg New Jerusalem"
+  },
+  {
+    "file": "pool-early-modern-13.jpg",
+    "cluster": "early-modern",
+    "caption": "Comenius, Orbis Sensualium Pictus (1658)",
+    "source": "File:Orbis-pictus-002.jpg",
+    "query": "Comenius Orbis Pictus"
+  },
+  {
+    "file": "pool-early-modern-14.jpg",
+    "cluster": "early-modern",
+    "caption": "From Alciato’s Emblemata — the emblem book habit",
+    "source": "File:Andreæ Alciati emblemata cvm commentariis Clavdii Minois...- and notis Lavrentii Pignorii Patavini - nouissima hac editione in continuam vnius commentarij seriem congestis, in certas quasdam quasi (14771272143).jpg",
+    "query": "Emblemata Alciato"
+  },
+  {
+    "file": "pool-freemasonry-3.jpg",
+    "cluster": "freemasonry",
+    "caption": "A lodge tracing board",
+    "source": "File:37.13 Tracing board.png",
+    "query": "Masonic tracing board"
+  },
+  {
+    "file": "pool-freemasonry-4.jpg",
+    "cluster": "freemasonry",
+    "caption": "Anderson’s Constitutions (1723)",
+    "source": "File:The constitutions of the free-masons Fleuron T086287-13.png",
+    "query": "Anderson's Constitutions 1723"
+  },
+  {
+    "file": "pool-freemasonry-5.jpg",
+    "cluster": "freemasonry",
+    "caption": "A lodge at work, 18th-century engraving",
+    "source": "File:VM 10043 – Diorama of a Lodge – ca. 1745 – Wachsmuth & Engelbrecht.jpg",
+    "query": "Masonic lodge engraving 18th century"
+  },
+  {
+    "file": "pool-freemasonry-6.jpg",
+    "cluster": "freemasonry",
+    "caption": "The Grand Lodge, London",
+    "source": "File:United Grand Lodge of England 1925.jpg",
+    "query": "Grand Lodge of England"
+  },
+  {
+    "file": "pool-freemasonry-7.jpg",
+    "cluster": "freemasonry",
+    "caption": "Solomon’s Temple, the craft’s central figure",
+    "source": "File:The temple of Solomon at Jerusalem. Coloured engraving, ca. Wellcome L0047683.jpg",
+    "query": "Solomon's Temple engraving"
+  },
+  {
+    "file": "pool-freemasonry-8.jpg",
+    "cluster": "freemasonry",
+    "caption": "A Masonic certificate",
+    "source": "File:Paul Revere, Masonic Certificate, 1773, NGA 58937.jpg",
+    "query": "Masonic certificate engraving"
+  },
+  {
+    "file": "pool-freemasonry-9.jpg",
+    "cluster": "freemasonry",
+    "caption": "The eye of providence",
+    "source": "File:Eye of Providence (icon).jpg",
+    "query": "all seeing eye providence"
+  },
+  {
+    "file": "pool-freemasonry-10.jpg",
+    "cluster": "freemasonry",
+    "caption": "Benjamin Franklin, freemason",
+    "source": "File:Benjamin Franklin 1767.jpg",
+    "query": "Benjamin Franklin portrait"
+  },
+  {
+    "file": "pool-freemasonry-11.jpg",
+    "cluster": "freemasonry",
+    "caption": "Albert Pike of the Scottish Rite",
+    "source": "File:Albert Pike - Brady-Handy.jpg",
+    "query": "Albert Pike"
+  },
+  {
+    "file": "pool-occult-revival-5.jpg",
+    "cluster": "occult-revival",
+    "caption": "Papus (Gérard Encausse)",
+    "source": "File:Bio-papus-image-1.jpg",
+    "query": "Papus Gerard Encausse"
+  },
+  {
+    "file": "pool-occult-revival-6.jpg",
+    "cluster": "occult-revival",
+    "caption": "Annie Besant",
+    "source": "File:Annie Besant, LoC.jpg",
+    "query": "Annie Besant portrait"
+  },
+  {
+    "file": "pool-occult-revival-7.jpg",
+    "cluster": "occult-revival",
+    "caption": "The seal of the Theosophical Society",
+    "source": "File:Theosophical Society Hall (HPB Lodge) (Former).jpg",
+    "query": "Theosophical Society seal"
+  },
+  {
+    "file": "pool-occult-revival-8.jpg",
+    "cluster": "occult-revival",
+    "caption": "A séance, in a 19th-century engraving",
+    "source": "File:Aesop--19th-century line engraving of sculpture by Karl Heinrich Möller.png",
+    "query": "seance engraving 19th century"
+  },
+  {
+    "file": "pool-occult-revival-9.jpg",
+    "cluster": "occult-revival",
+    "caption": "D. D. Home, the medium nobody caught",
+    "source": "File:Daniel Dunglas Home.jpg",
+    "query": "Daniel Dunglas Home"
+  },
+  {
+    "file": "pool-occult-revival-10.jpg",
+    "cluster": "occult-revival",
+    "caption": "A. E. Waite",
+    "source": "File:Arthur Waite Author.JPG",
+    "query": "Arthur Edward Waite"
+  },
+  {
+    "file": "pool-occult-revival-11.jpg",
+    "cluster": "occult-revival",
+    "caption": "MacGregor Mathers",
+    "source": "File:Samuel Liddell MacGregor Mathers in Egyptian getup.jpg",
+    "query": "Samuel Liddell MacGregor Mathers"
+  },
+  {
+    "file": "pool-occult-revival-12.jpg",
+    "cluster": "occult-revival",
+    "caption": "Rudolf Steiner",
+    "source": "File:Rudolf Steiner. .jpg",
+    "query": "Rudolf Steiner portrait"
+  },
+  {
+    "file": "pool-occult-revival-13.jpg",
+    "cluster": "occult-revival",
+    "caption": "Austin Osman Spare",
+    "source": "File:Austin Osman Spare.jpg",
+    "query": "Austin Osman Spare"
+  },
+  {
+    "file": "pool-occult-revival-14.jpg",
+    "cluster": "occult-revival",
+    "caption": "The Wheel of Fortune, Rider–Waite–Smith (1909)",
+    "source": "File:Wheel of Fortune (Rider-Waite Smith tarot deck).png",
+    "query": "Rider Waite tarot Wheel of Fortune"
+  },
+  {
+    "file": "pool-occult-revival-15.jpg",
+    "cluster": "occult-revival",
+    "caption": "The Star, Rider–Waite–Smith (1909)",
+    "source": "File:The Star (Rider-Waite Smith tarot deck).png",
+    "query": "Rider Waite tarot Star card"
+  },
+  {
+    "file": "pool-occult-revival-16.jpg",
+    "cluster": "occult-revival",
+    "caption": "A card of the Tarot de Marseille",
+    "source": "File:Person holding The Hermit tarot card at Wyldwood Renaissance Festival 2026.jpg",
+    "query": "Tarot de Marseille card"
+  },
+  {
+    "file": "pool-scholarship-3.jpg",
+    "cluster": "scholarship",
+    "caption": "Aby Warburg, who took the images seriously",
+    "source": "File:Aby Warburg.jpg",
+    "query": "Aby Warburg"
+  },
+  {
+    "file": "pool-scholarship-4.jpg",
+    "cluster": "scholarship",
+    "caption": "The Bodleian, where the manuscripts landed",
+    "source": "File:Divinity School Interior 2, Bodleian Library, Oxford, UK - Diliff.jpg",
+    "query": "Bodleian Library interior"
+  },
+  {
+    "file": "pool-scholarship-5.jpg",
+    "cluster": "scholarship",
+    "caption": "The Vatican Library",
+    "source": "File:Anton Raphael Mengs, The Triumph of History over Time (Allegory of the Museum Clementinum), ceiling fresco in the Camera dei Papiri, Vatican Library, 1772 - M0tty.jpg",
+    "query": "Vatican Apostolic Library"
+  },
+  {
+    "file": "pool-scholarship-6.jpg",
+    "cluster": "scholarship",
+    "caption": "A scriptorium at work",
+    "source": "File:Scriptorium-monk-at-work.jpg",
+    "query": "medieval scriptorium monk writing"
+  },
+  {
+    "file": "pool-scholarship-7.jpg",
+    "cluster": "scholarship",
+    "caption": "A Wunderkammer — the museum before museums",
+    "source": "File:Paar in een naturaliakabinet Titelpagina voor L. Vincent, Wondertooneel der Nature, 1706, RP-P-OB-15.661.jpg",
+    "query": "cabinet of curiosities Wunderkammer engraving"
+  },
+  {
+    "file": "pool-scholarship-8.jpg",
+    "cluster": "scholarship",
+    "caption": "Tycho Brahe",
+    "source": "File:Porträtt av Tycho Brahe - Skoklosters slott - 90153.tif",
+    "query": "Tycho Brahe portrait"
+  },
+  {
+    "file": "pool-scholarship-9.jpg",
+    "cluster": "scholarship",
+    "caption": "Kepler, Harmonices Mundi (1619)",
+    "source": "File:Harmonices Mundi 0001-lg.jpg",
+    "query": "Kepler Harmonices Mundi"
+  },
+  {
+    "file": "pool-scholarship-10.jpg",
+    "cluster": "scholarship",
+    "caption": "Newton — who wrote more on alchemy than on optics",
+    "source": "File:Portrait of Sir Isaac Newton, 1689.jpg",
+    "query": "Isaac Newton portrait Godfrey Kneller"
+  },
+  {
+    "file": "pool-scholarship-11.jpg",
+    "cluster": "scholarship",
+    "caption": "An armillary sphere",
+    "source": "File:Armillary sphere sundial, Canberra, 2022, 06.jpg",
+    "query": "armillary sphere engraving"
+  },
+  {
+    "file": "pool-scholarship-12.jpg",
+    "cluster": "scholarship",
+    "caption": "Wright of Derby’s Orrery (1766)",
+    "source": "File:Wright of Derby, The Orrery.jpg",
+    "query": "orrery Joseph Wright"
+  },
+  {
+    "file": "pool-scholarship-13.jpg",
+    "cluster": "scholarship",
+    "caption": "Isaac Casaubon, who dated the Hermetica and broke the spell",
+    "source": "File:Portret van Isaac Casaubon, filoloog en theoloog Icones 44.tiff",
+    "query": "Isaac Casaubon"
+  },
+  {
+    "file": "pool-scholarship-14.jpg",
+    "cluster": "scholarship",
+    "caption": "A reading room of the old kind",
+    "source": "File:Reading-room of the British Museum LCCN2007682650.jpg",
+    "query": "old library reading room engraving"
+  },
+  {
+    "file": "pool-scholarship-15.jpg",
+    "cluster": "scholarship",
+    "caption": "The Prague astronomical clock",
+    "source": "File:Czech-2013-Prague-Astronomical clock face.jpg",
+    "query": "astronomical clock Prague"
+  },
+  {
+    "file": "pool-scholarship-16.jpg",
+    "cluster": "scholarship",
+    "caption": "An incunable page",
+    "source": "File:Dedication page for the Historiae by Herodotus printed at Venice 1494.jpg",
+    "query": "incunabula printed book page"
+  }
+]

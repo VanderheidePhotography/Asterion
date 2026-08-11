@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- viewport-fit=cover: the scene runs edge to edge behind the notch and
+         the home indicator, and the CSS insets the chrome back out of them -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Asterion — an immersive digital museum for the documented history of Western esoteric traditions: people, books, symbols, organizations, and ideas."
+    />
+    <meta name="theme-color" content="#141122" />
+
+    <!--
+      LINK PREVIEWS.
+
+      `og:image` MUST be an absolute URL — LinkedIn, Slack and iMessage will
+      not resolve a relative one, and a shared link with no image unfurls as a
+      bare grey rectangle, which for a portfolio piece is most of the first
+      impression gone. Change the origin below if the site lands on a domain
+      other than this one; nothing else here needs touching.
+
+      The image itself is public/og.jpg, 1200×630. Until it exists the tags
+      degrade to a title-and-description card rather than breaking.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Asterion" />
+    <meta property="og:url" content="https://asterion.vercel.app/" />
+    <meta property="og:title" content="Asterion — a walkable museum of Western esoteric history" />
+    <meta
+      property="og:description"
+      content="A 3D museum you walk through: 900+ people, books, symbols and events of the Western esoteric tradition, every claim carrying its source. Runs in the browser."
+    />
+    <meta property="og:image" content="https://asterion.vercel.app/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="The rotunda of the Grand Library — a domed hall of bookcases, statues in lit niches, and a planetary orrery at its heart." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Asterion — a walkable museum of Western esoteric history" />
+    <meta
+      name="twitter:description"
+      content="A 3D museum you walk through: 900+ people, books, symbols and events, every claim carrying its source."
+    />
+    <meta name="twitter:image" content="https://asterion.vercel.app/og.jpg" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23141122'/%3E%3Cpath d='M16 5l2.2 8.8L27 16l-8.8 2.2L16 27l-2.2-8.8L5 16l8.8-2.2z' fill='%23e8b873'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Asterion · A Museum of Western Esoteric History</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

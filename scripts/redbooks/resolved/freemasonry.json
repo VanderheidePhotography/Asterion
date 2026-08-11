@@ -1,0 +1,581 @@
+{
+ "resolved": {
+  "bk-hutchinson-spirit-masonry": {
+   "bkId": "bk-hutchinson-spirit-masonry",
+   "archiveId": "bim_eighteenth-century_the-spirit-of-masonry-in_hutchinson-william_1775",
+   "title": "The spirit of masonry in moral and elucidatory lectures. By Wm Hutchinson ...  1775",
+   "creator": "Hutchinson, William",
+   "year": 1775,
+   "publisher": "",
+   "cover": "/art/cover-bk-hutchinson-spirit-masonry.png",
+   "ahash": "1111111111101000111111111111100011111111111110001111111111111000111111111111100011111000111110001111000000111000111100000111100011111010011110001111111111111000111111111111100011111111111110001111111111111000111111111111100011111111111010000000000000000000"
+  },
+  "bk-webb-freemasons-monitor": {
+   "bkId": "bk-webb-freemasons-monitor",
+   "archiveId": "the-freemasons-monitor-or-illuistrations-of-masonry-1797",
+   "title": "The Freemason's Monitor or Illustrations of Masonry",
+   "creator": "Thomas Smith Webb",
+   "year": 1797,
+   "publisher": "",
+   "cover": "/art/cover-bk-webb-freemasons-monitor.png",
+   "ahash": "0000011111111111000000000100011111000000000001111111111111111111111110101101111111111110111011111100100000000111111111010000000011111100001100001001000000000000111111000011110011111000010111001111110000011100000000000000000000001110000000000011111111000000"
+  },
+  "bk-cross-true-masonic-chart": {
+   "bkId": "bk-cross-true-masonic-chart",
+   "archiveId": "truemasonicchar01crosgoog",
+   "title": "The True Masonic Chart: Or Hieroglyphic Monitor: Containing All the Emblems Explained in the ...",
+   "creator": "Jeremy Ladd Cross",
+   "year": 1851,
+   "publisher": "",
+   "cover": "/art/cover-bk-cross-true-masonic-chart.png",
+   "ahash": "0111111111111111010000000001011111000000100001111100000000000111110000000000011111000000000001111111110000011111111000000000111111001000000001111100100000010111111000000000011111110111101111111110000000000111111111100111111111111111111111111111111111111111"
+  },
+  "bk-oliver-historical-landmarks": {
+   "bkId": "bk-oliver-historical-landmarks",
+   "archiveId": "historicallandma02olivuoft",
+   "title": "The historical landmarks and other evidences of Freemasonry, explained: in a series of practical lectures, with copious notes. Arranged on the system which has been enjoined by the Grand Lodge of England, as it was settled by the Lodge of Reconciliation, at the union in 1813",
+   "creator": "Oliver, George, 1782-1867",
+   "year": 1846,
+   "publisher": "London, R. Spencer",
+   "cover": "/art/cover-bk-oliver-historical-landmarks.png",
+   "ahash": "0111010111111111011100001111111101110000011111110111000001011111001000000000111100000000000001110000000000000011000000000000000100000000000000010000000000000001000000000000000100000000000000010000000000000011000000000000001000000000000000100000000000000111"
+  },
+  "bk-mackey-symbolism": {
+   "bkId": "bk-mackey-symbolism",
+   "archiveId": "symbolismoffreem00mackrich",
+   "title": "The symbolism of Freemasonry [electronic resource] : illustrating and explaining its science and philosophy, its legends, myths, and symbols",
+   "creator": "Mackey, Albert Gallatin, 1807-1881",
+   "year": 1869,
+   "publisher": "New York : Clay and Maynard",
+   "cover": "/art/cover-bk-mackey-symbolism.png",
+   "ahash": "1010000111111111000001111111111100000110111111110000000111111111000000011111111100000000000111110000000000011111000000000001111100000000100111110000000000011111000000000000011100000000001111110000000000011111000000000001111110000000001111111000000001111111"
+  },
+  "bk-mackey-lexicon": {
+   "bkId": "bk-mackey-lexicon",
+   "archiveId": "lexiconoffreemas0000albe",
+   "title": "A Lexicon of Freemasonry",
+   "creator": "Albert G. Mackey",
+   "year": 1855,
+   "publisher": "",
+   "cover": "/art/cover-bk-mackey-lexicon.png",
+   "ahash": "1111101111011111111111111111111111111100011111111111110001011111111000000000011111100000001111111110000000000111111000000001111111110000010011111110000000001111111110000100001111111000000000011111111100100100111111000000000111111110100000111111111111111111"
+  },
+  "bk-mackenzie-royal-cyclopaedia": {
+   "bkId": "bk-mackenzie-royal-cyclopaedia",
+   "archiveId": "mackenzie-the-royal-masonic-cyclopaedia",
+   "title": "The Royal Masonic Cyclopaedia, Kenneth R. H. Mackenzie",
+   "creator": "Kenneth R. H. Mackenzie",
+   "year": 1877,
+   "publisher": "",
+   "cover": "/art/cover-bk-mackenzie-royal-cyclopaedia.png",
+   "ahash": "1111111111111111111111100111111111000000000000111100001100000011111100000000011111111110001111111111000000001111111100000000011111100000000001111111110000111111111110000001111111111000000111111111110000011111111110100010111111111100001111111111111111111111"
+  },
+  "bk-findel-history-freemasonry": {
+   "bkId": "bk-findel-history-freemasonry",
+   "archiveId": "historyoffreemas00find",
+   "title": "History of freemasonry : from its rise down to the present day. / By J.G. Findel ...",
+   "creator": "Findel, J. G. (Joseph Gabriel), 1828-1905",
+   "year": 1866,
+   "publisher": "Asher & Co. 13, Bedford Street, Covent Garden",
+   "cover": "/art/cover-bk-findel-history-freemasonry.png",
+   "ahash": "0001111110000000001111111000000000011111100000000000000000000000000000000000000000000001110000000000001111100000000001111111000000000011111100000000001111100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001"
+  },
+  "bk-macoy-cyclopedia": {
+   "bkId": "bk-macoy-cyclopedia",
+   "archiveId": "cu31924030273225",
+   "title": "General history, cyclopedia and dictionary of freemasonry; containing an elaborate account of the rise and progress of freemasonry and its kindred associations--ancient and modern. Also, definitions of the technical terms used by the fraternity",
+   "creator": "Macoy, Robert, 1815-1895",
+   "year": 1869,
+   "publisher": "New York : Masonic Pub. Co.",
+   "cover": "/art/cover-bk-macoy-cyclopedia.png",
+   "ahash": "0000000000011110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111100000111111111111001111111111111101111111111111111111111111111111111111111111111"
+  },
+  "bk-morris-poetry-freemasonry": {
+   "bkId": "bk-morris-poetry-freemasonry",
+   "archiveId": "poetry_of_freemasonary",
+   "title": "Poetry Of Freemasonary",
+   "creator": "Robert Morris",
+   "year": 1895,
+   "publisher": "",
+   "cover": "/art/cover-bk-morris-poetry-freemasonry.png",
+   "ahash": "0000000000000000011111100000000001111111100111000111111011111000000111101111100000011111111110000001111111111110011110011111000000000111110000000000111111101100000011001001011000000000100001100000001011111100000000100111100000000000100100000000000000000000"
+  },
+  "bk-ward-freemasonry-ancient-gods": {
+   "bkId": "bk-ward-freemasonry-ancient-gods",
+   "archiveId": "freemasonryancie0000jsmw",
+   "title": "Freemasonry and the Ancient Gods",
+   "creator": "JSM Ward MA",
+   "year": 1926,
+   "publisher": "",
+   "cover": "/art/cover-bk-ward-freemasonry-ancient-gods.png",
+   "ahash": "0000000000000000000000000000000000000000000000000000000000000010000000000000001000000000000001110000000000000111011111111111111100000000001111111111111111111111111111111111111111111111111111111111111111111111110011111111111111111111111111111111111111111111"
+  },
+  "bk-waite-secret-tradition-masonry": {
+   "bkId": "bk-waite-secret-tradition-masonry",
+   "archiveId": "secrettraditioni02waituoft",
+   "title": "The secret tradition in freemasonry : and an analysis of the inter-relation between the craft and the high grades in respect to their term of research, expressed by the way of symbolism",
+   "creator": "Waite, Arthur Edward, 1857-1942",
+   "year": 1911,
+   "publisher": "New York : Rebman",
+   "cover": "/art/cover-bk-waite-secret-tradition-masonry.png",
+   "ahash": "0001111111111111000011111111111100000111111111110000011111111111000001110011111100001110010111110000000100101110000000100011000000000000001000000000110000001100000000110011111100000011111111110000011111111111000011111111111100011111111111110000111111111111"
+  },
+  "bk-wilmshurst-masonic-initiation": {
+   "bkId": "bk-wilmshurst-masonic-initiation",
+   "archiveId": "The_Masonic_Initiation_-_W._L._Wilmshurst",
+   "title": "The Masonic Initiation - W. L. Wilmshurst",
+   "creator": "W. L. Wilmshurst",
+   "year": 2014,
+   "publisher": "",
+   "cover": "/art/cover-bk-wilmshurst-masonic-initiation.png",
+   "ahash": "1111011111101111111000000000011111111000000111111111110000111111111111000011111111111000000111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "bk-heckethorn-secret-societies": {
+   "bkId": "bk-heckethorn-secret-societies",
+   "archiveId": "secretsocieties02heckgoog",
+   "title": "The Secret Societies of All Ages and Countries",
+   "creator": "Charles William Heckethorn",
+   "year": 1875,
+   "publisher": "J. Hogg",
+   "cover": "/art/cover-bk-heckethorn-secret-societies.png",
+   "ahash": "1111111111111111110000000000011111000000000001111111000000011111111111000111111111100000000011111110000000001111111111101111111111111111111111111111100001111111111111000111111111111011101111111111000000011111111111101111111111111000001111111111111111111111"
+  },
+  "bk-fellows-exposition-mysteries": {
+   "bkId": "bk-fellows-exposition-mysteries",
+   "archiveId": "mysteriesfreema01fellgoog",
+   "title": "The mysteries of freemasonry; or, An exposition of the religious dogmas and customs of the ancient Egyptians; showing from the origin, nature, and object of the rites and ceremonies of remote antiquity, their identity with the order of modern masonry",
+   "creator": "Fellows, John, 1759-1844",
+   "year": 1877,
+   "publisher": "London, Reeves and Turner",
+   "cover": "/art/cover-bk-fellows-exposition-mysteries.png",
+   "ahash": "1111111000000011111101000000111111110000000111111100000000000111111000000000111110000000000001111000000000000111100000000000001111100000000011111000000000000111110000000000111111111000001111111110000001101111110011000111111111111110111001111111111111111111"
+  },
+  "bk-duncan-ritual-monitor": {
+   "bkId": "bk-duncan-ritual-monitor",
+   "archiveId": "duncan-s-masonic-ritual",
+   "title": "DUNCAN' S MASONIC RITUAL",
+   "creator": "Malcolm C. Duncan",
+   "year": 1866,
+   "publisher": "",
+   "cover": "/art/cover-bk-duncan-ritual-monitor.png",
+   "ahash": "1111100000011111111100000000111111110000000011111111000000001111111100000000111111111000000011111111000000001111111100000000111111111100001111111111100000011111111111100111111111111111111111111111000000001111111100000000111111111111111111111111111111111111"
+  },
+  "bk-bernard-light-on-masonry": {
+   "bkId": "bk-bernard-light-on-masonry",
+   "archiveId": "LightOnMasonry",
+   "title": "Light On Masonry by David Bernard",
+   "creator": "David Bernard",
+   "year": 1829,
+   "publisher": "",
+   "cover": "/art/cover-bk-bernard-light-on-masonry.png",
+   "ahash": "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000000000011111000000000001111100000000000011110000001110001111111111111111111111111111111111"
+  },
+  "bk-churchward-arcana-freemasonry": {
+   "bkId": "bk-churchward-arcana-freemasonry",
+   "archiveId": "arcanaoffreemaso00churuoft",
+   "title": "The arcana of freemasonry",
+   "creator": "Churchward, Albert",
+   "year": 1915,
+   "publisher": "London : Allen & Unwin",
+   "cover": "/art/cover-bk-churchward-arcana-freemasonry.png",
+   "ahash": "0000011111110000000010000000100000000000000011001111111111111111111001000001111111111111111111111111111111111111111111111111111011110000011111101111000001111111111100000111111111111111111111100000001000000110000001100101111001111111111111100000001111110000"
+  },
+  "bk-yarker-notes-mysteries": {
+   "bkId": "bk-yarker-notes-mysteries",
+   "archiveId": "notesonscientif00junrgoog",
+   "title": "Notes on the Scientific and Religious Mysteries of Antiquity; the Gnosis and Secret Schools of ...",
+   "creator": "John Yarker Junr.",
+   "year": 1872,
+   "publisher": "",
+   "cover": "/art/cover-bk-yarker-notes-mysteries.png",
+   "ahash": "1111111111111111111111100011111111000000000000111111110100011111111101000001011111110010000011111111101000101111111110000000111111000000000000111100000000000011111000000000011110000000000011110000000000001111100000000000001111111100111111111111111111111111"
+  },
+  "bk-pierson-traditions": {
+   "bkId": "bk-pierson-traditions",
+   "archiveId": "traditionsoffree00pierrich",
+   "title": "Traditions of freemasonry and its coincidences with the ancient mysteries",
+   "creator": "Pierson, Azariah T. C., 1815-1889",
+   "year": 1870,
+   "publisher": "New York ; Masonic Publishing Co.",
+   "cover": "/art/cover-bk-pierson-traditions.png",
+   "ahash": "0000000000000000000111111111111000111111111111100011111111111111001111111111111100111111111111110011111111111110000000000000001000000000001000100011111111111111000111111111111000111111111111100011111111111110000011111111111000000011111111100000000011111000"
+  },
+  "bk-rebold-general-history": {
+   "bkId": "bk-rebold-general-history",
+   "archiveId": "ageneralhistory00brengoog",
+   "title": "A General History of Free-masonry in Europe: Based Upon the Ancient Documents Relating To, and ...",
+   "creator": "Emmanuel Rebold ,  Joseph Fletcher Brennan",
+   "year": 1869,
+   "publisher": "American masonic publishing association",
+   "cover": "/art/cover-bk-rebold-general-history.png",
+   "ahash": "1111111111111111111111111111111111111000000111111101000000001111110000000000001111111100001111111111100000100111111000000000011111111111111111111110000000000111111000000000011111111111111111111110000000001111111110000011111111111111111111111111111111111111"
+  },
+  "bk-ramsay-travels-cyrus": {
+   "bkId": "bk-ramsay-travels-cyrus",
+   "archiveId": "micro_IA40244319_0123",
+   "title": "The travels of Cyrus : to which is annex'd a discourse upon the theology and mythology of the ancients.",
+   "creator": "Ramsay, Andrew Michael. 1683-1743.",
+   "year": 1723,
+   "publisher": "Microfilming Corp. of America",
+   "cover": "/art/cover-bk-ramsay-travels-cyrus.png",
+   "ahash": "0000000000000000111111111111000011111111111110001111111111111000111111111111100011111111111110001111111111111000111111111111100011111111111110001111111111111000111111111111100011111111111100001111111111110000111111111111100011111111111100000000000000000000"
+  },
+  "bk-sickels-ahiman-rezon-guide": {
+   "bkId": "bk-sickels-ahiman-rezon-guide",
+   "archiveId": "generalahimanrez00sick",
+   "title": "The general Ahiman rezon and freemason's guide : containing monitorial instructions in the degrees of entered apprentice, fellow-craft and master mason ; to which are added a ritual for a lodge of sorrow ; also, an appendix, with the forms of masonic documents, masonic trials, etc.",
+   "creator": "Sickels, Daniel Edgar, 1825-1914",
+   "year": 1867,
+   "publisher": "New York : Masonic Publishing and Manufacturing Co.",
+   "cover": "/art/cover-bk-sickels-ahiman-rezon-guide.png",
+   "ahash": "1000000010111110100000000000001110000000000000111000000000000001100000001100000110000011111101111000001111111111100011111111111100000111111111010000111111111100000000011100010100000000000000010000000000000000000000000000000000000000000000000000000000000001"
+  },
+  "bk-hayden-washington-compeers": {
+   "bkId": "bk-hayden-washington-compeers",
+   "archiveId": "washingtonandhi01haydgoog",
+   "title": "Washington and his masonic compeers",
+   "creator": "Hayden, Sidney. [from old catalog]",
+   "year": 1866,
+   "publisher": "New York, Masonic publishing and manufacturing co.",
+   "cover": "/art/cover-bk-hayden-washington-compeers.png",
+   "ahash": "1111111111111111111000000000011111100000000011111111111111111111110000010000001111111111111111111111100000011111111000000000011111000000000001111111000000001111111110000001111111111100000111111110000000001111111000000000011111111111111111111111111111111111"
+  },
+  "bk-mackey-book-of-chapter": {
+   "bkId": "bk-mackey-book-of-chapter",
+   "archiveId": "ofchapterormbook00mackrich",
+   "title": "The book of the chapter : or, Monitorial instructions, in the degrees of mark, past and most excellent master, and the holy Royal arch",
+   "creator": "Mackey, Albert Gallatin, 1807-1881",
+   "year": 1863,
+   "publisher": "New York : Macoy & Sickels",
+   "cover": "/art/cover-bk-mackey-book-of-chapter.png",
+   "ahash": "0000110001100111000000000000001101000010010000001101101001011111111100000000111111011100001110111111101001011111111100000000111111100000000000111110000000000111110111111111111111000000000001111111111111111111110111000011111111000000011110110111111111111111"
+  },
+  "bk-gould-concise-history": {
+   "bkId": "bk-gould-concise-history",
+   "archiveId": "dli.ernet.236111",
+   "title": "A Concise History Of Freemasonry (1903)",
+   "creator": "Gould Robert Freke",
+   "year": 1903,
+   "publisher": "Gale and Polden Ltd., London",
+   "cover": "/art/cover-bk-gould-concise-history.png",
+   "ahash": "1111001111111111110000000000001111110000000011111111000000001111111111111111111111111111111111111111111111111111111100000000111111000000000000111111111111111111111111111111111111111111111111111111111111111111111100000000111111110000000011111111111111111111"
+  },
+  "bk-castells-origin-history": {
+   "bkId": "bk-castells-origin-history",
+   "archiveId": "originmasonicri00rowbgoog",
+   "title": "The origin of masonic ritual & tradition as manifested by the geometrical design and symbolism ...",
+   "creator": "William Rowbottom",
+   "year": 1880,
+   "publisher": "",
+   "cover": "/art/cover-bk-castells-origin-history.png",
+   "ahash": "1111111111111111111100100110111110000000000000111000000000000011111001000000011111011001100001111100000000001111111110000001111111010001000001111110000000001111100000000000001110000000000000111111110101110111110000000000011111111110110001111111001110011111"
+  },
+  "bk-anderson-constitutions-1738": {
+   "bkId": "bk-anderson-constitutions-1738",
+   "archiveId": "bim_eighteenth-century_the-new-book-of-constitu_anderson-james_1738",
+   "title": "The new book of constitutions of the antient and honourable fraternity of free and accepted masons. Containing their history, charges, regulations, &c. ... For the use of the lodges. By James Anderson, ...  1738",
+   "creator": "Anderson, James",
+   "year": 1738,
+   "publisher": "",
+   "cover": "/art/cover-bk-anderson-constitutions-1738.png",
+   "ahash": "0000000000000000111111111111110011111111111111001111111111111100111111111111110011111111111111001111111111111100111111111111110011111111111111001111111111111000111111111111100011111110111111001111111111111100111111111111100001111100000000000000000000000000"
+  },
+  "bk-oliver-revelations-square": {
+   "bkId": "bk-oliver-revelations-square",
+   "archiveId": "revelationsofsqu00oliv",
+   "title": "The revelations of a square; exhibiting a graphic display of the sayings and doings of eminent free and accepted masons",
+   "creator": "Oliver, George, 1782-1867. [from old catalog]",
+   "year": 1855,
+   "publisher": "New York, J. W. Leonard & co. [etc.]",
+   "cover": "/art/cover-bk-oliver-revelations-square.png",
+   "ahash": "0000001011111111000111111111111100000000000000010000000000100011000110000001011100000011111110110000101000100111000011111111111100011111111111110000000000000011001001100001111100111111111111110011111111111111001111100001111100111000000010110001111111111111"
+  },
+  "bk-newton-religion-of-masonry": {
+   "bkId": "bk-newton-religion-of-masonry",
+   "archiveId": "how-masonic-education-admits-one-to-the-glory-and-greatness-of-masonry",
+   "title": "HOW MASONIC EDUCATION ADMITS ONE TO THE GLORY AND GREATNESS OF MASONRY",
+   "creator": "Joseph Fort Newton",
+   "year": 1923,
+   "publisher": "",
+   "cover": "/art/cover-bk-newton-religion-of-masonry.png",
+   "ahash": "1111111111111111110000000000001111110100000001111111111111111111110000000000001111000000000000111100000000001111110000000000001111000100000010111100000000000011110000000000001111000000011111111100000000000011100000000000001111010000011001111111111111111111"
+  },
+  "bk-waite-emblematic-freemasonry": {
+   "bkId": "bk-waite-emblematic-freemasonry",
+   "archiveId": "ult.emblematicfreema0000arth",
+   "title": "Emblematic Freemasonry",
+   "creator": "Arthur Edward Waite",
+   "year": 1925,
+   "publisher": "William Rider & Son, Limited",
+   "cover": "/art/cover-bk-waite-emblematic-freemasonry.png",
+   "ahash": "0000011111111111001000111111111100000000111111110000000111101110000000000011111000000000000001100000000000000000000000000000000000000000000000000000000000000000011110000000000001111100000000000111110000110100001100000000001000000000000111100000000000000011"
+  }
+ },
+ "unresolved": [
+  {
+   "bkId": "bk-oliver-antiquities",
+   "cluster": "freemasonry",
+   "era": "nineteenth",
+   "yearGuess": 1823,
+   "dates": "1823",
+   "title": "The Antiquities of Freemasonry",
+   "author": "George Oliver",
+   "query": "Antiquities of Freemasonry George Oliver",
+   "epithet": "The Craft traced back to the patriarchs",
+   "summary": "Oliver's attempt to root Freemasonry in a pure primitive religion running from Adam and the patriarchs — the high tide of the mythical, antiquarian school of Masonic history he did most to build.",
+   "tags": [
+    "history",
+    "antiquarian",
+    "symbolism"
+   ],
+   "wiki": "George_Oliver_(freemason)",
+   "linkKind": "associated-with",
+   "linkTarget": "freemasonry",
+   "imprint": "London: G. and W. B. Whittaker, 1823",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-hughan-origin-english-rite",
+   "cluster": "freemasonry",
+   "era": "nineteenth",
+   "yearGuess": 1884,
+   "dates": "1884",
+   "title": "The Origin of the English Rite of Freemasonry",
+   "author": "William James Hughan",
+   "query": "Origin of the English Rite of Freemasonry Hughan",
+   "epithet": "The documentary turn in Masonic history",
+   "summary": "Hughan's evidence-based reconstruction of how the English craft degrees actually took shape — a founding work of the 'authentic school' that replaced Oliver's legends with records.",
+   "tags": [
+    "history",
+    "authentic-school",
+    "records"
+   ],
+   "wiki": "William_James_Hughan",
+   "linkKind": "associated-with",
+   "linkTarget": "freemasonry",
+   "imprint": "London: George Kenning, 1884",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-ward-interpretation-symbols",
+   "cluster": "freemasonry",
+   "era": "twentieth",
+   "yearGuess": 1924,
+   "dates": "1924",
+   "title": "An Interpretation of Our Masonic Symbols",
+   "author": "J. S. M. Ward",
+   "query": "Interpretation of Our Masonic Symbols Ward",
+   "epithet": "Every emblem read as a mystery-teaching",
+   "summary": "Ward's handbook decoding the Craft's symbols one by one as fragments of an ancient initiatory science — a staple of the between-the-wars esoteric lodge.",
+   "tags": [
+    "symbolism",
+    "interpretation",
+    "ritual"
+   ],
+   "wiki": "John_Sebastian_Marlow_Ward",
+   "linkKind": "associated-with",
+   "linkTarget": "speculative-masonry",
+   "imprint": "London: Baskerville Press, 1924",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-preston-illustrations-1812",
+   "cluster": "freemasonry",
+   "era": "enlightenment",
+   "yearGuess": 1812,
+   "dates": "1772 / 1812",
+   "title": "Illustrations of Masonry (Oliver edition)",
+   "author": "William Preston",
+   "query": "Illustrations of Masonry Preston Oliver notes",
+   "epithet": "The lectures that formed the English ritual",
+   "summary": "Preston's Illustrations, the book that codified the English lectures and the 'Prestonian' system of the degrees — here in the enlarged edition with George Oliver's notes.",
+   "tags": [
+    "ritual",
+    "lectures",
+    "prestonian"
+   ],
+   "wiki": "William_Preston_(Freemason)",
+   "linkKind": "wrote",
+   "linkTarget": "william-preston",
+   "imprint": "London: Whittaker, 1812",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-oliver-signs-symbols",
+   "cluster": "freemasonry",
+   "era": "nineteenth",
+   "yearGuess": 1837,
+   "dates": "1837",
+   "title": "Signs and Symbols Illustrated and Explained",
+   "author": "George Oliver",
+   "query": "Signs and Symbols Illustrated Explained Oliver",
+   "epithet": "A course of lectures on the first degree",
+   "summary": "Oliver's lectures on the signs and symbols of the first degree, expounded through his sweeping comparative mythology — the symbolic school of Masonic teaching at its most characteristic.",
+   "tags": [
+    "symbolism",
+    "lectures",
+    "first-degree"
+   ],
+   "wiki": "George_Oliver_(freemason)",
+   "linkKind": "associated-with",
+   "linkTarget": "freemasonry",
+   "imprint": "London: Richard Spencer, 1837",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-pike-book-of-words",
+   "cluster": "freemasonry",
+   "era": "nineteenth",
+   "yearGuess": 1874,
+   "dates": "1874",
+   "title": "Book of the Words",
+   "author": "Albert Pike",
+   "query": "Book of the Words Pike Scottish Rite",
+   "epithet": "Pike on the sacred words of the Rite",
+   "summary": "Pike's study of the significant words of the Scottish Rite degrees and their supposed roots in the ancient languages — a companion to Morals and Dogma from the Rite's great systematiser.",
+   "tags": [
+    "scottish-rite",
+    "words",
+    "pike"
+   ],
+   "wiki": "Albert_Pike",
+   "linkKind": "wrote",
+   "linkTarget": "albert-pike",
+   "imprint": "Washington: Supreme Council, 1874",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-vibert-freemasonry-before",
+   "cluster": "freemasonry",
+   "era": "twentieth",
+   "yearGuess": 1918,
+   "dates": "1918",
+   "title": "Freemasonry Before the Existence of Grand Lodges",
+   "author": "Lionel Vibert",
+   "query": "Freemasonry Before the Existence of Grand Lodges Vibert",
+   "epithet": "The Craft in the century before 1717",
+   "summary": "Vibert's careful account of the lodges and manuscripts of the seventeenth century, before the Grand Lodge era — a key work of the documentary school on Masonry's obscure beginnings.",
+   "tags": [
+    "history",
+    "pre-grand-lodge",
+    "records"
+   ],
+   "wiki": "Freemasonry",
+   "linkKind": "associated-with",
+   "linkTarget": "lodge-of-edinburgh",
+   "imprint": "London: Spencer, 1918",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-crowe-things-a-freemason",
+   "cluster": "freemasonry",
+   "era": "twentieth",
+   "yearGuery": 1909,
+   "yearGuess": 1909,
+   "dates": "1909",
+   "title": "Things a Freemason Should Know",
+   "author": "Frederick J. W. Crowe",
+   "query": "Things a Freemason Should Know Crowe",
+   "epithet": "A pocket handbook of Craft knowledge",
+   "summary": "Crowe's compact guide to the history, symbolism and practice a Mason was expected to know — one of the small self-improvement handbooks that furnished the Edwardian lodge library.",
+   "tags": [
+    "handbook",
+    "symbolism",
+    "practice"
+   ],
+   "wiki": "Freemasonry",
+   "linkKind": "associated-with",
+   "linkTarget": "freemasonry",
+   "imprint": "London: William Rider, 1909",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-oliver-book-of-lodge",
+   "cluster": "freemasonry",
+   "era": "nineteenth",
+   "yearGuess": 1849,
+   "dates": "1849",
+   "title": "The Book of the Lodge",
+   "author": "George Oliver",
+   "query": "Book of the Lodge Oliver",
+   "epithet": "How to furnish and govern a lodge",
+   "summary": "Oliver's practical manual on the constitution, furniture and government of a lodge, with its symbolism — the working companion to his many volumes on Masonic antiquity.",
+   "tags": [
+    "lodge",
+    "practice",
+    "symbolism"
+   ],
+   "wiki": "George_Oliver_(freemason)",
+   "linkKind": "associated-with",
+   "linkTarget": "freemasonry",
+   "imprint": "London: Richard Spencer, 1849",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-mackey-manual-of-lodge",
+   "cluster": "freemasonry",
+   "era": "nineteenth",
+   "yearGuess": 1862,
+   "dates": "1862",
+   "title": "A Manual of the Lodge",
+   "author": "Albert G. Mackey",
+   "query": "A Manual of the Lodge Mackey",
+   "epithet": "The monitorial instruction of the three degrees",
+   "summary": "Mackey's monitor of the ceremonies and lectures of the symbolic lodge, with the meaning of its emblems — one of the most widely used American guides to the working of the three degrees.",
+   "tags": [
+    "monitor",
+    "ritual",
+    "american"
+   ],
+   "wiki": "Albert_Mackey",
+   "linkKind": "wrote",
+   "linkTarget": "albert-mackey",
+   "imprint": "New York: Clark & Maynard, 1862",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-gould-military-lodges",
+   "cluster": "freemasonry",
+   "era": "nineteenth",
+   "yearGuess": 1899,
+   "dates": "1899",
+   "title": "Military Lodges: The Apron and the Sword",
+   "author": "Robert Freke Gould",
+   "query": "Military Lodges Apron and Sword Gould",
+   "epithet": "Freemasonry in the marching regiments",
+   "summary": "Gould's history of the travelling military lodges that carried Freemasonry across the British Empire with the army — a distinctive chapter of the Craft's spread, by its foremost historian.",
+   "tags": [
+    "history",
+    "military",
+    "empire"
+   ],
+   "wiki": "Robert_Freke_Gould",
+   "linkKind": "associated-with",
+   "linkTarget": "freemasonry",
+   "imprint": "London: Gale & Polden, 1899",
+   "reason": "no usable scan found"
+  },
+  {
+   "bkId": "bk-wright-woman-freemasonry",
+   "cluster": "freemasonry",
+   "era": "twentieth",
+   "yearGuess": 1922,
+   "dates": "1922",
+   "title": "Woman and Freemasonry",
+   "author": "Dudley Wright",
+   "query": "Woman and Freemasonry Dudley Wright",
+   "epithet": "The women admitted to the lodge and its rites",
+   "summary": "Wright's history of women's relation to Freemasonry — the female initiates, the adoptive rites and the mixed orders — a pioneering survey of a subject the regular Craft mostly ignored.",
+   "tags": [
+    "women",
+    "adoptive-rite",
+    "history"
+   ],
+   "wiki": "Freemasonry",
+   "linkKind": "associated-with",
+   "linkTarget": "freemasonry",
+   "imprint": "London: William Rider, 1922",
+   "reason": "no usable scan found"
+  }
+ ]
+}
