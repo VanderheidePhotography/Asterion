@@ -104,6 +104,7 @@ import {
 } from './three/layout';
 import { useReducedMotion } from '../../lib/useReducedMotion';
 import { useViewport } from '../../lib/useViewport';
+import { DeviceReport, DeviceReportOverlay, diagRequested } from './three/DeviceReport';
 import { useUi } from '../../app/store';
 import { useProgress, type StationId } from '../../app/progress';
 import { ambient } from '../audio/ambient';
@@ -3935,6 +3936,7 @@ export default function GrandLibrary() {
       >
         <AdaptiveQuality />
         <AspectFov />
+        {diagRequested() && <DeviceReport />}
         <SceneWarmup />
         <PropCulling />
         {/* order matters: dedup first, so StaticMerge — which groups by material
@@ -4004,6 +4006,7 @@ export default function GrandLibrary() {
           something on screen saying "walk here" — and it stands down only
           when walking itself is off: an open book, a seat at a table, photo
           mode, or the arrival glide */}
+      {diagRequested() && <DeviceReportOverlay />}
       {stickOn && !photoMode && !flightOn && !selected && !anySeated && !anyReading && <TouchStick />}
 
       {/* The floating control rail stood here — ambient sound, photo mode, and
