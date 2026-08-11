@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { texPx } from './textureBudget';
 import { mulberry32 } from '../../../domain/random';
 import { LAND, LAKES, type Ring } from '../../../data/coastlines';
 import { ZODIAC } from '../../../data/astrology';
@@ -128,8 +129,8 @@ export function earthMap(): THREE.CanvasTexture {
   // 2:1 is the equirectangular aspect. The Earth is a 5 cm sphere on the
   // chart, so this is far more resolution than it needs at rest — but the
   // body swells on hover, and the coastlines are the whole point.
-  const W = 2048;
-  const H = 1024;
+  const W = texPx(2048);
+  const H = texPx(1024);
   const c = document.createElement('canvas');
   c.width = W;
   c.height = H;
@@ -304,8 +305,8 @@ let terrestrialCache: THREE.CanvasTexture | null = null;
 /** the terrestrial globe's skin: sized parchment, sepia land, inked coasts */
 export function terrestrialGlobeMap(): THREE.CanvasTexture {
   if (terrestrialCache) return terrestrialCache;
-  const W = 2048;
-  const H = 1024;
+  const W = texPx(2048);
+  const H = texPx(1024);
   const c = document.createElement('canvas');
   c.width = W;
   c.height = H;
@@ -442,8 +443,8 @@ let celestialCache: THREE.CanvasTexture | null = null;
  */
 export function celestialGlobeMap(): THREE.CanvasTexture {
   if (celestialCache) return celestialCache;
-  const W = 2048;
-  const H = 1024;
+  const W = texPx(2048);
+  const H = texPx(1024);
   const c = document.createElement('canvas');
   c.width = W;
   c.height = H;

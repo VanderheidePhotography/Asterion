@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { mulberry32 } from '../../../domain/random';
+import { texPx } from './textureBudget';
 
 /**
  * The texture workshop. Every surface in the library — planked floors,
@@ -42,11 +43,16 @@ function make(
 ): THREE.CanvasTexture {
   const hit = cache.get(key);
   if (hit) return hit;
+  // painted smaller on a phone — see textureBudget. The painter is handed the
+  // scaled dimensions rather than the nominal ones, so everything it draws is
+  // laid out in the canvas it actually has; nothing needs to know the scale.
+  const w = texPx(size[0]);
+  const h = texPx(size[1]);
   const canvas = document.createElement('canvas');
-  canvas.width = size[0];
-  canvas.height = size[1];
+  canvas.width = w;
+  canvas.height = h;
   const ctx = canvas.getContext('2d')!;
-  paint(ctx, size[0], size[1]);
+  paint(ctx, w, h);
   const tex = new THREE.CanvasTexture(canvas);
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.anisotropy = 4;

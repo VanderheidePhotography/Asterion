@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import * as THREE from 'three';
+import { TEXTURE_SCALE } from './textureBudget';
 
 /**
  * Self-contained 3D text: renders type onto a high-DPI canvas texture.
@@ -63,10 +64,14 @@ const BASE = 64; // px font size the LAYOUT is measured at (wrap, padding, aspec
  * large in the world until they clear MIN_PX_PER_METRE. The giant titles come
  * out SHARPER than they are today; everything else comes out far cheaper.
  */
-const RASTER_FLOOR = 1;
-const RASTER_CEIL = 2.5;
+/* On a phone every one of these is halved again (see textureBudget): 969
+   labels at desktop density is ~486 MB of texture on a device whose whole tab
+   budget is smaller than that, and text is the one thing that survives being
+   drawn small — a glyph is high-contrast, and the outline stroke carries it. */
+const RASTER_FLOOR = 1 * TEXTURE_SCALE;
+const RASTER_CEIL = 2.5 * TEXTURE_SCALE;
 /** the density below which a big sign starts to look like a blurred decal */
-const MIN_PX_PER_METRE = 100;
+const MIN_PX_PER_METRE = 100 * TEXTURE_SCALE;
 /**
  * NOTE, measured: no label in the building currently reaches the ceiling, and
  * one wayfinding title still sits at 80 px/m. That one is scaled by an
