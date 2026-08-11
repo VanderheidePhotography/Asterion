@@ -58,3 +58,23 @@ export const TEXTURE_SCALE = LEAN_TEXTURES ? 0.5 : 1;
 export function texPx(px: number): number {
   return Math.max(2, Math.round(px * TEXTURE_SCALE));
 }
+
+/**
+ * The half-size scan to load in place of a full one, on a lean device.
+ *
+ * `scripts/optimize-textures-lean.mjs` writes a `.lean.jpg` beside every file
+ * under `public/textures`, at half its longest edge. This is the only place
+ * that knows the naming, and every loader in the app should go through it —
+ * the registry, and the four components that reach for a `TextureLoader`
+ * directly. Miss one and it quietly keeps the full-size upload, which is what
+ * happened first time: six files, ~200 MB, still resident on a phone.
+ *
+ * Restricted to `/textures/`. The grimoire plates under `/art/` and the tarot
+ * deck have no lean set — they are fetched one book at a time rather than all
+ * at once, so they never sit in memory together.
+ */
+export function leanPath(url: string): string {
+  if (!LEAN_TEXTURES) return url;
+  if (!url.includes('/textures/') || !url.endsWith('.jpg')) return url;
+  return url.replace(/\.jpg$/, '.lean.jpg');
+}

@@ -1,5 +1,6 @@
 import { useLayoutEffect, useMemo } from 'react';
 import * as THREE from 'three';
+import { leanPath } from './textureBudget';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { getMaterial, primeMaterials } from '../../../materials';
 import { CLUSTER_META, type ClusterId } from '../../../domain/types';
@@ -598,7 +599,7 @@ export function Cosmographia() {
     let live = true;
     void primeMaterials().then(() => {
       if (!live) return;
-      const tex = new THREE.TextureLoader().load('/textures/Fabric/fabric_rug_persian/normal.jpg');
+      const tex = new THREE.TextureLoader().load(leanPath('/textures/Fabric/fabric_rug_persian/normal.jpg'));
       tex.wrapS = THREE.RepeatWrapping;
       tex.wrapT = THREE.RepeatWrapping;
       tex.anisotropy = 8;

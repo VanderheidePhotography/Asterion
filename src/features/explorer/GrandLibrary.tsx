@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import * as THREE from 'three';
+import { leanPath } from './three/textureBudget';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Bloom, EffectComposer, Vignette } from '@react-three/postprocessing';
 import { configureMaterials, getMaterial, primeMaterials } from '../../materials';
@@ -2244,7 +2245,7 @@ function Moon() {
 
   useEffect(() => {
     let live = true;
-    const tex = new THREE.TextureLoader().load('/textures/Sky/moon.jpg', () => {
+    const tex = new THREE.TextureLoader().load(leanPath('/textures/Sky/moon.jpg'), () => {
       if (live) setFace(tex);
       else tex.dispose();
     });

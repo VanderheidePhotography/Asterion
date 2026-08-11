@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { leanPath } from './textureBudget';
 import { makeTexture, shade } from './textures';
 import { mulberry32 } from '../../../domain/random';
 import { ZODIAC } from '../../../data/astrology';
@@ -253,7 +254,7 @@ function couched(ctx: Ctx, rng: Rng, glyph: string, cx: number, cy: number, size
  * stays exactly where it is as the stand-in. `onPileReady` re-bakes each sheet
  * once the plate lands.
  */
-const PILE_URL = '/textures/Fabric/fabric_rug_persian/albedo.jpg';
+const PILE_URL = leanPath('/textures/Fabric/fabric_rug_persian/albedo.jpg');
 /** how many metres of real carpet one copy of the plate covers */
 const PILE_M = 1.15;
 

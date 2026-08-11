@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { mulberry32 } from '../../../domain/random';
-import { texPx } from './textureBudget';
+import { leanPath, texPx } from './textureBudget';
 
 /**
  * The texture workshop. Every surface in the library — planked floors,
@@ -938,12 +938,13 @@ function loadSpineScans() {
   };
   SPINE_SCANS.forEach((src, i) => {
     const img = new Image();
+    // half-size on a lean device, like every other scan
     img.onload = () => {
       scanImages[i] = img;
       settle();
     };
     img.onerror = () => settle();
-    img.src = src;
+    img.src = leanPath(src);
   });
 }
 

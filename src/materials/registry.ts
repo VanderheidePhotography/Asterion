@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { leanPath } from '../features/explorer/three/textureBudget';
 import libraryJson from './library.json';
 import { paintFallback } from './fallbacks';
 import {
@@ -124,15 +125,42 @@ function onTextureFailure(url: string, fn: () => void): void {
   else failureHandlers.set(url, [fn]);
 }
 
+/**
+ * THE HALF-SIZE SCAN, ON DEVICES THAT CANNOT HOLD THE FULL ONE.
+ *
+ * `scripts/optimize-textures-lean.mjs` writes a `.lean.jpg` beside every scan
+ * at half its longest edge — a quarter of the pixels, so the 143 files fall
+ * from about 487 MB resident to about 120 MB. That block is what remained
+ * after the generated art was halved, and it is what an iPhone 11 still could
+ * not hold: it rendered one frame and then lost its WebGL context, which is
+ * Safari reclaiming GPU memory and leaves a frozen picture on screen.
+ *
+ * If a lean file is missing the load fails, and the FULL scan is fetched in
+ * its place rather than leaving the surface black — the swap can never make a
+ * texture disappear, only make it smaller.
+ */
 function loadTexture(url: string, slot: MapSlot): THREE.Texture {
   const hit = textureCache.get(url);
   if (hit) return hit;
-  const tex = loader.load(url, undefined, undefined, () => {
+  const wanted = leanPath(url);
+  const onError = () => {
+    // the lean set is optional: fall back to the full scan before giving up
+    if (wanted !== url) {
+      loader.load(url, (full) => {
+        tex.image = full.image;
+        tex.needsUpdate = true;
+      }, undefined, fail);
+      return;
+    }
+    fail();
+  };
+  const fail = () => {
     failedTextures.add(url);
     const waiting = failureHandlers.get(url);
     failureHandlers.delete(url);
     waiting?.forEach((fn) => fn());
-  });
+  };
+  const tex = loader.load(wanted, undefined, undefined, onError);
   // Colour data decodes as sRGB; measurement data must stay linear. Getting
   // this backwards is why hand-built PBR scenes come out washed out or muddy.
   tex.colorSpace = SRGB_SLOTS.has(slot) ? THREE.SRGBColorSpace : THREE.NoColorSpace;
