@@ -22,11 +22,20 @@ import { Link } from 'react-router-dom';
  * This is a class component because that is still the only way to catch a
  * render error in React; there is no hook equivalent of `componentDidCatch`.
  */
-export class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
-  state = { failed: false };
+export class SceneBoundary extends Component<
+  { children: ReactNode },
+  { failed: boolean; detail: string }
+> {
+  state = { failed: false, detail: '' };
 
-  static getDerivedStateFromError() {
-    return { failed: true };
+  static getDerivedStateFromError(error: Error) {
+    // THE ACTUAL MESSAGE IS KEPT, not swallowed. A phone has no console to
+    // read, so a generic "something went wrong" leaves the visitor — and
+    // whoever they report it to — with no way to tell a browser that refused
+    // a GPU context from a bug in this code. They are entirely different
+    // problems with entirely different remedies, and they look identical on
+    // the page unless the page says which.
+    return { failed: true, detail: error?.message ?? '' };
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
@@ -37,11 +46,16 @@ export class SceneBoundary extends Component<{ children: ReactNode }, { failed: 
 
   render() {
     if (!this.state.failed) return this.props.children;
-    return <SceneUnavailable reason="something went wrong while building the hall" />;
+    return (
+      <SceneUnavailable
+        reason="something went wrong while building the hall"
+        detail={this.state.detail}
+      />
+    );
   }
 }
 
-export function SceneUnavailable({ reason }: { reason: string }) {
+export function SceneUnavailable({ reason, detail }: { reason: string; detail?: string }) {
   return (
     <div className="scene-unavailable" role="alert">
       <div className="scene-unavailable-card">
@@ -56,6 +70,7 @@ export function SceneUnavailable({ reason }: { reason: string }) {
           Every word of the museum is also kept as plain text: the same people, books, symbols and
           events, with their sources and citations, and nothing to render.
         </p>
+        {detail && <p className="scene-unavailable-detail">{detail}</p>}
         <div className="scene-unavailable-doors">
           <Link className="btn btn-gold" to="/research">
             Enter the Research Hall instead

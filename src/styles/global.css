@@ -1993,3 +1993,13 @@ button {
   white-space: pre;
   pointer-events: none;
 }
+
+/* the underlying error, shown verbatim: a phone has no console, and the
+   difference between "this browser refused a GPU context" and "this code has
+   a bug" is the whole diagnosis */
+.scene-unavailable-detail {
+  margin: 0.2rem 0 0;
+  font: 500 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #d9a06a;
+  word-break: break-word;
+}
