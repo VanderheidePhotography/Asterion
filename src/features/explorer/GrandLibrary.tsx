@@ -2926,13 +2926,7 @@ function LibraryScene({
     // need the headroom to still read as flames. Everything they do not reach
     // is darker than before, which is the point.
     scene.fog = new THREE.Fog('#04080f', 18, 72);
-    // A PHONE HAS NO BLOOM, so it needs the exposure back.
-    // Bloom is not only a glow: it lifts the whole frame, because every
-    // emissive surface bleeds a little light into its neighbours. Removing it
-    // for memory (see the EffectComposer below) took a visible step out of the
-    // room and the hall read as too dark on an iPhone. This puts the step
-    // back where the pass would have put it, and costs nothing.
-    gl.toneMappingExposure = LEAN_TEXTURES ? 1.46 : 1.26;
+    gl.toneMappingExposure = 1.26;
     // Hand the material registry the renderer (for anisotropy) and let it go
     // looking for scans. Both are fire-and-forget: every surface is already
     // dressed in its painted stand-in, and anything with a real scan on disk
@@ -3252,16 +3246,20 @@ function LibraryScene({
           bandwidth cost on exactly the machines that are already struggling,
           and the scene is dark and soft-edged enough that it reads the same
           without it. */}
-      {/* NOT ON A PHONE. Two reasons, and the second is the one that matters.
-          Bloom keeps a full-frame target plus a mip chain, which is memory a
-          device already at its ceiling does not have — and an iPhone 11 was
-          losing its WebGL context WHILE the hall was still being built, then
-          throwing here, because the composer is the first thing afterwards to
-          ask the context a question ("getContextAttributes() is null" is what
-          a lost context answers). Removing the pass removes both the memory
-          and the crash site. The hall renders unbloomed on phones: the
-          candles and sigils are still emissive, they simply do not spill. */}
-      {!LEAN_TEXTURES && (
+      {/* BLOOM IS NOT OPTIONAL, which taking it away proved.
+          It was cut on phones when an iPhone 11 was losing its WebGL context
+          mid-build and throwing here — the composer being the first thing
+          afterwards to ask the context a question. That was the right call at
+          1.4 GB of texture and the wrong one at 400 MB, because bloom is not
+          just a glow: every emissive surface bleeds a little into its
+          neighbours and lifts the whole frame. Without it the hall measured
+          15% darker and read, correctly, as "not like the desktop" — and
+          exposure cannot fake it, because exposure raises the black floor
+          along with everything else instead of putting light where the flames
+          are.
+          So it is back everywhere, at a quarter resolution on lean devices.
+          The pass is a blur; there is nothing in it fine enough to lose, and
+          at the phone's 0.9 Mpx budget its targets are a few MB. */}
       <EffectComposer ref={composerHandle} multisampling={0} enableNormalPass={false}>
         {/* Bloom was doing the opposite of its job. At threshold 0.62 it was
             catching every warm surface in the room, not just the flames — so
@@ -3275,7 +3273,7 @@ function LibraryScene({
             by definition, a blur — there is nothing in it fine enough to lose. */}
         <Bloom
           mipmapBlur
-          resolutionScale={0.5}
+          resolutionScale={LEAN_TEXTURES ? 0.25 : 0.5}
           intensity={0.34}
           luminanceThreshold={0.82}
           luminanceSmoothing={0.3}
@@ -3283,7 +3281,6 @@ function LibraryScene({
         />
         <Vignette offset={0.24} darkness={0.52} eskil={false} />
       </EffectComposer>
-      )}
     </>
   );
 }

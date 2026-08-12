@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { leanPath } from './textureBudget';
-import { asText } from './glyphText';
 import { makeTexture, shade } from './textures';
 import { mulberry32 } from '../../../domain/random';
 import { ZODIAC } from '../../../data/astrology';
@@ -202,11 +201,7 @@ function stitchRing(ctx: Ctx, rng: Rng, cx: number, cy: number, r: number, width
  * instead of in it. Falls back to a soft fill for the very small sizes, where
  * stitch detail is below a pixel and only muddies the letter.
  */
-function couched(ctx: Ctx, rng: Rng, rawGlyph: string, cx: number, cy: number, size: number, tone = GOLD): void {
-  // every glyph on this floor passes through here, which makes it the one
-  // place that has to ask for the TEXT form of a symbol rather than the
-  // emoji one iOS would otherwise choose
-  const glyph = asText(rawGlyph);
+function couched(ctx: Ctx, rng: Rng, glyph: string, cx: number, cy: number, size: number, tone = GOLD): void {
   ctx.save();
   ctx.translate(cx, cy);
   ctx.font = `${size}px "Segoe UI Symbol", "Arial Unicode MS", serif`;

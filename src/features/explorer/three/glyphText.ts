@@ -62,3 +62,50 @@ export function asText(text: string): string {
   }
   return out;
 }
+
+/**
+ * Apply `asText` to EVERY canvas text draw in the application, once.
+ *
+ * The targeted approach was tried first and failed twice: the glyphs are
+ * drawn from 71 call sites across 17 modules — the drum frieze, the dome
+ * band, the floor, the orrery, the plates, the seals, the tables, the book
+ * pages — and fixing the three I could find left the rest rendering as
+ * stickers on the device I could not see. A rule that must be remembered at
+ * 71 call sites is not a rule, it is a liability.
+ *
+ * So it is enforced in the one place they all pass through. Patching a DOM
+ * prototype is a heavy instrument and deserves justification:
+ *
+ *   - It is exactly co-extensive with the problem. Every affected draw goes
+ *     through fillText or strokeText; nothing else can produce the bug.
+ *   - It cannot change layout or metrics. A variation selector is a zero-width
+ *     request for a glyph FORM; `measureText` is left alone deliberately, and
+ *     the text form is never wider than the emoji one it replaces.
+ *   - It is idempotent. The selector is not itself in the symbol ranges, so
+ *     text that has already been through here is unchanged.
+ *   - It is inert on every platform but Apple's, which is the only one that
+ *     colours these characters in.
+ *
+ * Installed once from main.tsx, before anything paints.
+ */
+export function installTextPresentation(): void {
+  if (typeof CanvasRenderingContext2D === 'undefined') return;
+  const proto = CanvasRenderingContext2D.prototype as CanvasRenderingContext2D & {
+    __asterionTextForm?: boolean;
+  };
+  if (proto.__asterionTextForm) return; // hot reload, or a double import
+  proto.__asterionTextForm = true;
+
+  const fill = proto.fillText;
+  const stroke = proto.strokeText;
+  proto.fillText = function (text: string, x: number, y: number, maxWidth?: number) {
+    return maxWidth === undefined
+      ? fill.call(this, asText(String(text)), x, y)
+      : fill.call(this, asText(String(text)), x, y, maxWidth);
+  };
+  proto.strokeText = function (text: string, x: number, y: number, maxWidth?: number) {
+    return maxWidth === undefined
+      ? stroke.call(this, asText(String(text)), x, y)
+      : stroke.call(this, asText(String(text)), x, y, maxWidth);
+  };
+}

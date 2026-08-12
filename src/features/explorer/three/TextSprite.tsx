@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import * as THREE from 'three';
 import { TEXTURE_SCALE } from './textureBudget';
-import { asText } from './glyphText';
 
 /**
  * Self-contained 3D text: renders type onto a high-DPI canvas texture.
@@ -93,8 +92,6 @@ function bake(
   /** world height of ONE LINE of this label — sets how finely it must raster */
   worldLineHeight: number,
 ): Baked {
-  // symbols must render as engraved type, never as iOS colour emoji
-  text = asText(text);
   const scratch = document.createElement('canvas').getContext('2d')!;
   scratch.font = `${weight} ${BASE}px ${family}`;
   // greedy word wrap
