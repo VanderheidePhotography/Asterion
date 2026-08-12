@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import * as THREE from 'three';
+import { LEAN_TEXTURES } from './textureBudget';
 import { useFrame, useThree } from '@react-three/fiber';
 
 /**
@@ -68,6 +69,13 @@ const INTERVAL = 0.15;
  */
 const GLOW_BUDGET_SCREENS = 3;
 
+/**
+ * The on-screen line height, in device pixels, below which a label is not
+ * text any more — it is a smudge that still costs a draw and a bind. Only
+ * consulted on lean devices; see the noCull branch below.
+ */
+const LABEL_MIN_PX = 9;
+
 /** glows closer than this are always kept: the candle on the table in front of
  *  you must not go out because the room behind it is busy */
 const GLOW_ALWAYS_WITHIN = 4;
@@ -117,8 +125,42 @@ export function PropCulling() {
       if (!m.visible && !ours.current.has(m)) return;
 
       if (m.userData.noCull) {
-        // opted out (TextSprite): make sure a prior pass isn't still hiding it
-        if (ours.current.delete(m)) m.visible = true;
+        /*
+         * LABELS ARE EXEMPT ON A DESKTOP AND LEGIBILITY-CULLED ON A PHONE.
+         *
+         * The exemption exists because the glow budget was starving hall signs
+         * and wayfinding titles — text is content, and a sign that vanishes as
+         * you walk toward it is a bug. That reasoning is untouched here.
+         *
+         * But there are 969 of these and every one was visible at all times,
+         * each with a unique canvas and therefore its own draw AND its own
+         * material bind — which is precisely the quantity this scene is bound
+         * by. On an A13 that is the frame.
+         *
+         * So on lean devices they are culled by LEGIBILITY rather than by
+         * budget: a label whose line is under LABEL_MIN_PX on screen cannot be
+         * read by anyone, so drawing it buys nothing. The threshold is
+         * deliberately low and hysteretic (a shown label survives down to half
+         * of it) so nothing blinks at the boundary — the failure mode that
+         * made the original exemption necessary.
+         */
+        if (!LEAN_TEXTURES) {
+          if (ours.current.delete(m)) m.visible = true;
+          return;
+        }
+        const sp = m as THREE.Sprite;
+        sp.getWorldPosition(pos.current);
+        const d = Math.max(0.1, pos.current.distanceTo(camPos));
+        // on-screen height of one line, in px of the current drawing buffer
+        const linePx = ((sp.scale.y / (d * halfFov)) * size.height) / 2;
+        const shown = m.visible;
+        const legible = linePx >= (shown ? LABEL_MIN_PX * 0.5 : LABEL_MIN_PX);
+        if (legible) {
+          if (ours.current.delete(m)) m.visible = true;
+        } else if (shown) {
+          m.visible = false;
+          ours.current.add(m);
+        }
         return;
       }
 
