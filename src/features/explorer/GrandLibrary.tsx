@@ -104,7 +104,9 @@ import {
 } from './three/layout';
 import { useReducedMotion } from '../../lib/useReducedMotion';
 import { useViewport } from '../../lib/useViewport';
-import { DeviceReport, DeviceReportOverlay, diagRequested } from './three/DeviceReport';
+import { SceneUnavailable } from '../../app/chrome/SceneBoundary';
+import { ContextWatch, DeviceReport, DeviceReportOverlay, diagRequested } from './three/DeviceReport';
+import { LEAN_TEXTURES } from './three/textureBudget';
 import { useUi } from '../../app/store';
 import { useProgress, type StationId } from '../../app/progress';
 import { ambient } from '../audio/ambient';
@@ -3238,6 +3240,16 @@ function LibraryScene({
           bandwidth cost on exactly the machines that are already struggling,
           and the scene is dark and soft-edged enough that it reads the same
           without it. */}
+      {/* NOT ON A PHONE. Two reasons, and the second is the one that matters.
+          Bloom keeps a full-frame target plus a mip chain, which is memory a
+          device already at its ceiling does not have — and an iPhone 11 was
+          losing its WebGL context WHILE the hall was still being built, then
+          throwing here, because the composer is the first thing afterwards to
+          ask the context a question ("getContextAttributes() is null" is what
+          a lost context answers). Removing the pass removes both the memory
+          and the crash site. The hall renders unbloomed on phones: the
+          candles and sigils are still emissive, they simply do not spill. */}
+      {!LEAN_TEXTURES && (
       <EffectComposer ref={composerHandle} multisampling={0} enableNormalPass={false}>
         {/* Bloom was doing the opposite of its job. At threshold 0.62 it was
             catching every warm surface in the room, not just the flames — so
@@ -3259,6 +3271,7 @@ function LibraryScene({
         />
         <Vignette offset={0.24} darkness={0.52} eskil={false} />
       </EffectComposer>
+      )}
     </>
   );
 }
@@ -3503,6 +3516,8 @@ export default function GrandLibrary() {
     };
   }, [flightOn]);
   // photo mode: the chrome steps aside and the hall poses
+  /** the GPU was taken back mid-visit — see ContextWatch */
+  const [contextLost, setContextLost] = useState(false);
   const [photoMode, setPhotoMode] = useState(false);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -3917,6 +3932,15 @@ export default function GrandLibrary() {
           ? kabbalahDialogue
           : null;
 
+  if (contextLost) {
+    return (
+      <SceneUnavailable
+        reason="the browser reclaimed the graphics memory this hall was using"
+        detail="This happens when the device runs short of memory. Reloading usually works; closing other tabs first helps."
+      />
+    );
+  }
+
   return (
     <div className="scene-shell">
       <div className="sr-only" role="status" aria-live="polite">
@@ -3936,8 +3960,17 @@ export default function GrandLibrary() {
       >
         <AdaptiveQuality />
         <AspectFov />
+        <ContextWatch onLost={() => setContextLost(true)} />
         {diagRequested() && <DeviceReport />}
-        <SceneWarmup />
+        {/* the warmup compiles every shader and uploads every texture up
+            front, behind the intro card, so nothing hitches when you round a
+            corner. On a phone that is precisely wrong: it forces the whole
+            texture set resident at the same instant and creates a peak far
+            above the steady state, which is where the context was being lost.
+            Phones stream instead and accept the occasional first-approach
+            hitch — a hitch being strictly better than a hall that never
+            opens. */}
+        {!LEAN_TEXTURES && <SceneWarmup />}
         <PropCulling />
         {/* order matters: dedup first, so StaticMerge — which groups by material
             identity — sees the collapsed set and can bake far more together */}

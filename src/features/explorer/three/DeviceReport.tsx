@@ -34,6 +34,31 @@ export function diagRequested(): boolean {
   return new URLSearchParams(window.location.search).has('diag');
 }
 
+/**
+ * A LOST CONTEXT IS NOT A CRASH, and must not be left looking like one.
+ *
+ * When the GPU is taken back the canvas keeps showing its last frame for
+ * ever: no error, no console, nothing moving. Mounted always (not only under
+ * ?diag) so the visitor is told what happened and offered the one thing that
+ * reliably fixes it, rather than being left staring at a still photograph of
+ * a library.
+ */
+export function ContextWatch({ onLost }: { onLost: () => void }) {
+  const { gl } = useThree();
+  useEffect(() => {
+    const el = gl.domElement;
+    const handler = (e: Event) => {
+      // without preventDefault the context can never be restored, and the
+      // browser will not even try
+      e.preventDefault();
+      onLost();
+    };
+    el.addEventListener('webglcontextlost', handler);
+    return () => el.removeEventListener('webglcontextlost', handler);
+  }, [gl, onLost]);
+  return null;
+}
+
 /** lives INSIDE the Canvas — it needs the renderer and the frame loop */
 export function DeviceReport() {
   const { gl } = useThree();
