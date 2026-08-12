@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, type RefObject } from 'react';
 import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei';
+import { LEAN_TEXTURES } from './textureBudget';
 import { useFrame } from '@react-three/fiber';
 
 /**
@@ -144,7 +145,22 @@ export function GLBModel({
  * are gone from the scene, and preloading a model nothing mounts is 2 MB of
  * download spent before the first frame for nothing.
  */
-for (const m of [
+/**
+ * ON A PHONE, PRELOAD ONLY THE FIGURE YOU MEET FIRST.
+ *
+ * Preloading all fourteen is 13 MB fetched, parsed and uploaded before the
+ * first frame — on a laptop that is a moment nobody notices, and on a phone
+ * over cellular it is most of the wait before the doors open. The warmup is
+ * already off on lean devices for the same reason (the peak it creates), so
+ * the models stream too: the wizard by the hearth is the only one visible
+ * from the arrival, and the rest arrive as you turn to them.
+ *
+ * The cost is a possible pop-in on first approach. The alternative is a
+ * visitor who leaves before the building loads, which is not a trade.
+ */
+const PRELOAD = LEAN_TEXTURES
+  ? ['wizard']
+  : [
   'wizard',
   // the card-catalogue station in the north apse
   'librarian',
@@ -162,6 +178,8 @@ for (const m of [
   'serapis',
   'boaz',
   'jachin',
-]) {
+];
+
+for (const m of PRELOAD) {
   useGLTF.preload(`/models/${m}.glb`);
 }

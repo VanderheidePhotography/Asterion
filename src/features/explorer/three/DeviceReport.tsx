@@ -86,8 +86,13 @@ export function DeviceReport() {
     const a = acc.current;
     a.t += delta;
     a.frames += 1;
+    // gl.info accumulates across the composer's passes unless auto-reset is
+    // off, so a naive read reports the LAST pass only — a useless "1 draw"
+    gl.info.autoReset = false;
+    const draws = Math.round(gl.info.render.calls / Math.max(1, a.frames));
     if (a.t < 1) return; // one sample a second
     const fps = a.frames / a.t;
+    gl.info.reset();
     a.t = 0;
     a.frames = 0;
     const mem = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
@@ -95,6 +100,7 @@ export function DeviceReport() {
       `LEAN ${LEAN_TEXTURES ? 'YES' : 'NO'}   scale ${TEXTURE_SCALE}`,
       `deviceMemory ${mem ?? 'n/a'}   screen ${window.screen.width}×${window.screen.height}`,
       `TEX ${gl.info.memory.textures}   GEO ${gl.info.memory.geometries}`,
+      `DRAWS ${draws}   TRIS ${(gl.info.render.triangles / 1e6).toFixed(2)}M`,
       `PROG ${gl.info.programs?.length ?? 0}   dpr ${gl.getPixelRatio().toFixed(2)}`,
       `FPS ${fps.toFixed(0)}`,
       `LOST ${a.lost}   RESTORED ${a.restored}`,
