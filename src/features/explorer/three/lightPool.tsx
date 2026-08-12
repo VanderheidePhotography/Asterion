@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import * as THREE from 'three';
+import { LEAN_TEXTURES } from './textureBudget';
 import { useFrame, useThree } from '@react-three/fiber';
 
 /**
@@ -55,7 +56,24 @@ import { useFrame, useThree } from '@react-three/fiber';
  * 18 point + 4 spot + 2 directional + hemi + ambient = 26 lights per fragment,
  * against 43 before.
  */
-const POOL_SIZE = 18;
+const POOL_SIZE = LEAN_TEXTURES ? 10 : 18;
+
+/*
+ * TEN ON A PHONE, and the note above about 12 being "visibly darker" is why
+ * this is not a free cut.
+ *
+ * That A/B was run at desktop exposure. The lighting cost here is per
+ * fragment and per material bind, so it is the dominant term on a CPU an
+ * order of magnitude slower — halving the pool is the largest single thing
+ * available to an A13, and everything cheaper has already been done.
+ *
+ * What is lost is light from BEHIND WALLS first: the ranking scores a
+ * practical by how much of its influence sphere actually reaches the camera,
+ * so the slots go to what you can see. What that costs on a phone is the
+ * secondary wash from candles two rooms away — the ones lighting the wall you
+ * are standing at keep their slots, and every slot still cross-fades rather
+ * than popping. The exposure lift below pays back the general dimming.
+ */
 
 /** one harvest, at one moment, so the relink is paid exactly once — and behind
  *  the 4.6 s intro card, where a freeze is invisible. Lights that mount later

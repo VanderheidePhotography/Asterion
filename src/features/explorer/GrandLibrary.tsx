@@ -2926,7 +2926,11 @@ function LibraryScene({
     // need the headroom to still read as flames. Everything they do not reach
     // is darker than before, which is the point.
     scene.fog = new THREE.Fog('#04080f', 18, 72);
-    gl.toneMappingExposure = 1.26;
+    // A tenth of a stop back on lean devices, where the light pool is 10
+    // rather than 18 (see lightPool). Measured on one camera: pool 10 came
+    // out at 31.1 average brightness against the desktop's 31.9, and this
+    // closes it. Small enough to be a correction rather than a look.
+    gl.toneMappingExposure = LEAN_TEXTURES ? 1.3 : 1.26;
     // Hand the material registry the renderer (for anisotropy) and let it go
     // looking for scans. Both are fire-and-forget: every surface is already
     // dressed in its painted stand-in, and anything with a real scan on disk
