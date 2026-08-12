@@ -31,7 +31,6 @@ import {
   ReadingTables,
   TABLE_SPECS,
 } from './three/furniture';
-import { Chickadees, Owl } from './three/creatures';
 import {
   RotundaStatuary,
   MasonicPillars,
@@ -48,10 +47,11 @@ import { STATUE_LORE } from '../../data/statueLore';
 import { PILLAR_LORE } from '../../data/pillarLore';
 import { WING_LORE } from '../../data/wingLore';
 import { WingChronology, clusterSpan } from './three/WingChronology';
+import { FlyingBooks } from './three/FlyingBooks';
+import { Chickadees, Owl } from './three/creatures';
+import { ChandelierMoths, ShootingStars, StormWindows } from './three/ambientLife';
 import { TarotSpread } from './three/TarotTable';
 import { dealSpread, SPREAD_POSITIONS, type TarotCard } from '../../data/tarot';
-import { FlyingBooks } from './three/FlyingBooks';
-import { ChandelierMoths, ShootingStars, StormWindows } from './three/ambientLife';
 import { WingRadiance, HearthGlow } from './three/atmosphere';
 import { LibraryLighting } from './three/lighting';
 import { SceneWarmup } from './three/sceneWarmup';
@@ -3199,20 +3199,22 @@ function LibraryScene({
       <Chandeliers still={still} spots={chandelierSpots} />
       {/* The hall's small lives: books on errands, moths in the light, and
           the odd meteor for whoever looks up through the oculus.
-          NOT ON A PHONE. Each is a small subsystem with its own materials and
-          its own per-frame work, and each distinct material is another shader
-          for the driver to LINK — this scene links about 200 programs and on
-          a mobile driver that is a large part of the wait before the doors
-          open. They are the right things to cut first because they are the
-          only things here that nobody came to see: no visitor arrives to
-          watch a moth. The building, its books, its statues and its stations
-          are all untouched. */}
+          OFF ON PHONES, KEPT ON DESKTOP — and the second half of that was
+          MEASURED, after a first attempt to remove them everywhere on the
+          theory that they carried ~119 of the scene's 200 shader programs.
+          They do not. Removing them from the desktop moved the program count
+          from 200 to 216, which is to say nowhere: the drop to 81 on lean
+          devices came from culling labels, because a shader compiles when an
+          object FIRST DRAWS and 698 culled labels never compile theirs. The
+          moths were never the cost. They stay where they can be afforded. */}
       {!LEAN_TEXTURES && (
         <>
           <FlyingBooks still={still} />
           <ChandelierMoths still={still} anchors={chandelierSpots.slice(0, 4).map((s) => s.pos)} />
           <ShootingStars still={still} />
           <StormWindows still={still} />
+          <Owl still={still} />
+          <Chickadees still={still} />
         </>
       )}
       <Ladders spots={ladderSpots} />
@@ -3227,12 +3229,7 @@ function LibraryScene({
       <AlchemyBench table={ALCHEMY_POS} selected={alchemySelected} onPick={onPickMetal} active={alchemyActive} />
       <ProximityStation pos={KABBALAH_POS} onNear={onNearKabbalah} onSummon={onSummonKabbalah} />
       <KabbalahTablet table={KABBALAH_POS} selected={kabbalahSelected} onPick={onPickSephirah} active={kabbalahActive} still={still} />
-      {!LEAN_TEXTURES && (
-        <>
-          <Owl still={still} />
-          <Chickadees still={still} />
-        </>
-      )}
+
       {/* No four-legged animals in the hall at all now, and all three removals
           were made for the same reason.
           · The rigged fox glTF went first: its skinned mesh exploded into giant
@@ -3525,6 +3522,11 @@ export default function GrandLibrary() {
     const p = new URLSearchParams(window.location.search);
     if (p.get('view') || p.get('focus') || p.get('cam') || p.get('plate')) return false;
     if (useProgress.getState().returning) return false;
+    // NOT ON A PHONE. The glide is 3.5 seconds during which the visitor can
+    // look at the hall and do nothing else — a fine overture after a load
+    // measured in milliseconds, and an insult on top of one measured in
+    // seconds. A phone has also usually just spent that budget getting here.
+    if (LEAN_TEXTURES) return false;
     return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
   const onFlightDone = () => {
