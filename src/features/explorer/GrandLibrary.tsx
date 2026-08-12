@@ -2648,13 +2648,19 @@ function SpatialAudioListener() {
  */
 
 /** floor: below this the scene reads as mush even in this soft lighting */
-const MIN_PIXELS = 0.85e6;
-/** ceiling: past this there is nothing left to see, only cost */
-const MAX_PIXELS = 2.1e6;
+const MIN_PIXELS = LEAN_TEXTURES ? 0.35e6 : 0.85e6;
+/**
+ * Ceiling. A phone gets a far lower one — not because its screen is small
+ * (it is not, in device pixels: an iPhone 11 is 828×1792) but because it is
+ * the same budget spent on a GPU an order of magnitude slower, and the
+ * controller can only find that out by dropping frames first. Starting it
+ * under the ceiling it would have settled at anyway skips that discovery.
+ */
+const MAX_PIXELS = LEAN_TEXTURES ? 0.9e6 : 2.1e6;
 
 function AdaptiveQuality() {
   const { gl } = useThree();
-  const acc = useRef({ t: 0, frames: 0, target: 1.6e6, dpr: 1 });
+  const acc = useRef({ t: 0, frames: 0, target: LEAN_TEXTURES ? 0.7e6 : 1.6e6, dpr: 1 });
 
   /** the dpr that spends exactly `target` pixels on the canvas as it is now */
   const dprFor = (target: number) => {
@@ -2920,7 +2926,13 @@ function LibraryScene({
     // need the headroom to still read as flames. Everything they do not reach
     // is darker than before, which is the point.
     scene.fog = new THREE.Fog('#04080f', 18, 72);
-    gl.toneMappingExposure = 1.26;
+    // A PHONE HAS NO BLOOM, so it needs the exposure back.
+    // Bloom is not only a glow: it lifts the whole frame, because every
+    // emissive surface bleeds a little light into its neighbours. Removing it
+    // for memory (see the EffectComposer below) took a visible step out of the
+    // room and the hall read as too dark on an iPhone. This puts the step
+    // back where the pass would have put it, and costs nothing.
+    gl.toneMappingExposure = LEAN_TEXTURES ? 1.46 : 1.26;
     // Hand the material registry the renderer (for anisotropy) and let it go
     // looking for scans. Both are fire-and-forget: every surface is already
     // dressed in its painted stand-in, and anything with a real scan on disk

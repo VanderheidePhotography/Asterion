@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { makeTexture, shade } from './textures';
 import { mulberry32 } from '../../../domain/random';
+import { asText } from './glyphText';
 
 /**
  * The engraved content of the upper drum.
@@ -296,7 +297,9 @@ const astrolabe: Motif = (ctx, r) => {
   relief(ctx, (c) => c.arc(0, 0, r * 0.11, 0, Math.PI * 2), BRONZE_LT);
 };
 
-const FRIEZE_GLYPHS = ['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'];
+// asText: iOS renders these as colour emoji without an explicit text
+// presentation selector — see glyphText.ts
+const FRIEZE_GLYPHS = ['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'].map(asText);
 
 const FRIEZE_MOTIFS: Motif[] = [armillary, comet, sunFace, crescentStar, dividers, astrolabe];
 
