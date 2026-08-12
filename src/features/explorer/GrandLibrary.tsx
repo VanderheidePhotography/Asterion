@@ -3968,7 +3968,19 @@ export default function GrandLibrary() {
            every resize, so a higher one here would fight the pixel budget for a
            second each time the window changes size */
         dpr={[0.35, 1.5]}
-        gl={{ antialias: true, powerPreference: 'high-performance', stencil: false }}
+        /* On a phone: mediump and no MSAA. Mobile GPUs run half-precision
+           natively and emulate full precision, so `mediump` is both faster per
+           fragment AND quicker to compile — and this scene links ~220 programs,
+           which on a mobile driver is a large part of the wait before the doors
+           open. Antialiasing goes for the same reason: an MSAA buffer at even
+           0.9 Mpx is bandwidth the A13 would rather spend on the frame, and the
+           hall is too dark and soft-lit to show the jaggies. */
+        gl={{
+          antialias: !LEAN_TEXTURES,
+          precision: LEAN_TEXTURES ? 'mediump' : 'highp',
+          powerPreference: 'high-performance',
+          stencil: false,
+        }}
         camera={{ position: [0, 2.2, SPAWN_Z], fov: 64, near: 0.1, far: 220 }}
       >
         <AdaptiveQuality />

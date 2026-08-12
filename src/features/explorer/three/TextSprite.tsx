@@ -197,6 +197,31 @@ function release(key: string): void {
   bakeCache.delete(key);
 }
 
+/**
+ * HAS THE PAGE'S TYPE ARRIVED YET?
+ *
+ * Shared, and resolved once, rather than asked per label. Every sprite used
+ * to start `false`, bake itself in Georgia, and then bake again when
+ * `document.fonts.ready` resolved — so the museum's 969 labels performed
+ * 1,887 bakes, and 969 canvases were uploaded to the GPU only to be replaced
+ * moments later. On a desk that is 660 ms nobody notices. On a phone it is
+ * several seconds of the wait before the doors open, and double the peak
+ * texture memory at exactly the moment memory is tightest.
+ *
+ * A module-level promise instead: the first label to mount starts the wait,
+ * every label shares its result, and nothing bakes in a fallback face unless
+ * the fonts genuinely never arrive.
+ */
+let fontsAreReady = typeof document !== 'undefined' && document.fonts?.status === 'loaded';
+const fontWaiters = new Set<() => void>();
+if (!fontsAreReady && typeof document !== 'undefined') {
+  void document.fonts?.ready.then(() => {
+    fontsAreReady = true;
+    fontWaiters.forEach((fn) => fn());
+    fontWaiters.clear();
+  });
+}
+
 export function TextSprite({
   children,
   height = 0.5,
@@ -209,31 +234,42 @@ export function TextSprite({
   opacity = 1,
   outline = true,
 }: TextSpriteProps) {
-  // re-bake once web fonts finish loading so early mounts aren't stuck with fallbacks
-  const [fontsReady, setFontsReady] = useState(() => document.fonts.status === 'loaded');
+  // wait for the real face rather than baking twice — see fontsAreReady
+  const [fontsReady, setFontsReady] = useState(fontsAreReady);
   useEffect(() => {
-    if (!fontsReady) document.fonts.ready.then(() => setFontsReady(true));
+    if (fontsReady) return;
+    const wake = () => setFontsReady(true);
+    fontWaiters.add(wake);
+    return () => {
+      fontWaiters.delete(wake);
+    };
   }, [fontsReady]);
-
-  // `fontsReady` is part of the key, not just a re-bake trigger: a label baked
-  // in Georgia and the same label baked in Cormorant are different pictures,
-  // and sharing one cache slot between them would hand the fallback to
-  // whoever mounted second.
-  // `height` is in the key because it now changes the PICTURE, not just the
-  // quad: two labels of the same words at different world sizes need
-  // different raster densities and so cannot share one bake.
-  const key = `${fontsReady ? 'w' : 'f'}|${font}|${weight}|${color}|${maxWidthPx}|${height}|${outline ? 'o' : '-'}|${children}`;
+  // `height` is in the key because it changes the PICTURE, not just the quad:
+  // two labels of the same words at different world sizes need different
+  // raster densities and so cannot share one bake.
+  const key = `${font}|${weight}|${color}|${maxWidthPx}|${height}|${outline ? 'o' : '-'}|${children}`;
+  // NOTHING IS BAKED IN A FALLBACK FACE. The hooks still run in the same order
+  // every render — the early return is below them, where React requires it —
+  // but the work inside is skipped until the real type has arrived, which is
+  // what turns 1,887 bakes back into 969.
   const baked = useMemo(
     // the sprite is scaled to `height * lines * 1.5`, so one line stands
     // `height * 1.5` metres tall in the world — that is what must be resolved
-    () => peek(key, () => bake(children, color, FAMILIES[font], weight, maxWidthPx, outline, height * 1.5)),
+    () =>
+      fontsReady
+        ? peek(key, () => bake(children, color, FAMILIES[font], weight, maxWidthPx, outline, height * 1.5))
+        : null,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [key],
+    [key, fontsReady],
   );
   useEffect(() => {
+    if (!baked) return;
     retain(key);
     return () => release(key);
-  }, [key]);
+  }, [key, baked]);
+
+  // an empty sprite for the few hundred ms before the type lands
+  if (!baked) return null;
 
   const blockHeight = height * baked.lines * 1.5;
   const scale: [number, number, number] = [blockHeight * baked.aspect, blockHeight, 1];
