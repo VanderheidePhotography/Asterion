@@ -105,6 +105,7 @@ import {
 } from './three/layout';
 import { useReducedMotion } from '../../lib/useReducedMotion';
 import { useViewport } from '../../lib/useViewport';
+import { Deferred } from './three/Deferred';
 import { SceneUnavailable } from '../../app/chrome/SceneBoundary';
 import { ContextWatch, DeviceReport, DeviceReportOverlay, diagRequested } from './three/DeviceReport';
 import { LEAN_TEXTURES } from './three/textureBudget';
@@ -3148,7 +3149,9 @@ function LibraryScene({
       {/* the floor: one astronomical diagram across the whole plan, mandala to
           ways to roundels to brass — see three/cosmographia.tsx */}
       <Cosmographia />
-      <WingChronology sections={SECTIONS} />
+      <Deferred frames={4}>
+        <WingChronology sections={SECTIONS} />
+      </Deferred>
       {/* Isis & Serapis are niched on the two apse-side drum piers now — the
           same damask apse, dressing, reading and hover-warmth as the rest of
           the statuary (see ApseStatuary). The entrance keeps generic guardians. */}
@@ -3161,7 +3164,11 @@ function LibraryScene({
           first thing a visitor walked between. The named statuary all still
           stands: Hermes and the Leontocephaline on the wide drum piers, Isis & Serapis
           niched apse-side, Boaz & Jachin in the apse itself.) */}
-      <WingEnclosures />
+      {/* course 2 — see Deferred: the shell of the wings, which the visitor
+          can see down but is not standing in */}
+      <Deferred frames={2}>
+        <WingEnclosures />
+      </Deferred>
       <EntranceHall />
       {/* the vestibule's sconces, hanging lanterns and the light they cast —
           the first room a visitor stands in, and it used to be bare timber */}
@@ -3170,19 +3177,29 @@ function LibraryScene({
       {/* (the vestibule's two framed plates are gone — those walls are the
           pillars' now; see the note where Paintings used to stand in
           structure.tsx) */}
-      <WingGallery />
-      <WingArcade />
-      <WingFurnishings />
+      <Deferred frames={2}>
+        <WingGallery />
+        <WingArcade />
+        <WingFurnishings />
+      </Deferred>
       <WingRadiance still={still} />
       <HearthGlow />
-      <MegaShelves />
-      <Grimoires selectedId={selectedId} still={still} onSelect={onSelect} />
+      {/* course 3: the stacks and the thousand books on them. The last thing
+          built because it is the largest, and because a visitor who has just
+          arrived is looking at the rotunda, not reading a spine forty metres
+          down a corridor. */}
+      <Deferred frames={6}>
+        <MegaShelves />
+        <Grimoires selectedId={selectedId} still={still} onSelect={onSelect} />
+      </Deferred>
       <SectionMarks />
       {/* the hall names, as carved boards hanging off the first bookcase of
           each wing rather than as type floating in the aisle */}
-      <WingSigns
-        sections={SECTIONS.map((s) => ({ cluster: s.cluster, label: CLUSTER_META[s.cluster].label, angle: s.angle }))}
-      />
+      <Deferred frames={4}>
+        <WingSigns
+          sections={SECTIONS.map((s) => ({ cluster: s.cluster, label: CLUSTER_META[s.cluster].label, angle: s.angle }))}
+        />
+      </Deferred>
       <Orrery still={still} selected={planetSelected} onPickBody={onPickPlanet} mode={orreryMode} onSetMode={onSetOrreryMode} />
       <OculusBeam />
       {/* the charted heavens wheeling inside the dome — the air around the

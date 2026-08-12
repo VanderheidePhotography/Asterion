@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import * as THREE from 'three';
-import { TEXTURE_SCALE } from './textureBudget';
+import { LEAN_TEXTURES, TEXTURE_SCALE } from './textureBudget';
 
 /**
  * Self-contained 3D text: renders type onto a high-DPI canvas texture.
@@ -173,6 +173,50 @@ const bakeCache = new Map<string, CacheEntry>();
  * in the render phase drifts upward and nothing is ever freed. This half only
  * ensures the picture exists; it does not claim it.
  */
+/**
+ * BAKE THE LABELS OVER MANY FRAMES INSTEAD OF ALL AT ONCE — lean devices only.
+ *
+ * The legibility cull stopped 698 of these being UPLOADED, which was most of
+ * the texture memory, but every one of the 969 is still rastered the moment
+ * it mounts: a canvas created, the string measured, the glyphs stroked and
+ * filled. That is 660 ms on a desk and, on Safari — whose text measurement is
+ * markedly slower — several seconds on a phone, spent before the first frame
+ * can be presented. It is the last thing standing between tapping the link
+ * and standing in the hall.
+ *
+ * So on lean devices a label asks for its picture and gets it later. The pump
+ * runs on animation frames and spends a fixed BUDGET of milliseconds per
+ * frame, so the work is spread across the first second or two of a hall that
+ * is already on screen and already walkable. Labels fade in over that window
+ * rather than the building arriving late.
+ *
+ * Desktop bakes synchronously, exactly as before: there is nothing to fix on
+ * a machine where the whole set costs half a frame's grace.
+ */
+const BUDGET_MS = 4;
+const queue: { key: string; make: () => Baked; wake: () => void }[] = [];
+let pumping = false;
+
+function pump(): void {
+  const until = performance.now() + BUDGET_MS;
+  while (queue.length && performance.now() < until) {
+    const job = queue.shift()!;
+    // it may have been baked by another sprite sharing the same key
+    if (!bakeCache.has(job.key)) bakeCache.set(job.key, { baked: job.make(), refs: 0 });
+    job.wake();
+  }
+  if (queue.length) requestAnimationFrame(pump);
+  else pumping = false;
+}
+
+function enqueue(key: string, make: () => Baked, wake: () => void): void {
+  queue.push({ key, make, wake });
+  if (!pumping) {
+    pumping = true;
+    requestAnimationFrame(pump);
+  }
+}
+
 function peek(key: string, make: () => Baked): Baked {
   let entry = bakeCache.get(key);
   if (!entry) {
@@ -252,16 +296,22 @@ export function TextSprite({
   // every render — the early return is below them, where React requires it —
   // but the work inside is skipped until the real type has arrived, which is
   // what turns 1,887 bakes back into 969.
-  const baked = useMemo(
-    // the sprite is scaled to `height * lines * 1.5`, so one line stands
-    // `height * 1.5` metres tall in the world — that is what must be resolved
-    () =>
-      fontsReady
-        ? peek(key, () => bake(children, color, FAMILIES[font], weight, maxWidthPx, outline, height * 1.5))
-        : null,
+  // bumped by the pump when this label's picture is ready (lean devices).
+  // It MUST be a dependency of the memo below: waking the component is not
+  // enough on its own, because a memo whose deps are unchanged hands back the
+  // same null it computed before the bake existed — which left 8 of 969
+  // labels on screen and the rest permanently empty.
+  const [bakeTick, setBakeTick] = useState(0);
+  const baked = useMemo(() => {
+    if (!fontsReady) return null;
+    const make = () => bake(children, color, FAMILIES[font], weight, maxWidthPx, outline, height * 1.5);
+    if (!LEAN_TEXTURES) return peek(key, make);
+    const hit = bakeCache.get(key);
+    if (hit) return hit.baked;
+    enqueue(key, make, () => setBakeTick((n) => n + 1));
+    return null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [key, fontsReady],
-  );
+  }, [key, fontsReady, bakeTick]);
   useEffect(() => {
     if (!baked) return;
     retain(key);

@@ -28,6 +28,16 @@ import { LEAN_TEXTURES, TEXTURE_SCALE } from './textureBudget';
 /** the latest sample, written in the frame loop and read by the overlay */
 let latest = 'waiting for the first frame…';
 
+/**
+ * When the hall first PAINTED, in ms since navigation.
+ *
+ * The number the visitor actually experiences, and the one every load-time
+ * change has to be judged against. Recorded once, on the first frame the
+ * renderer presents — not on a timer, and not when React finishes committing,
+ * because neither of those has anything on screen yet.
+ */
+let firstFrameMs = 0;
+
 /** true when the visitor asked for the report with `?diag` */
 export function diagRequested(): boolean {
   if (typeof window === 'undefined') return false;
@@ -83,6 +93,7 @@ export function DeviceReport() {
   }, [gl]);
 
   useFrame((_, delta) => {
+    if (!firstFrameMs) firstFrameMs = Math.round(performance.now());
     const a = acc.current;
     a.t += delta;
     a.frames += 1;
@@ -102,7 +113,7 @@ export function DeviceReport() {
       `TEX ${gl.info.memory.textures}   GEO ${gl.info.memory.geometries}`,
       `DRAWS ${draws}   TRIS ${(gl.info.render.triangles / 1e6).toFixed(2)}M`,
       `PROG ${gl.info.programs?.length ?? 0}   dpr ${gl.getPixelRatio().toFixed(2)}`,
-      `FPS ${fps.toFixed(0)}`,
+      `FPS ${fps.toFixed(0)}   1st frame ${firstFrameMs} ms`,
       `LOST ${a.lost}   RESTORED ${a.restored}`,
     ].join('\n');
   });
