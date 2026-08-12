@@ -2,6 +2,7 @@ import type { Entity, EvidenceLevel, Source } from '../../../domain/types';
 import { EVIDENCE_META, TYPE_META, CLUSTER_META } from '../../../domain/types';
 import { mulberry32, hashString } from '../../../domain/random';
 import { frontispiece, plateFor } from './grimoireArt';
+import { LEAN_TEXTURES } from './textureBudget';
 
 /**
  * The grimoire press. Typesets an entity onto parchment pages — canvas
@@ -19,7 +20,20 @@ export const PAGE_H = 1040;
  * so the type is rasterised at 1140×1560 and stays crisp now that the book is
  * held large in front of the camera. Nothing else in the file needs to know.
  */
-const SS = 1.5;
+/**
+ * Supersampling for a baked page.
+ *
+ * The BAKE is cheap — four pages in about 7 ms — so this number is not about
+ * drawing time. It is about the UPLOAD: at 1.5 a page is 1140×1560, four of
+ * them are 28 MB of RGBA handed to the GPU in one go, and on a phone that
+ * stall is the whole of the wait between clicking a book and reading it.
+ * Three quarters puts it at 7 MB.
+ *
+ * The page is still legible enlarged: 570×780 against an iPhone 11's 828
+ * device pixels of width is a little soft, and a book that opens is worth
+ * more than a book that is sharp four seconds later.
+ */
+const SS = 1.5 * (LEAN_TEXTURES ? 0.5 : 1);
 const M = 82; // margin
 const CONTENT_W = PAGE_W - M * 2;
 const TOP = 118;
