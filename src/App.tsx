@@ -1,11 +1,11 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Header } from './app/chrome/Header';
 import { ambient } from './features/audio/ambient';
 import { SearchOverlay } from './features/search/SearchOverlay';
 import { CompanionPanel } from './features/companion/CompanionPanel';
 import { useSettings, useUi } from './app/store';
-import { SceneBoundary, SceneUnavailable, hasWebGL2 } from './app/chrome/SceneBoundary';
+import { SceneBoundary } from './app/chrome/SceneBoundary';
 import { ResearchLayout } from './features/research/ResearchLayout';
 import { ResearchHome } from './features/research/pages/ResearchHome';
 import { CataloguePage } from './features/research/pages/CataloguePage';
@@ -37,12 +37,6 @@ function SceneLoading() {
 }
 
 export function App() {
-  /**
-   * Has the visitor asked to enter the hall despite the WebGL2 probe saying
-   * no? Kept here rather than in the route so it survives the re-render that
-   * pressing the button causes.
-   */
-  const [forceScene, setForceScene] = useState(false);
   const highContrast = useSettings((s) => s.highContrast);
   const soundOn = useSettings((s) => s.soundOn);
   const { searchOpen, setSearchOpen } = useUi();
@@ -81,25 +75,26 @@ export function App() {
       {showHeader && <Header />}
       <Suspense fallback={<SceneLoading />}>
         <Routes>
-          {/* the hall is the one route that can fail for reasons that have
-              nothing to do with this code — no WebGL2, a lost context, a
-              driver that gives up on a large scene. Probed before mounting so
-              a machine that was never going to manage it is told so rather
-              than shown a black rectangle, and wrapped as well so a failure
-              part-way through the build lands in the same place. */}
+          {/* THE HALL ALWAYS GETS TO TRY.
+              It used to be gated on a WebGL2 probe, and the probe was wrong
+              more often than the hardware was: it exhausted iOS Safari's
+              context budget by running per render, and once Safari has
+              refused a site a context — which it does for a while after any
+              GPU crash — the probe reports "unsupported" on a phone that ran
+              the building five minutes earlier. A check that produces false
+              negatives on the exact devices it exists to help is worse than
+              no check, because the visitor is turned away from something that
+              would have worked.
+              So: mount it, and let SceneBoundary catch a real failure. The
+              visitor sees the same courteous page either way, and the only
+              thing lost is a slightly more specific sentence in the rare case
+              the device truly has no WebGL2 at all. */}
           <Route
             path="/"
             element={
-              hasWebGL2() || forceScene ? (
-                <SceneBoundary>
-                  <GrandLibrary />
-                </SceneBoundary>
-              ) : (
-                <SceneUnavailable
-                  reason="it does not support WebGL2"
-                  onRetry={() => setForceScene(true)}
-                />
-              )
+              <SceneBoundary>
+                <GrandLibrary />
+              </SceneBoundary>
             }
           />
           <Route path="/research" element={<ResearchLayout />}>
