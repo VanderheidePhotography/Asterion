@@ -95,6 +95,7 @@ import {
   SHELF_Y0,
   SHELF_PITCH,
   WING_ANGLES,
+  WING_CLUSTERS,
   WING_H,
   WING_U0,
   WING_U1,
@@ -121,15 +122,15 @@ import { formatYear } from '../../domain/timeline';
    The universal library: a domed rotunda with eight wings of stacks —
    one per tradition — every one a lamplit walk from the centre.
    ———————————————————————————————————————————————— */
-const CLUSTERS = Object.keys(CLUSTER_META) as ClusterId[];
-
 interface Section {
   cluster: ClusterId;
   angle: number;
   uCenter: number;
 }
-// one wing per tradition — eight wings, eight signs
-const SECTIONS: Section[] = CLUSTERS.map((cluster, i) => ({
+// one wing per tradition — eight wings, eight signs. The pairing itself lives
+// in layout.ts beside WING_ANGLES, because the structure needs it too: each
+// hall's end window is glazed with its own tradition's emblem.
+const SECTIONS: Section[] = WING_CLUSTERS.map((cluster, i) => ({
   cluster,
   angle: WING_ANGLES[i],
   uCenter: 23,

@@ -82,6 +82,17 @@ export interface MaterialParams {
   roughnessScale?: number;
   /** the same, for a metalness/ARM map. Defaults to 1. */
   metalnessScale?: number;
+  /**
+   * How strongly this surface reflects the room (see `environment.ts`).
+   *
+   * Only the `metal` and `glass` families are given the environment map at all,
+   * and this is their dial: 1 for metal and 0.45 for glass by default. Setting
+   * it on any OTHER family opts that material in deliberately — which is a real
+   * thing to want for, say, a waxed table top, but it is image-based lighting
+   * and it will raise that surface's black floor, so do it one material at a
+   * time and look at the result.
+   */
+  envMapIntensity?: number;
   /** multiplier on the normal map's strength, both axes */
   normalScale?: number;
   aoMapIntensity?: number;

@@ -370,7 +370,7 @@
     "stone_vault_coffer": {
       "label": "Vault coffering",
       "family": "stone",
-      "note": "The wings' barrel soffits — a gilt star at the centre of every coffer.",
+      "note": "The wings' barrel soffits — a gilt star at the centre of every coffer. WHITE colour on purpose: the painter is handed the tone, and setting it here as well multiplied it in twice, which for a dark teal is very near black — only the rib and the gilt star survived it and the soffit read as a grid on nothing. Same fix stone_dome_coffer had. The tone lives in the painter's args below.",
       "maps": {
         "albedo": "albedo.jpg",
         "normal": "normal.png",
@@ -378,7 +378,7 @@
         "ao": "ao.jpg"
       },
       "params": {
-        "color": "#2f3b3a",
+        "color": "#ffffff",
         "roughness": 0.95,
         "metalness": 0,
         "normalScale": 1.25,
@@ -390,7 +390,7 @@
       "fallback": {
         "painter": "vaultCoffer",
         "args": [
-          "#2f3b3a",
+          "#222b2a",
           "#c39a4e",
           67
         ]

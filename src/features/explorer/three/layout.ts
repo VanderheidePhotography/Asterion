@@ -7,6 +7,7 @@
  *  hearth warms the west wall and the clock keeps the east.
  */
 
+import { CLUSTER_META, type ClusterId } from '../../../domain/types';
 import { DRUM_R_IN, DRUM_R_OUT } from './drumGeometry';
 
 export const ROT_R = 17; // rotunda inner radius
@@ -16,6 +17,18 @@ export const OCULUS_R = 4.7; // skylight at the crown
 
 /** eight wings in four mirrored pairs, leaving the cardinals free */
 export const WING_ANGLES = [18, 54, 126, 162, 198, 234, 306, 342].map((d) => (d * Math.PI) / 180);
+/**
+ * Which tradition holds which wing — `WING_CLUSTERS[i]` lives down
+ * `WING_ANGLES[i]`.
+ *
+ * This pairing was implicit in GrandLibrary's `SECTIONS` and nowhere else,
+ * which was fine while the wayfinding sigil was the only thing that needed to
+ * know it. It is now also needed by the STRUCTURE — every hall's end window
+ * glazes its own tradition's emblem into its tracery — and two files deriving
+ * the same zip independently is how a hall ends up announcing one section and
+ * being glazed with another's sign.
+ */
+export const WING_CLUSTERS = Object.keys(CLUSTER_META) as ClusterId[];
 export const WING_HALF = 5.4; // half-width of a wing corridor — broad museum aisles
 export const WING_U0 = 16.2; // where a wing leaves the rotunda
 export const WING_U1 = 64; // outer end wall — vast twin-gallery halls of books & art
