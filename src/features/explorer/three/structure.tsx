@@ -10,7 +10,7 @@ import { TextSprite } from './TextSprite';
 // painter still imported directly is the stained glass, which feeds an unlit
 // MeshBasicMaterial rather than a PBR surface — it is a light source, not a
 // material, and it has no business having roughness.
-import { stainedGlassArch } from './textures';
+import { fanlightGlass, stainedGlassArch } from './textures';
 import {
   archMoulding,
   DRUM_R_IN,
@@ -33,6 +33,7 @@ import {
   ROT_R,
   ROT_WALL_H,
   WING_ANGLES,
+  WING_CLUSTERS,
   WING_H,
   WING_HALF,
   WING_U1,
@@ -899,7 +900,35 @@ export function Rotunda() {
 /** the four wings: side walls above the shelves, plank ceilings, beams,
  *  and a stained-glass window at the end of every walk */
 export function WingEnclosures() {
-  const glassTex = useMemo(() => stainedGlassArch(), []);
+  /**
+   * ONE WINDOW PER TRADITION, not one window eight times.
+   *
+   * The wings are ordered by `WING_ANGLES`, and `SECTIONS` in GrandLibrary
+   * pairs `WING_ANGLES[i]` with `CLUSTERS[i]` — so the index IS the tradition,
+   * and the window at the end of each hall can glaze that tradition's own
+   * emblem into the oculus of its tracery. It is the same sign the glowing mark
+   * over the hall mouth carries (both come out of `sigils.ts`), which is what
+   * turns a corridor into somewhere: you are told what this hall is on the way
+   * in, and told again by the thing you are walking toward.
+   *
+   * Eight canvases at 320×480 rather than one — about 5 MB, and a quarter of
+   * that on a lean device. The materials are unlit `MeshBasicMaterial`, so
+   * unlike a PBR surface they carry no light-uniform block and eight of them
+   * cost the frame nothing over one (see the material-bind note in
+   * docs/MATERIALS.md).
+   */
+  const glassMats = useMemo(
+    () =>
+      WING_CLUSTERS.map(
+        (c, i) =>
+          new THREE.MeshBasicMaterial({
+            map: stainedGlassArch(11 + i, c),
+            transparent: true,
+            toneMapped: false,
+          }),
+      ),
+    [],
+  );
   // dense tiling (~1.7 m panels, matching the drum) — stretched any thinner
   // the walls read as smooth low-poly brown slabs at a distance.
   //
@@ -912,10 +941,6 @@ export function WingEnclosures() {
   // the flared mouth splay, ~2.5 m long — tiled to the same ~1.7 m panel pitch
   // as the side wall so the panel grid reads continuous into the corridor
   const splayMat = useMemo(() => getMaterial('wood_hall_wainscot', { repeat: [1.5, WING_H / 3.4] }), []);
-  const glassMat = useMemo(
-    () => new THREE.MeshBasicMaterial({ map: glassTex, transparent: true, toneMapped: false }),
-    [glassTex],
-  );
   /* — the great barrel vault: a curved timber ceiling spanning wall to wall,
        ribbed at every bay line, a brass ridge rail running the crown. Its
        section (VAULT_R/HALF/CY) is the shared one the drum headers also use. */
@@ -1072,19 +1097,21 @@ export function WingEnclosures() {
 
   useLayoutEffect(
     () => () => {
-      // glassMat is still locally owned; the rest belong to the registry and
-      // are shared across the building, so disposing them here would blank
-      // every other surface using them.
-      glassMat.dispose();
+      // the glass materials are still locally owned; the rest belong to the
+      // registry and are shared across the building, so disposing them here
+      // would blank every other surface using them. (Their MAPS are the
+      // texture cache's and are not disposed either — a second mount would
+      // find the cache holding a dead canvas.)
+      glassMats.forEach((m) => m.dispose());
       vaultGeom.dispose();
       ribsGeom.dispose();
     },
-    [glassMat, vaultGeom, ribsGeom],
+    [glassMats, vaultGeom, ribsGeom],
   );
 
   return (
     <group>
-      {WING_ANGLES.map((a) => {
+      {WING_ANGLES.map((a, wi) => {
         const [mx, mz] = wingPoint(a, mid, 0);
         const [vmx, vmz] = wingPoint(a, vaultMid, 0);
         const [ex, ez] = wingPoint(a, WING_U1 + 0.2, 0);
@@ -1126,7 +1153,7 @@ export function WingEnclosures() {
             <mesh position={[ex, WING_H / 2, ez]} rotation-y={-a} material={endMat}>
               <boxGeometry args={[0.45, WING_H, WING_WALL_HALF * 2 + 0.8]} />
             </mesh>
-            <mesh position={[gx, 6.1, gz]} rotation-y={-a - Math.PI / 2} material={glassMat}>
+            <mesh position={[gx, 6.1, gz]} rotation-y={-a - Math.PI / 2} material={glassMats[wi]}>
               <planeGeometry args={[4.8, 7.4]} />
             </mesh>
             {/* the barrel vault, its ribs, and the brass ridge */}
@@ -1452,7 +1479,7 @@ export function EntranceHall() {
     () => getMaterial('stone_marble_white', { repeat: [3, 1], overrides: { color: '#cdbfa4', roughness: 0.5 } }),
     [],
   );
-  const fanTex = useMemo(() => stainedGlassArch(), []);
+  const fanTex = useMemo(() => fanlightGlass(), []);
   // unlit, like the wings' windows: this is a light source in the composition,
   // not a surface waiting to be lit — and at the end of a dark hall it is what
   // makes the doorway read from the middle of the rotunda
@@ -1472,30 +1499,21 @@ export function EntranceHall() {
     [fanTex],
   );
   /**
-   * The fanlight, and why it needs its own UVs.
+   * The fanlight — stock UVs, and that is the point.
    *
-   * `stainedGlassArch` paints a whole arched window into a 2:3 canvas and
-   * leaves the margins TRANSPARENT. A circle sector's stock UVs map its
-   * bounding box to the full 0..1 of that canvas, so the semicircular head
-   * sampled the painting's empty corners and the glass simply did not appear —
-   * it read as an unglazed hole with brass bars over it.
+   * It used to carry a hand-written UV remap that sampled the HEAD of
+   * `stainedGlassArch` (the horizontal middle of that canvas, v 0.60 to 0.94),
+   * because a semicircle's stock UVs would otherwise have read the arched
+   * painting's empty transparent corners and the glass would not have appeared
+   * at all. That worked only while the wing window's head was an
+   * undifferentiated grid; a real window's head is mostly solid stone, and the
+   * doorway came out glazed with a dark slab.
    *
-   * These UVs sample the painted arch's own HEAD instead: the horizontal
-   * middle of the canvas, and the band from the springing (v 0.6) to the crown
-   * (v 0.94). The leading in the painting then runs the same way the brass
-   * bars in front of it do.
+   * `fanlightGlass` paints a fan into the upper half of a square canvas about
+   * its centre — the same convention `rugHalf` uses — which is exactly what a
+   * half CircleGeometry's own UVs sample. So there is nothing to remap.
    */
-  const fanGeom = useMemo(() => {
-    const g = new THREE.CircleGeometry(HEAD_R - 0.06, 40, 0, Math.PI);
-    const uv = g.attributes.uv;
-    for (let i = 0; i < uv.count; i++) {
-      const u = uv.getX(i);
-      const v = uv.getY(i);
-      uv.setXY(i, 0.07 + 0.86 * u, 0.6 + 0.34 * ((v - 0.5) * 2));
-    }
-    uv.needsUpdate = true;
-    return g;
-  }, []);
+  const fanGeom = useMemo(() => new THREE.CircleGeometry(HEAD_R - 0.06, 40, 0, Math.PI), []);
   useLayoutEffect(() => () => fanGeom.dispose(), [fanGeom]);
 
   /** both leaves, all their panels and mouldings, in one buffer */
@@ -1946,19 +1964,13 @@ export function ResearchApse() {
  * from surviving code, it is simply stated without one.
  * ─────────────────────────────────────────────────────────────────────────── */
 
-/** the gallery in every wing: real public-domain art, framed at eye level in
- *  the gap the shelves leave open. One wall carries the tradition's figure,
- *  the facing wall an emblem plate. Order matches WING_ANGLES. */
-const WING_CLUSTERS = [
-  'hermetica',
-  'alchemy',
-  'kabbalah',
-  'renaissance',
-  'early-modern',
-  'freemasonry',
-  'occult-revival',
-  'scholarship',
-] as const;
+/* The gallery in every wing — real public-domain art, framed at eye level in
+ * the gap the shelves leave open; one wall carries the tradition's figure, the
+ * facing wall an emblem plate — reads WING_CLUSTERS from layout.ts. It used to
+ * be a hand-written copy of that list right here, which was the THIRD place in
+ * the app asserting which tradition holds which wing (GrandLibrary's SECTIONS
+ * and this were the other two). Any of them could drift and hang Böhme in the
+ * Freemasonry hall. */
 
 const FIGURE_CAPTIONS: Record<string, string> = {
   hermetica: 'Hermes Trismegistus',
@@ -2008,42 +2020,224 @@ const ART2_CAPTIONS: Record<string, [string, string]> = {
 };
 
 /**
- * One framed engraving: a gilt box, a mat, the print, a picture lamp over it
- * and a soft additive wash standing in for the light the lamp does not cast.
+ * THE GILT FRAME, IN SECTION.
  *
- * The depth ladder is the load-bearing part — frame face 0.10, mat 0.225,
- * print 0.24. The gilt frame is a SOLID box, so its front face occludes
- * anything level with or behind it; the mat and the print have to sit proud of
- * it or every painting in the building renders as a blank gold panel.
+ * What was here was a flat gold BOX 0.20 m deep with the mount at z 0.225 and
+ * the print at z 0.24 — that is, the picture stood PROUD OF ITS OWN FRAME. A
+ * frame with no rebate is not a frame; it is a gold slab with a poster on it,
+ * and the whole assembly stood a quarter of a metre off the wall, which is what
+ * made it read as stuck on rather than hung.
+ *
+ * This is a real moulding instead, given as a SECTION and swept round: bands
+ * measured in from the frame's outer edge, each standing its own distance off
+ * the wall. The profile is an ordinary 18th-century gilt frame — a high outer
+ * knull, a cavetto falling away from it, an astragal bead, a flat, and then the
+ * sight edge rising again to lap over the picture. Everything a visitor reads
+ * as "carved" here is that one rise-and-fall: a moulding is a thing that
+ * catches light at its top edges and holds shadow in its hollows, and a slab
+ * has neither.
+ *
+ * The whole frame now projects 0.10 m — less than half what the slab did — and
+ * the picture sits BEHIND the sight edge, lapped by 3 cm all round.
+ *
+ *   `from`/`to` are offsets in from the outer edge; `z` is how far the band
+ *   stands off the wall.
+ */
+const FRAME_MARGIN = 0.3;
+const FRAME_SECTION: [from: number, to: number, z: number][] = [
+  [0.0, 0.05, 0.1], // the outer knull — the highest edge of a frame
+  [0.05, 0.16, 0.055], // cavetto, falling away into shadow
+  [0.16, 0.21, 0.09], // the astragal bead
+  [0.21, 0.29, 0.05], // the flat
+  [0.29, 0.33, 0.075], // the sight edge, rising to lap the picture
+];
+/** where the picture plane sits: under the sight edge, over the flat */
+const FRAME_SIGHT_Z = 0.052;
+
+/**
+ * The moulding, mitred and merged.
+ *
+ * Every one of the thirty-two plates in the building is the same 2.5 × 3.3, so
+ * this is built ONCE and shared — the cache is keyed on the size only so that
+ * stays true if a second size is ever hung. Twenty-four boxes and four corner
+ * rosettes per frame collapse to one buffer; without the merge this pass would
+ * have added ~900 draw calls to the wings.
+ */
+const frameCache = new Map<string, THREE.BufferGeometry>();
+function frameMoulding(w: number, h: number): THREE.BufferGeometry {
+  const key = `${w}x${h}`;
+  const hit = frameCache.get(key);
+  if (hit) return hit;
+  const parts: THREE.BufferGeometry[] = [];
+  const OW = w / 2 + FRAME_MARGIN;
+  const OH = h / 2 + FRAME_MARGIN;
+  for (const [from, to, z] of FRAME_SECTION) {
+    const ow = OW - from;
+    const oh = OH - from;
+    const ih = OH - to;
+    const band = to - from;
+    // mitred: the rails run the full width, the stiles fill between them, so
+    // no two members of a band overlap and the merged buffer has no z-fighting
+    for (const sy of [1, -1]) {
+      const g = new THREE.BoxGeometry(ow * 2, band, z);
+      g.translate(0, sy * (oh - band / 2), z / 2);
+      parts.push(g);
+    }
+    for (const sx of [1, -1]) {
+      const g = new THREE.BoxGeometry(band, ih * 2, z);
+      g.translate(sx * (ow - band / 2), 0, z / 2);
+      parts.push(g);
+    }
+  }
+  // a carved rosette at each corner, where the mitre is — the one place a
+  // frame of this kind is ever ornamented, because it is the one place the
+  // joint needs hiding
+  for (const sx of [1, -1]) {
+    for (const sy of [1, -1]) {
+      const cx = sx * (OW - 0.155);
+      const cy = sy * (OH - 0.155);
+      const boss = new THREE.SphereGeometry(0.055, 10, 6);
+      boss.scale(1, 1, 0.55);
+      boss.translate(cx, cy, 0.1);
+      parts.push(boss);
+      for (let p = 0; p < 6; p++) {
+        const a = (p / 6) * Math.PI * 2;
+        const petal = new THREE.SphereGeometry(0.042, 8, 5);
+        petal.scale(1, 0.5, 0.4);
+        petal.rotateZ(a);
+        petal.translate(cx + Math.cos(a) * 0.062, cy + Math.sin(a) * 0.062, 0.088);
+        parts.push(petal);
+      }
+    }
+  }
+  const merged = mergeGeometries(parts, false)!;
+  parts.forEach((p) => p.dispose());
+  frameCache.set(key, merged);
+  return merged;
+}
+
+/** the picture lamp: a half-round brass hood on two swan arms, likewise merged */
+const lampCache = new Map<string, THREE.BufferGeometry>();
+function pictureLamp(w: number, h: number): THREE.BufferGeometry {
+  const key = `${w}x${h}`;
+  const hit = lampCache.get(key);
+  if (hit) return hit;
+  const parts: THREE.BufferGeometry[] = [];
+  const y = h / 2 + FRAME_MARGIN + 0.16;
+  // the hood — a half cylinder, open side down, tipped toward the picture
+  const hood = new THREE.CylinderGeometry(0.085, 0.085, w * 0.55, 14, 1, true, 0, Math.PI);
+  hood.rotateZ(Math.PI / 2);
+  hood.rotateX(-0.5);
+  hood.translate(0, y, 0.3);
+  parts.push(hood);
+  // its end caps
+  for (const sx of [1, -1]) {
+    const cap = new THREE.CircleGeometry(0.085, 14, 0, Math.PI);
+    cap.rotateY(Math.PI / 2);
+    cap.rotateX(-0.5);
+    cap.translate(sx * w * 0.275, y, 0.3);
+    parts.push(cap);
+  }
+  // the two arms back to the wall, and the rosettes they land on
+  for (const sx of [1, -1]) {
+    const arm = new THREE.CylinderGeometry(0.018, 0.018, 0.3, 8);
+    arm.rotateX(Math.PI / 2);
+    arm.translate(sx * w * 0.22, y, 0.16);
+    parts.push(arm);
+    const plate = new THREE.CylinderGeometry(0.045, 0.045, 0.02, 10);
+    plate.rotateX(Math.PI / 2);
+    plate.translate(sx * w * 0.22, y, 0.012);
+    parts.push(plate);
+  }
+  const merged = mergeGeometries(parts, false)!;
+  parts.forEach((p) => p.dispose());
+  lampCache.set(key, merged);
+  return merged;
+}
+
+/**
+ * One framed engraving: the moulding above, a rag mount, the print set back in
+ * the rebate, a picture lamp, and a soft wash standing in for the light the
+ * lamp does not cast.
+ *
+ * THE PRINT IS LIT NOW, not unlit. It was a `MeshBasicMaterial`, which is why
+ * every plate in the building read as a lightbox: an unlit surface ignores the
+ * room entirely, so a bright scan hung in a hall graded at 85% shadow came out
+ * as the brightest rectangle in the frame and sat on the wall like a screen.
+ * It is a standard material with a gentle `emissiveMap` off its own image
+ * instead — so the picture takes the hall's warmth and the lamp's, and carries
+ * just enough self-glow to stay legible in the dark without going flat.
  */
 export function FramedArt({ tex, w, h }: { tex: THREE.Texture; w: number; h: number }) {
+  const gilt = useMemo(
+    () =>
+      getMaterial('metal_gold_leaf', {
+        // OLD GILDING, WHICH IS A DARK MATERIAL WITH BRIGHT EDGES.
+        //
+        // The first cut of this held metalness down to 0.62 to keep some
+        // diffuse gold in it, and the result was a light chalky orange — a
+        // flat, evenly-lit brown that was the highest-chroma thing in the hall
+        // and sat on top of the palette instead of in it. That is backwards.
+        // Real water-gilding reads dark in the hollows and catches fire only on
+        // the arrises, so the diffuse colour goes DOWN to a deep bronze-ochre
+        // and the metalness back up, and the environment does the burnishing.
+        // The moulding's own section then supplies the contrast, which is the
+        // whole point of having cut a section.
+        overrides: { color: '#6d5227', metalness: 0.82, roughness: 0.34, envMapIntensity: 1.05 },
+      }),
+    [],
+  );
+  const brass = useMemo(() => getMaterial('metal_brass_burnished'), []);
+  const mount = useMemo(
+    () => getMaterial('book_parchment', { overrides: { color: '#a89a7c', roughness: 0.95 } }),
+    [],
+  );
+  const geom = useMemo(() => frameMoulding(w, h), [w, h]);
+  const lamp = useMemo(() => pictureLamp(w, h), [w, h]);
+  // one per plate, because each carries its own image — a local material, which
+  // is what an emissive surface is meant to be (see the note in the registry)
+  const print = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        map: tex,
+        emissiveMap: tex,
+        emissive: new THREE.Color('#ffffff'),
+        // Just enough to keep the engraving legible where the lamp does not
+        // reach. These are scans of white paper: anything more and the plate
+        // goes back to being the brightest rectangle in a hall graded at 85%
+        // shadow, which is the lightbox look this pass exists to remove.
+        emissiveIntensity: 0.15,
+        color: '#9a9078',
+        roughness: 0.92,
+        metalness: 0,
+      }),
+    [tex],
+  );
+  useLayoutEffect(() => () => print.dispose(), [print]);
   return (
     <group>
-      <mesh position={[0, 0, 0.1]}>
-        <boxGeometry args={[w + 0.34, h + 0.34, 0.2]} />
-        <meshStandardMaterial color="#8a6a2f" metalness={0.55} roughness={0.4} />
+      {/* the moulding and the lamp are shared buffers — never dispose them */}
+      <mesh geometry={geom} material={gilt} />
+      <mesh geometry={lamp} material={brass} />
+      {/* the mount, and the print set 4 mm in front of it inside the rebate */}
+      <mesh position={[0, 0, FRAME_SIGHT_Z - 0.004]} material={mount}>
+        <planeGeometry args={[w + 0.1, h + 0.1]} />
       </mesh>
-      <mesh position={[0, 0, 0.225]}>
-        <planeGeometry args={[w + 0.14, h + 0.14]} />
-        <meshBasicMaterial color="#b9ad93" />
-      </mesh>
-      {/* knocked back with a tint rather than shown at full value — these are
-          bright scans hanging in a dim hall */}
-      <mesh position={[0, 0, 0.24]}>
+      <mesh position={[0, 0, FRAME_SIGHT_Z]} material={print}>
         <planeGeometry args={[w, h]} />
-        <meshBasicMaterial map={tex} color="#c8b99c" />
       </mesh>
-      {/* the picture lamp, and its glow — a sprite, not a light */}
-      <mesh position={[0, h / 2 + 0.34, 0.5]} rotation-x={0.6}>
-        <boxGeometry args={[w * 0.6, 0.08, 0.16]} />
-        <meshStandardMaterial color="#b98a3d" metalness={0.7} roughness={0.35} />
-      </mesh>
-      <sprite position={[0, h / 2 - 0.1, 0.55]} scale={[w * 1.1, h * 0.7, 1]}>
+      {/* The lamp's wash. Kept small, faint and HIGH — it used to be a
+          three-quarter-height additive sheet laid over the whole plate at 0.14,
+          and on a scan of white paper that is a bleach: the print came out as a
+          flat white rectangle whatever its own material did. A picture lamp
+          lights the top of a picture and falls away, so this now grazes the top
+          third and the paper carries the rest itself. */}
+      <sprite position={[0, h / 2 - 0.02, 0.3]} scale={[w * 0.85, h * 0.34, 1]}>
         <spriteMaterial
           map={getGlowTexture()}
           color="#ffe2b0"
           transparent
-          opacity={0.16}
+          opacity={0.07}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
@@ -2082,25 +2276,25 @@ export function WingGallery() {
           <group key={a}>
             <group position={[fx, Y, fz]} rotation-y={-a}>
               <FramedArt tex={figures[i]} w={W} h={H} />
-              <TextSprite position={[0, -2, 0.24]} height={0.24} color="#e9dcc0" maxWidthPx={900}>
+              <TextSprite position={[0, -2, 0.12]} height={0.24} color="#e9dcc0" maxWidthPx={900}>
                 {FIGURE_CAPTIONS[cluster]}
               </TextSprite>
             </group>
             <group position={[ex, Y, ez]} rotation-y={Math.PI - a}>
               <FramedArt tex={emblems[i]} w={W} h={H} />
-              <TextSprite position={[0, -2, 0.24]} height={0.2} color="#e9dcc0" maxWidthPx={1000}>
+              <TextSprite position={[0, -2, 0.12]} height={0.2} color="#e9dcc0" maxWidthPx={1000}>
                 {EMBLEM_CAPTIONS[cluster]}
               </TextSprite>
             </group>
             <group position={[lx, Y, lz]} rotation-y={-a}>
               <FramedArt tex={art2L[i]} w={W} h={H} />
-              <TextSprite position={[0, -2, 0.24]} height={0.2} color="#e9dcc0" maxWidthPx={1000}>
+              <TextSprite position={[0, -2, 0.12]} height={0.2} color="#e9dcc0" maxWidthPx={1000}>
                 {art2[0]}
               </TextSprite>
             </group>
             <group position={[rx, Y, rz]} rotation-y={Math.PI - a}>
               <FramedArt tex={art2R[i]} w={W} h={H} />
-              <TextSprite position={[0, -2, 0.24]} height={0.2} color="#e9dcc0" maxWidthPx={1000}>
+              <TextSprite position={[0, -2, 0.12]} height={0.2} color="#e9dcc0" maxWidthPx={1000}>
                 {art2[1]}
               </TextSprite>
             </group>
@@ -2125,56 +2319,395 @@ export function WingGallery() {
  * What the walls carry instead is the sconces (entranceDressing.tsx) — a row of
  * lights receding, which is the one thing a corridor's own walls should do. */
 
-/** A carved oak reading bench set against the wall. */
-function Bench({ woodMat }: { woodMat: THREE.Material }) {
+/**
+ * UVs from the DOMINANT FACE AXIS, at a real-world scale.
+ *
+ * `planarUV` above projects one way for everything, which is right for a door
+ * — a flat thing seen from one side — and wrong for furniture, where the seat
+ * is read from above, the standards from the side and the back from the front.
+ * Projected one way, two of those three get the grain smeared along them, which
+ * is most of why a merged box-built prop reads as plastic however good the scan
+ * on it is.
+ *
+ * This picks the two axes perpendicular to each face's own normal instead, so
+ * every surface gets the timber at the same physical grain size and the boards
+ * run the way boards run. Box primitives carry per-face normals, so the choice
+ * is exact for them; it seams on the curved mouldings, which are 3 cm half-
+ * rounds and never resolve it.
+ */
+function boxUV(g: THREE.BufferGeometry, perMetre: number): THREE.BufferGeometry {
+  const pos = g.attributes.position;
+  const nor = g.attributes.normal;
+  const uv = new Float32Array(pos.count * 2);
+  for (let i = 0; i < pos.count; i++) {
+    const ax = Math.abs(nor.getX(i));
+    const ay = Math.abs(nor.getY(i));
+    const az = Math.abs(nor.getZ(i));
+    let u: number;
+    let v: number;
+    if (ax >= ay && ax >= az) {
+      u = pos.getZ(i);
+      v = pos.getY(i);
+    } else if (ay >= az) {
+      u = pos.getX(i);
+      v = pos.getZ(i);
+    } else {
+      u = pos.getX(i);
+      v = pos.getY(i);
+    }
+    uv[i * 2] = u * perMetre;
+    uv[i * 2 + 1] = v * perMetre;
+  }
+  g.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+  return g;
+}
+
+/* ————— the gallery benches —————
+ *
+ * What was here was four boards: a plank seat, a thin back panel floating
+ * behind it, and two slab legs. Nothing was jointed to anything, the back stood
+ * clear of the seat in mid-air, and every face took the timber scan stretched
+ * 0..1 across it — so a 1.9 m seat and a 0.16 m leg wore the same few boards at
+ * wildly different sizes. It read as flat-pack.
+ *
+ * This is a panel-back oak settle: standards with arched feet, a through
+ * stretcher pegged at both ends, a seat with a moulded nosing, and a back of
+ * two fielded panels between stiles and rails. The joints are pegged where a
+ * joiner would peg them, which is the cheapest carpentry detail there is and
+ * the one that most reliably says a thing was made rather than moulded.
+ *
+ * Baked once at module scope and shared by all sixteen — as with the display
+ * cases, the merge is what makes the detail affordable.
+ */
+const BENCH_L = 1.92;
+const BENCH_D = 0.52;
+const BENCH_SEAT_Y = 0.46;
+const BENCH_BACK_Y = 1.04;
+
+const BENCH_OAK = (() => {
+  const parts: THREE.BufferGeometry[] = [];
+  const box = (sx: number, sy: number, sz: number, x: number, y: number, z: number) => {
+    const g = new THREE.BoxGeometry(sx, sy, sz);
+    g.translate(x, y, z);
+    parts.push(g);
+  };
+  const zBack = -(BENCH_D / 2 - 0.055);
+
+  for (const sx of [1, -1]) {
+    const x = sx * (BENCH_L / 2 - 0.055);
+    // the standard, and the two feet it stands on — the gap between them is
+    // the arch, and it is what stops a slab end reading as a cinder block
+    box(0.075, BENCH_SEAT_Y - 0.2, BENCH_D - 0.05, x, 0.1 + (BENCH_SEAT_Y - 0.2) / 2 + 0.1, 0);
+    for (const sz of [1, -1]) {
+      box(0.075, 0.2, 0.15, x, 0.1, sz * (BENCH_D / 2 - 0.095));
+    }
+    // the pegs holding the stretcher's through-tenon
+    for (const py of [0.165, 0.235]) {
+      const peg = new THREE.CylinderGeometry(0.011, 0.011, 0.1, 6);
+      peg.rotateZ(Math.PI / 2);
+      peg.translate(x, py, 0);
+      parts.push(peg);
+    }
+  }
+  // the stretcher, tenoned right through both standards
+  box(BENCH_L - 0.04, 0.075, 0.055, 0, 0.2, 0);
+  // aprons under the seat, front and back
+  for (const sz of [1, -1]) {
+    box(BENCH_L - 0.2, 0.085, 0.032, 0, BENCH_SEAT_Y - 0.085, sz * (BENCH_D / 2 - 0.04));
+  }
+  // the seat, and the half-round nosing worked on its front edge
+  box(BENCH_L, 0.055, BENCH_D, 0, BENCH_SEAT_Y - 0.0275, 0);
+  const nose = new THREE.CylinderGeometry(0.0275, 0.0275, BENCH_L, 10);
+  nose.rotateZ(Math.PI / 2);
+  nose.translate(0, BENCH_SEAT_Y - 0.0275, BENCH_D / 2);
+  parts.push(nose);
+
+  /* — the back: stiles, muntin, rails, and two fielded panels — */
+  const bh = BENCH_BACK_Y - BENCH_SEAT_Y;
+  for (const sx of [1, -1]) {
+    box(0.07, bh, 0.06, sx * (BENCH_L / 2 - 0.06), BENCH_SEAT_Y + bh / 2, zBack);
+  }
+  box(0.055, bh, 0.06, 0, BENCH_SEAT_Y + bh / 2, zBack); // the muntin
+  box(BENCH_L - 0.06, 0.1, 0.062, 0, BENCH_SEAT_Y + 0.05, zBack); // bottom rail
+  box(BENCH_L - 0.06, 0.115, 0.062, 0, BENCH_BACK_Y - 0.0575, zBack); // top rail
+  // the moulded cap over the top rail — the bench's own cornice
+  box(BENCH_L, 0.03, 0.086, 0, BENCH_BACK_Y + 0.015, zBack);
+  box(BENCH_L - 0.03, 0.022, 0.072, 0, BENCH_BACK_Y + 0.041, zBack);
+  // the panels themselves, set back in their grooves and fielded — a raised
+  // centre inside a bevel, which is what "fielded" means and what gives a flat
+  // panel an edge to catch the light on
+  for (const sx of [1, -1]) {
+    const pw = BENCH_L / 2 - 0.145;
+    const px = sx * (BENCH_L / 4 + 0.005);
+    const py = BENCH_SEAT_Y + bh / 2;
+    const ph = bh - 0.19;
+    box(pw, ph, 0.022, px, py, zBack - 0.012);
+    box(pw - 0.07, ph - 0.07, 0.03, px, py, zBack - 0.004);
+  }
+  // pegs at the four frame joints, as on the standards
+  for (const sx of [1, -1]) {
+    for (const py of [BENCH_SEAT_Y + 0.05, BENCH_BACK_Y - 0.0575]) {
+      const peg = new THREE.CylinderGeometry(0.009, 0.009, 0.07, 6);
+      peg.rotateX(Math.PI / 2);
+      peg.translate(sx * (BENCH_L / 2 - 0.06), py, zBack);
+      parts.push(peg);
+    }
+  }
+
+  const merged = mergeGeometries(parts, false)!;
+  parts.forEach((p) => p.dispose());
+  // 1.6 repeats per metre — a board about 60 cm wide, which is what the
+  // gallery timber scan photographs as
+  boxUV(merged, 1.6);
+  return merged;
+})();
+
+/** the squab: a buttoned leather cushion, worn where people sit */
+const BENCH_CUSHION = (() => {
+  const parts: THREE.BufferGeometry[] = [];
+  const w = BENCH_L - 0.14;
+  const d = BENCH_D - 0.13;
+  const pad = new THREE.BoxGeometry(w, 0.075, d);
+  pad.translate(0, BENCH_SEAT_Y + 0.036, 0.01);
+  parts.push(pad);
+  // the piped edge, front and back
+  for (const sz of [1, -1]) {
+    const pipe = new THREE.CylinderGeometry(0.021, 0.021, w, 8);
+    pipe.rotateZ(Math.PI / 2);
+    pipe.translate(0, BENCH_SEAT_Y + 0.028, 0.01 + sz * (d / 2));
+    parts.push(pipe);
+  }
+  // buttons, pulled down into the stuffing
+  for (const bx of [-0.62, -0.21, 0.21, 0.62]) {
+    const b = new THREE.SphereGeometry(0.021, 8, 6);
+    b.scale(1, 0.5, 1);
+    b.translate(bx, BENCH_SEAT_Y + 0.068, 0.01);
+    parts.push(b);
+  }
+  const merged = mergeGeometries(parts, false)!;
+  parts.forEach((p) => p.dispose());
+  boxUV(merged, 2.2);
+  return merged;
+})();
+
+/** A panel-back oak settle set against the wall, under the plates. */
+function Bench({ woodMat, leatherMat }: { woodMat: THREE.Material; leatherMat: THREE.Material }) {
   return (
     <group>
-      <mesh position={[0, 0.42, 0]} material={woodMat}>
-        <boxGeometry args={[1.9, 0.14, 0.55]} />
-      </mesh>
-      <mesh position={[0, 0.78, -0.2]} material={woodMat}>
-        <boxGeometry args={[1.9, 0.62, 0.12]} />
-      </mesh>
-      {[-0.82, 0.82].map((x) => (
-        <mesh key={x} position={[x, 0.19, 0]} material={woodMat}>
-          <boxGeometry args={[0.16, 0.42, 0.5]} />
-        </mesh>
-      ))}
+      <mesh geometry={BENCH_OAK} material={woodMat} />
+      <mesh geometry={BENCH_CUSHION} material={leatherMat} />
     </group>
   );
 }
 
-/** A lit glass display case on a plinth, a glowing artifact suspended within. */
-function DisplayCase({ woodMat, glassMat, seed }: { woodMat: THREE.Material; glassMat: THREE.Material; seed: number }) {
+/* ————— the display cases —————
+ *
+ * What was here was three boxes and a d20: a plain cube plinth, a plain cube
+ * vitrine, a plain cube cap, and a `icosahedronGeometry(0.22, 0)` in one of
+ * four sweet-shop hues floating at its centre. At detail 0 and flat-shaded an
+ * icosahedron presents as a hexagon from almost every angle, so what a visitor
+ * actually saw was a glowing mint lozenge hovering inside a grey box — the most
+ * placeholder-looking object in the building, and there are thirty-two of them.
+ *
+ * All three parts are rebuilt below, and all three are baked at MODULE SCOPE
+ * and shared by every case. That is the whole reason this could be detailed at
+ * all: the pedestal alone is fourteen primitives, and thirty-two cases × the
+ * new part count would have been ~600 draw calls if each case built its own.
+ */
+
+/** the pedestal: a moulded base, a tapered die, a moulded cap. Oak. */
+const CASE_PEDESTAL = (() => {
+  const parts: THREE.BufferGeometry[] = [];
+  /** a moulded course: a stack of thin slabs stepping in, which is what reads
+   *  as a run of mouldings without any of them being modelled */
+  const course = (y0: number, steps: [w: number, t: number][]) => {
+    let y = y0;
+    for (const [wd, t] of steps) {
+      const g = new THREE.BoxGeometry(wd, t, wd);
+      g.translate(0, y + t / 2, 0);
+      parts.push(g);
+      y += t;
+    }
+  };
+  // base: plinth, cavetto, torus
+  course(0, [
+    [1.02, 0.07],
+    [0.96, 0.04],
+    [0.92, 0.05],
+  ]);
+  // the die — the pedestal's body, very slightly tapered so it does not read
+  // as an extruded square
+  const die = new THREE.CylinderGeometry(0.615, 0.645, 0.72, 4, 1);
+  die.rotateY(Math.PI / 4);
+  die.translate(0, 0.16 + 0.36, 0);
+  parts.push(die);
+  // cap: fillet, ovolo, the top slab the vitrine stands on
+  course(0.88, [
+    [0.94, 0.04],
+    [1.0, 0.05],
+    [1.06, 0.05],
+  ]);
+  const merged = mergeGeometries(parts, false)!;
+  parts.forEach((p) => p.dispose());
+  // world-scaled, for the same reason the bench is — see `boxUV`. Stock box
+  // UVs run 0..1 per face, so a 1.06 m cap slab and a 0.04 m fillet wore the
+  // timber at wildly different grain sizes and the pedestal read as plastic.
+  boxUV(merged, 1.6);
+  return merged;
+})();
+
+/** the vitrine's brass: four corner stiles, a sill and cornice frame, the
+ *  turntable the specimen stands on, and the label plate on the pedestal */
+const CASE_BRASS = (() => {
+  const parts: THREE.BufferGeometry[] = [];
+  const HALF = 0.4;
+  const Y0 = 1.02;
+  const HT = 1.26;
+  // corner stiles — square section, standing proud of the glass
+  for (const sx of [1, -1]) {
+    for (const sz of [1, -1]) {
+      const g = new THREE.BoxGeometry(0.05, HT, 0.05);
+      g.translate(sx * HALF, Y0 + HT / 2, sz * HALF);
+      parts.push(g);
+    }
+  }
+  // sill and cornice rails, all four sides of each
+  for (const y of [Y0 + 0.025, Y0 + HT - 0.025]) {
+    for (const [sx, sz] of [[1, 0], [-1, 0], [0, 1], [0, -1]] as const) {
+      const along = sx !== 0 ? 0.05 : HALF * 2 + 0.05;
+      const across = sx !== 0 ? HALF * 2 + 0.05 : 0.05;
+      const g = new THREE.BoxGeometry(along, 0.05, across);
+      g.translate(sx * HALF, y, sz * HALF);
+      parts.push(g);
+    }
+  }
+  // the cornice itself, a lipped cap over the top rail
+  const cap = new THREE.BoxGeometry(0.96, 0.045, 0.96);
+  cap.translate(0, Y0 + HT + 0.02, 0);
+  parts.push(cap);
+  const capLip = new THREE.BoxGeometry(0.88, 0.035, 0.88);
+  capLip.translate(0, Y0 + HT + 0.058, 0);
+  parts.push(capLip);
+  // the turntable the specimen turns on — a stepped disc, so the object is
+  // DISPLAYED rather than levitating, which is what the old one did
+  for (const [r, t, y] of [[0.19, 0.018, 1.05], [0.14, 0.022, 1.068]] as const) {
+    const g = new THREE.CylinderGeometry(r, r, t, 20);
+    g.translate(0, y, 0);
+    parts.push(g);
+  }
+  // the engraved label plate, canted on the pedestal's face
+  const plate = new THREE.BoxGeometry(0.44, 0.16, 0.012);
+  plate.rotateX(-0.5);
+  plate.translate(0, 0.86, 0.46);
+  parts.push(plate);
+  const merged = mergeGeometries(parts, false)!;
+  parts.forEach((p) => p.dispose());
+  return merged;
+})();
+
+/** the glazing: four panes and a light, as one buffer */
+const CASE_GLASS = (() => {
+  const parts: THREE.BufferGeometry[] = [];
+  const HALF = 0.4;
+  const Y0 = 1.02;
+  const HT = 1.26;
+  for (const [sx, sz] of [[1, 0], [-1, 0], [0, 1], [0, -1]] as const) {
+    const g = new THREE.PlaneGeometry(HALF * 2, HT - 0.05);
+    if (sx !== 0) g.rotateY((Math.PI / 2) * sx);
+    else if (sz < 0) g.rotateY(Math.PI);
+    g.translate(sx * HALF, Y0 + HT / 2, sz * HALF);
+    parts.push(g);
+  }
+  const top = new THREE.PlaneGeometry(HALF * 2, HALF * 2);
+  top.rotateX(-Math.PI / 2);
+  top.translate(0, Y0 + HT - 0.03, 0);
+  parts.push(top);
+  const merged = mergeGeometries(parts, false)!;
+  parts.forEach((p) => p.dispose());
+  return merged;
+})();
+
+/**
+ * The specimen: a quartz point, not a die.
+ *
+ * A six-sided prism with a pyramidal termination is the one crystal shape
+ * everybody recognises on sight, and it is what a cabinet of curiosities
+ * actually held. It is also barely more geometry than the icosahedron it
+ * replaces — the whole readability problem was that a d20 has no axis, so it
+ * had no orientation to turn about and no silhouette to recognise.
+ */
+const CASE_CRYSTAL = (() => {
+  const parts: THREE.BufferGeometry[] = [];
+  const shaft = new THREE.CylinderGeometry(0.105, 0.115, 0.4, 6);
+  shaft.translate(0, 0.2, 0);
+  parts.push(shaft);
+  const point = new THREE.ConeGeometry(0.105, 0.19, 6);
+  point.translate(0, 0.49, 0);
+  parts.push(point);
+  // a smaller companion crystal at its foot, the way real specimens grow
+  const small = new THREE.CylinderGeometry(0.05, 0.057, 0.2, 6);
+  small.rotateZ(0.32);
+  small.translate(0.12, 0.1, 0.04);
+  parts.push(small);
+  const smallPt = new THREE.ConeGeometry(0.05, 0.1, 6);
+  smallPt.rotateZ(0.32);
+  smallPt.translate(0.073, 0.243, 0.04);
+  parts.push(smallPt);
+  const merged = mergeGeometries(parts, false)!;
+  parts.forEach((p) => p.dispose());
+  return merged;
+})();
+
+/**
+ * Four mineral tints, shared across all thirty-two cases.
+ *
+ * Real specimen colours — smoky quartz, amethyst, citrine, beryl — in place of
+ * the old mint/lilac/baby-blue, which were the palette's only unearned chroma
+ * and read as pickups in a game. They keep a low emissive so they still carry
+ * in a dark hall, but well under the old 0.9: the object should look lit from
+ * within, not switched on. Hoisted out of the component because it built a NEW
+ * material per case — thirty-two materials for four colours.
+ */
+const CRYSTAL_TINTS = ['#8a6f52', '#7d6a9c', '#b08a44', '#5f8878'];
+const CRYSTAL_MATERIALS = CRYSTAL_TINTS.map(
+  (hue) =>
+    new THREE.MeshStandardMaterial({
+      color: hue,
+      emissive: new THREE.Color(hue),
+      emissiveIntensity: 0.34,
+      metalness: 0.15,
+      roughness: 0.12,
+      flatShading: true,
+    }),
+);
+
+/** A lit glass case on a moulded pedestal, a mineral specimen turning within. */
+function DisplayCase({
+  timberMat,
+  brassMat,
+  glassMat,
+  seed,
+}: {
+  timberMat: THREE.Material;
+  brassMat: THREE.Material;
+  glassMat: THREE.Material;
+  seed: number;
+}) {
   const spin = useRef<THREE.Mesh>(null);
   useFrame((_, delta) => {
-    if (spin.current) spin.current.rotation.y += delta * 0.4;
+    if (spin.current) spin.current.rotation.y += delta * 0.25;
   });
-  const hue = ['#ffd27a', '#b9e0ff', '#d4b9ff', '#a8f0c8'][seed % 4];
+  const hue = CRYSTAL_TINTS[seed % 4];
   return (
     <group>
-      {/* plinth */}
-      <mesh position={[0, 0.5, 0]} material={woodMat}>
-        <boxGeometry args={[0.9, 1.0, 0.9]} />
-      </mesh>
-      <mesh position={[0, 1.02, 0]} material={woodMat}>
-        <boxGeometry args={[1.02, 0.08, 1.02]} />
-      </mesh>
-      {/* glass vitrine */}
-      <mesh position={[0, 1.7, 0]} material={glassMat}>
-        <boxGeometry args={[0.8, 1.25, 0.8]} />
-      </mesh>
-      {/* brass cap */}
-      <mesh position={[0, 2.36, 0]} material={woodMat}>
-        <boxGeometry args={[0.92, 0.1, 0.92]} />
-      </mesh>
-      {/* the floating artifact */}
-      <mesh ref={spin} position={[0, 1.7, 0]}>
-        <icosahedronGeometry args={[0.22, 0]} />
-        <meshStandardMaterial color={hue} emissive={hue} emissiveIntensity={0.9} metalness={0.4} roughness={0.2} />
-      </mesh>
-      <sprite position={[0, 1.7, 0]} scale={[0.9, 0.9, 1]}>
-        <spriteMaterial map={getGlowTexture()} color={hue} transparent opacity={0.28} depthWrite={false} blending={THREE.AdditiveBlending} />
+      <mesh geometry={CASE_PEDESTAL} material={timberMat} />
+      <mesh geometry={CASE_BRASS} material={brassMat} />
+      <mesh geometry={CASE_GLASS} material={glassMat} />
+      <mesh ref={spin} geometry={CASE_CRYSTAL} position={[0, 1.079, 0]} material={CRYSTAL_MATERIALS[seed % 4]} />
+      {/* tight and faint — the specimen should look lit from within, and a
+          wide additive halo just washes the facets it is meant to show */}
+      <sprite position={[0, 1.3, 0]} scale={[0.5, 0.5, 1]}>
+        <spriteMaterial map={getGlowTexture()} color={hue} transparent opacity={0.12} depthWrite={false} blending={THREE.AdditiveBlending} />
       </sprite>
     </group>
   );
@@ -2192,7 +2725,23 @@ function DisplayCase({ woodMat, glassMat, seed }: { woodMat: THREE.Material; gla
  *  Everything hugs the walls (inside the non-walkable margin) so the broad
  *  central aisle stays clear. */
 export function WingFurnishings() {
+  // repeat stays 1 for both: the bench and the pedestals carry their own
+  // world-scaled UVs from `boxUV`, and a repeat here would multiply that
   const oak = useMemo(() => getMaterial('wood_gallery_timber', { repeat: [1, 1] }), []);
+  const hide = useMemo(
+    () =>
+      getMaterial('leather_upholstery', {
+        repeat: [1, 1],
+        // An old library squab: reddened off the scan's tan so it reads as
+        // oxblood morocco rather than a new tan sofa. Held UP at #8c4a35 —
+        // this tint MULTIPLIES a mid-brown scan, so the first pick (#5b3126)
+        // landed near black and the cushion vanished into the seat it sits on.
+        // These alcoves are the darkest floor in the building; a colour meant
+        // to read here has to be chosen against the scan, not on its own.
+        overrides: { color: '#8c4a35', roughness: 0.82 },
+      }),
+    [],
+  );
   const brass = useMemo(
     () =>
       getMaterial('metal_brass_burnished', {
@@ -2233,7 +2782,7 @@ export function WingFurnishings() {
           const [x, z] = wingPoint(a, GALLERY_U, wall * N);
           items.push(
             <group key={`b${wall}`} position={[x, 0, z]} rotation-y={wall < 0 ? -a : Math.PI - a}>
-              <Bench woodMat={oak} />
+              <Bench woodMat={oak} leatherMat={hide} />
             </group>,
           );
         }
@@ -2245,7 +2794,7 @@ export function WingFurnishings() {
             const [x, z] = wingPoint(a, u, wall * N);
             items.push(
               <group key={`c${u}${wall}`} position={[x, 0, z]} rotation-y={wall < 0 ? -a : Math.PI - a}>
-                <DisplayCase woodMat={brass} glassMat={glass} seed={ci++} />
+                <DisplayCase timberMat={oak} brassMat={brass} glassMat={glass} seed={ci++} />
               </group>,
             );
           }

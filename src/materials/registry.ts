@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { leanPath } from '../features/explorer/three/textureBudget';
 import libraryJson from './library.json';
 import { paintFallback } from './fallbacks';
+import { roomEnvironment } from './environment';
 import {
   SRGB_SLOTS,
   type AnyStandardMaterial,
@@ -80,9 +81,53 @@ export function primeMaterials(): Promise<void> {
 let maxAnisotropy = 4;
 
 /**
+ * The room's own reflection, for the surfaces that need one — see the header of
+ * `environment.ts` for why a metal with no environment map renders black, and
+ * why this is NOT hung on `scene.environment`.
+ *
+ * Null until the renderer arrives (PMREM needs a GL context). Materials built
+ * before then are caught by the sweep in `configureMaterials`, exactly as they
+ * are caught by the sweep in `primeMaterials` when their scans land.
+ */
+let environment: THREE.Texture | null = null;
+
+/**
+ * Which surfaces get it.
+ *
+ * METAL, always: that is the family the map exists for, and a metal without one
+ * is not dark on purpose, it is broken.
+ *
+ * GLASS, at a lower intensity: crystal spheres, lenses and flask bodies are
+ * doing the same job — showing the room back — and they have the same problem,
+ * but glass is dielectric, so it keeps its diffuse term and needs far less help.
+ *
+ * Everything else is left alone. Image-based lighting on the stone and timber
+ * would raise the black floor of the entire building at once, and this museum's
+ * whole grade is built on that floor staying where it is.
+ */
+function envIntensityFor(def: MaterialDef): number | null {
+  if (def.family === 'metal') return def.params?.envMapIntensity ?? 1;
+  if (def.family === 'glass') return def.params?.envMapIntensity ?? 0.45;
+  return def.params?.envMapIntensity ?? null;
+}
+
+function applyEnvironment(mat: AnyStandardMaterial, def: MaterialDef): void {
+  if (!environment) return;
+  const intensity = envIntensityFor(def);
+  if (intensity === null) return;
+  mat.envMap = environment;
+  mat.envMapIntensity = intensity;
+  mat.needsUpdate = true;
+}
+
+/**
  * Hand the registry the renderer once it exists. Anisotropy is the single
  * cheapest win in a building full of long floors and tall shafts seen at
  * grazing angles — without it every plank run turns to shimmer at ten metres.
+ *
+ * This is also where the room's reflection is built and swept over everything
+ * already handed out. Both passes are idempotent — this runs again on every hot
+ * reload — and `roomEnvironment` caches, so the PMREM pass happens once.
  */
 export function configureMaterials(gl: THREE.WebGLRenderer): void {
   maxAnisotropy = gl.capabilities.getMaxAnisotropy();
@@ -90,6 +135,8 @@ export function configureMaterials(gl: THREE.WebGLRenderer): void {
     tex.anisotropy = maxAnisotropy;
     tex.needsUpdate = true;
   }
+  environment = roomEnvironment(gl);
+  for (const entry of live.values()) applyEnvironment(entry.material, getMaterialDef(entry.id));
 }
 
 /* ————— texture loading ————— */
@@ -395,6 +442,7 @@ export function getMaterial(id: MaterialId, req: MaterialRequest = {}): AnyStand
   applyParams(mat, def.params ?? {});
   if (req.overrides) applyParams(mat, req.overrides);
   applyMaps(mat, id, req);
+  applyEnvironment(mat, def);
 
   live.set(key, { material: mat, id, request: req });
   return mat;

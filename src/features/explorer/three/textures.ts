@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { mulberry32 } from '../../../domain/random';
+import type { ClusterId } from '../../../domain/types';
+import { SIGIL_PAINTERS, SIGIL_SIZE } from './sigils';
 import { leanPath, texPx } from './textureBudget';
 
 /**
@@ -1302,69 +1304,673 @@ export function spineSheet(seed = 29): THREE.CanvasTexture {
 }
 
 /** a pointed-arch stained-glass window for the aisle ends */
-export function stainedGlassArch(seed = 3): THREE.CanvasTexture {
-  return make(`glass|${seed}`, [256, 384], (ctx, w, h) => {
+/**
+ * THE WINDOW AT THE END OF EVERY WALK.
+ *
+ * What was here was a grid of randomly coloured squares behind a ruled black
+ * lattice, and it was the cheapest thing in the building: real leaded glass is
+ * not a grid, because lead is a structural material and its lines go where the
+ * DRAWING needs them — round a medallion, along a quarry's diagonal, out to the
+ * saddle bars. A regular orthogonal net is the one pattern a glazier never
+ * produces, so the eye reads it instantly as wallpaper.
+ *
+ * This is a transitional window, which is what the rest of the building is:
+ * round-headed lights under a two-centred arch, and the head filled with PLATE
+ * tracery — piercings cut through a solid stone plate rather than bar tracery
+ * moulded out of it. Plate is the older, heavier, stranger-looking of the two
+ * and reads as something nobody alive remembers building.
+ *
+ * The composition, from the sill up:
+ *   QUARRIES  a diamond grisaille field — pale green-white glass, each quarry
+ *             its own tone, several painted with an oak trail in brown enamel.
+ *   BORDER    a ruby-and-sapphire dashed band following each light's own arch,
+ *             with a gold fillet showing either side of it.
+ *   ROUNDELS  sol in the left light, luna in the right — gold on ruby and
+ *             silver on sapphire. The only two saturated things at eye level.
+ *   OCULUS    the tradition's own emblem, glazed in gold on deep blue, drawn by
+ *             the SAME painter that draws the glowing sign over the hall mouth
+ *             (sigils.ts). Passing no cluster gives a plain wheel of foils,
+ *             which is what the front door's fanlight wants.
+ *   AGE       soot up from the sill, a few mismatched replacement quarries, two
+ *             cracks strapped with a repair lead, corrosion round the rebate.
+ *
+ * TWO THINGS ARE LOAD-BEARING AND MUST NOT MOVE.
+ *
+ * 1. The springing stays at 0.40h and the apex at ~0.05h. The fanlight over the
+ *    front doors is a semicircle that samples THIS painting's head — `fanGeom`
+ *    in structure.tsx reads u 0.07–0.93, v 0.60–0.94, which is canvas rows
+ *    0.06h to 0.40h. Move the arch and the entrance is glazed with a slice of
+ *    somebody else's window.
+ * 2. Every coordinate is proportional to w/h and every line width is scaled by
+ *    K. The old painter used raw pixels, so on a phone — where `texPx` paints
+ *    the canvas at half size — its panes and leads came out at twice their
+ *    intended weight relative to the glass. Nothing here can drift that way.
+ */
+export function stainedGlassArch(seed = 3, cluster?: ClusterId): THREE.CanvasTexture {
+  return make(`glass|${seed}|${cluster ?? 'plain'}`, [320, 480], (ctx, w, h) => {
     const rng = mulberry32(seed);
     ctx.clearRect(0, 0, w, h);
-    const colors = ['#e8b873', '#9fb8ff', '#f2a0c0', '#a8e08f', '#c9a0ff', '#7fd4c1', '#ffd9a0'];
-    // arch silhouette path
-    const arch = () => {
+    /** line widths are in 320-wide units, so a lean canvas keeps the weights */
+    const K = w / 320;
+
+    /* ————— the stonework, struck rather than eyeballed ————— */
+    const M = w * 0.055; // jamb
+    const S = h * 0.4; // springing of the great arch — SEE NOTE 1
+    const APEX = h * 0.05; // its crown — SEE NOTE 1
+    const SILL = h * 0.978;
+    const T = w * 0.032; // the rebate the glass sits back in
+    const MW = w * 0.03; // the mullion between the two lights
+    // a two-centred arch through (M, S) and (w/2, APEX): one span and one rise
+    // give one pair of centres, so the head re-strikes itself if either moves
+    const span = w / 2 - M;
+    const rise = S - APEX;
+    const d = (rise * rise - span * span) / (2 * span);
+    const R = span + d;
+    /** the half-angle at which a concentric arch of radius `Ri` reaches the
+     *  centre line. Taking it from the radius rather than reusing the outer
+     *  arch's angle is what makes the inner rings meet cleanly on the axis
+     *  instead of leaving a notch at the apex. */
+    const phiOf = (Ri: number) => Math.acos(Math.min(1, d / Ri));
+    const archPath = (inset: number, bottom: number) => {
+      const Ri = R - inset;
+      const p = phiOf(Ri);
       ctx.beginPath();
-      ctx.moveTo(18, h - 10);
-      ctx.lineTo(18, h * 0.4);
-      ctx.quadraticCurveTo(18, 44, w / 2, 22);
-      ctx.quadraticCurveTo(w - 18, 44, w - 18, h * 0.4);
-      ctx.lineTo(w - 18, h - 10);
+      ctx.moveTo(M + inset, bottom);
+      ctx.lineTo(M + inset, S);
+      ctx.arc(w / 2 + d, S, Ri, Math.PI, Math.PI + p);
+      ctx.arc(w / 2 - d, S, Ri, -p, 0);
+      ctx.lineTo(w - M - inset, bottom);
       ctx.closePath();
     };
-    arch();
-    ctx.save();
-    ctx.clip();
-    // glass panes in a grid, each softly luminous
-    const pane = 34;
-    for (let y = 0; y < h; y += pane) {
-      for (let x = 0; x < w; x += pane) {
-        ctx.fillStyle = colors[Math.floor(rng() * colors.length)];
-        ctx.globalAlpha = 0.85;
-        ctx.fillRect(x, y, pane, pane);
-        ctx.globalAlpha = 0.35;
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(x + 3, y + 3, pane * 0.4, pane * 0.32);
-        ctx.globalAlpha = 1;
-      }
-    }
-    // rosette at the crown
-    ctx.beginPath();
-    ctx.arc(w / 2, h * 0.26, 34, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffdf9e';
-    ctx.fill();
-    for (let i = 0; i < 8; i++) {
-      const a = (i / 8) * Math.PI * 2;
+
+    /* ————— the two lights ————— */
+    const LS = h * 0.575; // where their own round heads spring
+    const lights = [
+      { x0: M + T, x1: w / 2 - MW / 2 },
+      { x0: w / 2 + MW / 2, x1: w - M - T },
+    ].map((l) => ({ ...l, cx: (l.x0 + l.x1) / 2, r: (l.x1 - l.x0) / 2 }));
+    const lightPath = (l: (typeof lights)[number], inset = 0) => {
       ctx.beginPath();
-      ctx.arc(w / 2 + Math.cos(a) * 22, h * 0.26 + Math.sin(a) * 22, 8, 0, Math.PI * 2);
-      ctx.fillStyle = colors[i % colors.length];
+      ctx.moveTo(l.x0 + inset, SILL - T);
+      ctx.lineTo(l.x0 + inset, LS);
+      ctx.arc(l.cx, LS, l.r - inset, Math.PI, Math.PI * 2);
+      ctx.lineTo(l.x1 - inset, SILL - T);
+      ctx.closePath();
+    };
+
+    /* ————— the piercings in the head plate ————— */
+    const OC = { x: w / 2, y: h * 0.215, r: w * 0.165 };
+    const SPANDREL = [-1, 1].map((s) => ({ x: w / 2 + s * w * 0.19, y: h * 0.365, r: w * 0.052 }));
+
+    /* ————— palettes ————— */
+    /** pot-metal, the deep stuff: only the roundels and the oculus get these */
+    const RUBY = '#8c2029';
+    const SAPPHIRE = '#243f86';
+    const GOLD = '#e3b558';
+    const SILVER = '#cdd6de';
+    const VERT = '#2f6b46';
+    /** the grisaille run — nearly white glass, and the whole field is made of
+     *  it. Held HIGH: this material is unlit and toneMapped off, so what is
+     *  painted here is what reaches the screen, and in a backlit window the
+     *  white glass has to be the brightest thing in the frame. Painted at a
+     *  mid value it loses to the pot-metal roundels, and a window whose plain
+     *  glass is darker than its rubies is reading as a picture of a window. */
+    const GRIS = ['#dee2c4', '#d2d9b8', '#e9ebd0', '#c8d2ae', '#f0edd6', '#d8dcbe', '#e4ddba'];
+    /** the mismatched panes a later glazier put in, having nothing to hand */
+    const PATCH = ['#a89a6a', '#7e8f76', '#b7a184', '#8e8f9c'];
+    const LEAD = '#181310';
+
+    /* ————— the field: a diamond quarry lattice —————
+     * Laid on the lattice's OWN axes rather than on the canvas's: `u` and `v`
+     * run at ±45°, so a cell is one quarry and the leads between cells are the
+     * real leading, not a grid drawn over the glass afterwards. */
+    const quarry = (x0: number, y0: number, x1: number, y1: number, pitch: number) => {
+      const toXY = (u: number, v: number): [number, number] => [((u + v) * pitch) / 2, ((u - v) * pitch) / 2];
+      const us: number[] = [];
+      const vs: number[] = [];
+      for (const [px, py] of [[x0, y0], [x1, y0], [x0, y1], [x1, y1]] as const) {
+        us.push((px + py) / pitch);
+        vs.push((px - py) / pitch);
+      }
+      const u0 = Math.floor(Math.min(...us)) - 1;
+      const u1 = Math.ceil(Math.max(...us)) + 1;
+      const v0 = Math.floor(Math.min(...vs)) - 1;
+      const v1 = Math.ceil(Math.max(...vs)) + 1;
+      const cells: [number, number, string][] = [];
+      for (let u = u0; u <= u1; u++) {
+        for (let v = v0; v <= v1; v++) {
+          // one pane in fifty is a later replacement, and the rest of the field
+          // drifts in tone the way hand-blown glass does
+          const patch = rng() < 0.02;
+          const tone = patch ? PATCH[Math.floor(rng() * PATCH.length)] : GRIS[Math.floor(rng() * GRIS.length)];
+          cells.push([u, v, tone]);
+          ctx.beginPath();
+          const c = [toXY(u, v), toXY(u + 1, v), toXY(u + 1, v + 1), toXY(u, v + 1)];
+          ctx.moveTo(c[0][0], c[0][1]);
+          for (let i = 1; i < 4; i++) ctx.lineTo(c[i][0], c[i][1]);
+          ctx.closePath();
+          ctx.fillStyle = tone;
+          ctx.fill();
+          // the pane's own thickness: glass is never flat, so one corner of
+          // each quarry carries more light than the rest of it
+          const g = ctx.createLinearGradient(c[0][0], c[0][1], c[2][0], c[2][1]);
+          g.addColorStop(0, 'rgba(255,252,232,0.34)');
+          g.addColorStop(0.55, 'rgba(255,252,232,0.02)');
+          g.addColorStop(1, 'rgba(40,44,30,0.13)');
+          ctx.fillStyle = g;
+          ctx.fill();
+        }
+      }
+      // the trail: an oak sprig painted in brown enamel across a scatter of
+      // quarries. Grisaille is DRAWN glass — without the painting it is just
+      // pale panes, and the drawing is the whole reason the field is pale.
+      ctx.lineCap = 'round';
+      for (const [u, v] of cells) {
+        if (rng() > 0.34) continue;
+        const [qx, qy] = toXY(u + 0.5, v + 0.5);
+        ctx.save();
+        ctx.translate(qx, qy);
+        ctx.rotate(rng() * Math.PI * 2);
+        ctx.strokeStyle = 'rgba(58,44,26,0.55)';
+        ctx.lineWidth = 1.1 * K;
+        ctx.beginPath();
+        ctx.moveTo(-pitch * 0.3, 0);
+        ctx.quadraticCurveTo(0, -pitch * 0.14, pitch * 0.3, pitch * 0.04);
+        ctx.stroke();
+        for (const t of [-0.14, 0.1]) {
+          ctx.beginPath();
+          ctx.ellipse(t * pitch, -pitch * 0.13, pitch * 0.13, pitch * 0.07, -0.5, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+      // and now the lead: one came along every lattice line, drawn once so the
+      // joins are continuous rather than a stitched grid of segments
+      ctx.strokeStyle = LEAD;
+      ctx.lineWidth = 2.1 * K;
+      for (let u = u0; u <= u1 + 1; u++) {
+        const [ax, ay] = toXY(u, v0);
+        const [bx, by] = toXY(u, v1 + 1);
+        ctx.beginPath();
+        ctx.moveTo(ax, ay);
+        ctx.lineTo(bx, by);
+        ctx.stroke();
+      }
+      for (let v = v0; v <= v1 + 1; v++) {
+        const [ax, ay] = toXY(u0, v);
+        const [bx, by] = toXY(u1 + 1, v);
+        ctx.beginPath();
+        ctx.moveTo(ax, ay);
+        ctx.lineTo(bx, by);
+        ctx.stroke();
+      }
+    };
+
+    /** a roundel: pot-metal ground, a lead ring, and something drawn on it */
+    const roundel = (
+      cx: number,
+      cy: number,
+      r: number,
+      ground: string,
+      draw: (ctx: CanvasRenderingContext2D, r: number) => void,
+    ) => {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.fillStyle = ground;
+      ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+      // pot-metal is streaky — the colour lies in the glass, not on it
+      for (let i = 0; i < 40; i++) {
+        ctx.globalAlpha = 0.06 + rng() * 0.12;
+        ctx.fillStyle = rng() > 0.5 ? shade(ground, 0.14) : shade(ground, -0.12);
+        ctx.beginPath();
+        ctx.ellipse(cx + (rng() - 0.5) * r * 2, cy + (rng() - 0.5) * r * 2, r * (0.1 + rng() * 0.5), r * 0.06, rng() * Math.PI, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      ctx.save();
+      ctx.translate(cx, cy);
+      draw(ctx, r);
+      ctx.restore();
+      ctx.restore();
+      // the lead round its edge, and the fillet of white glass outside that
+      ctx.strokeStyle = LEAD;
+      ctx.lineWidth = 2.6 * K;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.strokeStyle = 'rgba(232,226,190,0.6)';
+      ctx.lineWidth = 1.2 * K;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r + 2.6 * K, 0, Math.PI * 2);
+      ctx.stroke();
+    };
+
+    /* ═════ paint ═════ */
+    ctx.save();
+    archPath(0, SILL);
+    ctx.clip();
+
+    // the stone plate the whole window is cut out of. It is nearly black
+    // because this surface is UNLIT and backlit: from inside a dark hall the
+    // stone is a silhouette and only the glass has any value at all.
+    ctx.fillStyle = '#1d1710';
+    ctx.fillRect(0, 0, w, h);
+
+    /* — the two lights — */
+    for (const [i, l] of lights.entries()) {
+      ctx.save();
+      lightPath(l);
+      ctx.clip();
+      quarry(l.x0, LS - l.r, l.x1, SILL, w * 0.082);
+      ctx.restore();
+
+      // the border band, following the light's own arch: a gold fillet laid
+      // first and left showing either side, then ruby and sapphire dashed over
+      // it in alternation. Dashing a stroke is what lets the coloured squares
+      // turn the head of the arch with it instead of stopping at the springing.
+      ctx.save();
+      lightPath(l);
+      ctx.clip();
+      const bw = w * 0.026;
+      const seg = w * 0.038;
+      ctx.strokeStyle = GOLD;
+      ctx.lineWidth = bw + 3.4 * K;
+      lightPath(l, bw * 0.5);
+      ctx.stroke();
+      for (const [k, tone] of [[0, RUBY], [seg, SAPPHIRE]] as const) {
+        ctx.setLineDash([seg, seg]);
+        ctx.lineDashOffset = k;
+        ctx.strokeStyle = tone;
+        ctx.lineWidth = bw;
+        lightPath(l, bw * 0.5);
+        ctx.stroke();
+      }
+      ctx.setLineDash([]);
+      // the lead each side of the band. The outer one rides the light's own
+      // edge and is half cut away by the clip, which is exactly what happens
+      // where a panel meets its rebate.
+      ctx.strokeStyle = LEAD;
+      ctx.lineWidth = 1.7 * K;
+      lightPath(l, 0);
+      ctx.stroke();
+      lightPath(l, bw + 1.7 * K);
+      ctx.stroke();
+      ctx.restore();
+
+      // sol and luna. Gold on ruby, silver on sapphire — the one place in the
+      // building silver is used for anything, and the reason it is here is that
+      // the moon is the only cold light the museum admits.
+      ctx.save();
+      lightPath(l);
+      ctx.clip();
+      const rr = l.r * 0.66;
+      const ry = LS - l.r * 0.02;
+      if (i === 0) {
+        roundel(l.cx, ry, rr, RUBY, (c, r) => {
+          c.fillStyle = GOLD;
+          c.strokeStyle = GOLD;
+          c.lineWidth = 2.4 * K;
+          for (let k = 0; k < 16; k++) {
+            const a = (k / 16) * Math.PI * 2;
+            c.beginPath();
+            c.moveTo(Math.cos(a) * r * 0.42, Math.sin(a) * r * 0.42);
+            c.lineTo(Math.cos(a) * r * (k % 2 ? 0.68 : 0.82), Math.sin(a) * r * (k % 2 ? 0.68 : 0.82));
+            c.stroke();
+          }
+          c.beginPath();
+          c.arc(0, 0, r * 0.4, 0, Math.PI * 2);
+          c.fill();
+          // the face, cut back through the stain with a needle
+          c.strokeStyle = 'rgba(60,26,18,0.75)';
+          c.lineWidth = 1.8 * K;
+          for (const s of [-1, 1]) {
+            c.beginPath();
+            c.arc(s * r * 0.14, -r * 0.08, r * 0.05, 0, Math.PI * 2);
+            c.stroke();
+          }
+          c.beginPath();
+          c.arc(0, r * 0.02, r * 0.19, 0.35, Math.PI - 0.35);
+          c.stroke();
+        });
+      } else {
+        roundel(l.cx, ry, rr, SAPPHIRE, (c, r) => {
+          c.fillStyle = SILVER;
+          c.beginPath();
+          c.arc(0, 0, r * 0.56, Math.PI * 0.42, Math.PI * 1.58);
+          c.quadraticCurveTo(r * 0.16, 0, Math.cos(Math.PI * 0.42) * r * 0.56, Math.sin(Math.PI * 0.42) * r * 0.56);
+          c.fill();
+          c.fillStyle = '#e8e2c4';
+          for (let k = 0; k < 7; k++) {
+            const a = rng() * Math.PI * 2;
+            const rad = r * (0.62 + rng() * 0.26);
+            const sx = Math.cos(a) * rad;
+            const sy = Math.sin(a) * rad;
+            c.beginPath();
+            for (let p = 0; p < 8; p++) {
+              const pa = (p / 8) * Math.PI * 2;
+              const pr = r * (p % 2 ? 0.03 : 0.09);
+              const px = sx + Math.cos(pa) * pr;
+              const py = sy + Math.sin(pa) * pr;
+              if (p === 0) c.moveTo(px, py);
+              else c.lineTo(px, py);
+            }
+            c.closePath();
+            c.fill();
+          }
+        });
+      }
+      ctx.restore();
+
+      // saddle bars: the iron the panel is actually tied to, sagging a little
+      // after eight hundred years of doing it
+      ctx.save();
+      lightPath(l);
+      ctx.clip();
+      ctx.strokeStyle = '#100d0a';
+      ctx.lineWidth = 2.8 * K;
+      for (let y = LS - l.r * 0.55; y < SILL; y += h * 0.093) {
+        ctx.beginPath();
+        ctx.moveTo(l.x0 - 2, y);
+        ctx.quadraticCurveTo(l.cx, y + 1.6 * K, l.x1 + 2, y);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    /* — the head: the oculus and its two spandrel foils — */
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(OC.x, OC.y, OC.r, 0, Math.PI * 2);
+    ctx.clip();
+    roundel(OC.x, OC.y, OC.r, '#1b2c5e', (c, r) => {
+      // a wheel of foils round the rim in ruby and green, so the emblem sits on
+      // something rather than floating in a blue disc
+      for (let k = 0; k < 12; k++) {
+        const a = (k / 12) * Math.PI * 2;
+        c.fillStyle = k % 2 ? RUBY : VERT;
+        c.beginPath();
+        c.arc(Math.cos(a) * r * 0.83, Math.sin(a) * r * 0.83, r * 0.12, 0, Math.PI * 2);
+        c.fill();
+        c.strokeStyle = LEAD;
+        c.lineWidth = 1.5 * K;
+        c.stroke();
+      }
+      c.strokeStyle = LEAD;
+      c.lineWidth = 2 * K;
+      c.beginPath();
+      c.arc(0, 0, r * 0.68, 0, Math.PI * 2);
+      c.stroke();
+      if (cluster) {
+        // the tradition's own sign, in gold glass — drawn by the same painter
+        // that draws the glowing mark over this hall's mouth
+        c.save();
+        const k = (r * 1.32) / SIGIL_SIZE;
+        c.scale(k, k);
+        c.translate(-SIGIL_SIZE / 2, -SIGIL_SIZE / 2);
+        c.strokeStyle = GOLD;
+        c.fillStyle = GOLD;
+        // in the sigil's own 256-wide space, so it comes out ~2.5 px here —
+        // the width of a drawn line on glass rather than of a lead
+        c.lineWidth = 12;
+        c.font = '600 34px Georgia, serif';
+        c.lineCap = 'round';
+        c.lineJoin = 'round';
+        SIGIL_PAINTERS[cluster](c);
+        c.restore();
+      } else {
+        // no tradition: the front door gets a plain wheel, which is what a
+        // fanlight over a threshold should be
+        c.strokeStyle = GOLD;
+        c.lineWidth = 2.6 * K;
+        for (let k = 0; k < 8; k++) {
+          const a = (k / 8) * Math.PI * 2;
+          c.beginPath();
+          c.moveTo(0, 0);
+          c.lineTo(Math.cos(a) * r * 0.66, Math.sin(a) * r * 0.66);
+          c.stroke();
+        }
+        c.fillStyle = GOLD;
+        c.beginPath();
+        c.arc(0, 0, r * 0.13, 0, Math.PI * 2);
+        c.fill();
+      }
+    });
+    ctx.restore();
+
+    for (const sp of SPANDREL) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(sp.x, sp.y, sp.r, 0, Math.PI * 2);
+      ctx.clip();
+      roundel(sp.x, sp.y, sp.r, rng() > 0.5 ? VERT : RUBY, (c, r) => {
+        c.fillStyle = GOLD;
+        for (let k = 0; k < 3; k++) {
+          const a = -Math.PI / 2 + (k / 3) * Math.PI * 2;
+          c.beginPath();
+          c.arc(Math.cos(a) * r * 0.38, Math.sin(a) * r * 0.38, r * 0.34, 0, Math.PI * 2);
+          c.fill();
+        }
+      });
+      ctx.restore();
+    }
+
+    /* — the light coming through it — */
+    // A window is the brightest thing in a dark hall, and what sells that is
+    // not brighter glass but the way the brightness pools: strongest where the
+    // openings are, gone by the rebate.
+    const bleed = ctx.createRadialGradient(w / 2, h * 0.5, 0, w / 2, h * 0.5, h * 0.62);
+    bleed.addColorStop(0, 'rgba(255,246,214,0.16)');
+    bleed.addColorStop(0.6, 'rgba(255,240,200,0.06)');
+    bleed.addColorStop(1, 'rgba(255,236,190,0)');
+    ctx.fillStyle = bleed;
+    ctx.fillRect(0, 0, w, h);
+
+    /* — age — */
+    // Soot climbing from the sill, and the green bloom of corroded lead. Kept
+    // shallow and short: at 0.55 alpha over the bottom half it read as a window
+    // whose lower lights had been bricked up, and the field a visitor stands
+    // closest to is the one it was eating.
+    const soot = ctx.createLinearGradient(0, h, 0, h * 0.62);
+    soot.addColorStop(0, 'rgba(18,15,10,0.3)');
+    soot.addColorStop(1, 'rgba(18,15,10,0)');
+    ctx.fillStyle = soot;
+    ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < 90; i++) {
+      ctx.globalAlpha = 0.04 + rng() * 0.12;
+      ctx.fillStyle = rng() > 0.5 ? '#3d4a34' : '#1d2018';
+      ctx.beginPath();
+      ctx.ellipse(rng() * w, rng() * h, 2 + rng() * 16, 1.5 + rng() * 9, rng() * Math.PI, 0, Math.PI * 2);
       ctx.fill();
     }
-    // lead lines
-    ctx.strokeStyle = '#241c14';
-    ctx.lineWidth = 4;
-    for (let y = 0; y <= h; y += pane) {
+    ctx.globalAlpha = 1;
+    // two cracks, each strapped with the lead a glazier put over it rather
+    // than reglazing the panel
+    for (let i = 0; i < 2; i++) {
+      const l = lights[i % 2];
+      let cx = l.x0 + rng() * (l.x1 - l.x0);
+      let cy = LS + rng() * (SILL - LS) * 0.8;
       ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(w, y);
+      ctx.moveTo(cx, cy);
+      for (let k = 0; k < 5; k++) {
+        cx += (rng() - 0.5) * w * 0.14;
+        cy += (rng() - 0.3) * h * 0.05;
+        ctx.lineTo(cx, cy);
+      }
+      ctx.strokeStyle = 'rgba(24,19,16,0.85)';
+      ctx.lineWidth = 2.4 * K;
       ctx.stroke();
-    }
-    for (let x = 0; x <= w; x += pane) {
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, h);
+      ctx.strokeStyle = 'rgba(214,206,176,0.35)';
+      ctx.lineWidth = 0.9 * K;
       ctx.stroke();
     }
     ctx.restore();
-    // stone tracery outline
-    arch();
-    ctx.strokeStyle = '#3a2f24';
-    ctx.lineWidth = 10;
+
+    /* — the stone the whole thing is set in — */
+    // drawn OUTSIDE the clip so it reads as the reveal in front of the glass,
+    // and given a lit inner lip because the one place a backlit window is not
+    // a silhouette is the arris the light wraps round
+    archPath(0, SILL);
+    ctx.strokeStyle = '#2a2118';
+    ctx.lineWidth = 11 * K;
+    ctx.stroke();
+    archPath(T * 0.5, SILL);
+    ctx.strokeStyle = 'rgba(226,214,178,0.20)';
+    ctx.lineWidth = 1.6 * K;
+    ctx.stroke();
+    // the mullion, standing in front of the glass for the same reason
+    ctx.fillStyle = '#2a2118';
+    ctx.fillRect(w / 2 - MW / 2, LS - lights[0].r - h * 0.02, MW, SILL - LS + lights[0].r + h * 0.02);
+    ctx.fillStyle = 'rgba(226,214,178,0.16)';
+    ctx.fillRect(w / 2 - MW / 2, LS - lights[0].r - h * 0.02, 1.4 * K, SILL - LS + lights[0].r + h * 0.02);
+  }, false);
+}
+
+/**
+ * THE FANLIGHT OVER THE FRONT DOORS — and why it is not the wing window.
+ *
+ * It used to be: `fanGeom` in structure.tsx re-mapped a semicircle's UVs onto
+ * the head of `stainedGlassArch`, and while that head was an undifferentiated
+ * grid of coloured squares the theft went unnoticed. It stopped working the
+ * moment the wing window became a real one, because a real window's head is
+ * mostly SOLID STONE — plate tracery is piercings cut through a plate — so the
+ * doorway ended up glazed with a dark slab and a smeared oculus.
+ *
+ * A fanlight is its own thing and has its own geometry: wedges radiating from a
+ * boss at the springing, crossed by concentric rings. It also already has
+ * nine brass glazing bars and two brass rings standing in front of it (see
+ * `brassGeom`), so the leading painted here is laid on exactly those divisions —
+ * the metal in front reads as the frame of the panes behind it rather than as a
+ * grille bolted over a picture.
+ *
+ * Warm, where the wings' windows are cool. Those look out on a moonlit night
+ * and this one is the door you came in by.
+ *
+ * Painted into the UPPER half of a square canvas about its centre, the same
+ * convention `rugHalf` uses and for the same reason: the geometry is the
+ * y >= 0 half of a CircleGeometry, whose stock UVs span the whole canvas about
+ * (0.5, 0.5), so the springing line has to lie along the canvas's middle row.
+ */
+export function fanlightGlass(seed = 5): THREE.CanvasTexture {
+  return make(`fanlight|${seed}`, [512, 512], (ctx, w, h) => {
+    const rng = mulberry32(seed);
+    const K = w / 512;
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2;
+    const cy = h / 2;
+    const R = h / 2 - 5 * K;
+    /** the same nine lights the brass bars in front divide it into */
+    const WEDGES = 9;
+    /** and the same two rings */
+    const RINGS = [0.17, 0.47, 0.75, 1];
+    const LEAD = '#181310';
+    // honey and amber out from the boss, deepening to ruby and sapphire at the
+    // rim — the fan reads as light spilling in rather than as a pattern
+    const BANDS = [
+      ['#f0d9a0', '#e6c884', '#f7e6bb'],
+      ['#d8a24f', '#c98f3e', '#e2b263'],
+      ['#8c2029', '#243f86', '#2f6b46'],
+    ];
+
+    // canvas y runs DOWN, so PI..2PI sweeps the upper half of the image
+    for (let r = 0; r < 3; r++) {
+      for (let k = 0; k < WEDGES; k++) {
+        const a0 = Math.PI + (k / WEDGES) * Math.PI;
+        const a1 = Math.PI + ((k + 1) / WEDGES) * Math.PI;
+        const r0 = R * RINGS[r];
+        const r1 = R * RINGS[r + 1];
+        const pal = BANDS[r];
+        // the outer band alternates so the rim is not one flat colour
+        const tone = r === 2 ? pal[k % pal.length] : pal[Math.floor(rng() * pal.length)];
+        ctx.beginPath();
+        ctx.arc(cx, cy, r0, a0, a1);
+        ctx.arc(cx, cy, r1, a1, a0, true);
+        ctx.closePath();
+        ctx.fillStyle = tone;
+        ctx.fill();
+        // each pane's own draw: glass is thicker at one edge than the other
+        const g = ctx.createLinearGradient(
+          cx + Math.cos(a0) * r0,
+          cy + Math.sin(a0) * r0,
+          cx + Math.cos(a1) * r1,
+          cy + Math.sin(a1) * r1,
+        );
+        g.addColorStop(0, 'rgba(255,246,214,0.28)');
+        g.addColorStop(0.6, 'rgba(255,246,214,0.03)');
+        g.addColorStop(1, 'rgba(48,36,18,0.22)');
+        ctx.fillStyle = g;
+        ctx.fill();
+        // a scatter of seed bubbles, which is what dates a pane to before
+        // anyone could make glass without them
+        for (let i = 0; i < 7; i++) {
+          const a = a0 + rng() * (a1 - a0);
+          const rr = r0 + rng() * (r1 - r0);
+          ctx.globalAlpha = 0.12 + rng() * 0.22;
+          ctx.fillStyle = '#fffdf0';
+          ctx.beginPath();
+          ctx.ellipse(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr, 1.6 * K + rng() * 3 * K, 1 * K + rng() * 2 * K, rng() * Math.PI, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    // the leading, on exactly the divisions the brass in front stands on
+    ctx.strokeStyle = LEAD;
+    ctx.lineWidth = 3.4 * K;
+    for (let k = 0; k <= WEDGES; k++) {
+      const a = Math.PI + (k / WEDGES) * Math.PI;
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.cos(a) * R * RINGS[0], cy + Math.sin(a) * R * RINGS[0]);
+      ctx.lineTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R);
+      ctx.stroke();
+    }
+    for (const t of RINGS) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, R * t, Math.PI, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    // the boss at the springing: a gold sun, half-shown, as the fan is half a
+    // circle and its centre is on the door head
+    ctx.beginPath();
+    ctx.arc(cx, cy, R * RINGS[0], Math.PI, Math.PI * 2);
+    ctx.fillStyle = '#e3b558';
+    ctx.fill();
+    ctx.strokeStyle = LEAD;
+    ctx.lineWidth = 3 * K;
+    ctx.stroke();
+    ctx.strokeStyle = '#6b4a1c';
+    ctx.lineWidth = 2 * K;
+    for (let k = 1; k < 8; k++) {
+      const a = Math.PI + (k / 8) * Math.PI;
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.cos(a) * R * 0.05, cy + Math.sin(a) * R * 0.05);
+      ctx.lineTo(cx + Math.cos(a) * R * 0.14, cy + Math.sin(a) * R * 0.14);
+      ctx.stroke();
+    }
+
+    /* — age, inside the glass only — */
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, Math.PI, Math.PI * 2);
+    ctx.clip();
+    for (let i = 0; i < 70; i++) {
+      ctx.globalAlpha = 0.04 + rng() * 0.12;
+      ctx.fillStyle = rng() > 0.55 ? '#3d4a34' : '#231d14';
+      ctx.beginPath();
+      ctx.ellipse(cx + (rng() - 0.5) * R * 2, cy - rng() * R, 3 * K + rng() * 20 * K, 2 * K + rng() * 10 * K, rng() * Math.PI, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    ctx.restore();
+
+    // the stone rebate it is set into
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, Math.PI, Math.PI * 2);
+    ctx.strokeStyle = '#2a2118';
+    ctx.lineWidth = 9 * K;
     ctx.stroke();
   }, false);
 }
@@ -1724,32 +2330,126 @@ export function domeCoffers(base = '#5d5a48', gilt = '#b98a3d', seed = 63): THRE
  * The field is painted, not timbered: these are the ceilings of a museum of
  * the esoteric, and a gilt star at the centre of every coffer costs nothing
  * and turns 47 m of brown boarding into a night sky held up by ribs.
+ *
+ * ── What this used to be, and the two faults it had ───────────────────────
+ *
+ * 1. NO BEVELS. The recess was three concentric rectangles, each a flat fill a
+ *    little darker than the last. Concentric rectangles are not a coffer: what
+ *    tells the eye a panel is SUNK is that each step has a lit edge on the side
+ *    the light comes from and a shadowed one opposite, and without that the
+ *    whole soffit reads as a flat surface with a grid printed on it. Every step
+ *    here now carries both.
+ *
+ * 2. IT WAS PAINTED THROUGH A DOUBLE TINT. `stone_vault_coffer` set
+ *    `params.color` to the same `#2f3b3a` this painter was called with, and
+ *    three multiplies map × colour — so the drawing rendered at roughly the
+ *    SQUARE of its intended value, which for a dark teal is very close to
+ *    black. Only the parts of the drawing already much lighter than the base
+ *    survived (the rib, the gilt star), which is exactly what the vault looked
+ *    like: a rib grid and a star, floating on nothing. The definition now sets
+ *    `color: "#ffffff"` — the same fix `stone_dome_coffer` had — so what is
+ *    painted here is what is seen, and the values below are pitched for that.
+ *    Note this is a per-material fix and not the building-wide one: the other
+ *    painter-backed definitions still double-tint, and unpicking them all at
+ *    once brightens every surface together and wants the lighting regraded with
+ *    it (see docs/MATERIALS.md).
+ *
+ * Seamless in both axes, and everything that touches an edge is drawn
+ * symmetrically about it: the ribs are half-width, and the boss in each corner
+ * is a QUARTER of one, so four tiles assemble a whole boss at every rib
+ * crossing — which is where a real vault puts them.
  */
 export function vaultCoffer(base = '#2f3b3a', gilt = '#c39a4e', seed = 67): THREE.CanvasTexture {
   return make(`vaultcoffer|${base}|${gilt}|${seed}`, [256, 256], (ctx, w, h) => {
     const rng = mulberry32(seed);
+    const K = w / 256;
     const RIB = w * 0.055; // half the rib; the neighbouring tile supplies the rest
-    ctx.fillStyle = shade(base, 0.16);
+    /** the light is over the visitor's shoulder and below: every step is lit on
+     *  its top-left arris and shadowed on its bottom-right, consistently, which
+     *  is the whole of what makes this read as carved */
+    const LIT = shade(base, 0.3);
+    const DARK = shade(base, -0.2);
+
+    ctx.fillStyle = shade(base, 0.14);
     ctx.fillRect(0, 0, w, h);
-    // stepped recess in from the rib
+    // the rib's own crown, catching the light along its length
+    ctx.fillStyle = shade(base, 0.24);
+    ctx.fillRect(0, 0, w, RIB * 0.5);
+    ctx.fillRect(0, 0, RIB * 0.5, h);
+    ctx.fillRect(w - RIB * 0.5, 0, RIB * 0.5, h);
+    ctx.fillRect(0, h - RIB * 0.5, w, RIB * 0.5);
+
+    /** one step down: a fill, then its two arrises */
+    const step = (inset: number, size: number, tone: string) => {
+      ctx.fillStyle = tone;
+      ctx.fillRect(inset, inset, size, size);
+      ctx.lineWidth = 2.2 * K;
+      // the lit lip, over the top and down the left
+      ctx.strokeStyle = LIT;
+      ctx.beginPath();
+      ctx.moveTo(inset, inset + size);
+      ctx.lineTo(inset, inset);
+      ctx.lineTo(inset + size, inset);
+      ctx.stroke();
+      // and the shadow the step casts on itself, right and below
+      ctx.strokeStyle = DARK;
+      ctx.beginPath();
+      ctx.moveTo(inset + size, inset);
+      ctx.lineTo(inset + size, inset + size);
+      ctx.lineTo(inset, inset + size);
+      ctx.stroke();
+    };
+
     const steps = 3;
     for (let s = 0; s < steps; s++) {
-      const inset = RIB + (w * 0.055) * s;
-      ctx.fillStyle = shade(base, 0.06 - s * 0.09);
-      ctx.fillRect(inset, inset, w - inset * 2, h - inset * 2);
+      const inset = RIB + w * 0.055 * s;
+      step(inset, w - inset * 2, shade(base, 0.04 - s * 0.055));
     }
     const f = RIB + w * 0.055 * steps;
-    // the sunk field, and a scatter of small stars in it
-    ctx.fillStyle = shade(base, -0.16);
+
+    /* ——— the gilt bead on the inner arris ———
+     * Laid as short jittered strokes rather than stroked as a rectangle. A
+     * ruled gold line is the single fastest way to make a painted ceiling look
+     * printed; leaf on plaster is broken and uneven, and at 12 m that unevenness
+     * is the only thing distinguishing gilding from yellow paint. */
+    const bead = (x0: number, y0: number, x1: number, y1: number) => {
+      const n = Math.max(2, Math.round(Math.hypot(x1 - x0, y1 - y0) / (5 * K)));
+      for (let i = 0; i < n; i++) {
+        // a fifth of the bead has lost its leaf and shows the bole under it
+        const gone = rng() < 0.18;
+        ctx.strokeStyle = gone ? shade(base, -0.06) : shade(gilt, (rng() - 0.5) * 0.26);
+        ctx.lineWidth = (1.5 + rng() * 1.1) * K;
+        ctx.beginPath();
+        ctx.moveTo(x0 + ((x1 - x0) * i) / n, y0 + ((y1 - y0) * i) / n);
+        ctx.lineTo(x0 + ((x1 - x0) * (i + 1)) / n, y0 + ((y1 - y0) * (i + 1)) / n);
+        ctx.stroke();
+      }
+    };
+    const b = f - 1.4 * K;
+    bead(b, b, w - b, b);
+    bead(w - b, b, w - b, h - b);
+    bead(w - b, h - b, b, h - b);
+    bead(b, h - b, b, b);
+
+    /* ——— the sunk field: a small night sky ——— */
+    ctx.fillStyle = shade(base, -0.14);
+    ctx.fillRect(f, f, w - f * 2, h - f * 2);
+    // the field is deepest at its middle — a coffer is a box, and the back of
+    // a box is further from the light than its sides
+    const well = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, (w - f * 2) * 0.7);
+    well.addColorStop(0, 'rgba(0,0,0,0.34)');
+    well.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = well;
     ctx.fillRect(f, f, w - f * 2, h - f * 2);
     ctx.fillStyle = '#cfe0e8';
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < 16; i++) {
       ctx.globalAlpha = 0.25 + rng() * 0.5;
       const sx = f + rng() * (w - f * 2);
       const sy = f + rng() * (h - f * 2);
-      ctx.fillRect(sx, sy, 1.5, 1.5);
+      ctx.fillRect(sx, sy, 1.5 * K, 1.5 * K);
     }
     ctx.globalAlpha = 1;
+
     // the gilt star at the coffer's centre — eight points, drawn as two
     // crossed four-point stars so it keeps its shape at a distance
     const c = w / 2;
@@ -1772,6 +2472,60 @@ export function vaultCoffer(base = '#2f3b3a', gilt = '#c39a4e', seed = 67): THRE
       ctx.restore();
     }
     ctx.globalAlpha = 1;
+
+    /* ——— the boss at the rib crossing ———
+     * A quarter in each corner of the tile; four tiles make one. Carved, then
+     * gilded on its upper petals only — the underside of a boss twelve metres
+     * up never saw a gilder's cushion and has two centuries of dust on it. */
+    for (const [cx, cy] of [[0, 0], [w, 0], [0, h], [w, h]] as const) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(0, 0, w, h);
+      ctx.clip();
+      const br = RIB * 2.1;
+      ctx.fillStyle = shade(base, 0.2);
+      ctx.beginPath();
+      ctx.arc(cx, cy, br, 0, Math.PI * 2);
+      ctx.fill();
+      for (let p = 0; p < 8; p++) {
+        const a = (p / 8) * Math.PI * 2;
+        // the two petals facing the light keep their leaf; the rest are stone
+        const up = Math.sin(a) < -0.2 || Math.cos(a) < -0.2;
+        ctx.fillStyle = up ? shade(gilt, -0.08) : shade(base, 0.08);
+        ctx.beginPath();
+        ctx.ellipse(cx + Math.cos(a) * br * 0.52, cy + Math.sin(a) * br * 0.52, br * 0.36, br * 0.19, a, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.fillStyle = shade(gilt, 0.08);
+      ctx.beginPath();
+      ctx.arc(cx, cy, br * 0.24, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    /* ——— age ——— */
+    // dust and cobweb settle where two surfaces meet, so they gather in the
+    // corners of the recess and nowhere else
+    for (const [dx, dy] of [[f, f], [w - f, f], [f, h - f], [w - f, h - f]] as const) {
+      const g = ctx.createRadialGradient(dx, dy, 0, dx, dy, w * 0.12);
+      g.addColorStop(0, 'rgba(28,26,20,0.4)');
+      g.addColorStop(1, 'rgba(28,26,20,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(f, f, w - f * 2, h - f * 2);
+    }
+    // one settlement crack, wandering across the panel and dying out
+    ctx.strokeStyle = 'rgba(20,20,18,0.42)';
+    ctx.lineWidth = 1.1 * K;
+    let cx2 = f + rng() * (w - f * 2);
+    let cy2 = f;
+    ctx.beginPath();
+    ctx.moveTo(cx2, cy2);
+    for (let i = 0; i < 5; i++) {
+      cx2 += (rng() - 0.5) * w * 0.14;
+      cy2 += (h - f * 2) / 5;
+      ctx.lineTo(cx2, cy2);
+    }
+    ctx.stroke();
   });
 }
 

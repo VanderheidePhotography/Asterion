@@ -220,6 +220,17 @@ const lampOfLearning: Painter = (ctx) => {
   }
 };
 
+/** the 256×256 space every painter above draws in. Exported with the painters
+ *  themselves so other art in the building can carry the same signs the
+ *  wayfinding marks do without redrawing them: the window at the end of each
+ *  wing glazes its tradition's emblem into the oculus of its tracery (see
+ *  `stainedGlassArch`), and a sign that is a glowing mark in the air over the
+ *  hall mouth and a leaded medallion in the far window is the same sign twice,
+ *  which is the point. A painter touches nothing but the path — the caller sets
+ *  its own transform, stroke, fill and line width first. */
+export const SIGIL_SIZE = SIZE;
+export type SigilPainter = Painter;
+
 const PAINTERS: Record<ClusterId, Painter> = {
   hermetica: caduceus,
   alchemy: ouroboros,
@@ -230,6 +241,8 @@ const PAINTERS: Record<ClusterId, Painter> = {
   'occult-revival': radiantEye,
   scholarship: lampOfLearning,
 };
+
+export const SIGIL_PAINTERS: Record<ClusterId, Painter> = PAINTERS;
 
 export function getSigilTexture(cluster: ClusterId, color = '#ffd9a0'): THREE.CanvasTexture {
   const key = `${cluster}|${color}`;
