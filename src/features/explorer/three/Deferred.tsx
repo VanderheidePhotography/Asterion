@@ -1,6 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { LEAN_TEXTURES } from './textureBudget';
-import { reportProgress } from './loadPhase';
 
 /**
  * BUILD THE ROOM YOU ARE STANDING IN FIRST.
@@ -25,16 +24,21 @@ import { reportProgress } from './loadPhase';
  * the previous one to be on screen instead of piling onto the same stall.
  *
  * Desktop mounts everything immediately, exactly as before.
+ *
+ * A COURSE DOES NOT DRIVE THE LOADING BAR, and used to claim to. Each one
+ * carried a `progress` prop that reported a milestone as it landed — dead code
+ * in both directions: on desktop nothing is deferred, so none of them ever
+ * fired, and on a phone every one of them fires AFTER the first presented
+ * frame, which is the moment the veil comes down. The bar those numbers were
+ * addressed to had already gone. The courses are, correctly, what happens
+ * once the visitor is already standing in the hall.
  */
 export function Deferred({
   /** how many painted frames to wait before this course is built */
   frames = 1,
-  /** where this course leaves the loading bar, 0‥1 */
-  progress,
   children,
 }: {
   frames?: number;
-  progress?: number;
   children: ReactNode;
 }) {
   const [ready, setReady] = useState(!LEAN_TEXTURES);
@@ -45,14 +49,12 @@ export function Deferred({
     let handle = 0;
     const tick = () => {
       left -= 1;
-      if (left <= 0) {
-        setReady(true);
-        if (progress !== undefined) reportProgress(progress);
-      } else handle = requestAnimationFrame(tick);
+      if (left <= 0) setReady(true);
+      else handle = requestAnimationFrame(tick);
     };
     handle = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(handle);
-  }, [ready, frames, progress]);
+  }, [ready, frames]);
 
   return ready ? <>{children}</> : null;
 }

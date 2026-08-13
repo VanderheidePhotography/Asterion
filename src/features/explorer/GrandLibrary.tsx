@@ -106,7 +106,7 @@ import {
 import { useReducedMotion } from '../../lib/useReducedMotion';
 import { useViewport } from '../../lib/useViewport';
 import { Deferred } from './three/Deferred';
-import { HallLoading, PaintWatch } from './three/HallLoading';
+import { BuildWatch, HallLoading, PaintWatch } from './three/HallLoading';
 import { resetLoadPhase } from './three/loadPhase';
 import { SceneUnavailable } from '../../app/chrome/SceneBoundary';
 import { ContextWatch, DeviceReport, DeviceReportOverlay, diagRequested } from './three/DeviceReport';
@@ -3151,7 +3151,7 @@ function LibraryScene({
       {/* the floor: one astronomical diagram across the whole plan, mandala to
           ways to roundels to brass — see three/cosmographia.tsx */}
       <Cosmographia />
-      <Deferred frames={4} progress={0.7}>
+      <Deferred frames={4}>
         <WingChronology sections={SECTIONS} />
       </Deferred>
       {/* Isis & Serapis are niched on the two apse-side drum piers now — the
@@ -3168,7 +3168,7 @@ function LibraryScene({
           niched apse-side, Boaz & Jachin in the apse itself.) */}
       {/* course 2 — see Deferred: the shell of the wings, which the visitor
           can see down but is not standing in */}
-      <Deferred frames={2} progress={0.45}>
+      <Deferred frames={2}>
         <WingEnclosures />
       </Deferred>
       <EntranceHall />
@@ -3179,7 +3179,7 @@ function LibraryScene({
       {/* (the vestibule's two framed plates are gone — those walls are the
           pillars' now; see the note where Paintings used to stand in
           structure.tsx) */}
-      <Deferred frames={2} progress={0.55}>
+      <Deferred frames={2}>
         <WingGallery />
         <WingArcade />
         <WingFurnishings />
@@ -3190,14 +3190,14 @@ function LibraryScene({
           built because it is the largest, and because a visitor who has just
           arrived is looking at the rotunda, not reading a spine forty metres
           down a corridor. */}
-      <Deferred frames={6} progress={0.88}>
+      <Deferred frames={6}>
         <MegaShelves />
         <Grimoires selectedId={selectedId} still={still} onSelect={onSelect} />
       </Deferred>
       <SectionMarks />
       {/* the hall names, as carved boards hanging off the first bookcase of
           each wing rather than as type floating in the aisle */}
-      <Deferred frames={4} progress={0.75}>
+      <Deferred frames={4}>
         <WingSigns
           sections={SECTIONS.map((s) => ({ cluster: s.cluster, label: CLUSTER_META[s.cluster].label, angle: s.angle }))}
         />
@@ -3318,6 +3318,9 @@ function LibraryScene({
         />
         <Vignette offset={0.24} darkness={0.52} eskil={false} />
       </EffectComposer>
+      {/* last in the tree so its effect runs after every other mount: the
+          building is constructed, and the only thing left is drawing it */}
+      <BuildWatch />
     </>
   );
 }

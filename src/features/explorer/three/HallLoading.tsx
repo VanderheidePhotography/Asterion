@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { loadPhase, onLoadPhase, reportPainted, reportProgress, type LoadPhase } from './loadPhase';
+import { creepTick, loadPhase, onLoadPhase, reportMilestone, reportPainted, type LoadPhase } from './loadPhase';
 
 /**
  * The line held while the hall is built. Long enough to be worth reading, and
@@ -28,6 +28,27 @@ export function PaintWatch() {
 }
 
 /**
+ * The scene tree is up: every course of the building has rendered and every
+ * material, geometry and texture it asked for exists. Not the same thing as
+ * being on screen — nothing has been drawn yet, which is the next milestone
+ * and the one the veil actually waits for.
+ *
+ * Mounted LAST inside the scene, because a child's effect runs before its
+ * parent's and this has to be the effect that runs after all of them.
+ *
+ * A LAYOUT effect, not a passive one — measured, and the difference is 1.4
+ * seconds. Passive effects flush whenever React next gets a turn, which on a
+ * cold load is well after r3f's loop has already drawn the hall: the trace had
+ * `paint` landing before `build`, so the bar sat at 5/11 with the museum
+ * already on screen behind the veil. Layout effects run inside the commit,
+ * which is the moment this milestone is actually about.
+ */
+export function BuildWatch() {
+  useLayoutEffect(() => reportMilestone('build'), []);
+  return null;
+}
+
+/**
  * OUTSIDE the canvas: what the visitor looks at until that frame arrives.
  *
  * The Suspense fallback in App.tsx covers the code-split chunk and then gets
@@ -48,21 +69,18 @@ export function HallLoading() {
   useEffect(() => onLoadPhase(setPhase), []);
 
   /**
-   * A CREEP TOWARD THE NEXT MILESTONE, so the bar is never still.
+   * A CREEP INSIDE THE MILESTONE IN FLIGHT, so the bar is never still.
    *
-   * The courses report at four points, and between them nothing moves — on a
-   * slow device that is several seconds of a frozen bar, which reads worse
-   * than no bar. This eases toward whatever the next real milestone is and
-   * never reaches it, so the motion is honest about direction without
-   * inventing progress it has not made.
+   * Constructing the scene is one uninterrupted block of work that nothing can
+   * report from inside, and on a slow device that is seconds of a frozen bar,
+   * which reads worse than no bar at all. The easing lives in loadPhase and is
+   * fenced into the current milestone — it eases toward that milestone's
+   * completion and cannot reach it, so the motion is honest about direction
+   * without claiming a course that has not been laid.
    */
   useEffect(() => {
     if (phase.painted) return;
-    const id = setInterval(() => {
-      const p = loadPhase();
-      if (p.painted) return;
-      reportProgress(Math.min(p.progress + (0.92 - p.progress) * 0.06, 0.92));
-    }, 220);
+    const id = setInterval(creepTick, 220);
     return () => clearInterval(id);
   }, [phase.painted]);
 
