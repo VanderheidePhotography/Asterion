@@ -73,8 +73,38 @@ export function validateCollection(all: Entity[] = entities, bib: Map<string, So
   return problems;
 }
 
-// Shared singletons — built once, used by search, the companion, and the scenes.
-export const searchIndex = buildSearchIndex(entities);
-export const companion = buildCompanion(entities, sourceMap, searchIndex);
-export const graphLayout = computeLayout(entities);
-export const timeline = timelineItems(entities);
+/**
+ * Shared singletons — built once, used by search, the companion, and the
+ * scenes. BUILT ON FIRST ASK, not on import.
+ *
+ * These were four `export const`s, which means four whole-corpus passes ran
+ * during module evaluation of the ENTRY chunk on every visit: Fuse indexing
+ * every entity, the companion's retrieval tables, a force layout over the
+ * relation graph, and the timeline sort. A visitor who walks into the hall and
+ * never opens search paid for all of it before the front door could open, and
+ * module evaluation is the one place in a load where nothing else can happen —
+ * no frame, no fetch callback, no paint.
+ *
+ * Lazily memoised, they cost exactly what they did before, at the moment
+ * something actually wants them: opening search, asking the companion,
+ * drawing a relation thread. Each is still built once.
+ */
+let _searchIndex: ReturnType<typeof buildSearchIndex> | null = null;
+export function searchIndex(): ReturnType<typeof buildSearchIndex> {
+  return (_searchIndex ??= buildSearchIndex(entities));
+}
+
+let _companion: ReturnType<typeof buildCompanion> | null = null;
+export function companion(): ReturnType<typeof buildCompanion> {
+  return (_companion ??= buildCompanion(entities, sourceMap, searchIndex()));
+}
+
+let _graphLayout: ReturnType<typeof computeLayout> | null = null;
+export function graphLayout(): ReturnType<typeof computeLayout> {
+  return (_graphLayout ??= computeLayout(entities));
+}
+
+let _timeline: ReturnType<typeof timelineItems> | null = null;
+export function timeline(): ReturnType<typeof timelineItems> {
+  return (_timeline ??= timelineItems(entities));
+}

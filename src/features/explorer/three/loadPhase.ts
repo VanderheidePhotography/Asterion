@@ -177,10 +177,21 @@ export function resetLoadPhase(): void {
  * type is genuinely load-bearing for how soon the hall can be lettered, and it
  * is the one milestone here that is pure network.
  */
+/**
+ * Note this asks for the LABEL face, not `document.fonts.ready` — the same
+ * narrowing TextSprite makes, and for the same reason: the page also loads the
+ * two faces an opened grimoire's pages are set in, and the hall does not wait
+ * on those, so a bar that did would be reporting somebody else's download.
+ */
+const LABEL_FACE = "600 64px 'Cormorant Garamond'";
+
 function fontsReady(): boolean {
-  return typeof document !== 'undefined' && document.fonts?.status === 'loaded';
+  return typeof document !== 'undefined' && Boolean(document.fonts?.check(LABEL_FACE));
 }
 
 if (typeof document !== 'undefined' && document.fonts) {
-  void document.fonts.ready.then(() => reportMilestone('fonts'));
+  void document.fonts
+    .load(LABEL_FACE)
+    .catch(() => undefined)
+    .then(() => reportMilestone('fonts'));
 }

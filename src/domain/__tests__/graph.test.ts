@@ -11,20 +11,20 @@ describe('knowledge graph', () => {
 
   it('positions every entity in both layouts', () => {
     for (const e of entities) {
-      expect(graphLayout.byCluster.has(e.id), e.id).toBe(true);
-      expect(graphLayout.byTime.has(e.id), e.id).toBe(true);
+      expect(graphLayout().byCluster.has(e.id), e.id).toBe(true);
+      expect(graphLayout().byTime.has(e.id), e.id).toBe(true);
     }
   });
 
   it('is deterministic — same layout on every visit', () => {
-    const a = graphLayout.byCluster.get('john-dee')!;
-    const b = graphLayout.byCluster.get('john-dee')!;
+    const a = graphLayout().byCluster.get('john-dee')!;
+    const b = graphLayout().byCluster.get('john-dee')!;
     expect(a).toEqual(b);
     expect(Number.isFinite(a.x + a.y + a.z)).toBe(true);
   });
 
   it('neighbor lookup is symmetric', () => {
-    const edges = graphLayout.edges;
+    const edges = graphLayout().edges;
     for (const e of entities.slice(0, 10)) {
       for (const n of neighborsOf(e.id, edges)) {
         expect(neighborsOf(n, edges)).toContain(e.id);

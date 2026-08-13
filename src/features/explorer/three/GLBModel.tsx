@@ -158,27 +158,24 @@ export function GLBModel({
  * The cost is a possible pop-in on first approach. The alternative is a
  * visitor who leaves before the building loads, which is not a trade.
  */
-const PRELOAD = LEAN_TEXTURES
-  ? ['wizard']
-  : [
-  'wizard',
-  // the card-catalogue station in the north apse
-  'librarian',
-  // the drum piers
-  'hermes',
-  'enoch',
-  'leontocephaline',
-  'prometheus',
-  'sophia',
-  'melchizedek',
-  'zoroaster',
-  'orpheus',
-  // the apse pair and the two great pillars
-  'isis',
-  'serapis',
-  'boaz',
-  'jachin',
-];
+/**
+ * AND ON A DESKTOP, ONLY WHAT STANDS IN THE ARRIVAL SIGHTLINE.
+ *
+ * The list below used to be all fourteen on anything that was not a phone —
+ * about 13 MB fetched and meshopt-decoded at module evaluation, which is to
+ * say in the same stretch of main thread that is trying to build the hall.
+ * A desktop on a fast line swallows it; a desktop on a hotel connection wears
+ * the whole 13 MB before the doors open, for statues that are behind the
+ * visitor or across the building.
+ *
+ * Four are kept, and they are the ones you are looking at while it loads: the
+ * wizard at the hearth, Hermes and Enoch on the two entrance piers you walk
+ * between, and the librarian whose desk closes the view straight ahead. Every
+ * other figure streams as you turn toward it — and none of them pops in from
+ * nothing, because the procedural stone figure stands on the pier as the
+ * Suspense fallback until its model lands (see statues.tsx).
+ */
+const PRELOAD = LEAN_TEXTURES ? ['wizard'] : ['wizard', 'hermes', 'enoch', 'librarian'];
 
 for (const m of PRELOAD) {
   useGLTF.preload(`/models/${m}.glb`);

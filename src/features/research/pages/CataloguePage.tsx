@@ -14,7 +14,7 @@ export function CataloguePage() {
 
   const shown = useMemo(() => {
     const base = query.trim()
-      ? searchIndex.query(query, 60).map((h) => h.entity)
+      ? searchIndex().query(query, 60).map((h) => h.entity)
       : [...entities].sort((a, b) => a.name.localeCompare(b.name));
     return base.filter(
       (e) => (!typeFilter || e.type === typeFilter) && (!clusterFilter || e.cluster === clusterFilter),

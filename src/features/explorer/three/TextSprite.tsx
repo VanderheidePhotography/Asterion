@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import * as THREE from 'three';
-import { LEAN_TEXTURES, TEXTURE_SCALE } from './textureBudget';
+import { TEXTURE_SCALE } from './textureBudget';
 
 /**
  * Self-contained 3D text: renders type onto a high-DPI canvas texture.
@@ -190,8 +190,17 @@ const bakeCache = new Map<string, CacheEntry>();
  * is already on screen and already walkable. Labels fade in over that window
  * rather than the building arriving late.
  *
- * Desktop bakes synchronously, exactly as before: there is nothing to fix on
- * a machine where the whole set costs half a frame's grace.
+ * DESKTOP STREAMS TOO, since 2026-08-13. It used to bake synchronously on the
+ * theory that the whole set costs half a frame's grace on a real machine, and
+ * a sampling profile of a cold desktop load says otherwise: `strokeText`,
+ * `measureText`, `fillText` and the canvas `scale`/`getContext` around them
+ * come to roughly six hundred milliseconds, all of it spent before the first
+ * frame can be presented. That is not grace, that is a third of the wait — and
+ * it buys nothing, because a visitor who has just arrived is looking at the
+ * rotunda, not reading a spine forty metres down a corridor.
+ *
+ * The budget is per frame, so a fast machine simply drains the queue in fewer
+ * frames; there is no separate desktop path to keep working.
  */
 const BUDGET_MS = 4;
 const queue: { key: string; make: () => Baked; wake: () => void }[] = [];
@@ -215,15 +224,6 @@ function enqueue(key: string, make: () => Baked, wake: () => void): void {
     pumping = true;
     requestAnimationFrame(pump);
   }
-}
-
-function peek(key: string, make: () => Baked): Baked {
-  let entry = bakeCache.get(key);
-  if (!entry) {
-    entry = { baked: make(), refs: 0 };
-    bakeCache.set(key, entry);
-  }
-  return entry.baked;
 }
 
 /** claim it, from an effect — paired with exactly one `release` */
@@ -256,14 +256,44 @@ function release(key: string): void {
  * every label shares its result, and nothing bakes in a fallback face unless
  * the fonts genuinely never arrive.
  */
-let fontsAreReady = typeof document !== 'undefined' && document.fonts?.status === 'loaded';
+/**
+ * THE TWO FACES THE HALL IS LETTERED IN — and only those.
+ *
+ * This waited on `document.fonts.ready`, which resolves when EVERY face the
+ * page has asked for has arrived. The page asks for four families: Cormorant
+ * Garamond and Inter, which every label here is set in, and EB Garamond and
+ * Cinzel, which exist for the pages of an opened grimoire — a thing no visitor
+ * is looking at while the doors are still shut. So the hall's lettering waited
+ * on type it does not use.
+ *
+ * `document.fonts.load` takes a CSS font shorthand and resolves when the faces
+ * matching it are usable, so this waits for exactly what `bake` will ask the
+ * canvas for. Weights are listed because a face is per weight: asking for 600
+ * does not load 400, and a missing weight is synthesised — which thickens the
+ * glyphs and, worse, does it inconsistently between labels.
+ */
+const LABEL_FACES = [
+  "400 64px 'Cormorant Garamond'",
+  "500 64px 'Cormorant Garamond'",
+  "600 64px 'Cormorant Garamond'",
+  "700 64px 'Cormorant Garamond'",
+  "400 64px 'Inter'",
+  "500 64px 'Inter'",
+  "600 64px 'Inter'",
+];
+
+let fontsAreReady = false;
 const fontWaiters = new Set<() => void>();
-if (!fontsAreReady && typeof document !== 'undefined') {
-  void document.fonts?.ready.then(() => {
-    fontsAreReady = true;
-    fontWaiters.forEach((fn) => fn());
-    fontWaiters.clear();
-  });
+if (typeof document !== 'undefined' && document.fonts) {
+  void Promise.all(LABEL_FACES.map((face) => document.fonts.load(face)))
+    // a face that fails to load must not hold the museum's type hostage: bake
+    // in whatever the fallback stack resolves to rather than never baking
+    .catch(() => undefined)
+    .then(() => {
+      fontsAreReady = true;
+      fontWaiters.forEach((fn) => fn());
+      fontWaiters.clear();
+    });
 }
 
 export function TextSprite({
@@ -305,7 +335,6 @@ export function TextSprite({
   const baked = useMemo(() => {
     if (!fontsReady) return null;
     const make = () => bake(children, color, FAMILIES[font], weight, maxWidthPx, outline, height * 1.5);
-    if (!LEAN_TEXTURES) return peek(key, make);
     const hit = bakeCache.get(key);
     if (hit) return hit.baked;
     enqueue(key, make, () => setBakeTick((n) => n + 1));

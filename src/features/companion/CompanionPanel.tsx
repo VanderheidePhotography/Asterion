@@ -28,7 +28,7 @@ export function CompanionPanel() {
   const ask = (q: string) => {
     const question = q.trim();
     if (!question) return;
-    setLog((l) => [...l, { question, answer: companion.ask(question) }]);
+    setLog((l) => [...l, { question, answer: companion().ask(question) }]);
     setDraft('');
     requestAnimationFrame(() => {
       logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: 'smooth' });

@@ -47,9 +47,6 @@ import { STATUE_LORE } from '../../data/statueLore';
 import { PILLAR_LORE } from '../../data/pillarLore';
 import { WING_LORE } from '../../data/wingLore';
 import { WingChronology, clusterSpan } from './three/WingChronology';
-import { FlyingBooks } from './three/FlyingBooks';
-import { Chickadees, Owl } from './three/creatures';
-import { ChandelierMoths, ShootingStars, StormWindows } from './three/ambientLife';
 import { TarotSpread } from './three/TarotTable';
 import { dealSpread, SPREAD_POSITIONS, type TarotCard } from '../../data/tarot';
 import { WingRadiance, HearthGlow } from './three/atmosphere';
@@ -196,7 +193,8 @@ const GRIMOIRES: Grimoire[] = (() => {
         if (a.year !== undefined && b.year !== undefined) return a.year - b.year;
         if (a.year !== undefined) return -1;
         if (b.year !== undefined) return 1;
-        return (graphLayout.degree.get(b.id) ?? 0) - (graphLayout.degree.get(a.id) ?? 0);
+        const degree = graphLayout().degree;
+        return (degree.get(b.id) ?? 0) - (degree.get(a.id) ?? 0);
       });
     /**
      * SPREAD THE CLUSTER DOWN THE WHOLE CORRIDOR, not just the near end.
@@ -3217,26 +3215,23 @@ function LibraryScene({
           somebody pushed back a minute ago (three/studyProps.tsx) */}
       <StudyProps still={still} />
       <Chandeliers still={still} spots={chandelierSpots} />
-      {/* The hall's small lives: books on errands, moths in the light, and
-          the odd meteor for whoever looks up through the oculus.
-          OFF ON PHONES, KEPT ON DESKTOP — and the second half of that was
-          MEASURED, after a first attempt to remove them everywhere on the
-          theory that they carried ~119 of the scene's 200 shader programs.
-          They do not. Removing them from the desktop moved the program count
-          from 200 to 216, which is to say nowhere: the drop to 81 on lean
-          devices came from culling labels, because a shader compiles when an
-          object FIRST DRAWS and 698 culled labels never compile theirs. The
-          moths were never the cost. They stay where they can be afforded. */}
-      {!LEAN_TEXTURES && (
-        <>
-          <FlyingBooks still={still} />
-          <ChandelierMoths still={still} anchors={chandelierSpots.slice(0, 4).map((s) => s.pos)} />
-          <ShootingStars still={still} />
-          <StormWindows still={still} />
-          <Owl still={still} />
-          <Chickadees still={still} />
-        </>
-      )}
+      {/* THE HALL'S SMALL LIVES ARE GONE — books on errands, moths in the
+          chandelier light, meteors through the oculus, rain on the wing
+          windows, the owl on its ledge and the chickadees on theirs. Removed
+          2026-08-13 on the user's explicit call during a load-weight pass,
+          after being offered the option of keeping the birds.
+
+          They were desktop-only already, and the note that used to stand here
+          was right that they are not a SHADER cost: removing them moved the
+          program count 200 -> 216, i.e. nowhere. What they cost is geometry,
+          draw calls and six animation loops on every frame, in a building the
+          measurements say is bound by exactly that.
+
+          If they are ever wanted back, they are whole in git history:
+          FlyingBooks.tsx, the ChandelierMoths / ShootingStars / StormWindows
+          in ambientLife.tsx, and Owl / Chickadees in creatures.tsx. The hall
+          keeps its candle flicker, its igniting orbit roads and the visitor —
+          it is not a still building, it is an unpopulated one. */}
       <Ladders spots={ladderSpots} />
       <FloorBookPiles spots={pileSpots} />
       <Greenery pots={pots} trails={trails} />
@@ -3579,6 +3574,34 @@ export default function GrandLibrary() {
     resetLoadPhase();
     return null;
   });
+  /**
+   * SHOW THE VEIL BEFORE BUILDING THE HALL BEHIND IT.
+   *
+   * Measured on a cold load: first paint at 2792 ms — not the hall, ANY pixel.
+   * The veil and the Canvas were in the same commit, and r3f builds its scene
+   * in a layout effect, which runs before the browser is allowed to present
+   * anything. So React had long since written the veil into the DOM and the
+   * visitor was still looking at a blank page for the whole of the
+   * construction. The bar it carries could not have been seen at any value,
+   * however honest the value was.
+   *
+   * Two frames of daylight fixes it: the veil commits alone, the browser
+   * presents it, and only then does the Canvas mount and the building start.
+   * One rAF is the frame's callback; the second is the proof it was presented.
+   * The cost is those two frames at the front — against two and a half seconds
+   * of blank screen removed from it.
+   */
+  const [shellPainted, setShellPainted] = useState(false);
+  useEffect(() => {
+    let second = 0;
+    const first = requestAnimationFrame(() => {
+      second = requestAnimationFrame(() => setShellPainted(true));
+    });
+    return () => {
+      cancelAnimationFrame(first);
+      cancelAnimationFrame(second);
+    };
+  }, []);
   const [photoMode, setPhotoMode] = useState(false);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -4011,7 +4034,8 @@ export default function GrandLibrary() {
               .join(' — ')
           : ''}
       </div>
-      <Canvas
+      {shellPainted && (
+        <Canvas
         /* lower bound matches AdaptiveQuality's floor: r3f re-applies this on
            every resize, so a higher one here would fight the pixel budget for a
            second each time the window changes size */
@@ -4097,7 +4121,8 @@ export default function GrandLibrary() {
           flightOn={flightOn}
           onFlightDone={onFlightDone}
         />
-      </Canvas>
+        </Canvas>
+      )}
 
       <HallLoading />
 

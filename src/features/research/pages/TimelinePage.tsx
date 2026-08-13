@@ -4,7 +4,7 @@ import { formatYear, groupByEra } from '../../../domain/timeline';
 import { ERA_META, TYPE_META } from '../../../domain/types';
 
 export function TimelinePage() {
-  const eras = groupByEra(timeline);
+  const eras = groupByEra(timeline());
   return (
     <>
       <h1 className="page-title">Timeline</h1>

@@ -46,12 +46,14 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23141122'/%3E%3Cpath d='M16 5l2.2 8.8L27 16l-8.8 2.2L16 27l-2.2-8.8L5 16l8.8-2.2z' fill='%23e8b873'/%3E%3C/svg%3E"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- The type is served from this origin now (src/styles/fonts.css and
+         public/fonts). It used to come from fonts.googleapis.com, which meant
+         a render-blocking stylesheet on one third-party origin and the woff2
+         files from a second — all of it in front of the first label the hall
+         can bake. The two faces the hall's own labels need are preloaded here;
+         the rest arrive with the stylesheet. -->
+    <link rel="preload" href="/fonts/cormorant-garamond-600-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-500-latin.woff2" as="font" type="font/woff2" crossorigin />
     <title>Asterion · A Museum of Western Esoteric History</title>
   </head>
   <body>

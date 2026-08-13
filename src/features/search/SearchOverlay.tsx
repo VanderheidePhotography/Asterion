@@ -16,7 +16,7 @@ export function SearchOverlay() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  const hits = useMemo(() => searchIndex.query(query, 9), [query]);
+  const hits = useMemo(() => searchIndex().query(query, 9), [query]);
 
   useEffect(() => {
     if (searchOpen) {

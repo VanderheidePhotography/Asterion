@@ -22,10 +22,11 @@ describe('collection integrity', () => {
   });
 
   it('the timeline is sorted and contains only dated, event-like entries', () => {
-    for (let i = 1; i < timeline.length; i++) {
-      expect(timeline[i].year).toBeGreaterThanOrEqual(timeline[i - 1].year);
+    const items = timeline();
+    for (let i = 1; i < items.length; i++) {
+      expect(items[i].year).toBeGreaterThanOrEqual(items[i - 1].year);
     }
-    for (const t of timeline) {
+    for (const t of items) {
       expect(['event', 'work', 'organization']).toContain(t.entity.type);
     }
   });

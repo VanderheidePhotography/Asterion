@@ -2,21 +2,46 @@ import { Suspense, lazy, useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Header } from './app/chrome/Header';
 import { ambient } from './features/audio/ambient';
-import { SearchOverlay } from './features/search/SearchOverlay';
-import { CompanionPanel } from './features/companion/CompanionPanel';
 import { useSettings, useUi } from './app/store';
 import { SceneBoundary } from './app/chrome/SceneBoundary';
-import { ResearchLayout } from './features/research/ResearchLayout';
-import { ResearchHome } from './features/research/pages/ResearchHome';
-import { CataloguePage } from './features/research/pages/CataloguePage';
-import { EntityPage } from './features/research/pages/EntityPage';
-import { TimelinePage } from './features/research/pages/TimelinePage';
-import { SourcesPage } from './features/research/pages/SourcesPage';
-import { AboutPage } from './features/research/pages/AboutPage';
 
 // The library is code-split: three.js only loads when the visitor enters,
 // keeping research mode featherweight.
 const GrandLibrary = lazy(() => import('./features/explorer/GrandLibrary'));
+
+/**
+ * THE RESEARCH HALL IS SPLIT OUT TOO, and for the same reason in reverse.
+ *
+ * Six pages, their layout, Fuse's index and the whole entity corpus were
+ * STATIC imports here, so every one of them was fetched, parsed and evaluated
+ * before the front door could open — measured at ~390 K of entities, ~265 K of
+ * generated red books, 27 K of sources and 49 K of Fuse in the entry chunk,
+ * none of which the rotunda needs to stand up. A visitor arriving at `/` paid
+ * for the reading room they had not walked into yet.
+ *
+ * They are lazy now. The corpus itself is shared, so whichever hall the
+ * visitor enters first pulls it; the difference is that the entry chunk no
+ * longer carries the pages, the search index and the layout on top of it.
+ */
+const ResearchLayout = lazy(() =>
+  import('./features/research/ResearchLayout').then((m) => ({ default: m.ResearchLayout })),
+);
+const ResearchHome = lazy(() => import('./features/research/pages/ResearchHome').then((m) => ({ default: m.ResearchHome })));
+const CataloguePage = lazy(() =>
+  import('./features/research/pages/CataloguePage').then((m) => ({ default: m.CataloguePage })),
+);
+const EntityPage = lazy(() => import('./features/research/pages/EntityPage').then((m) => ({ default: m.EntityPage })));
+const TimelinePage = lazy(() => import('./features/research/pages/TimelinePage').then((m) => ({ default: m.TimelinePage })));
+const SourcesPage = lazy(() => import('./features/research/pages/SourcesPage').then((m) => ({ default: m.SourcesPage })));
+const AboutPage = lazy(() => import('./features/research/pages/AboutPage').then((m) => ({ default: m.AboutPage })));
+
+/**
+ * The two overlays are lazy for the same reason: both pull the entity corpus
+ * (and the search index behind it) into whatever chunk they sit in, and both
+ * are closed until the visitor asks for them — ⌘K, or the companion's button.
+ */
+const SearchOverlay = lazy(() => import('./features/search/SearchOverlay').then((m) => ({ default: m.SearchOverlay })));
+const CompanionPanel = lazy(() => import('./features/companion/CompanionPanel').then((m) => ({ default: m.CompanionPanel })));
 
 const LOADING_LORE = [
   '“That which is below is like that which is above.” — the Emerald Tablet',
@@ -108,8 +133,10 @@ export function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
-      <SearchOverlay />
-      <CompanionPanel />
+      <Suspense fallback={null}>
+        <SearchOverlay />
+        <CompanionPanel />
+      </Suspense>
     </>
   );
 }
