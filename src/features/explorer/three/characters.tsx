@@ -9,6 +9,7 @@ import { registerPickable, unregisterPickable } from './ManualPicker';
 import { APSE_HALF } from './layout';
 import { getMaterial } from '../../../materials';
 import { GLBModel } from './GLBModel';
+import { useHeldForReveal } from './Deferred';
 
 /**
  * The regulars. Three wizards deep in discussion over pipes at one table;
@@ -457,6 +458,7 @@ export function Librarian({
   active: boolean;
   still: boolean;
 }) {
+  const held = useHeldForReveal();
   const head = useRef<THREE.Group>(null);
   const beacon = useRef<THREE.Sprite>(null);
   const sign = useRef<THREE.Sprite>(null);
@@ -925,6 +927,9 @@ export function Librarian({
           still leaves someone at the counter; its `head` ref simply goes null
           once the model takes over, and the survey-the-hall frame loop above
           is written to tolerate that. */}
+      {held ? (
+        <ProceduralLibrarian head={head} robeMat={robeMat} brassMat={brassMat} />
+      ) : (
       <Suspense fallback={<ProceduralLibrarian head={head} robeMat={robeMat} brassMat={brassMat} />}>
         {/* Taller than life at 2.4 m (was 2.0): she stands behind a 0.92 m
             counter with a 2.98 m cornice over her, and now that the counter is
@@ -933,6 +938,7 @@ export function Librarian({
             head lands ~2.4 m, still well under the arch crown at 2.92. */}
         <GLBModel src="/models/librarian.glb" targetHeight={2.4} position={[0, -0.55]} />
       </Suspense>
+      )}
 
       {/* ————— the "ask here" sign —————
           A soft halo with the lamp-of-learning emblem billboarded in front of

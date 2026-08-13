@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { LEAN_TEXTURES } from './textureBudget';
+import { loadPhase, onLoadPhase } from './loadPhase';
 
 /**
  * BUILD THE ROOM YOU ARE STANDING IN FIRST.
@@ -33,6 +34,35 @@ import { LEAN_TEXTURES } from './textureBudget';
  * addressed to had already gone. The courses are, correctly, what happens
  * once the visitor is already standing in the hall.
  */
+/**
+ * HOLD SOMETHING BACK UNTIL THE DOORS ARE OPEN — lean devices only.
+ *
+ * A course (above) is staged across a handful of frames and still lands inside
+ * the wait. This is for work that should not be in the wait at all: fourteen
+ * sculpted glTF figures, about a megabyte each, meshopt-decoded on the main
+ * thread, uploaded and linked — while the visitor is looking at a loading
+ * screen and the procedural stone figures that stand in for them are already
+ * built and already correct.
+ *
+ * Nothing is lost by waiting: the stand-in is what the niche shows either way
+ * until the model lands, and GLBModel dissolves the carving up through it
+ * (see `beneath`), so a figure arriving after the reveal looks like a statue
+ * gaining its detail rather than like a page still loading.
+ *
+ * Desktop is untouched: it has the headroom, and holding a model there would
+ * only make an arrival visible that currently is not.
+ */
+export function useHeldForReveal(): boolean {
+  const [held, setHeld] = useState(LEAN_TEXTURES && !loadPhase().painted);
+  useEffect(() => {
+    if (!held) return;
+    return onLoadPhase((p) => {
+      if (p.painted) setHeld(false);
+    });
+  }, [held]);
+  return held;
+}
+
 /**
  * HOW MANY COURSES ARE STILL OUTSTANDING — for the veil, which waits for them.
  *

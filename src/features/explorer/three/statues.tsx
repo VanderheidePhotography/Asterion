@@ -2,6 +2,7 @@ import { Suspense, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { GLBModel } from './GLBModel';
+import { useHeldForReveal } from './Deferred';
 import { candleWash, getGlowTexture } from './glowTexture';
 import { rugHalf } from './textures';
 import { TextSprite } from './TextSprite';
@@ -595,6 +596,7 @@ function Monument({
   selected: boolean;
   onPick?: (kind: string) => void;
 }) {
+  const held = useHeldForReveal();
   const mats = useMemo<Mats>(
     () => ({
       stone: new THREE.MeshStandardMaterial({ color: STONE, roughness: 0.95, emissive: '#6b5836' }),
@@ -683,11 +685,13 @@ function Monument({
       {/* the pedestal itself is not built here — all ten are baked into one
           buffer by `NichePedestals`, which is mounted alongside the statuary.
           What this frame owes it is the height everything else stands at. */}
-      <group position-y={pedH}>{STATUE_MODELS[spec.kind] ? (
+      <group position-y={pedH}>{STATUE_MODELS[spec.kind] && !held ? (
         // a real sculpted model stands in place of the procedural figure; the
         // carved primitive is the fallback while the glTF streams in — and is
         // handed to the model as `beneath` as well, so the carving dissolves
-        // up through it instead of replacing it in a single frame
+        // up through it instead of replacing it in a single frame.
+        // `held` keeps the whole glTF out of the load on a phone until the
+        // doors are open — see useHeldForReveal
         <Suspense
           fallback={
             spec.wide ? (
@@ -1014,6 +1018,7 @@ export function LeontocephalineEast({
   selected?: boolean;
   onPick?: (kind: string) => void;
 }) {
+  const held = useHeldForReveal();
   const mats = useMemo<Mats>(
     () => ({
       stone: new THREE.MeshStandardMaterial({ color: STONE, roughness: 0.95 }),
@@ -1095,9 +1100,21 @@ export function LeontocephalineEast({
           where theirs are, which is the thing an eye actually compares, and
           the raised key still clears the springing at 5.2 into the conch. */}
       <group position-y={PEDESTAL_H}>
-        <Suspense fallback={<FullFigure kind="leontocephaline" mats={mats} />}>
-          <GLBModel src="/models/leontocephaline.glb" targetHeight={5.0} position={[0, 0]} rotationY={0} animate={false} highlightRef={highlight} />
-        </Suspense>
+        {held ? (
+          <FullFigure kind="leontocephaline" mats={mats} />
+        ) : (
+          <Suspense fallback={<FullFigure kind="leontocephaline" mats={mats} />}>
+            <GLBModel
+              src="/models/leontocephaline.glb"
+              targetHeight={5.0}
+              position={[0, 0]}
+              rotationY={0}
+              animate={false}
+              highlightRef={highlight}
+              beneath={<FullFigure kind="leontocephaline" mats={mats} />}
+            />
+          </Suspense>
+        )}
       </group>
 
       {/* the name, on the pedestal's brass plate at knee height — the same
@@ -1359,6 +1376,11 @@ function Pillar({
       {/* the sculpted marble pillar itself — Boaz / Jachin, its letter carved on
           the shaft and its Corinthian capital modelled in; the procedural stone
           column it replaced is gone */}
+      {/* NOT held back for the reveal, unlike the niche figures: its Suspense
+          fallback is `null` because the procedural column it replaced is gone,
+          so holding it would open the doors on two missing pillars and pop
+          them in afterwards. A figure can wait because something is standing
+          in its place; this cannot. */}
       <Suspense fallback={null}>
         <GLBModel src={`/models/${spec.kind}.glb`} targetHeight={PILLAR_H} position={[0, 0]} animate={false} />
       </Suspense>
