@@ -1,6 +1,14 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { creepTick, loadPhase, onLoadPhase, reportMilestone, reportPainted, type LoadPhase } from './loadPhase';
+import {
+  creepTick,
+  loadPhase,
+  onLoadPhase,
+  reportMilestone,
+  reportPainted,
+  waitsFor,
+  type LoadPhase,
+} from './loadPhase';
 import { coursesSettled } from './Deferred';
 import { labelsSettled } from './TextSprite';
 import { scansSettled } from '../../../materials/registry';
@@ -44,12 +52,18 @@ export function PaintWatch() {
      * `lights` is not here: LightPool reports it from the harvest itself, which
      * is the only place that knows the pool is rigged.
      */
-    if (!coursesSettled()) return;
-    reportMilestone('courses');
-    if (!labelsSettled()) return;
-    reportMilestone('labels');
-    if (!scansSettled()) return;
-    reportMilestone('scans');
+    if (waitsFor('courses')) {
+      if (!coursesSettled()) return;
+      reportMilestone('courses');
+    }
+    if (waitsFor('labels')) {
+      if (!labelsSettled()) return;
+      reportMilestone('labels');
+    }
+    if (waitsFor('scans')) {
+      if (!scansSettled()) return;
+      reportMilestone('scans');
+    }
   });
   return null;
 }
@@ -74,6 +88,26 @@ export function BuildWatch() {
   useLayoutEffect(() => reportMilestone('build'), []);
   return null;
 }
+
+/*
+ * TRIED HERE AND REJECTED BY MEASUREMENT: kicking `gl.compileAsync(scene,
+ * camera)` off in this layout effect, so the driver would link the first
+ * frame's programs in parallel instead of three blocking on each one the first
+ * time it is used.
+ *
+ * The reasoning was sound and the numbers were not. Counted on a cold lean
+ * load, the first frame links 90 programs and spends ~609 ms blocked inside
+ * `getProgramInfoLog` waiting for them. With the pre-compile: 137 programs,
+ * 274 shaders and 1286 ms blocked — half as much again of everything.
+ *
+ * `compile`/`compileAsync` prepare the whole VISIBLE GRAPH, not the camera's
+ * frustum, so they link every material standing behind the visitor and down
+ * every corridor as well — work the first frame does not need and, on a phone
+ * where SceneWarmup is off, work nothing else was going to do either. Whatever
+ * KHR_parallel_shader_compile gives back, it does not pay for compiling half a
+ * building again. If this is tried a third time, the thing to compile is the
+ * frustum, and three does not offer that.
+ */
 
 /**
  * OUTSIDE the canvas: what the visitor looks at until that frame arrives.

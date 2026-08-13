@@ -268,28 +268,45 @@ function loadPile(): void {
     // desaturate once, here, rather than per draw: a `saturation(0)` filter on
     // a 2K source costs nothing at bake time and would cost a full-canvas
     // filtered blit every time `cloth` was called otherwise
+    /**
+     * MEASURE SMALL, CORRECT WITH A FILTER.
+     *
+     * Lift the scan to a neutral mid grey: a photograph averages wherever it
+     * averages, and multiplied into a dye anything below 0.5 mean darkens the
+     * whole floor toward black while anything above washes it out. Normalising
+     * here is what makes the dyer's shelf mean what it says.
+     *
+     * How it did that was the problem. `getImageData` over the full 2K scan,
+     * a JS loop to sum four million bytes, then a second loop to scale them and
+     * a `putImageData` back — on a profile of a cold load it was the single
+     * largest canvas cost in the building, ~270 ms of blocked main thread on a
+     * DESKTOP, for one carpet.
+     *
+     * The mean of an image is the mean of a thumbnail of it: the browser's own
+     * downscale is the same average, computed in native code. So it reads 64×64
+     * — 4,096 pixels rather than millions — and applies the correction as part
+     * of the same `filter` string the desaturation already needed, which means
+     * the GPU-side canvas does it during a single `drawImage` and no pixel
+     * buffer is ever handed to JavaScript.
+     */
+    const probe = document.createElement('canvas');
+    probe.width = 64;
+    probe.height = 64;
+    const px = probe.getContext('2d', { willReadFrequently: true })!;
+    px.filter = 'grayscale(1) contrast(1.15)';
+    px.drawImage(img, 0, 0, 64, 64);
+    const small = px.getImageData(0, 0, 64, 64).data;
+    let sum = 0;
+    for (let i = 0; i < small.length; i += 4) sum += small[i];
+    const mean = sum / (small.length / 4);
+
     const c = document.createElement('canvas');
     c.width = img.naturalWidth;
     c.height = img.naturalHeight;
     const x = c.getContext('2d')!;
-    x.filter = 'grayscale(1) contrast(1.15)';
+    // brightness() multiplies, which is exactly what the old loop's `k` did
+    x.filter = `grayscale(1) contrast(1.15) brightness(${(208 / Math.max(1, mean)).toFixed(4)})`;
     x.drawImage(img, 0, 0);
-    // Lift it to a neutral mid grey. A photograph averages wherever it averages;
-    // multiplied into a dye, anything below 0.5 mean darkens the whole floor
-    // toward black and anything above washes it out. Normalising here means the
-    // dyer's shelf means what it says.
-    const d = x.getImageData(0, 0, c.width, c.height);
-    let sum = 0;
-    for (let i = 0; i < d.data.length; i += 4) sum += d.data[i];
-    const mean = sum / (d.data.length / 4);
-    const k = 208 / Math.max(1, mean);
-    for (let i = 0; i < d.data.length; i += 4) {
-      const v = Math.min(255, d.data[i] * k);
-      d.data[i] = v;
-      d.data[i + 1] = v;
-      d.data[i + 2] = v;
-    }
-    x.putImageData(d, 0, 0);
     pileTile = c;
     const waiting = pileWaiters ?? [];
     pileWaiters = null;

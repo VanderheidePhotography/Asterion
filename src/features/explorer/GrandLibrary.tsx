@@ -2809,6 +2809,9 @@ function AstrologyStation({ onNear, onSummon }: { onNear: (near: boolean) => voi
 }
 
 /* ————— scene assembly ————— */
+/** the bloom the hall is graded for; a phone ramps up to it after the reveal */
+const BLOOM_INTENSITY = 0.34;
+
 function LibraryScene({
   still,
   onSelect,
@@ -3291,7 +3294,22 @@ function LibraryScene({
           are.
           So it is back everywhere, at a quarter resolution on lean devices.
           The pass is a blur; there is nothing in it fine enough to lose, and
-          at the phone's 0.9 Mpx budget its targets are a few MB. */}
+          at the phone's 0.9 Mpx budget its targets are a few MB.
+
+          MOUNTING IT LATE ON PHONES WAS TRIED, AND MEASURED, AND BACKED OUT.
+          The premise was good: counted on a cold lean load the first frame
+          links 90 shader programs and blocks ~600 ms waiting for the driver,
+          and the composer is 36 of those 90 plus 34 of the 43 texture uploads.
+          Deferring it past the reveal duly took the first frame to 54.
+          But the TOTAL went 90 -> 141. Rendering through the composer is a
+          different path — an HDR target, tone mapping handed to the effect
+          chain — so every material that had already linked for drawing
+          straight to the canvas linked a SECOND time when the chain arrived.
+          The doors opened sooner and the visitor was handed an ~87-program
+          relink the moment they walked in, which on a phone is the freeze this
+          whole pass exists to remove. If the composer is ever made optional at
+          runtime, this is the trap: its presence is part of every material's
+          shader identity. */}
       <EffectComposer ref={composerHandle} multisampling={0} enableNormalPass={false}>
         {/* Bloom was doing the opposite of its job. At threshold 0.62 it was
             catching every warm surface in the room, not just the flames — so
@@ -3306,7 +3324,7 @@ function LibraryScene({
         <Bloom
           mipmapBlur
           resolutionScale={LEAN_TEXTURES ? 0.25 : 0.5}
-          intensity={0.34}
+          intensity={BLOOM_INTENSITY}
           luminanceThreshold={0.82}
           luminanceSmoothing={0.3}
           radius={0.6}

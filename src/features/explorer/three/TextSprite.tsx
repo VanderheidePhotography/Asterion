@@ -253,7 +253,10 @@ function pump(): void {
   else pumping = false;
 }
 
+let everQueued = false;
+
 function enqueue(key: string, make: () => Baked, wake: () => void): void {
+  everQueued = true;
   queue.push({ key, make, wake });
   if (!pumping) {
     pumping = true;
@@ -265,9 +268,16 @@ function enqueue(key: string, make: () => Baked, wake: () => void): void {
  * Is every label that has asked for a picture holding one? Read by the veil,
  * which holds the doors shut until the hall is lettered rather than letting
  * the visitor watch the signs write themselves.
+ *
+ * `everQueued` is what makes the answer mean anything on a phone. Labels there
+ * do not ask for their pixels until the culler finds them legible, so at the
+ * first presented frame the queue is empty because nothing has asked YET — and
+ * an empty queue read at that moment would report the hall lettered while every
+ * sign in it was still blank. (The veil's own cap covers the case where nothing
+ * within sight is legible and so nothing ever queues.)
  */
 export function labelsSettled(): boolean {
-  return queue.length === 0;
+  return everQueued && queue.length === 0;
 }
 
 /** claim it, from an effect — paired with exactly one `release` */

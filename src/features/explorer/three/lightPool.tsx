@@ -205,12 +205,28 @@ export function LightPool({ enabled = true, size = POOL_SIZE }: { enabled?: bool
     if (!enabled) return;
     elapsed.current += delta;
 
-    // ——— once: take every point light out of the graph, keep its recipe ———
-    if (!sources.current) {
-      // every course must be standing, or its chandeliers are never harvested
-      // and stay as permanent unpooled lights — the cost this exists to avoid
-      if (elapsed.current < HARVEST_FLOOR || !coursesSettled()) return;
-      const found: Source[] = [];
+    /**
+     * TAKE EVERY POINT LIGHT OUT OF THE GRAPH AND KEEP ITS RECIPE.
+     *
+     * INCREMENTAL, which is what lets it happen early. The first version
+     * harvested once and waited for every deferred course to mount first —
+     * otherwise a wing chandelier arriving later stays unpooled forever, which
+     * is the per-fragment cost this file exists to remove. On a phone that
+     * meant waiting SIX PAINTED FRAMES for the stacks before the lamps could be
+     * rigged, and the veil waited on the lamps, so a slow first few frames
+     * turned directly into seconds of loading screen.
+     *
+     * So it harvests what is standing now, and adopts stragglers as they mount.
+     * Adopting is free: the pool's SIZE is the shader define, and that never
+     * changes — a new source only joins the ranking. And because a light
+     * mounted in one commit is detached in the next frame's callback, before
+     * the renderer has drawn with it, the light count three.js sees never moves
+     * and the relink storm never happens either.
+     */
+    const first = !sources.current;
+    if (first && elapsed.current < HARVEST_FLOOR) return;
+    if (first || !coursesSettled()) {
+      const found: Source[] = sources.current ?? [];
       const taken: THREE.PointLight[] = [];
       scene.traverse((o) => {
         const l = o as THREE.PointLight;
@@ -231,7 +247,8 @@ export function LightPool({ enabled = true, size = POOL_SIZE }: { enabled?: bool
       }
       sources.current = found;
       reportMilestone('lights');
-
+    }
+    if (first) {
       for (let i = 0; i < size; i++) {
         const light = new THREE.PointLight(0xffffff, 0, 10, 2);
         light.userData.pooled = true;
@@ -243,7 +260,7 @@ export function LightPool({ enabled = true, size = POOL_SIZE }: { enabled?: bool
     }
 
     const all = sources.current;
-    if (all.length === 0) return;
+    if (!all || all.length === 0) return;
 
     // ——— rank: how much of each light's reach actually gets to the camera ———
     sinceRank.current += delta;

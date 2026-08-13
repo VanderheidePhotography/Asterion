@@ -27,6 +27,8 @@
  * can invent progress except the creep, and the creep is fenced — see `creep`.
  */
 
+import { LEAN_TEXTURES } from './textureBudget';
+
 export interface LoadPhase {
   /** 0‥1, for the bar */
   progress: number;
@@ -85,6 +87,9 @@ const WORK = [
 
 export type Milestone = (typeof WORK)[number]['id'];
 
+/** the stages that precede a presented frame — always waited for */
+const BEFORE_PAINT = new Set<Milestone>(['chunk', 'fonts', 'build', 'paint']);
+
 const TOTAL = WORK.reduce((sum, w) => sum + w.weight, 0);
 
 /**
@@ -96,8 +101,36 @@ const TOTAL = WORK.reduce((sum, w) => sum + w.weight, 0);
  * every arrival did before this existed, so the cap can only ever land the
  * visitor back where they already were, never worse.
  */
-const SETTLE_CAP_MS = 2000;
+/*
+ * SHORTER ON A PHONE, and the settle list is shorter there too — see
+ * `SETTLE` below. A lean device is the one that can least afford to be held,
+ * and it is the one where every stage of the settle takes longest, so a cap
+ * written for a desktop turns into the whole complaint.
+ */
+const SETTLE_CAP_MS = LEAN_TEXTURES ? 700 : 2000;
 let capTimer: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * WHAT THE VEIL ACTUALLY WAITS FOR, which is not the whole list.
+ *
+ * On a desktop everything is built before the first frame, so every settle
+ * milestone is about the room in front of you and waiting for all of them is
+ * right.
+ *
+ * On a phone the building arrives in courses, and the courses are the WINGS —
+ * which are down corridors and behind walls, invisible from the spawn point.
+ * That is the entire premise of Deferred. Holding the doors shut until they
+ * have mounted (and until every scan for them has landed) meant a visitor
+ * waiting on rooms they cannot see from where they are standing, on the
+ * slowest device, which is the opposite of what staged construction is for.
+ *
+ * So a lean device waits for what is actually in shot: the labels it decided
+ * were worth baking, and the lamps. The wings keep building behind an open
+ * hall, exactly as they were designed to.
+ */
+const SETTLE: readonly Milestone[] = LEAN_TEXTURES
+  ? ['labels', 'lights']
+  : ['courses', 'labels', 'lights', 'scans'];
 
 /** which milestones are behind us */
 let done = new Set<Milestone>();
@@ -116,8 +149,20 @@ let done = new Set<Milestone>();
  */
 let creep = 0;
 
+/** does the veil wait for this stage on this device? */
+export function waitsFor(id: Milestone): boolean {
+  return BEFORE_PAINT.has(id) || SETTLE.includes(id);
+}
+
+/** the next stage the bar reports — only ones this device actually waits for,
+ *  or the label would name a course the veil has already stopped caring about */
 function next(): (typeof WORK)[number] | undefined {
-  return WORK.find((w) => !done.has(w.id));
+  return WORK.find((w) => !done.has(w.id) && waitsFor(w.id));
+}
+
+/** is everything the VEIL waits for behind us? — a subset on lean, see SETTLE */
+function open(): boolean {
+  return next() === undefined;
 }
 
 /**
@@ -126,17 +171,19 @@ function next(): (typeof WORK)[number] | undefined {
  * It used to lift on `paint` alone, and that was the right call against a
  * blank screen and the wrong one against a finished museum: the frame is real,
  * but for a second after it the hall is visibly assembling — signs blank, wings
- * arriving, lamps about to be re-rigged. Every milestone must be behind us now,
- * and SETTLE_CAP_MS guarantees that happens on a schedule either way.
+ * arriving, lamps about to be re-rigged.
+ *
+ * "Fit to look at" is device-dependent, though, which the first version of this
+ * missed: see SETTLE. And SETTLE_CAP_MS ends the wait either way.
  */
 function compute(): LoadPhase {
   const settled = WORK.reduce((sum, w) => (done.has(w.id) ? sum + w.weight : sum), 0);
   const pending = next();
-  if (!pending) return { progress: 1, label: 'Open', painted: true };
-  const progress = (settled + pending.weight * creep) / TOTAL;
+  if (open()) return { progress: 1, label: 'Open', painted: true };
+  const progress = (settled + (pending ? pending.weight * creep : 0)) / TOTAL;
   return {
     progress: Math.min(1, progress),
-    label: pending.label,
+    label: pending?.label ?? 'Open',
     painted: false,
   };
 }
