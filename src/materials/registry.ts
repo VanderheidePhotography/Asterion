@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader.js';
 import { leanPath } from '../features/explorer/three/textureBudget';
 import libraryJson from './library.json';
 import { paintFallback } from './fallbacks';
@@ -69,21 +70,34 @@ export function primeMaterials(): Promise<void> {
   // which scans exist, so a count that ignored it could reach zero before a
   // single real one had been asked for
   inFlight += 1;
-  manifestPromise = fetch(`${LIB.root}/manifest.json`)
-    .then((r) => (r.ok ? r.json() : {}))
-    .catch(() => ({}))
-    .then((json: TextureManifest) => {
-      manifest = json ?? {};
-      // anything built before the manifest landed is still on its stand-in
-      for (const entry of live.values()) applyMaps(entry.material, entry.id, entry.request);
-      inFlight = Math.max(0, inFlight - 1);
-    });
+  manifestPromise = Promise.all([
+    fetch(`${LIB.root}/manifest.json`)
+      .then((r) => (r.ok ? r.json() : {}))
+      .catch(() => ({})),
+    // which scans also exist as compressed KTX2 (see the ktx2 script). Fetched
+    // together with the manifest so that by the time any map is applied, the
+    // registry already knows which form to ask for — a texture requested a
+    // moment too early would take the JPEG and pay for it in memory forever.
+    fetch(`${LIB.root}/ktx2.json`)
+      .then((r) => (r.ok ? r.json() : []))
+      .catch(() => []),
+  ]).then(([json, list]: [TextureManifest, string[]]) => {
+    manifest = json ?? {};
+    compressed = new Set(Array.isArray(list) ? list : []);
+    // anything built before the manifest landed is still on its stand-in
+    for (const entry of live.values()) applyMaps(entry.material, entry.id, entry.request);
+    inFlight = Math.max(0, inFlight - 1);
+  });
   return manifestPromise;
 }
 
 /* ————— renderer-dependent settings ————— */
 
 let maxAnisotropy = 4;
+/** kept because the KTX2 transcoder must be told what this GPU can decode —
+ *  `detectSupport` is the difference between a compressed upload and a loader
+ *  that cannot answer at all */
+let renderer: THREE.WebGLRenderer | null = null;
 
 /**
  * The room's own reflection, for the surfaces that need one — see the header of
@@ -135,6 +149,7 @@ function applyEnvironment(mat: AnyStandardMaterial, def: MaterialDef): void {
  * reload — and `roomEnvironment` caches, so the PMREM pass happens once.
  */
 export function configureMaterials(gl: THREE.WebGLRenderer): void {
+  renderer = gl;
   maxAnisotropy = gl.capabilities.getMaxAnisotropy();
   for (const tex of textureCache.values()) {
     tex.anisotropy = maxAnisotropy;
@@ -149,6 +164,47 @@ export function configureMaterials(gl: THREE.WebGLRenderer): void {
 const loader = new THREE.TextureLoader();
 /** one download per file; per-material clones share the GPU upload */
 const textureCache = new Map<string, THREE.Texture>();
+
+/**
+ * THE COMPRESSED SET, AND WHY IT IS WORTH A SECOND LOADER.
+ *
+ * A JPEG is small on the wire and enormous in memory: the browser decodes it
+ * and uploads four bytes per pixel, so the 143 scans cost ~487 MB of VRAM at
+ * full size and ~120 MB at the half size phones load. That figure is why the
+ * lean set exists, and it is what an iPhone 11 could not hold — one frame, then
+ * a lost context.
+ *
+ * KTX2/ETC1S stays compressed onto the GPU: about half a byte per pixel, mips
+ * included, and no decode on the main thread at all (a cold load measured 668
+ * ms inside `texSubImage2D`). `scripts/optimize-textures-ktx2.mjs` writes the
+ * files and the index of what it wrote; this is the only place that knows to
+ * prefer them, and a scan with no `.ktx2` beside it simply loads as before.
+ *
+ * The transcoder is served from `/basis/` — the same files three ships, copied
+ * into `public` rather than fetched from a CDN, which is this project's rule
+ * for every asset.
+ */
+let compressed = new Set<string>();
+let ktx2: KTX2Loader | null = null;
+
+function ktx2Loader(): KTX2Loader | null {
+  if (!renderer) return null;
+  if (!ktx2) {
+    ktx2 = new KTX2Loader().setTranscoderPath('/basis/').detectSupport(renderer);
+  }
+  return ktx2;
+}
+
+/** the compressed twin of a scan, as a path relative to the texture root, if
+ *  one was encoded — the index is keyed that way, so lookups stay one string */
+function compressedRel(url: string): string | null {
+  if (!url.startsWith(`${LIB.root}/`)) return null;
+  const rel = url.slice(LIB.root.length + 1).replace(/\.jpg$/, '.ktx2');
+  return compressed.has(rel) ? rel : null;
+}
+
+/** files whose transcode is in flight — see the guard in loadTexture */
+const pendingKtx = new Set<string>();
 
 /**
  * Files that failed to load, and the work waiting on them.
@@ -207,10 +263,57 @@ export function scansSettled(): boolean {
   return inFlight === 0;
 }
 
-function loadTexture(url: string, slot: MapSlot): THREE.Texture {
+function loadTexture(url: string, slot: MapSlot): THREE.Texture | null {
   const hit = textureCache.get(url);
   if (hit) return hit;
   const wanted = leanPath(url);
+
+  /**
+   * COMPRESSED FIRST, when the file exists and the renderer is known.
+   *
+   * `.ktx2` carries its own mip chain and its own colour-space metadata, so
+   * unlike the JPEG path there is nothing to configure afterwards except the
+   * wrapping — and unlike the JPEG path there is no fallback ladder either: a
+   * file listed in ktx2.json is one this build wrote, so a failure there is a
+   * broken deployment rather than an optional asset, and it falls back to the
+   * scan for the same reason the lean set does.
+   */
+  const ktxRel = compressedRel(wanted);
+  const ktx = ktxRel && ktx2Loader();
+  if (ktxRel && ktx) {
+    // one load per file: without this every material sharing a scan kicks its
+    // own transcode, because nothing lands in the cache until the first
+    // finishes — the exact duplication textureCache exists to prevent
+    if (pendingKtx.has(url)) return null;
+    pendingKtx.add(url);
+    inFlight += 1;
+    ktx.load(
+      `${LIB.root}/${ktxRel}`,
+      (loaded) => {
+        loaded.colorSpace = SRGB_SLOTS.has(slot) ? THREE.SRGBColorSpace : THREE.NoColorSpace;
+        loaded.wrapS = THREE.RepeatWrapping;
+        loaded.wrapT = THREE.RepeatWrapping;
+        loaded.anisotropy = maxAnisotropy;
+        textureCache.set(url, loaded);
+        pendingKtx.delete(url);
+        // the same sweep the manifest uses: every material already handed out
+        // is wearing its painted stand-in and picks the scan up here
+        for (const entry of live.values()) applyMaps(entry.material, entry.id, entry.request);
+        inFlight = Math.max(0, inFlight - 1);
+      },
+      undefined,
+      () => {
+        // the compressed twin is unusable on this device — drop the id from the
+        // set so the next pass takes the ordinary scan, and sweep to trigger it
+        compressed.delete(ktxRel);
+        pendingKtx.delete(url);
+        for (const entry of live.values()) applyMaps(entry.material, entry.id, entry.request);
+        inFlight = Math.max(0, inFlight - 1);
+      },
+    );
+    return null;
+  }
+
   const settle = () => {
     inFlight = Math.max(0, inFlight - 1);
   };
@@ -387,7 +490,12 @@ function applyMaps(mat: AnyStandardMaterial, id: MaterialId, req: MaterialReques
       continue;
     }
     const url = `${dir}/${file}`;
-    const tex = instance(loadTexture(url, slot), uv);
+    const loaded = loadTexture(url, slot);
+    // null means a compressed scan is still transcoding: leave the slot as it
+    // is — the painted stand-in stays up — and let the sweep that runs when it
+    // lands fill this in, exactly as the manifest's own sweep does
+    if (!loaded) continue;
+    const tex = instance(loaded, uv);
     // aoMap defaults to the second UV set, which none of this geometry has.
     // Point it back at uv0 rather than duplicating an attribute everywhere.
     if (slot === 'ao') tex.channel = 0;
@@ -408,12 +516,13 @@ function applyMaps(mat: AnyStandardMaterial, id: MaterialId, req: MaterialReques
     }
   }
 
-  if (armFile) {
+  const armTex = armFile ? loadTexture(`${dir}/${armFile}`, 'arm') : null;
+  if (armFile && armTex) {
     // ONE texture object in all three slots. three.js samples .r for occlusion,
     // .g for roughness and .b for metalness, so the packed file is read
     // correctly by each without any shader work — and because it is the same
     // object, it uploads to the GPU once.
-    const arm = instance(loadTexture(`${dir}/${armFile}`, 'arm'), uv);
+    const arm = instance(armTex, uv);
     arm.channel = 0;
     set('aoMap', arm);
     set('roughnessMap', arm);

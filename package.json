@@ -16,6 +16,7 @@
     "typecheck": "tsc -b",
     "textures:fetch": "node scripts/fetch-textures.mjs",
     "textures:scan": "node scripts/scan-textures.mjs",
+    "textures:ktx2": "node scripts/optimize-textures-ktx2.mjs",
     "assets:optimize": "node scripts/optimize-models.mjs && node scripts/optimize-textures.mjs && node scripts/optimize-meshes.mjs",
     "assets:optimize:dry": "node scripts/optimize-models.mjs --dry && node scripts/optimize-textures.mjs --dry && node scripts/optimize-meshes.mjs --dry",
     "lint": "eslint ."
