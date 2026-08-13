@@ -46,8 +46,24 @@ function detect(): boolean {
 
 export const LEAN_TEXTURES = detect();
 
-/** the linear scale every generated canvas is painted at */
-export const TEXTURE_SCALE = LEAN_TEXTURES ? 0.5 : 1;
+/**
+ * The linear scale every generated canvas is painted at.
+ *
+ * 0.5 → 0.42 on 2026-08-13, on the user's call, as the last dial in a pass on
+ * mobile load time. It is the same lever the header describes, turned once
+ * more: painting cost, upload cost and texture memory all fall with the SQUARE
+ * of this number, so 0.42 is about 30% less of all three than 0.5 — and unlike
+ * everything else in that pass, it is a change to how the museum LOOKS on a
+ * phone rather than to when it appears.
+ *
+ * What it softens: the floor mandala, the dome's gloria, the globes and the
+ * painted plaster and timber. What it does not touch: type, which carries its
+ * own density floor (see TextSprite's RASTER_FLOOR and MIN_PX_PER_METRE), and
+ * the photographed scans, which are files rather than canvases.
+ *
+ * One number, one line, reversible.
+ */
+export const TEXTURE_SCALE = LEAN_TEXTURES ? 0.42 : 1;
 
 /**
  * Scale one canvas dimension, never below 2px and always whole.
