@@ -2003,3 +2003,69 @@ button {
   color: #d9a06a;
   word-break: break-word;
 }
+
+/* ————— the veil held while the hall is built —————
+   Over the canvas rather than instead of it: the renderer is working behind
+   this, and it lifts on the first frame it presents. Before this there was a
+   blank dark rectangle for the whole of that wait, which more than one
+   visitor reported as the site being broken. */
+.hall-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: radial-gradient(ellipse at center, #16112a 0%, #0d0a1a 70%);
+  animation: hall-loading-out 260ms ease forwards;
+}
+@keyframes hall-loading-out {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.hall-loading-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  max-width: min(34rem, 88vw);
+  text-align: center;
+}
+.hall-loading-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  letter-spacing: 0.26em;
+  color: #f5e7cb;
+}
+.hall-loading-phase {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c9a648;
+}
+.hall-loading-track {
+  width: min(22rem, 70vw);
+  height: 2px;
+  background: rgba(255, 226, 168, 0.16);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.hall-loading-bar {
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(to right, rgba(232, 184, 115, 0.5), #e8b873);
+  /* the bar eases between milestones; see HallLoading's creep */
+  transition: transform 320ms ease-out;
+}
+.hall-loading-lore {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #8f8272;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hall-loading { animation: none; }
+  .hall-loading-bar { transition: none; }
+}

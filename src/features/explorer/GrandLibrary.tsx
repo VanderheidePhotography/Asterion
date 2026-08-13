@@ -106,6 +106,8 @@ import {
 import { useReducedMotion } from '../../lib/useReducedMotion';
 import { useViewport } from '../../lib/useViewport';
 import { Deferred } from './three/Deferred';
+import { HallLoading, PaintWatch } from './three/HallLoading';
+import { resetLoadPhase } from './three/loadPhase';
 import { SceneUnavailable } from '../../app/chrome/SceneBoundary';
 import { ContextWatch, DeviceReport, DeviceReportOverlay, diagRequested } from './three/DeviceReport';
 import { LEAN_TEXTURES } from './three/textureBudget';
@@ -3149,7 +3151,7 @@ function LibraryScene({
       {/* the floor: one astronomical diagram across the whole plan, mandala to
           ways to roundels to brass — see three/cosmographia.tsx */}
       <Cosmographia />
-      <Deferred frames={4}>
+      <Deferred frames={4} progress={0.7}>
         <WingChronology sections={SECTIONS} />
       </Deferred>
       {/* Isis & Serapis are niched on the two apse-side drum piers now — the
@@ -3166,7 +3168,7 @@ function LibraryScene({
           niched apse-side, Boaz & Jachin in the apse itself.) */}
       {/* course 2 — see Deferred: the shell of the wings, which the visitor
           can see down but is not standing in */}
-      <Deferred frames={2}>
+      <Deferred frames={2} progress={0.45}>
         <WingEnclosures />
       </Deferred>
       <EntranceHall />
@@ -3177,7 +3179,7 @@ function LibraryScene({
       {/* (the vestibule's two framed plates are gone — those walls are the
           pillars' now; see the note where Paintings used to stand in
           structure.tsx) */}
-      <Deferred frames={2}>
+      <Deferred frames={2} progress={0.55}>
         <WingGallery />
         <WingArcade />
         <WingFurnishings />
@@ -3188,14 +3190,14 @@ function LibraryScene({
           built because it is the largest, and because a visitor who has just
           arrived is looking at the rotunda, not reading a spine forty metres
           down a corridor. */}
-      <Deferred frames={6}>
+      <Deferred frames={6} progress={0.88}>
         <MegaShelves />
         <Grimoires selectedId={selectedId} still={still} onSelect={onSelect} />
       </Deferred>
       <SectionMarks />
       {/* the hall names, as carved boards hanging off the first bookcase of
           each wing rather than as type floating in the aisle */}
-      <Deferred frames={4}>
+      <Deferred frames={4} progress={0.75}>
         <WingSigns
           sections={SECTIONS.map((s) => ({ cluster: s.cluster, label: CLUSTER_META[s.cluster].label, angle: s.angle }))}
         />
@@ -3567,6 +3569,13 @@ export default function GrandLibrary() {
   // photo mode: the chrome steps aside and the hall poses
   /** the GPU was taken back mid-visit — see ContextWatch */
   const [contextLost, setContextLost] = useState(false);
+  // the phase module outlives a client-side route change, so a visitor who
+  // walks out to the Research Hall and back would otherwise inherit "Open"
+  // from the previous visit and see no veil at all while it rebuilds
+  useState(() => {
+    resetLoadPhase();
+    return null;
+  });
   const [photoMode, setPhotoMode] = useState(false);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -4021,6 +4030,7 @@ export default function GrandLibrary() {
       >
         <AdaptiveQuality />
         <AspectFov />
+        <PaintWatch />
         <ContextWatch onLost={() => setContextLost(true)} />
         {diagRequested() && <DeviceReport />}
         {/* the warmup compiles every shader and uploads every texture up
@@ -4085,6 +4095,8 @@ export default function GrandLibrary() {
           onFlightDone={onFlightDone}
         />
       </Canvas>
+
+      <HallLoading />
 
       {flightOn && <div className="flight-skip">tap or press any key to skip</div>}
 

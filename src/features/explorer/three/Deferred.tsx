@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { LEAN_TEXTURES } from './textureBudget';
+import { reportProgress } from './loadPhase';
 
 /**
  * BUILD THE ROOM YOU ARE STANDING IN FIRST.
@@ -28,9 +29,12 @@ import { LEAN_TEXTURES } from './textureBudget';
 export function Deferred({
   /** how many painted frames to wait before this course is built */
   frames = 1,
+  /** where this course leaves the loading bar, 0‥1 */
+  progress,
   children,
 }: {
   frames?: number;
+  progress?: number;
   children: ReactNode;
 }) {
   const [ready, setReady] = useState(!LEAN_TEXTURES);
@@ -41,12 +45,14 @@ export function Deferred({
     let handle = 0;
     const tick = () => {
       left -= 1;
-      if (left <= 0) setReady(true);
-      else handle = requestAnimationFrame(tick);
+      if (left <= 0) {
+        setReady(true);
+        if (progress !== undefined) reportProgress(progress);
+      } else handle = requestAnimationFrame(tick);
     };
     handle = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(handle);
-  }, [ready, frames]);
+  }, [ready, frames, progress]);
 
   return ready ? <>{children}</> : null;
 }
