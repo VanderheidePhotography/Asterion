@@ -21,13 +21,10 @@
  *     albedo.jpg       -> albedo.ktx2         (full scan)
  *     albedo.lean.jpg  -> albedo.lean.ktx2    (the half-size set)
  *
- * ETC1S EVERYWHERE, including normal maps, and that is a deliberate departure
- * from the usual advice. UASTC is the quality choice for normals, and measured
- * here it turned a 193 kB JPEG into a 1,095 kB file — 5.7× the download, on
- * the exact devices this exists to help. ETC1S lands the same map at 144 kB.
- * The normals in this building are worn timber, plaster and stone under candle
- * light; the block artefacts ETC1S is criticised for do not survive contact
- * with that. Normals get a higher quality level to soften the difference.
+ * ETC1S, AND ONLY ON COLOUR MAPS — see COLOUR_SLOTS below for why the
+ * measurement maps are deliberately left as JPEGs. (UASTC would encode them
+ * correctly and was measured at 1,095 kB for a 193 kB normal map: 5.7× the
+ * download, on the exact devices this exists to help.)
  *
  * `sips` does the JPEG→PNG decode, as in the other asset scripts, because it
  * ships with macOS and keeps this repo free of a native image dependency.
@@ -54,10 +51,29 @@ const LIST = path.join(ROOT, 'ktx2.json');
 const DRY = process.argv.includes('--dry');
 const FORCE = process.argv.includes('--force');
 
-/** ETC1S quality, 1‥255. Normals carry direction rather than colour, so a
- *  block error there bends light rather than shifting a hue — they get more. */
+/**
+ * COLOUR MAPS ONLY. Encoding the measurement maps as well was shipped and then
+ * reported from a phone as "the red carpet and everything is blending into one
+ * dull colour", which is exactly what it was.
+ *
+ * ETC1S is a colour codec: a shared codebook across 4×4 blocks, channels
+ * treated perceptually. That is why it can throw away seven eighths of an
+ * albedo and still look like the photograph. A NORMAL map is not colour — its
+ * channels are the x, y and z of a direction, and quantising them bends every
+ * surface normal toward its block's average. An ARM map is not colour either —
+ * occlusion, roughness and metalness are three unrelated greyscale images
+ * stacked in R, G and B, and a codec that assumes its channels correlate smears
+ * each into the others. Shading goes flat, roughness stops varying, and a room
+ * lit by its own reflections loses the separation between its materials.
+ *
+ * So: albedo and emissive are encoded, everything else stays a JPEG. Most of
+ * the memory win survives — colour maps are the largest and most numerous — and
+ * the shading gets its data back.
+ */
+const COLOUR_SLOTS = /^(albedo|emissive)(\.lean)?\.jpg$/;
+
+/** ETC1S quality, 1‥255 */
 const QUALITY = 160;
-const QUALITY_NORMAL = 200;
 /** encoder effort, 0‥6. 2 is the encoder's own default and encodes ~1.5 s a
  *  file; 6 spends minutes per texture to save a few percent. */
 const EFFORT = 2;
@@ -69,7 +85,7 @@ function* walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) yield* walk(full);
-    else if (entry.isFile() && entry.name.endsWith('.jpg')) yield full;
+    else if (entry.isFile() && COLOUR_SLOTS.test(entry.name)) yield full;
   }
 }
 
@@ -99,10 +115,9 @@ for (const src of walk(ROOT)) {
     continue;
   }
   execFileSync('sips', ['-s', 'format', 'png', src, '--out', scratch], { stdio: 'ignore' });
-  const isNormal = /normal/i.test(path.basename(src));
   const bytes = await encodeToKTX2(new Uint8Array(fs.readFileSync(scratch)), {
     isUASTC: false,
-    qualityLevel: isNormal ? QUALITY_NORMAL : QUALITY,
+    qualityLevel: QUALITY,
     compressionLevel: EFFORT,
     mipmap: true,
     imageDecoder: decodePng,

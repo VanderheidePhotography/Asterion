@@ -195,9 +195,33 @@ function ktx2Loader(): KTX2Loader | null {
   return ktx2;
 }
 
-/** the compressed twin of a scan, as a path relative to the texture root, if
- *  one was encoded — the index is keyed that way, so lookups stay one string */
-function compressedRel(url: string): string | null {
+/**
+ * The compressed twin of a scan, as a path relative to the texture root, if one
+ * was encoded — the index is keyed that way, so lookups stay one string.
+ *
+ * COLOUR SLOTS ONLY, and that restriction is a bug fix, reported from a phone
+ * as "the red carpet and everything is blending into one dull colour".
+ *
+ * ETC1S is a COLOUR codec. It shares a codebook across 4×4 blocks and treats
+ * its channels perceptually — which is why it can throw away seven eighths of
+ * an albedo and still look like the photograph. A normal map is not colour: its
+ * three channels are the x, y and z of a direction, and quantising them bends
+ * every surface normal in the building slightly toward its block's average. An
+ * ARM map is not colour either — occlusion, roughness and metalness are three
+ * unrelated greyscale images stacked in R, G and B, and a codec that assumes
+ * they correlate smears each into the others.
+ *
+ * The result is exactly what was reported: shading goes flat, roughness stops
+ * varying, and a room lit almost entirely by its own reflections loses the
+ * separation between its materials. The carpet did not change colour so much as
+ * stop being distinguishable from everything around it.
+ *
+ * So albedo and emissive compress; the measurement maps stay JPEG. That keeps
+ * most of the memory win — colour maps are the largest and the most numerous —
+ * and hands the shading back its data.
+ */
+function compressedRel(url: string, slot: MapSlot): string | null {
+  if (!SRGB_SLOTS.has(slot)) return null;
   if (!url.startsWith(`${LIB.root}/`)) return null;
   const rel = url.slice(LIB.root.length + 1).replace(/\.jpg$/, '.ktx2');
   return compressed.has(rel) ? rel : null;
@@ -278,7 +302,7 @@ function loadTexture(url: string, slot: MapSlot): THREE.Texture | null {
    * broken deployment rather than an optional asset, and it falls back to the
    * scan for the same reason the lean set does.
    */
-  const ktxRel = compressedRel(wanted);
+  const ktxRel = compressedRel(wanted, slot);
   const ktx = ktxRel && ktx2Loader();
   if (ktxRel && ktx) {
     // one load per file: without this every material sharing a scan kicks its
