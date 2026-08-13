@@ -3,7 +3,12 @@ import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules', 'coverage'] },
+  // `public` is assets, not source: served byte-for-byte, never compiled, and
+  // some of it is vendored — public/basis holds three's Basis transcoder,
+  // 57 kB of emscripten output that lints as ~400 errors about `process`,
+  // `require` and empty blocks. CI runs `eslint .` where local habit runs
+  // `eslint src`, which is exactly how it got past me.
+  { ignores: ['dist', 'node_modules', 'coverage', 'public'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
