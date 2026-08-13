@@ -155,7 +155,20 @@ export function PropCulling() {
         const linePx = ((sp.scale.y / (d * halfFov)) * size.height) / 2;
         const shown = m.visible;
         const legible = linePx >= (shown ? LABEL_MIN_PX * 0.5 : LABEL_MIN_PX);
+        /**
+         * THE SAME TEST NOW DECIDES WHETHER THE LABEL IS EVER DRAWN AT ALL.
+         *
+         * This routine has always known which labels nobody could read; it
+         * just learned it too late to matter, because every one of the 969 had
+         * already rastered a canvas and uploaded it before the first frame.
+         * A label on a phone now arrives as a correctly sized, empty quad and
+         * asks for its pixels here, the first time it is worth having them —
+         * so the ~700 that are never legible are never paid for, and the ones
+         * you walk up to bake as they become readable.
+         */
         if (legible) {
+          const ask = m.userData.bakeWhenLegible as (() => void) | undefined;
+          if (ask) ask();
           if (ours.current.delete(m)) m.visible = true;
         } else if (shown) {
           m.visible = false;

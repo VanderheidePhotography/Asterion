@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, type RefObject } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react';
 import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei';
 import { LEAN_TEXTURES } from './textureBudget';
@@ -15,6 +15,9 @@ import { useFrame } from '@react-three/fiber';
  * inside <Suspense> with a procedural fallback so a slow load never breaks
  * the scene.
  */
+/** seconds for a streamed carving to come up through the figure standing for it */
+const FADE_S = 0.55;
+
 export function GLBModel({
   src,
   targetHeight,
@@ -23,6 +26,7 @@ export function GLBModel({
   still = false,
   animate = true,
   highlightRef,
+  beneath,
 }: {
   src: string;
   targetHeight: number;
@@ -34,8 +38,18 @@ export function GLBModel({
    *  the model's materials are cloned so this instance can be tinted without
    *  touching the shared glTF cache. */
   highlightRef?: RefObject<number>;
+  /** what stood here while the model streamed — kept underneath and dissolved
+   *  through, rather than cut away the frame the glTF resolves */
+  beneath?: ReactNode;
 }) {
   const { scene, animations } = useGLTF(src);
+  // `beneath` is a fresh element on every parent render, so it can never be a
+  // dependency: as one it re-ran the dissolve's setup (re-capturing the target
+  // opacity as the 0 it had just written, leaving every carving permanently
+  // invisible) and re-ran the material-dispose cleanup under a live model.
+  // Only whether there IS something beneath is stable, and it is all that
+  // either of them actually needs to know.
+  const dissolving = Boolean(beneath);
 
   const model = useMemo(() => {
     const root = scene.clone(true);
@@ -54,8 +68,9 @@ export function GLBModel({
       const m = o as THREE.Mesh;
       if (!m.isMesh) return;
       m.frustumCulled = false;
-      // own the materials so a hover tint never bleeds into the shared cache
-      if (highlightRef) {
+      // own the materials so neither a hover tint nor the arrival dissolve
+      // bleeds into the shared glTF cache — both write to them per instance
+      if (highlightRef || dissolving) {
         m.material = Array.isArray(m.material)
           ? m.material.map((mm) => mm.clone())
           : m.material.clone();
@@ -68,7 +83,7 @@ export function GLBModel({
 
   // free the cloned materials when the model is swapped out or unmounted
   useEffect(() => {
-    if (!highlightRef) return;
+    if (!highlightRef && !dissolving) return;
     return () => {
       model.traverse((o) => {
         const m = o as THREE.Mesh;
@@ -76,7 +91,7 @@ export function GLBModel({
         (Array.isArray(m.material) ? m.material : [m.material]).forEach((mm) => mm.dispose());
       });
     };
-  }, [model, highlightRef]);
+  }, [model, highlightRef, dissolving]);
 
   const mixer = useMemo(() => new THREE.AnimationMixer(model), [model]);
   useEffect(() => {
@@ -104,9 +119,52 @@ export function GLBModel({
     return out;
   }, [model, highlightRef]);
 
+  /**
+   * A CARVING ARRIVES BY DISSOLVING INTO THE STONE THAT STOOD FOR IT.
+   *
+   * Ten of the fourteen figures now stream in after the doors open (see
+   * PRELOAD), and a glTF resolving used to be a hard cut: the procedural stone
+   * figure was the Suspense fallback, so the moment the model landed the
+   * fallback was unmounted and the carving appeared in its place, in view, in
+   * one frame. That single-frame swap is most of what "it loads in while it is
+   * still rendering" looks like.
+   *
+   * So the model comes up from nothing over FADE_S while the figure it replaces
+   * is still standing underneath it — `beneath` is that figure, handed in by
+   * the caller rather than left to Suspense, and dropped once the carving is
+   * opaque. The two occupy the same volume, so what the eye gets is a statue
+   * gaining its detail rather than a statue being swapped.
+   */
+  const fade = useRef(0);
+  const [arrived, setArrived] = useState(!dissolving);
+  const faded = useMemo(() => {
+    const out: { mat: THREE.Material; wasTransparent: boolean; opacity: number }[] = [];
+    if (!dissolving) return out;
+    model.traverse((o) => {
+      const m = o as THREE.Mesh;
+      if (!m.isMesh) return;
+      for (const mm of Array.isArray(m.material) ? m.material : [m.material]) {
+        out.push({ mat: mm, wasTransparent: mm.transparent, opacity: mm.opacity });
+        mm.transparent = true;
+        mm.opacity = 0;
+      }
+    });
+    return out;
+  }, [model, dissolving]);
+
   const lastK = useRef(-1);
   useFrame((_, delta) => {
     if (animate && !still) mixer.update(delta);
+    if (faded.length && fade.current < 1) {
+      fade.current = Math.min(1, fade.current + delta / FADE_S);
+      for (const f of faded) f.mat.opacity = f.opacity * fade.current;
+      if (fade.current >= 1) {
+        // sorting a transparent material costs every frame forever; the flag
+        // only ever existed for the dissolve, so it goes back the way it was
+        for (const f of faded) f.mat.transparent = f.wasTransparent;
+        setArrived(true);
+      }
+    }
     // wash the carving in a warm glow proportional to the hover value. Writing
     // it only when the value actually moves keeps a statue nobody is looking at
     // — which is nearly all of them, nearly all the time — entirely free.
@@ -124,6 +182,7 @@ export function GLBModel({
 
   return (
     <group position={[position[0], 0, position[1]]} rotation-y={rotationY}>
+      {!arrived && beneath}
       <primitive object={model} />
     </group>
   );

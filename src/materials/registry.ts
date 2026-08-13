@@ -65,6 +65,10 @@ let manifestPromise: Promise<void> | null = null;
  */
 export function primeMaterials(): Promise<void> {
   if (manifestPromise) return manifestPromise;
+  // the manifest counts as a scan in flight: it is what TELLS the registry
+  // which scans exist, so a count that ignored it could reach zero before a
+  // single real one had been asked for
+  inFlight += 1;
   manifestPromise = fetch(`${LIB.root}/manifest.json`)
     .then((r) => (r.ok ? r.json() : {}))
     .catch(() => ({}))
@@ -72,6 +76,7 @@ export function primeMaterials(): Promise<void> {
       manifest = json ?? {};
       // anything built before the manifest landed is still on its stand-in
       for (const entry of live.values()) applyMaps(entry.material, entry.id, entry.request);
+      inFlight = Math.max(0, inFlight - 1);
     });
   return manifestPromise;
 }
@@ -186,20 +191,49 @@ function onTextureFailure(url: string, fn: () => void): void {
  * its place rather than leaving the surface black — the swap can never make a
  * texture disappear, only make it smaller.
  */
+/**
+ * HOW MANY SCANS ARE STILL IN THE AIR — read by the loading veil.
+ *
+ * Every surface is dressed in a painted stand-in the moment it is built and
+ * swaps to its photographed scan when that lands, so a visitor let in too early
+ * watches the walls change texture around them. The veil waits on this count
+ * reaching zero (under its own cap — the long tail of scans is far too long to
+ * hold a hall behind a curtain for, and the ones that miss the reveal simply
+ * arrive as they always did).
+ */
+let inFlight = 0;
+
+export function scansSettled(): boolean {
+  return inFlight === 0;
+}
+
 function loadTexture(url: string, slot: MapSlot): THREE.Texture {
   const hit = textureCache.get(url);
   if (hit) return hit;
   const wanted = leanPath(url);
+  const settle = () => {
+    inFlight = Math.max(0, inFlight - 1);
+  };
   const onError = () => {
     // the lean set is optional: fall back to the full scan before giving up
     if (wanted !== url) {
-      loader.load(url, (full) => {
-        tex.image = full.image;
-        tex.needsUpdate = true;
-      }, undefined, fail);
+      loader.load(
+        url,
+        (full) => {
+          tex.image = full.image;
+          tex.needsUpdate = true;
+          settle();
+        },
+        undefined,
+        () => {
+          fail();
+          settle();
+        },
+      );
       return;
     }
     fail();
+    settle();
   };
   const fail = () => {
     failedTextures.add(url);
@@ -207,7 +241,8 @@ function loadTexture(url: string, slot: MapSlot): THREE.Texture {
     failureHandlers.delete(url);
     waiting?.forEach((fn) => fn());
   };
-  const tex = loader.load(wanted, undefined, undefined, onError);
+  inFlight += 1;
+  const tex = loader.load(wanted, settle, undefined, onError);
   // Colour data decodes as sRGB; measurement data must stay linear. Getting
   // this backwards is why hand-built PBR scenes come out washed out or muddy.
   tex.colorSpace = SRGB_SLOTS.has(slot) ? THREE.SRGBColorSpace : THREE.NoColorSpace;

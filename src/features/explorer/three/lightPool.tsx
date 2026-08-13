@@ -2,6 +2,8 @@ import { useRef } from 'react';
 import * as THREE from 'three';
 import { LEAN_TEXTURES } from './textureBudget';
 import { useFrame, useThree } from '@react-three/fiber';
+import { coursesSettled } from './Deferred';
+import { reportMilestone } from './loadPhase';
 
 /**
  * Evaluate a FIXED, SMALL number of point lights per fragment, whichever ones
@@ -75,11 +77,24 @@ const POOL_SIZE = LEAN_TEXTURES ? 10 : 18;
  * than popping. The exposure lift below pays back the general dimming.
  */
 
-/** one harvest, at one moment, so the relink is paid exactly once — and behind
- *  the 4.6 s intro card, where a freeze is invisible. Lights that mount later
- *  (an orrery plate the visitor switches to) are left alone: they already
- *  relink on mount today, and there are only ever two of them. */
-const HARVEST_AT = 5.0;
+/** one harvest, at one moment, so the relink is paid exactly once. Lights that
+ *  mount later (an orrery plate the visitor switches to) are left alone: they
+ *  already relink on mount today, and there are only ever two of them.
+ *
+ *  IT USED TO BE AT 5.0 s, behind the arrival card, on the reasoning that a
+ *  freeze is invisible there. Two things had changed since: phones skip the
+ *  arrival glide entirely, and the veil now lifts on the first presented frame
+ *  — so 5 s put the one unavoidable relink, AND the lighting change that comes
+ *  with re-rigging 35 practicals onto 18 slots, squarely in front of a visitor
+ *  already walking the hall. It is the "still loading in" complaint in its most
+ *  visible form: the room changes its lighting while you stand in it.
+ *
+ *  Now it happens as early as it possibly can — the moment every deferred
+ *  course has mounted, so nothing is missed, with a floor to let the first
+ *  frames through — and the veil holds until it is done (see loadPhase). The
+ *  relink is paid behind the curtain, which is what "behind the intro card"
+ *  was reaching for in the first place. */
+const HARVEST_FLOOR = 0.25;
 
 /** seconds between re-rankings. The ranking is a sort over ~35 items, but
  *  running it every frame makes slots thrash between near-equal candidates. */
@@ -192,7 +207,9 @@ export function LightPool({ enabled = true, size = POOL_SIZE }: { enabled?: bool
 
     // ——— once: take every point light out of the graph, keep its recipe ———
     if (!sources.current) {
-      if (elapsed.current < HARVEST_AT) return;
+      // every course must be standing, or its chandeliers are never harvested
+      // and stay as permanent unpooled lights — the cost this exists to avoid
+      if (elapsed.current < HARVEST_FLOOR || !coursesSettled()) return;
       const found: Source[] = [];
       const taken: THREE.PointLight[] = [];
       scene.traverse((o) => {
@@ -213,6 +230,7 @@ export function LightPool({ enabled = true, size = POOL_SIZE }: { enabled?: bool
         parent.remove(l);
       }
       sources.current = found;
+      reportMilestone('lights');
 
       for (let i = 0; i < size; i++) {
         const light = new THREE.PointLight(0xffffff, 0, 10, 2);

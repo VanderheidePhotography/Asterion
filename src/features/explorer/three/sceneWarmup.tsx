@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
+import { milestoneDone } from './loadPhase';
 
 /**
  * Pay the first-render costs during the intro card instead of mid-walk.
@@ -70,6 +71,22 @@ export function SceneWarmup() {
 
     elapsed.current += delta;
     if (elapsed.current > WATCH_SECONDS) return;
+
+    /**
+     * NOT UNTIL THE LIGHT POOL HAS BEEN HARVESTED.
+     *
+     * The number of visible lights is a shader `#define`, so the harvest
+     * relinks every material in the building — and this pass exists to link
+     * every material in the building. Running first meant compiling the whole
+     * set against 35 lights and then throwing all of it away when the pool
+     * took over, which is the single most expensive way to arrange two
+     * correct pieces of work. It used to be hidden by the harvest sitting at
+     * 5 s, long after the warmup had finished wasting its time.
+     *
+     * The `elapsed` guard is the escape hatch: if the pool is ever disabled,
+     * the milestone never reports and the warmup must still run.
+     */
+    if (!milestoneDone('lights') && elapsed.current < 2) return;
 
     sinceCheck.current += delta;
     if (sinceCheck.current < CHECK_INTERVAL || compiling.current) return;

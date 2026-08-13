@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import * as THREE from 'three';
-import { TEXTURE_SCALE } from './textureBudget';
+import { LEAN_TEXTURES, TEXTURE_SCALE } from './textureBudget';
 
 /**
  * Self-contained 3D text: renders type onto a high-DPI canvas texture.
@@ -82,16 +82,30 @@ const MIN_PX_PER_METRE = 100 * TEXTURE_SCALE;
  */
 const noRaycast = () => undefined;
 
-function bake(
-  text: string,
-  color: string,
-  family: string,
-  weight: number,
-  maxWidthPx: number,
-  outline: boolean,
-  /** world height of ONE LINE of this label — sets how finely it must raster */
-  worldLineHeight: number,
-): Baked {
+/**
+ * LAY THE LABEL OUT WITHOUT DRAWING IT.
+ *
+ * Split out of `bake` because a label needs its shape long before — and often
+ * instead of — its pixels: the sprite must be the right size on the pier for
+ * the culler to judge whether anyone could read it, and on a phone most labels
+ * never become readable at all. Measuring is `measureText` on a scratch
+ * context; drawing is a canvas allocation, a stroke and a fill per line, and a
+ * GPU upload. Measured over a cold load the second group is roughly ten times
+ * the first.
+ */
+interface Layout {
+  lines: string[];
+  lineHeight: number;
+  pad: number;
+  width: number;
+  height: number;
+}
+
+const layouts = new Map<string, Layout>();
+
+function layout(text: string, family: string, weight: number, maxWidthPx: number, key: string): Layout {
+  const hit = layouts.get(key);
+  if (hit) return hit;
   const scratch = document.createElement('canvas').getContext('2d')!;
   scratch.font = `${weight} ${BASE}px ${family}`;
   // greedy word wrap
@@ -111,8 +125,29 @@ function bake(
 
   const lineHeight = BASE * 1.22;
   const pad = BASE * 0.4;
-  const width = Math.ceil(Math.max(...lines.map((l) => scratch.measureText(l).width)) + pad * 2);
-  const height = Math.ceil(lines.length * lineHeight + pad * 2);
+  const out: Layout = {
+    lines,
+    lineHeight,
+    pad,
+    width: Math.ceil(Math.max(...lines.map((l) => scratch.measureText(l).width)) + pad * 2),
+    height: Math.ceil(lines.length * lineHeight + pad * 2),
+  };
+  layouts.set(key, out);
+  return out;
+}
+
+function bake(
+  text: string,
+  color: string,
+  family: string,
+  weight: number,
+  maxWidthPx: number,
+  outline: boolean,
+  /** world height of ONE LINE of this label — sets how finely it must raster */
+  worldLineHeight: number,
+  key: string,
+): Baked {
+  const { lines, lineHeight, pad, width, height } = layout(text, family, weight, maxWidthPx, key);
 
   // the raster this label needs to hold MIN_PX_PER_METRE, never below the
   // floor and never past the ceiling (a 3 m sign does not need 4× either)
@@ -226,6 +261,15 @@ function enqueue(key: string, make: () => Baked, wake: () => void): void {
   }
 }
 
+/**
+ * Is every label that has asked for a picture holding one? Read by the veil,
+ * which holds the doors shut until the hall is lettered rather than letting
+ * the visitor watch the signs write themselves.
+ */
+export function labelsSettled(): boolean {
+  return queue.length === 0;
+}
+
 /** claim it, from an effect — paired with exactly one `release` */
 function retain(key: string): void {
   const entry = bakeCache.get(key);
@@ -334,41 +378,88 @@ export function TextSprite({
   const [bakeTick, setBakeTick] = useState(0);
   const baked = useMemo(() => {
     if (!fontsReady) return null;
-    const make = () => bake(children, color, FAMILIES[font], weight, maxWidthPx, outline, height * 1.5);
     const hit = bakeCache.get(key);
     if (hit) return hit.baked;
-    enqueue(key, make, () => setBakeTick((n) => n + 1));
+    const make = () => bake(children, color, FAMILIES[font], weight, maxWidthPx, outline, height * 1.5, key);
+    const wake = () => setBakeTick((n) => n + 1);
+    // ON A PHONE, WAIT TO BE WORTH DRAWING — see `pending` below
+    if (LEAN_TEXTURES) return { pending: make, wake };
+    enqueue(key, make, wake);
     return null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, fontsReady, bakeTick]);
   useEffect(() => {
-    if (!baked) return;
+    if (!baked || 'pending' in baked) return;
     retain(key);
     return () => release(key);
   }, [key, baked]);
 
-  // an empty sprite for the few hundred ms before the type lands
-  if (!baked) return null;
+  /**
+   * THE SHAPE, WHICH COSTS A MEASUREMENT, AGAINST THE PICTURE, WHICH COSTS A
+   * CANVAS.
+   *
+   * A label has to exist at the right size before anyone can decide whether it
+   * is worth drawing — that is what the culler in propCulling.tsx ranks — so
+   * the quad is sized from the layout alone. On a phone the pixels are then
+   * left unbaked: PropCulling already decides, every frame, that ~700 of the
+   * museum's 969 labels are too small on screen to be read and hides them, and
+   * it decided that AFTER every one of them had been rastered and uploaded.
+   * Now the sprite carries its own bake request in `userData` and the culler
+   * calls it the moment the label first becomes legible — walk up to a shelf
+   * and its spine labels raster as they become readable, and the ones you
+   * never walk up to are never paid for at all.
+   */
+  const pendingBake = baked && 'pending' in baked ? baked : null;
+  const shape = useMemo(() => {
+    if (!fontsReady) return null;
+    const l = layout(children, FAMILIES[font], weight, maxWidthPx, key);
+    return { lines: l.lines.length, aspect: l.width / l.height };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, fontsReady]);
+  const request = useMemo(() => {
+    if (!pendingBake) return undefined;
+    let asked = false;
+    return () => {
+      if (asked) return;
+      asked = true;
+      enqueue(key, pendingBake.pending, pendingBake.wake);
+    };
+  }, [key, pendingBake]);
 
-  const blockHeight = height * baked.lines * 1.5;
-  const scale: [number, number, number] = [blockHeight * baked.aspect, blockHeight, 1];
+  // an empty sprite for the few hundred ms before the type lands
+  const picture = baked && !('pending' in baked) ? baked : null;
+  if (!picture && !shape) return null;
+
+  const lines = picture ? picture.lines : shape!.lines;
+  const aspect = picture ? picture.aspect : shape!.aspect;
+  const blockHeight = height * lines * 1.5;
+  const scale: [number, number, number] = [blockHeight * aspect, blockHeight, 1];
 
   // Text is content, not dressing: PropCulling's glow budget ranks sprites by
   // screen area and starves the small/far ones, and in a small building most
   // labels ARE small or far. That is right for a candle glow — nobody reads a
   // candle — and wrong for a hall sign or a wayfinding title, which exists
   // specifically to be read from a distance. `noCull` is PropCulling's opt-out.
+  // `bakeWhenLegible` is what PropCulling calls; an unbaked label draws
+  // nothing until it has been called and the picture has arrived
+  const data = { noCull: true, bakeWhenLegible: request };
   if (billboard) {
     return (
-      <sprite position={position} scale={scale} raycast={noRaycast} userData={{ noCull: true }}>
-        <spriteMaterial map={baked.texture} transparent opacity={opacity} depthWrite={false} />
+      <sprite position={position} scale={scale} raycast={noRaycast} userData={data} visible={Boolean(picture)}>
+        <spriteMaterial map={picture?.texture ?? null} transparent opacity={opacity} depthWrite={false} />
       </sprite>
     );
   }
   return (
-    <mesh position={position} scale={scale} raycast={noRaycast} userData={{ noCull: true }}>
+    <mesh position={position} scale={scale} raycast={noRaycast} userData={data} visible={Boolean(picture)}>
       <planeGeometry args={[1, 1]} />
-      <meshBasicMaterial map={baked.texture} transparent opacity={opacity} depthWrite={false} side={THREE.DoubleSide} />
+      <meshBasicMaterial
+        map={picture?.texture ?? null}
+        transparent
+        opacity={opacity}
+        depthWrite={false}
+        side={THREE.DoubleSide}
+      />
     </mesh>
   );
 }

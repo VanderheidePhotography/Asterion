@@ -685,7 +685,9 @@ function Monument({
           What this frame owes it is the height everything else stands at. */}
       <group position-y={pedH}>{STATUE_MODELS[spec.kind] ? (
         // a real sculpted model stands in place of the procedural figure; the
-        // carved primitive is the fallback while the glTF streams in
+        // carved primitive is the fallback while the glTF streams in — and is
+        // handed to the model as `beneath` as well, so the carving dissolves
+        // up through it instead of replacing it in a single frame
         <Suspense
           fallback={
             spec.wide ? (
@@ -702,6 +704,13 @@ function Monument({
             rotationY={STATUE_MODELS[spec.kind].rotY ?? 0}
             animate={false}
             highlightRef={highlight}
+            beneath={
+              spec.wide ? (
+                <FullFigure kind={spec.kind as Full} mats={mats} />
+              ) : (
+                <HermFigure kind={spec.kind as Herm} mats={mats} />
+              )
+            }
           />
         </Suspense>
       ) : spec.wide ? (

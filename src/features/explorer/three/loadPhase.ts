@@ -46,11 +46,22 @@ export interface LoadPhase {
  * what they buy is that the bar is at 0.2 when the tree starts building and not
  * before, however long that took to reach.
  *
- * NOT INCLUDED, on purpose: the scans and the label bakes. Both keep arriving
- * for many seconds after the doors open — a surface swaps its painted stand-in
- * for a photographed one, a sign fades up — and the veil deliberately does not
- * wait for them. A bar that waited for every byte would hold a walkable hall
- * behind a curtain for half a minute.
+ * THE LIST RUNS PAST THE FIRST FRAME, and did not until now. Presenting a
+ * frame is not the same as being fit to look at: at that moment the labels are
+ * still baking, the wings are still mounting on a phone, the scans are still
+ * arriving over their painted stand-ins, and the light pool has not been
+ * harvested — so the visitor was let in to watch the building finish itself,
+ * which reads as an unfinished website rather than as a museum.
+ *
+ * So four settling milestones follow `paint`, and the veil now waits for them.
+ * They are the ones that finish in a second or so. What does NOT appear here is
+ * anything slow: the ten statue models that stream in after the reveal, and the
+ * long tail of scans. Those dissolve in over their stand-ins instead (see
+ * GLBModel), because waiting for them would hold a walkable hall behind a
+ * curtain for half a minute — the exact failure the veil exists to end.
+ *
+ * And the whole settle is capped: see SETTLE_CAP_MS. A slow device gets its
+ * doors open on time even if nothing has settled at all.
  */
 /*
  * There is no milestone here for the renderer's own creation, and there was
@@ -65,11 +76,28 @@ const WORK = [
   { id: 'fonts', weight: 1, label: 'Cutting the type' },
   { id: 'build', weight: 6, label: 'Raising the rotunda' },
   { id: 'paint', weight: 2, label: 'Lighting the candles' },
+  // ——— the settle: everything between a first frame and a finished room ———
+  { id: 'courses', weight: 1, label: 'Shelving the collection' },
+  { id: 'labels', weight: 2, label: 'Lettering the signs' },
+  { id: 'lights', weight: 1, label: 'Trimming the lamps' },
+  { id: 'scans', weight: 2, label: 'Hanging the scans' },
 ] as const;
 
 export type Milestone = (typeof WORK)[number]['id'];
 
 const TOTAL = WORK.reduce((sum, w) => sum + w.weight, 0);
+
+/**
+ * HOW LONG THE SETTLE MAY HOLD THE DOORS SHUT, from the first presented frame.
+ *
+ * The point of waiting is a clean reveal, and the point of a cap is that a
+ * clean reveal is worth about two seconds and not one second more. Whatever
+ * has not settled by then keeps arriving behind an open hall — which is what
+ * every arrival did before this existed, so the cap can only ever land the
+ * visitor back where they already were, never worse.
+ */
+const SETTLE_CAP_MS = 2000;
+let capTimer: ReturnType<typeof setTimeout> | null = null;
 
 /** which milestones are behind us */
 let done = new Set<Milestone>();
@@ -93,21 +121,22 @@ function next(): (typeof WORK)[number] | undefined {
 }
 
 /**
- * THE FRAME IS THE END OF THE WAIT, not the completion of the list.
+ * THE VEIL LIFTS WHEN THE ROOM IS FIT TO LOOK AT, not when a frame exists.
  *
- * `painted` is tied to that one milestone rather than to every milestone being
- * settled, because the two can arrive out of order and the visitor's eyes side
- * with the frame. Anything still outstanding when the hall is drawn is, by
- * definition, no longer something they are waiting behind a curtain for.
+ * It used to lift on `paint` alone, and that was the right call against a
+ * blank screen and the wrong one against a finished museum: the frame is real,
+ * but for a second after it the hall is visibly assembling — signs blank, wings
+ * arriving, lamps about to be re-rigged. Every milestone must be behind us now,
+ * and SETTLE_CAP_MS guarantees that happens on a schedule either way.
  */
 function compute(): LoadPhase {
-  if (done.has('paint')) return { progress: 1, label: 'Open', painted: true };
   const settled = WORK.reduce((sum, w) => (done.has(w.id) ? sum + w.weight : sum), 0);
   const pending = next();
-  const progress = (settled + (pending ? pending.weight * creep : 0)) / TOTAL;
+  if (!pending) return { progress: 1, label: 'Open', painted: true };
+  const progress = (settled + pending.weight * creep) / TOTAL;
   return {
     progress: Math.min(1, progress),
-    label: pending?.label ?? 'Open',
+    label: pending.label,
     painted: false,
   };
 }
@@ -134,6 +163,11 @@ function publish(): void {
   listeners.forEach((fn) => fn(at));
 }
 
+/** has this stage happened yet? */
+export function milestoneDone(id: Milestone): boolean {
+  return done.has(id);
+}
+
 /** something the hall was waiting on has happened */
 export function reportMilestone(id: Milestone): void {
   if (done.has(id)) return;
@@ -152,15 +186,30 @@ export function creepTick(): void {
   publish();
 }
 
-/** the renderer has presented a frame — the veil can go */
+/**
+ * The renderer has presented a frame. That starts the settle rather than
+ * ending the wait — and starts the clock that ends the settle whatever else
+ * happens, so nothing downstream can hold the doors shut by never reporting.
+ */
 export function reportPainted(): void {
+  if (done.has('paint')) return;
   reportMilestone('paint');
+  if (capTimer) clearTimeout(capTimer);
+  capTimer = setTimeout(() => {
+    capTimer = null;
+    for (const w of WORK) done.add(w.id);
+    publish();
+  }, SETTLE_CAP_MS);
 }
 
 /** a fresh visit (the module outlives a client-side route change) */
 export function resetLoadPhase(): void {
   done = new Set<Milestone>();
   creep = 0;
+  if (capTimer) {
+    clearTimeout(capTimer);
+    capTimer = null;
+  }
   // we are only ever called from the hall's own render, which cannot happen
   // until its chunk has been fetched and evaluated
   done.add('chunk');

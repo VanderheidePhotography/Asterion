@@ -33,6 +33,25 @@ import { LEAN_TEXTURES } from './textureBudget';
  * addressed to had already gone. The courses are, correctly, what happens
  * once the visitor is already standing in the hall.
  */
+/**
+ * HOW MANY COURSES ARE STILL OUTSTANDING — for the veil, which waits for them.
+ *
+ * A course that lands after the reveal is a wing appearing around a visitor who
+ * is already standing in the hall, and that is precisely the "still loading in"
+ * look this is now asked to avoid. So the veil holds until every course has
+ * mounted (capped in loadPhase, so a stall cannot lock the doors).
+ *
+ * On desktop nothing is deferred and nothing ever registers, so `pending` stays
+ * at zero and the milestone is reported by the first check that runs.
+ */
+let pending = 0;
+let started = false;
+
+/** called by the veil once a frame has been presented */
+export function coursesSettled(): boolean {
+  return pending === 0 || !started;
+}
+
 export function Deferred({
   /** how many painted frames to wait before this course is built */
   frames = 1,
@@ -45,15 +64,24 @@ export function Deferred({
 
   useEffect(() => {
     if (ready) return;
+    pending += 1;
+    started = true;
     let left = frames;
     let handle = 0;
+    let counted = false;
     const tick = () => {
       left -= 1;
-      if (left <= 0) setReady(true);
-      else handle = requestAnimationFrame(tick);
+      if (left <= 0) {
+        counted = true;
+        pending -= 1;
+        setReady(true);
+      } else handle = requestAnimationFrame(tick);
     };
     handle = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(handle);
+    return () => {
+      cancelAnimationFrame(handle);
+      if (!counted) pending -= 1;
+    };
   }, [ready, frames]);
 
   return ready ? <>{children}</> : null;

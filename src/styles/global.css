@@ -2023,6 +2023,19 @@ button {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+/* the reveal: the veil dissolves into the finished hall rather than being cut
+   away from it, and its card leaves a beat earlier than its ground so the type
+   is gone before the room is uncovered (see REVEAL_MS in HallLoading) */
+.hall-loading-open {
+  animation: none;
+  opacity: 0;
+  transition: opacity 620ms ease-in;
+  pointer-events: none;
+}
+.hall-loading-open .hall-loading-card {
+  opacity: 0;
+  transition: opacity 260ms ease-in;
+}
 .hall-loading-card {
   display: flex;
   flex-direction: column;
@@ -2068,4 +2081,9 @@ button {
 @media (prefers-reduced-motion: reduce) {
   .hall-loading { animation: none; }
   .hall-loading-bar { transition: none; }
+  /* the dissolve still happens — it is what stops the reveal reading as a
+     glitch — but instantly, so nothing animates for a visitor who asked for
+     no animation */
+  .hall-loading-open,
+  .hall-loading-open .hall-loading-card { transition: none; }
 }

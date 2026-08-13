@@ -1,12 +1,18 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { creepTick, loadPhase, onLoadPhase, reportMilestone, reportPainted, type LoadPhase } from './loadPhase';
+import { coursesSettled } from './Deferred';
+import { labelsSettled } from './TextSprite';
+import { scansSettled } from '../../../materials/registry';
 
 /**
  * The line held while the hall is built. Long enough to be worth reading, and
  * about the place rather than about software — nobody wants a percentage from
  * a museum, but they will wait for one if the wait is furnished.
  */
+/** how long the veil takes to dissolve into the hall — matches the CSS */
+const REVEAL_MS = 620;
+
 const LORE = [
   '“That which is below is like that which is above.” — the Emerald Tablet',
   '“Know thyself, and thou shalt know the universe and the gods.” — the temple at Delphi',
@@ -23,7 +29,28 @@ const LORE = [
  * blank, which is precisely the failure this whole overlay exists to end.
  */
 export function PaintWatch() {
-  useFrame(() => reportPainted());
+  useFrame(() => {
+    reportPainted();
+    /**
+     * THE SETTLE, CHECKED IN ORDER AND ONLY IN ORDER.
+     *
+     * Each of these can be momentarily true before its turn — the bake queue is
+     * empty before the first label asks for a picture, and the scan count sits
+     * at zero before the manifest says which scans exist — so an out-of-order
+     * check would report a stage that has not started as one that has finished.
+     * Walking the list front to back and stopping at the first thing still
+     * outstanding is what makes each answer mean what it says.
+     *
+     * `lights` is not here: LightPool reports it from the harvest itself, which
+     * is the only place that knows the pool is rigged.
+     */
+    if (!coursesSettled()) return;
+    reportMilestone('courses');
+    if (!labelsSettled()) return;
+    reportMilestone('labels');
+    if (!scansSettled()) return;
+    reportMilestone('scans');
+  });
   return null;
 }
 
@@ -84,10 +111,31 @@ export function HallLoading() {
     return () => clearInterval(id);
   }, [phase.painted]);
 
-  if (phase.painted) return null;
+  /**
+   * THE REVEAL IS A DISSOLVE, not a cut.
+   *
+   * The veil used to be returned as `null` the instant the hall was ready, so
+   * a dark loading card was replaced by a dark hall in one frame — which reads
+   * as a glitch rather than as an opening, and gives the eye no moment to
+   * understand that the room behind it is the destination. It holds for the
+   * length of the fade and then leaves.
+   */
+  const [gone, setGone] = useState(false);
+  useEffect(() => {
+    if (!phase.painted) return;
+    const id = setTimeout(() => setGone(true), REVEAL_MS);
+    return () => clearTimeout(id);
+  }, [phase.painted]);
+
+  if (gone) return null;
 
   return (
-    <div className="hall-loading" role="status" aria-live="polite">
+    <div
+      className={phase.painted ? 'hall-loading hall-loading-open' : 'hall-loading'}
+      role="status"
+      aria-live="polite"
+      aria-hidden={phase.painted}
+    >
       <div className="hall-loading-card">
         <span className="hall-loading-name">ASTERION</span>
         <span className="hall-loading-phase">{phase.label}…</span>
