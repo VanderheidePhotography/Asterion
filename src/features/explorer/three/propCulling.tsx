@@ -121,8 +121,17 @@ export function PropCulling() {
       const isMesh = (m as THREE.Mesh).isMesh === true;
       const isSprite = (m as THREE.Sprite).isSprite === true;
       if (!isMesh && !isSprite) return;
-      // never our business if something else is hiding it
-      if (!m.visible && !ours.current.has(m)) return;
+      /*
+       * NEVER OUR BUSINESS IF SOMETHING ELSE IS HIDING IT — except a label
+       * that has not been baked yet, which is hidden BY US in a sense: on a
+       * phone a TextSprite renders an empty, correctly sized quad until this
+       * routine asks it for its pixels (see `bakeWhenLegible`). Skipping it
+       * here because it is invisible is a deadlock — invisible until asked,
+       * never asked because invisible — and it cost the museum every label on
+       * mobile: hall signs, wayfinding titles and the book titles that pop up
+       * as you walk along a shelf.
+       */
+      if (!m.visible && !ours.current.has(m) && !m.userData.bakeWhenLegible) return;
 
       if (m.userData.noCull) {
         /*
@@ -168,7 +177,19 @@ export function PropCulling() {
          */
         if (legible) {
           const ask = m.userData.bakeWhenLegible as (() => void) | undefined;
-          if (ask) ask();
+          if (ask) {
+            /*
+             * ITS ANCESTORS HAVE TO BE SHOWING, and this is the whole reason
+             * the check is here rather than in TextSprite. `traverse` walks
+             * into hidden branches, and the museum's ~969 book titles live in
+             * per-book groups that are switched on only when the visitor is
+             * beside that shelf. Without this walk, standing at the door would
+             * bake every title in the building — the exact bill this
+             * bake-on-legibility scheme exists to avoid.
+             */
+            for (let p = m.parent; p; p = p.parent) if (!p.visible) return;
+            ask();
+          }
           if (ours.current.delete(m)) m.visible = true;
         } else if (shown) {
           m.visible = false;
