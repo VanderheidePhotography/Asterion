@@ -21,11 +21,11 @@ import {
  * looked any different.
  */
 
-/** a camera at the origin looking down −z, which is three's default */
 /** the phone's cap, pinned here rather than imported: a test in Node reports
  *  as a desktop, where the queue deliberately does not gate at all */
 const CAP = 2;
 
+/** a camera somewhere on the floor, looking down −z unless told otherwise */
 function cameraAt(x: number, z: number, lookX = x, lookZ = z - 1): THREE.Camera {
   const cam = new THREE.PerspectiveCamera();
   cam.position.set(x, 1.7, z);
