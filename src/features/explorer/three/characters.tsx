@@ -10,6 +10,7 @@ import { APSE_HALF } from './layout';
 import { getMaterial } from '../../../materials';
 import { GLBModel } from './GLBModel';
 import { useHeldForReveal } from './Deferred';
+import { LEAN_TEXTURES } from './textureBudget';
 import { reportModelReady, useModelSlot } from './modelQueue';
 
 /**
@@ -934,9 +935,21 @@ export function Librarian({
           once the model takes over, and the survey-the-hall frame loop above
           is written to tolerate that. */}
       {held || !slot ? (
-        <ProceduralLibrarian head={head} robeMat={robeMat} brassMat={brassMat} />
+        // nothing behind the desk on a phone until she arrives — the same rule
+        // the statuary follows now (see statues.tsx): a crude stand-in that is
+        // up for seconds rather than a frame reads as the wrong figure, not as
+        // a figure loading. Desktop keeps hers; it never sees it.
+        LEAN_TEXTURES ? null : (
+          <ProceduralLibrarian head={head} robeMat={robeMat} brassMat={brassMat} />
+        )
       ) : (
-      <Suspense fallback={<ProceduralLibrarian head={head} robeMat={robeMat} brassMat={brassMat} />}>
+      <Suspense
+        fallback={
+          LEAN_TEXTURES ? null : (
+            <ProceduralLibrarian head={head} robeMat={robeMat} brassMat={brassMat} />
+          )
+        }
+      >
         {/* Taller than life at 2.4 m (was 2.0): she stands behind a 0.92 m
             counter with a 2.98 m cornice over her, and now that the counter is
             wider and set forward she has to grow with it to keep command of the
@@ -946,6 +959,7 @@ export function Librarian({
           src="/models/librarian.glb"
           targetHeight={2.4}
           position={[0, -0.55]}
+          fadeIn={LEAN_TEXTURES}
           onReady={() => reportModelReady('librarian')}
         />
       </Suspense>

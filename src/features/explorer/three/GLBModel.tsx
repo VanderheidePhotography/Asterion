@@ -27,6 +27,7 @@ export function GLBModel({
   animate = true,
   highlightRef,
   beneath,
+  fadeIn = false,
   onReady,
 }: {
   src: string;
@@ -42,6 +43,10 @@ export function GLBModel({
   /** what stood here while the model streamed — kept underneath and dissolved
    *  through, rather than cut away the frame the glTF resolves */
   beneath?: ReactNode;
+  /** dissolve up from nothing rather than cutting in, with no stand-in under
+   *  it. `beneath` implies this; a caller that shows nothing while the model
+   *  streams — every figure on a phone, see statues.tsx — asks for it here. */
+  fadeIn?: boolean;
   /** the glTF has landed and this component is mounted — how the download
    *  queue learns its slot is free (see modelQueue) */
   onReady?: () => void;
@@ -56,7 +61,9 @@ export function GLBModel({
   // invisible) and re-ran the material-dispose cleanup under a live model.
   // Only whether there IS something beneath is stable, and it is all that
   // either of them actually needs to know.
-  const dissolving = Boolean(beneath);
+  // `beneath` still implies a dissolve, so no desktop caller changes; `fadeIn`
+  // is the same dissolve with nothing standing under it
+  const dissolving = Boolean(beneath) || fadeIn;
 
   const model = useMemo(() => {
     const root = scene.clone(true);

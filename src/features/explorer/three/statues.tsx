@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { GLBModel } from './GLBModel';
 import { useHeldForReveal } from './Deferred';
+import { LEAN_TEXTURES } from './textureBudget';
 import { reportModelReady, useModelSlot } from './modelQueue';
 import { candleWash, getGlowTexture } from './glowTexture';
 import { rugHalf } from './textures';
@@ -685,6 +686,15 @@ function Monument({
    */
   const pedH = niche ? PEDESTAL_H : 0;
 
+  /** the procedural carving — a desktop's Suspense fallback and the thing its
+   *  model dissolves up through. Never rendered on a phone; see the note on
+   *  the GLBModel below. */
+  const stand = spec.wide ? (
+    <FullFigure kind={spec.kind as Full} mats={mats} />
+  ) : (
+    <HermFigure kind={spec.kind as Herm} mats={mats} />
+  );
+
   return (
     <group position={spec.pos} rotation-y={spec.rotY}>
       {/* the pedestal itself is not built here — all ten are baked into one
@@ -697,15 +707,7 @@ function Monument({
         // up through it instead of replacing it in a single frame.
         // `held` keeps the whole glTF out of the load on a phone until the
         // doors are open — see useHeldForReveal
-        <Suspense
-          fallback={
-            spec.wide ? (
-              <FullFigure kind={spec.kind as Full} mats={mats} />
-            ) : (
-              <HermFigure kind={spec.kind as Herm} mats={mats} />
-            )
-          }
-        >
+        <Suspense fallback={LEAN_TEXTURES ? null : stand}>
           <GLBModel
             src={STATUE_MODELS[spec.kind].src}
             targetHeight={STATUE_MODELS[spec.kind].height}
@@ -714,19 +716,29 @@ function Monument({
             animate={false}
             highlightRef={highlight}
             onReady={() => reportModelReady(spec.kind)}
-            beneath={
-              spec.wide ? (
-                <FullFigure kind={spec.kind as Full} mats={mats} />
-              ) : (
-                <HermFigure kind={spec.kind as Herm} mats={mats} />
-              )
-            }
+            /* NO STAND-IN ON A PHONE, and the niche is empty until the carving
+               lands. Removed on the user's explicit instruction after they
+               reported the crude figures "overlapping and taking the place of
+               where the actual models are supposed to be".
+               The reasoning that put them there — a figure can wait because
+               something is standing in its place — assumed the stand-in read as
+               the statue arriving. It does not: it is a different silhouette at
+               a different height in the same alcove, so on the slow device,
+               where it is up for seconds rather than a frame, what a visitor
+               sees is the wrong statue and then a second one appearing over it.
+               An alcove that is dressed but not yet occupied — pedestal, rug,
+               candle stands, beam and label are all still there — reads as a
+               statue you have not reached, which is the truth.
+               `fadeIn` keeps the dissolve, so it still comes up rather than
+               cutting in; there is simply nothing underneath it now. Desktop is
+               untouched: it builds every figure before the doors open, so its
+               stand-in is never seen and costs nothing to keep. */
+            fadeIn={LEAN_TEXTURES}
+            beneath={LEAN_TEXTURES ? undefined : stand}
           />
         </Suspense>
-      ) : spec.wide ? (
-        <FullFigure kind={spec.kind as Full} mats={mats} />
-      ) : (
-        <HermFigure kind={spec.kind as Herm} mats={mats} />
+      ) : STATUE_MODELS[spec.kind] && LEAN_TEXTURES ? null : (
+        stand
       )}</group>
 
       {/* the hearth rug — 3 cm proud of the boards so it never z-fights them */}
@@ -1111,9 +1123,11 @@ export function LeontocephalineEast({
           the raised key still clears the springing at 5.2 into the conch. */}
       <group position-y={PEDESTAL_H}>
         {held || !slot ? (
-          <FullFigure kind="leontocephaline" mats={mats} />
+          // empty on a phone until the carving lands — the same rule as every
+          // other niche, see Monument
+          LEAN_TEXTURES ? null : <FullFigure kind="leontocephaline" mats={mats} />
         ) : (
-          <Suspense fallback={<FullFigure kind="leontocephaline" mats={mats} />}>
+          <Suspense fallback={LEAN_TEXTURES ? null : <FullFigure kind="leontocephaline" mats={mats} />}>
             <GLBModel
               src="/models/leontocephaline.glb"
               targetHeight={5.0}
@@ -1122,7 +1136,8 @@ export function LeontocephalineEast({
               animate={false}
               highlightRef={highlight}
               onReady={() => reportModelReady('leontocephaline')}
-              beneath={<FullFigure kind="leontocephaline" mats={mats} />}
+              fadeIn={LEAN_TEXTURES}
+              beneath={LEAN_TEXTURES ? undefined : <FullFigure kind="leontocephaline" mats={mats} />}
             />
           </Suspense>
         )}

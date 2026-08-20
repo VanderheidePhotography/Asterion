@@ -4,7 +4,6 @@ import { useFrame } from '@react-three/fiber';
 import { PALETTE } from '../../../materials';
 import { DustMotes } from './DustMotes';
 import { OCULUS_R, ROT_DOME_TOP } from './layout';
-import { LEAN_TEXTURES } from './textureBudget';
 
 /**
  * The lighting rig.
@@ -39,44 +38,45 @@ import { LEAN_TEXTURES } from './textureBudget';
 const MOON_DIR: [number, number, number] = [-26, 38, -20];
 
 /**
- * A PHONE IS NOT A DARK ROOM — the one place this rig is graded differently.
+ * A PHONE IS NOT A DARK ROOM — but the fix for that is NOT more flat light.
  *
- * Everything above is written for a big panel in a dim room, which is where
- * "roughly 85% shadow" was judged and where it is right. A phone is neither.
- * Three things stack against it and they all point the same way:
+ * The problem is real: the pool is 10 practicals on lean against a desktop's
+ * 18, nobody looks at a phone in a dark room, and the argument that unlit
+ * depth is worth walking into is an argument about a hall you can see 40 m
+ * down rather than about a hundred pixels at the end of a wing.
  *
- *   THE POOL IS SMALLER   lean devices carry 10 practicals against a desktop's
- *                         18 (see lightPool), so a third of the candlelight in
- *                         any given view is simply not being evaluated. That
- *                         was measured at the time as a 2.5% loss of average
- *                         brightness on ONE camera standing in the middle of
- *                         the rotunda, which is the most generously lit spot
- *                         in the building; in a wing, where the practicals ARE
- *                         the light, the shortfall is much larger.
- *   THE SCREEN IS LIT     nobody looks at a phone in a dark room. Daylight on
- *                         the glass raises the black level of the DISPLAY, and
- *                         a scene whose whole lower two thirds sits just above
- *                         black arrives as a single flat dark field.
- *   THE FRAME IS SMALL    the argument for darkness is that unlit depth is
- *                         worth walking into. That argument is about a hall
- *                         you can see 40 m down. At 375 pt wide the far end of
- *                         a wing is a hundred pixels, and darkness there buys
- *                         mystery on a desktop and an empty rectangle here.
+ * The first attempt at it raised these four terms — bounce to 0.15, the flat
+ * ambient to 0.098, the moon to 0.52 — and it was wrong in a way that is worth
+ * recording, because it looked correct in every A/B of BRIGHTNESS.
  *
- * So the two flat terms and the moon are lifted on lean, and the exposure with
- * them (see GrandLibrary). Deliberately the FLAT terms rather than more
- * practicals: a practical costs frame time on the device that has least of it,
- * and the thing actually missing on a phone is the general wash that the eight
- * unslotted candles used to provide. The candle pools themselves are untouched,
- * so the ratio of "lit by a flame" to "not" — which is what the grade is
- * really about — is preserved; the floor under it comes up.
+ * Every one of those is achromatic: silver, blue-grey, silver. Light with no
+ * colour in it adds the same amount to all three channels of whatever it
+ * lands on, and adding a constant to R, G and B is the definition of washing
+ * a colour out — the ceremonial way went from crimson to brown, the whole
+ * floor lost its red, and the museum on a phone read as "dull and colourless"
+ * next to the same frame on a desktop. It was reported that way, and the
+ * report was exactly right. Raising exposure on top of it made it worse, not
+ * better: ACES desaturates as values climb toward its shoulder.
  *
- * Desktop values are unchanged, to the digit.
+ * So these stay at the desktop's values, to the digit, and a phone gets its
+ * legibility from the two levers that do not cost saturation:
+ *
+ *   EXPOSURE     a straight multiply in linear space, so it preserves the
+ *                RATIO between channels and therefore the hue — only the
+ *                tone-map shoulder desaturates, and at these levels almost
+ *                nothing is near it. See GrandLibrary.
+ *   SATURATION   a small positive grade in the effect chain, which is the
+ *                direct answer to a small screen in a bright room rather than
+ *                an approximation of one. See the HueSaturation pass.
+ *
+ * The lesson, if this is ever revisited: measure the COLOUR, not just the
+ * brightness. A grade that is 20% brighter and 20% less saturated is not a
+ * brighter museum, it is a greyer one.
  */
-const BOUNCE = LEAN_TEXTURES ? 0.15 : 0.095;
-const FLAT = LEAN_TEXTURES ? 0.098 : 0.058;
-const MOON = LEAN_TEXTURES ? 0.52 : 0.42;
-const COUNTER = LEAN_TEXTURES ? 0.19 : 0.15;
+const BOUNCE = 0.095;
+const FLAT = 0.058;
+const MOON = 0.42;
+const COUNTER = 0.15;
 
 
 export function LibraryLighting({ still }: { still: boolean }) {
