@@ -51,7 +51,11 @@ export function signPlates(labels: string[], seed = 617): THREE.CanvasTexture {
   return makeTexture(
     `wing-signs|${labels.join('|')}|${seed}`,
     [CELL_W * COLS, CELL_H * ROWS],
-    (ctx) => {
+    (ctx, w, h) => {
+      // the boards are laid out in nominal cell pixels, and on a phone the
+      // canvas is smaller than nominal (see textureBudget) — so fit the sheet
+      // to it rather than drawing seven of the eight boards off the edge
+      ctx.scale(w / (CELL_W * COLS), h / (CELL_H * ROWS));
       const rng = mulberry32(seed);
       for (let i = 0; i < COLS * ROWS; i++) {
         const ox = (i % COLS) * CELL_W;
