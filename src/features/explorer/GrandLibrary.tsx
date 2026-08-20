@@ -103,6 +103,7 @@ import {
 import { useReducedMotion } from '../../lib/useReducedMotion';
 import { useViewport } from '../../lib/useViewport';
 import { Deferred } from './three/Deferred';
+import { ModelQueue } from './three/modelQueue';
 import { BuildWatch, HallLoading, PaintWatch } from './three/HallLoading';
 import { resetLoadPhase } from './three/loadPhase';
 import { SceneUnavailable } from '../../app/chrome/SceneBoundary';
@@ -2931,11 +2932,21 @@ function LibraryScene({
     // need the headroom to still read as flames. Everything they do not reach
     // is darker than before, which is the point.
     scene.fog = new THREE.Fog('#04080f', 18, 72);
-    // A tenth of a stop back on lean devices, where the light pool is 10
-    // rather than 18 (see lightPool). Measured on one camera: pool 10 came
-    // out at 31.1 average brightness against the desktop's 31.9, and this
-    // closes it. Small enough to be a correction rather than a look.
-    gl.toneMappingExposure = LEAN_TEXTURES ? 1.3 : 1.26;
+    /*
+     * A REAL STOP ON LEAN, not the correction this used to be.
+     *
+     * It was 1.30 against the desktop's 1.26, and the note that justified it
+     * was honest about its own scope: it closed a 2.5% gap measured on ONE
+     * camera in the middle of the rotunda, which is the brightest floor in the
+     * building. It was never a grade for a phone; it was a patch for a smaller
+     * light pool, and it left the actual complaint — that the museum arrives on
+     * a phone as a dark rectangle — completely untouched.
+     *
+     * 1.42 with the lifted flat terms in lighting.tsx behind it. Exposure alone
+     * would only raise the black floor and grey the frame out; the two changes
+     * are one change, and the reasoning for both is in lighting.tsx.
+     */
+    gl.toneMappingExposure = LEAN_TEXTURES ? 1.42 : 1.26;
     // Hand the material registry the renderer (for anisotropy) and let it go
     // looking for scans. Both are fire-and-forget: every surface is already
     // dressed in its painted stand-in, and anything with a real scan on disk
@@ -3331,6 +3342,9 @@ function LibraryScene({
         />
         <Vignette offset={0.24} darkness={0.52} eskil={false} />
       </EffectComposer>
+      {/* hands the sculpted figures the connection one or two at a time, in
+          the order the visitor is actually looking at them — see modelQueue */}
+      <ModelQueue />
       {/* last in the tree so its effect runs after every other mount: the
           building is constructed, and the only thing left is drawing it */}
       <BuildWatch />

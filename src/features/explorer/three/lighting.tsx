@@ -4,6 +4,7 @@ import { useFrame } from '@react-three/fiber';
 import { PALETTE } from '../../../materials';
 import { DustMotes } from './DustMotes';
 import { OCULUS_R, ROT_DOME_TOP } from './layout';
+import { LEAN_TEXTURES } from './textureBudget';
 
 /**
  * The lighting rig.
@@ -37,6 +38,47 @@ import { OCULUS_R, ROT_DOME_TOP } from './layout';
  *  shadows across the floor toward the visitor rather than away from them. */
 const MOON_DIR: [number, number, number] = [-26, 38, -20];
 
+/**
+ * A PHONE IS NOT A DARK ROOM — the one place this rig is graded differently.
+ *
+ * Everything above is written for a big panel in a dim room, which is where
+ * "roughly 85% shadow" was judged and where it is right. A phone is neither.
+ * Three things stack against it and they all point the same way:
+ *
+ *   THE POOL IS SMALLER   lean devices carry 10 practicals against a desktop's
+ *                         18 (see lightPool), so a third of the candlelight in
+ *                         any given view is simply not being evaluated. That
+ *                         was measured at the time as a 2.5% loss of average
+ *                         brightness on ONE camera standing in the middle of
+ *                         the rotunda, which is the most generously lit spot
+ *                         in the building; in a wing, where the practicals ARE
+ *                         the light, the shortfall is much larger.
+ *   THE SCREEN IS LIT     nobody looks at a phone in a dark room. Daylight on
+ *                         the glass raises the black level of the DISPLAY, and
+ *                         a scene whose whole lower two thirds sits just above
+ *                         black arrives as a single flat dark field.
+ *   THE FRAME IS SMALL    the argument for darkness is that unlit depth is
+ *                         worth walking into. That argument is about a hall
+ *                         you can see 40 m down. At 375 pt wide the far end of
+ *                         a wing is a hundred pixels, and darkness there buys
+ *                         mystery on a desktop and an empty rectangle here.
+ *
+ * So the two flat terms and the moon are lifted on lean, and the exposure with
+ * them (see GrandLibrary). Deliberately the FLAT terms rather than more
+ * practicals: a practical costs frame time on the device that has least of it,
+ * and the thing actually missing on a phone is the general wash that the eight
+ * unslotted candles used to provide. The candle pools themselves are untouched,
+ * so the ratio of "lit by a flame" to "not" — which is what the grade is
+ * really about — is preserved; the floor under it comes up.
+ *
+ * Desktop values are unchanged, to the digit.
+ */
+const BOUNCE = LEAN_TEXTURES ? 0.15 : 0.095;
+const FLAT = LEAN_TEXTURES ? 0.098 : 0.058;
+const MOON = LEAN_TEXTURES ? 0.52 : 0.42;
+const COUNTER = LEAN_TEXTURES ? 0.19 : 0.15;
+
+
 export function LibraryLighting({ still }: { still: boolean }) {
   const shaft = useRef<THREE.SpotLight>(null);
 
@@ -68,10 +110,10 @@ export function LibraryLighting({ still }: { still: boolean }) {
           a lit face from a shadowed one, nowhere near enough to READ by. What
           the moon actually lights is the pool under the oculus, below, and the
           bays under the wing windows; everything else is on the practicals. */}
-      <directionalLight position={MOON_DIR} color={PALETTE.moonlitSilver} intensity={0.42} />
+      <directionalLight position={MOON_DIR} color={PALETTE.moonlitSilver} intensity={MOON} />
       {/* the counter-light, down from 0.26: shadow faces keep a trace of blue
           so carving still resolves, but they are close to black now */}
-      <directionalLight position={[24, 14, 22]} color={PALETTE.midnightBlue} intensity={0.15} />
+      <directionalLight position={[24, 14, 22]} color={PALETTE.midnightBlue} intensity={COUNTER} />
 
       {/* ————— the oculus shaft ————— */}
       <primitive object={shaftTarget} />
@@ -101,12 +143,12 @@ export function LibraryLighting({ still }: { still: boolean }) {
           walking into. It is now doing one job only — keeping the deepest
           corners off pure black, so architecture recedes into darkness instead
           of ending at it. */}
-      <hemisphereLight args={[PALETTE.midnightBlue, PALETTE.blackWalnut, 0.095]} />
+      <hemisphereLight args={[PALETTE.midnightBlue, PALETTE.blackWalnut, BOUNCE]} />
       {/* The last flat term in the building. It exists only so that a surface
           facing directly away from every source still resolves as a surface.
           Cooler than the fill above it, because a shadow that stays blue reads
           as night and a shadow that goes grey reads as underexposure. */}
-      <ambientLight intensity={0.058} color={PALETTE.moonlitSilver} />
+      <ambientLight intensity={FLAT} color={PALETTE.moonlitSilver} />
 
       {/* ————— the dome wash —————
           The one light in this file added for a single surface, and it is worth
