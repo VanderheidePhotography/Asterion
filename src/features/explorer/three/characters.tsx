@@ -10,6 +10,8 @@ import { APSE_HALF } from './layout';
 import { getMaterial } from '../../../materials';
 import { GLBModel } from './GLBModel';
 import { useHeldForReveal } from './Deferred';
+import { LEAN_TEXTURES } from './textureBudget';
+import { reportModelReady, useModelSlot } from './modelQueue';
 
 /**
  * The regulars. Three wizards deep in discussion over pipes at one table;
@@ -459,6 +461,11 @@ export function Librarian({
   still: boolean;
 }) {
   const held = useHeldForReveal();
+  // she queues for the connection alongside the statuary — see modelQueue. She
+  // closes the view straight down the axis from the entrance, so on arrival the
+  // ranking there puts her first, which is right: she is the figure a visitor
+  // is looking at while the rest of the building is still arriving.
+  const slot = useModelSlot('librarian', [position[0], position[2]], position[1]);
   const head = useRef<THREE.Group>(null);
   const beacon = useRef<THREE.Sprite>(null);
   const sign = useRef<THREE.Sprite>(null);
@@ -927,16 +934,34 @@ export function Librarian({
           still leaves someone at the counter; its `head` ref simply goes null
           once the model takes over, and the survey-the-hall frame loop above
           is written to tolerate that. */}
-      {held ? (
-        <ProceduralLibrarian head={head} robeMat={robeMat} brassMat={brassMat} />
+      {held || !slot ? (
+        // nothing behind the desk on a phone until she arrives — the same rule
+        // the statuary follows now (see statues.tsx): a crude stand-in that is
+        // up for seconds rather than a frame reads as the wrong figure, not as
+        // a figure loading. Desktop keeps hers; it never sees it.
+        LEAN_TEXTURES ? null : (
+          <ProceduralLibrarian head={head} robeMat={robeMat} brassMat={brassMat} />
+        )
       ) : (
-      <Suspense fallback={<ProceduralLibrarian head={head} robeMat={robeMat} brassMat={brassMat} />}>
+      <Suspense
+        fallback={
+          LEAN_TEXTURES ? null : (
+            <ProceduralLibrarian head={head} robeMat={robeMat} brassMat={brassMat} />
+          )
+        }
+      >
         {/* Taller than life at 2.4 m (was 2.0): she stands behind a 0.92 m
             counter with a 2.98 m cornice over her, and now that the counter is
             wider and set forward she has to grow with it to keep command of the
             gateway — at 2.0 the enlarged desk read as taller than she was. Her
             head lands ~2.4 m, still well under the arch crown at 2.92. */}
-        <GLBModel src="/models/librarian.glb" targetHeight={2.4} position={[0, -0.55]} />
+        <GLBModel
+          src="/models/librarian.glb"
+          targetHeight={2.4}
+          position={[0, -0.55]}
+          fadeIn={LEAN_TEXTURES}
+          onReady={() => reportModelReady('librarian')}
+        />
       </Suspense>
       )}
 

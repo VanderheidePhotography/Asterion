@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { leanPath } from './textureBudget';
+import { leanPath, texMarks } from './textureBudget';
 import { makeTexture, shade } from './textures';
 import { mulberry32 } from '../../../domain/random';
 import { ZODIAC } from '../../../data/astrology';
@@ -453,7 +453,7 @@ function weavePattern(ctx: Ctx, seed: number): CanvasPattern | null {
     }
   }
   // slubs: the thick places in a hand-spun yarn
-  for (let i = 0; i < 150; i++) {
+  for (let i = 0, n = texMarks(150); i < n; i++) {
     t.fillStyle = `rgba(0,0,0,${0.05 + rng() * 0.12})`;
     t.fillRect(rng() * T, rng() * T, 1 + rng() * 4, 1 + rng() * 2.5);
   }
@@ -482,7 +482,7 @@ function cloth(ctx: Ctx, rng: Rng, base: string, x: number, y: number, w: number
   ctx.fillStyle = base;
   ctx.fillRect(x, y, w, h);
   // dye lots never matched — vats varied, and the light has faded them unevenly
-  for (let i = 0; i < 220; i++) {
+  for (let i = 0, n = texMarks(220); i < n; i++) {
     ctx.globalAlpha = 0.05 + rng() * 0.12;
     ctx.fillStyle = shade(base, (rng() - 0.5) * 0.13);
     const bw = w * (0.05 + rng() * 0.3);
@@ -520,7 +520,8 @@ function cloth(ctx: Ctx, rng: Rng, base: string, x: number, y: number, w: number
 function pavement(ctx: Ctx, rng: Rng, base: string, x: number, y: number, w: number, h: number): void {
   ctx.fillStyle = base;
   ctx.fillRect(x, y, w, h);
-  for (let i = 0; i < 900; i++) {
+  // counted against the canvas we were given, not a desktop's — see texMarks
+  for (let i = 0, n = texMarks(900); i < n; i++) {
     ctx.globalAlpha = 0.06 + rng() * 0.16;
     ctx.fillStyle = shade(base, (rng() - 0.5) * 0.2);
     ctx.beginPath();
@@ -530,7 +531,7 @@ function pavement(ctx: Ctx, rng: Rng, base: string, x: number, y: number, w: num
   // crazing
   ctx.globalAlpha = 0.16;
   ctx.strokeStyle = shade(base, -0.34);
-  for (let i = 0; i < 260; i++) {
+  for (let i = 0, n = texMarks(260); i < n; i++) {
     const cx = x + rng() * w;
     const cy = y + rng() * h;
     ctx.lineWidth = 0.6 + rng();

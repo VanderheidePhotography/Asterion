@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { makeTexture, shade } from './textures';
 import { mulberry32 } from '../../../domain/random';
+import { texMarks } from './textureBudget';
 
 /**
  * The engraved content of the upper drum.
@@ -147,7 +148,11 @@ function castBronze(ctx: Ctx, rng: Rng, w: number, h: number): void {
 function cutStone(ctx: Ctx, rng: Rng, x: number, y: number, w: number, h: number, base = STONE): void {
   ctx.fillStyle = base;
   ctx.fillRect(x, y, w, h);
-  for (let i = 0; i < 1200; i++) {
+  // scattered by the canvas's own size, not by a desktop's — see texMarks.
+  // Two of these run per plaque and per roundel, eighteen cells in all, and at
+  // full count they were the single largest thing standing between a phone and
+  // its first frame.
+  for (let i = 0, n = texMarks(1200); i < n; i++) {
     const px = x + rng() * w;
     const py = y + rng() * h;
     ctx.globalAlpha = 0.04 + rng() * 0.1;
@@ -155,7 +160,7 @@ function cutStone(ctx: Ctx, rng: Rng, x: number, y: number, w: number, h: number
     ctx.fillRect(px, py, 1 + rng() * 3, 1 + rng() * 2);
   }
   // claw-chisel chatter, all running one way as a mason's would
-  for (let i = 0; i < 90; i++) {
+  for (let i = 0, n = texMarks(90); i < n; i++) {
     const py = y + rng() * h;
     ctx.globalAlpha = 0.05 + rng() * 0.07;
     ctx.strokeStyle = shade(base, -0.14);
@@ -541,7 +546,20 @@ export function celestialRoundels(seed = 523): THREE.CanvasTexture {
   return makeTexture(
     `celestial-roundels|${seed}`,
     [ROUNDEL_CELL * ROUNDEL_COLS, ROUNDEL_CELL * ROUNDEL_ROWS],
-    (ctx) => {
+    (ctx, w, h) => {
+      /*
+       * DRAW IN NOMINAL COORDINATES ON WHATEVER CANVAS WE WERE GIVEN.
+       *
+       * `make` paints a phone's canvases at TEXTURE_SCALE (see textureBudget)
+       * and hands the painter the size it actually got. Everything below is
+       * laid out in 512 px cells against the FULL 2048×1024 sheet, so without
+       * this the eight roundels were struck at desktop pitch onto an 860 px
+       * canvas: cell 0 filled the whole texture and the other seven were drawn
+       * off the edge — painted in full, at full cost, and never seen. The
+       * medallions round the drum then sampled atlas cells that had nothing in
+       * them, which is why the upper order was blank stone on a phone.
+       */
+      ctx.scale(w / (ROUNDEL_CELL * ROUNDEL_COLS), h / (ROUNDEL_CELL * ROUNDEL_ROWS));
       const rng = mulberry32(seed);
       const S = ROUNDEL_CELL;
       const C = S / 2;
@@ -645,7 +663,11 @@ export function constellationPlaques(seed = 337): THREE.CanvasTexture {
   return makeTexture(
     `constellation-plaques|${seed}`,
     [PLAQUE_W * PLAQUE_COLS, PLAQUE_H * PLAQUE_ROWS],
-    (ctx) => {
+    (ctx, w, h) => {
+      // the same atlas rule as `celestialRoundels` above — draw the sheet at
+      // its nominal pitch and let the transform fit it to the canvas the
+      // device budget actually allowed
+      ctx.scale(w / (PLAQUE_W * PLAQUE_COLS), h / (PLAQUE_H * PLAQUE_ROWS));
       const rng = mulberry32(seed);
       for (let i = 0; i < PLAQUE_COUNT; i++) {
         const ox = (i % PLAQUE_COLS) * PLAQUE_W;

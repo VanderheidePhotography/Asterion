@@ -37,6 +37,48 @@ import { OCULUS_R, ROT_DOME_TOP } from './layout';
  *  shadows across the floor toward the visitor rather than away from them. */
 const MOON_DIR: [number, number, number] = [-26, 38, -20];
 
+/**
+ * A PHONE IS NOT A DARK ROOM — but the fix for that is NOT more flat light.
+ *
+ * The problem is real: the pool is 10 practicals on lean against a desktop's
+ * 18, nobody looks at a phone in a dark room, and the argument that unlit
+ * depth is worth walking into is an argument about a hall you can see 40 m
+ * down rather than about a hundred pixels at the end of a wing.
+ *
+ * The first attempt at it raised these four terms — bounce to 0.15, the flat
+ * ambient to 0.098, the moon to 0.52 — and it was wrong in a way that is worth
+ * recording, because it looked correct in every A/B of BRIGHTNESS.
+ *
+ * Every one of those is achromatic: silver, blue-grey, silver. Light with no
+ * colour in it adds the same amount to all three channels of whatever it
+ * lands on, and adding a constant to R, G and B is the definition of washing
+ * a colour out — the ceremonial way went from crimson to brown, the whole
+ * floor lost its red, and the museum on a phone read as "dull and colourless"
+ * next to the same frame on a desktop. It was reported that way, and the
+ * report was exactly right. Raising exposure on top of it made it worse, not
+ * better: ACES desaturates as values climb toward its shoulder.
+ *
+ * So these stay at the desktop's values, to the digit, and a phone gets its
+ * legibility from the two levers that do not cost saturation:
+ *
+ *   EXPOSURE     a straight multiply in linear space, so it preserves the
+ *                RATIO between channels and therefore the hue — only the
+ *                tone-map shoulder desaturates, and at these levels almost
+ *                nothing is near it. See GrandLibrary.
+ *   SATURATION   a small positive grade in the effect chain, which is the
+ *                direct answer to a small screen in a bright room rather than
+ *                an approximation of one. See the HueSaturation pass.
+ *
+ * The lesson, if this is ever revisited: measure the COLOUR, not just the
+ * brightness. A grade that is 20% brighter and 20% less saturated is not a
+ * brighter museum, it is a greyer one.
+ */
+const BOUNCE = 0.095;
+const FLAT = 0.058;
+const MOON = 0.42;
+const COUNTER = 0.15;
+
+
 export function LibraryLighting({ still }: { still: boolean }) {
   const shaft = useRef<THREE.SpotLight>(null);
 
@@ -68,10 +110,10 @@ export function LibraryLighting({ still }: { still: boolean }) {
           a lit face from a shadowed one, nowhere near enough to READ by. What
           the moon actually lights is the pool under the oculus, below, and the
           bays under the wing windows; everything else is on the practicals. */}
-      <directionalLight position={MOON_DIR} color={PALETTE.moonlitSilver} intensity={0.42} />
+      <directionalLight position={MOON_DIR} color={PALETTE.moonlitSilver} intensity={MOON} />
       {/* the counter-light, down from 0.26: shadow faces keep a trace of blue
           so carving still resolves, but they are close to black now */}
-      <directionalLight position={[24, 14, 22]} color={PALETTE.midnightBlue} intensity={0.15} />
+      <directionalLight position={[24, 14, 22]} color={PALETTE.midnightBlue} intensity={COUNTER} />
 
       {/* ————— the oculus shaft ————— */}
       <primitive object={shaftTarget} />
@@ -101,12 +143,12 @@ export function LibraryLighting({ still }: { still: boolean }) {
           walking into. It is now doing one job only — keeping the deepest
           corners off pure black, so architecture recedes into darkness instead
           of ending at it. */}
-      <hemisphereLight args={[PALETTE.midnightBlue, PALETTE.blackWalnut, 0.095]} />
+      <hemisphereLight args={[PALETTE.midnightBlue, PALETTE.blackWalnut, BOUNCE]} />
       {/* The last flat term in the building. It exists only so that a surface
           facing directly away from every source still resolves as a surface.
           Cooler than the fill above it, because a shadow that stays blue reads
           as night and a shadow that goes grey reads as underexposure. */}
-      <ambientLight intensity={0.058} color={PALETTE.moonlitSilver} />
+      <ambientLight intensity={FLAT} color={PALETTE.moonlitSilver} />
 
       {/* ————— the dome wash —————
           The one light in this file added for a single surface, and it is worth

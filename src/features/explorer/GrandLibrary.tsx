@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import * as THREE from 'three';
 import { leanPath } from './three/textureBudget';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Bloom, EffectComposer, Vignette } from '@react-three/postprocessing';
+import { Bloom, EffectComposer, HueSaturation, Vignette } from '@react-three/postprocessing';
 import { configureMaterials, getMaterial, primeMaterials } from '../../materials';
 import { TextSprite } from './three/TextSprite';
 import { ManualPicker, registerPickable, unregisterPickable } from './three/ManualPicker';
@@ -103,6 +103,7 @@ import {
 import { useReducedMotion } from '../../lib/useReducedMotion';
 import { useViewport } from '../../lib/useViewport';
 import { Deferred } from './three/Deferred';
+import { ModelQueue } from './three/modelQueue';
 import { BuildWatch, HallLoading, PaintWatch } from './three/HallLoading';
 import { resetLoadPhase } from './three/loadPhase';
 import { SceneUnavailable } from '../../app/chrome/SceneBoundary';
@@ -2931,11 +2932,18 @@ function LibraryScene({
     // need the headroom to still read as flames. Everything they do not reach
     // is darker than before, which is the point.
     scene.fog = new THREE.Fog('#04080f', 18, 72);
-    // A tenth of a stop back on lean devices, where the light pool is 10
-    // rather than 18 (see lightPool). Measured on one camera: pool 10 came
-    // out at 31.1 average brightness against the desktop's 31.9, and this
-    // closes it. Small enough to be a correction rather than a look.
-    gl.toneMappingExposure = LEAN_TEXTURES ? 1.3 : 1.26;
+    /*
+     * A THIRD OF A STOP ON LEAN, and it is now doing this job ALONE with the
+     * saturation grade below — the flat light terms it used to be paired with
+     * are back at their desktop values, because they were what turned the
+     * floor brown (the whole argument is in lighting.tsx).
+     *
+     * Exposure is safe where those were not: it is a multiply in linear space,
+     * so it scales all three channels together and leaves the ratio between
+     * them — the hue and the saturation — alone. Only the tone-map shoulder
+     * desaturates, and at 1.38 almost nothing in this building is near it.
+     */
+    gl.toneMappingExposure = LEAN_TEXTURES ? 1.38 : 1.26;
     // Hand the material registry the renderer (for anisotropy) and let it go
     // looking for scans. Both are fire-and-forget: every surface is already
     // dressed in its painted stand-in, and anything with a real scan on disk
@@ -3329,8 +3337,34 @@ function LibraryScene({
           luminanceSmoothing={0.3}
           radius={0.6}
         />
+        {/* ————— the phone's colour grade —————
+            A small positive saturation, on lean only, and it is the honest
+            version of what the flat-light experiment was reaching for.
+
+            A phone is a small panel in a room with the lights on, and both of
+            those cost apparent colour: the frame is a few centimetres across,
+            and ambient light on the glass lifts the black level so everything
+            sits in a narrower range. Adding grey light was an attempt to make
+            the museum more legible there and it did the opposite — it made
+            the picture paler. This adds the colour back where the loss
+            actually is, in the display, and it cannot touch the lighting
+            budget or the frame rate: HueSaturation merges into the same
+            fullscreen pass Bloom and Vignette already run in.
+
+            +0.14 rather than more. This is a correction for a viewing
+            condition, not a look — the moment it starts making the crimson
+            damask louder than it is on a desktop it has stopped being one. */}
+        {/* Always mounted, zero on a desktop. An effect appearing or
+            disappearing changes the composer's shader, and this file already
+            carries a hard-won note about the composer being part of every
+            material's shader identity — a constant chain with a constant of
+            zero in it is free, and cannot surprise anyone later. */}
+        <HueSaturation saturation={LEAN_TEXTURES ? 0.14 : 0} hue={0} />
         <Vignette offset={0.24} darkness={0.52} eskil={false} />
       </EffectComposer>
+      {/* hands the sculpted figures the connection one or two at a time, in
+          the order the visitor is actually looking at them — see modelQueue */}
+      <ModelQueue />
       {/* last in the tree so its effect runs after every other mount: the
           building is constructed, and the only thing left is drawing it */}
       <BuildWatch />
