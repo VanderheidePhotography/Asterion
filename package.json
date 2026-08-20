@@ -17,8 +17,9 @@
     "textures:fetch": "node scripts/fetch-textures.mjs",
     "textures:scan": "node scripts/scan-textures.mjs",
     "textures:ktx2": "node scripts/optimize-textures-ktx2.mjs",
-    "assets:optimize": "node scripts/optimize-models.mjs && node scripts/optimize-textures.mjs && node scripts/optimize-meshes.mjs",
-    "assets:optimize:dry": "node scripts/optimize-models.mjs --dry && node scripts/optimize-textures.mjs --dry && node scripts/optimize-meshes.mjs --dry",
+    "assets:optimize": "node scripts/optimize-models.mjs && node scripts/optimize-textures.mjs && node scripts/optimize-meshes.mjs && node scripts/optimize-models-lean.mjs",
+    "assets:optimize:dry": "node scripts/optimize-models.mjs --dry && node scripts/optimize-textures.mjs --dry && node scripts/optimize-meshes.mjs --dry && node scripts/optimize-models-lean.mjs --dry",
+    "models:lean": "node scripts/optimize-models-lean.mjs",
     "lint": "eslint ."
   },
   "dependencies": {

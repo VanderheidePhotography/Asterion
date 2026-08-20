@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react';
 import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei';
-import { LEAN_TEXTURES } from './textureBudget';
+import { LEAN_TEXTURES, leanModelPath } from './textureBudget';
 import { useFrame } from '@react-three/fiber';
 
 /**
@@ -27,6 +27,7 @@ export function GLBModel({
   animate = true,
   highlightRef,
   beneath,
+  onReady,
 }: {
   src: string;
   targetHeight: number;
@@ -41,8 +42,14 @@ export function GLBModel({
   /** what stood here while the model streamed — kept underneath and dissolved
    *  through, rather than cut away the frame the glTF resolves */
   beneath?: ReactNode;
+  /** the glTF has landed and this component is mounted — how the download
+   *  queue learns its slot is free (see modelQueue) */
+  onReady?: () => void;
 }) {
-  const { scene, animations } = useGLTF(src);
+  // a phone gets the decimated twin where one was built — see leanModelPath.
+  // Done here rather than at every call site so no future figure can be added
+  // that quietly serves a desktop's megabyte to a phone.
+  const { scene, animations } = useGLTF(leanModelPath(src));
   // `beneath` is a fresh element on every parent render, so it can never be a
   // dependency: as one it re-ran the dissolve's setup (re-capturing the target
   // opacity as the 0 it had just written, leaving every carving permanently
@@ -92,6 +99,20 @@ export function GLBModel({
       });
     };
   }, [model, highlightRef, dissolving]);
+
+  /*
+   * We only reach here once `useGLTF` has resolved, so this effect firing IS
+   * the model having been fetched, decoded and built — which is exactly when
+   * the queue behind us can start the next one. Deliberately not waiting for
+   * the dissolve to finish: the download is over, and holding the slot for
+   * another half second of fading would idle the connection.
+   */
+  useEffect(() => {
+    onReady?.();
+    // once per mounted model. `onReady` is a fresh closure every render and
+    // re-firing it would hand the same slot back again and again.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const mixer = useMemo(() => new THREE.AnimationMixer(model), [model]);
   useEffect(() => {
@@ -237,5 +258,5 @@ export function GLBModel({
 const PRELOAD = LEAN_TEXTURES ? ['wizard'] : ['wizard', 'hermes', 'enoch', 'librarian'];
 
 for (const m of PRELOAD) {
-  useGLTF.preload(`/models/${m}.glb`);
+  useGLTF.preload(leanModelPath(`/models/${m}.glb`));
 }

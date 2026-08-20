@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { GLBModel } from './GLBModel';
 import { useHeldForReveal } from './Deferred';
+import { reportModelReady, useModelSlot } from './modelQueue';
 import { candleWash, getGlowTexture } from './glowTexture';
 import { rugHalf } from './textures';
 import { TextSprite } from './TextSprite';
@@ -597,6 +598,10 @@ function Monument({
   onPick?: (kind: string) => void;
 }) {
   const held = useHeldForReveal();
+  /* and once the doors ARE open, one figure downloads at a time, nearest in
+   * view first — see modelQueue. Thirteen megabytes asked for at once means
+   * every niche keeps its stand-in until the last of them lands. */
+  const slot = useModelSlot(spec.kind, [spec.pos[0], spec.pos[2]], spec.pos[1]);
   const mats = useMemo<Mats>(
     () => ({
       stone: new THREE.MeshStandardMaterial({ color: STONE, roughness: 0.95, emissive: '#6b5836' }),
@@ -685,7 +690,7 @@ function Monument({
       {/* the pedestal itself is not built here — all ten are baked into one
           buffer by `NichePedestals`, which is mounted alongside the statuary.
           What this frame owes it is the height everything else stands at. */}
-      <group position-y={pedH}>{STATUE_MODELS[spec.kind] && !held ? (
+      <group position-y={pedH}>{STATUE_MODELS[spec.kind] && !held && slot ? (
         // a real sculpted model stands in place of the procedural figure; the
         // carved primitive is the fallback while the glTF streams in — and is
         // handed to the model as `beneath` as well, so the carving dissolves
@@ -708,6 +713,7 @@ function Monument({
             rotationY={STATUE_MODELS[spec.kind].rotY ?? 0}
             animate={false}
             highlightRef={highlight}
+            onReady={() => reportModelReady(spec.kind)}
             beneath={
               spec.wide ? (
                 <FullFigure kind={spec.kind as Full} mats={mats} />
@@ -1019,6 +1025,10 @@ export function LeontocephalineEast({
   onPick?: (kind: string) => void;
 }) {
   const held = useHeldForReveal();
+  // it queues for the connection with the other nine — see modelQueue. Its
+  // spot is the east niche, worked out below as `r`; the queue only needs it
+  // to within a metre, so the drum's face radius on the +x axis will do.
+  const slot = useModelSlot('leontocephaline', [FACE_R, 0], 2.2);
   const mats = useMemo<Mats>(
     () => ({
       stone: new THREE.MeshStandardMaterial({ color: STONE, roughness: 0.95 }),
@@ -1100,7 +1110,7 @@ export function LeontocephalineEast({
           where theirs are, which is the thing an eye actually compares, and
           the raised key still clears the springing at 5.2 into the conch. */}
       <group position-y={PEDESTAL_H}>
-        {held ? (
+        {held || !slot ? (
           <FullFigure kind="leontocephaline" mats={mats} />
         ) : (
           <Suspense fallback={<FullFigure kind="leontocephaline" mats={mats} />}>
@@ -1111,6 +1121,7 @@ export function LeontocephalineEast({
               rotationY={0}
               animate={false}
               highlightRef={highlight}
+              onReady={() => reportModelReady('leontocephaline')}
               beneath={<FullFigure kind="leontocephaline" mats={mats} />}
             />
           </Suspense>
